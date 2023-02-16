@@ -1,0 +1,17 @@
+.ghost {
+  z-index: 1000 !important;
+  overflow: hidden;
+  padding: 0;
+  width: auto;
+  height: 4px;
+  font-size: 0;
+  border-width: 0;
+  background: #0960bd !important;
+  content: '';
+  box-sizing: border-box;
+
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :deep(.element-edit-wrapper) {
+    display: none;
+  }
+}

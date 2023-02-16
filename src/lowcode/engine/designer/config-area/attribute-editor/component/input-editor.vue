@@ -1,0 +1,63 @@
+<template>
+  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+    <a-input v-model:value="modelValue" placeholder="请输入" />
+  </form-Item-wrapper>
+</template>
+<script lang="ts" setup name="InputEditor">
+import { inject, computed } from 'vue';
+import { isNil } from 'lodash-es';
+import FormItemWrapper from '../../components/form-item-wrapper.vue';
+import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { set, get } from '/@lowcode-engine/utils/scheme';
+import { AttributeItem } from '../../attribute-editor/interface';
+
+interface Props {
+  label: string;
+  attribute: string;
+  option: AttributeItem;
+}
+const props = withDefaults(defineProps<Props>(), {
+  label: '',
+  attribute: '',
+});
+
+const core = inject(HexCoreInjectionKey);
+
+const scheme = computed(() => {
+  return core?.state.selectedData?.selectedScheme!;
+});
+
+const modelValue = computed({
+  set(val) {
+    if (
+      isNil(scheme.value.props[props.attribute]) ||
+      Object.prototype.toString.call(scheme.value.props[props.attribute]) === '[object String]'
+    ) {
+      set(props.attribute, val, scheme.value);
+      return;
+    }
+    if (props.option.i18n) {
+      const obj = get(props.attribute, scheme.value) as any;
+      // 获取当前语种
+      obj['zh-CN'] = val;
+      set(props.attribute, obj, scheme.value);
+      return;
+    }
+    set(props.attribute, val, scheme.value);
+  },
+  get() {
+    const val: any = get(props.attribute, scheme.value);
+    if (
+      isNil(scheme.value.props[props.attribute]) ||
+      Object.prototype.toString.call(scheme.value.props[props.attribute]) === '[object String]'
+    ) {
+      return val;
+    }
+    if (isNil(val)) return '';
+    if (props.option.i18n) {
+      return val['zh-CN'];
+    }
+    return val;
+  },
+});
+</script>

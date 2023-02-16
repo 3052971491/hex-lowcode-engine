@@ -1,0 +1,41 @@
+<template>
+  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+    <a-select v-model:value="modelValue">
+      <a-select-option value="start">start</a-select-option>
+      <a-select-option value="end">end</a-select-option>
+      <a-select-option value="center">center</a-select-option>
+      <a-select-option value="space-around">space-around</a-select-option>
+      <a-select-option value="space-between">space-between</a-select-option>
+    </a-select>
+  </form-Item-wrapper>
+</template>
+<script lang="ts" setup name="RowJustifyEditor">
+import { inject, computed } from 'vue';
+import FormItemWrapper from '../../components/form-item-wrapper.vue';
+import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { AttributeItem } from '../interface';
+import { set, get } from '/@lowcode-engine/utils/scheme';
+
+interface Props {
+  label: string;
+  attribute: string;
+  option: AttributeItem;
+}
+const props = withDefaults(defineProps<Props>(), {
+  label: '',
+  attribute: '',
+});
+
+const core = inject(HexCoreInjectionKey);
+const scheme = computed(() => {
+  return core?.state.selectedData?.selectedScheme!;
+});
+const modelValue = computed({
+  set(val: string) {
+    set(props.attribute, val, scheme.value);
+  },
+  get() {
+    return get(props.attribute, scheme.value);
+  },
+});
+</script>
