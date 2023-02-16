@@ -22,7 +22,7 @@ export default defineConfig({
       },
       {
         find: /\/@lowcode-engine/,
-        replacement: `${pathResolve('src/lowcode/engine')}/`,
+        replacement: `${pathResolve('src/engine')}/`,
       },
     ],
   },

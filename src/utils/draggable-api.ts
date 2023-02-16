@@ -1,8 +1,8 @@
 import { cloneDeep } from 'lodash-es';
 import type { LowCodeScheme } from '/@/types/scheme.d';
 
-import { buildUUID } from '/@lowcode-engine/utils/common';
-import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@lowcode-engine/schema/pc';
+import { buildUUID } from '/@/utils/common';
+import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/scheme/pc';
 
 export function buildElementScheme(element: LowCodeScheme.Scheme): LowCodeScheme.Scheme {
   const newScheme = cloneDeep(element);

@@ -21,12 +21,12 @@
                   <a-form-item label="启用">
                     <a-switch v-model:checked="item.enable" />
                   </a-form-item>
-                  <a-form-item v-if="item.type === RuleType.CUSTOM">
-                    <div v-if="item.type === RuleType.CUSTOM" style="width: 400px">
+                  <a-form-item v-if="item.type === 'custom'">
+                    <div v-if="item.type === 'custom'" style="width: 400px">
                       <hex-monaco-editor v-model:value="item.value" :title="item.label" :theme="Theme.DEFAULT" />
                     </div>
                   </a-form-item>
-                  <template v-else-if="item.type === RuleType.REQUIRED"></template>
+                  <template v-else-if="item.type === 'required'"></template>
                   <a-form-item v-else :label="item.label">
                     <a-input-number v-model:value="item.value" style="width: 200px"></a-input-number>
                   </a-form-item>
@@ -57,8 +57,7 @@ import { inject, computed } from 'vue';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { FormOutlined } from '@ant-design/icons-vue';
 import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@lowcode-engine/utils/scheme';
-import { RuleType } from '/@lowcode-engine/enum/element-option-enum';
+import { set, get } from '/@/utils/scheme';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { AttributeItem } from '../../attribute-editor/interface';

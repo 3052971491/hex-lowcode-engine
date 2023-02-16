@@ -16,8 +16,7 @@
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@lowcode-engine/utils/scheme';
-import { Behavior } from '/@lowcode-engine/enum/element-option-enum';
+import { set, get } from '/@/utils/scheme';
 import { AttributeItem } from '../../attribute-editor/interface';
 
 interface Props {
@@ -43,11 +42,11 @@ const modelValue = computed({
 });
 
 const source = [
-  { key: Behavior.NORMAL, name: '普通', tips: 'NORMAL: 控件的基本功能均可操作' },
-  { key: Behavior.DISABLED, name: '禁用', tips: 'DISABLED: UI呈现禁用效果的特定样式' },
-  { key: Behavior.READONLY, name: '只读', tips: 'READONLY: 仅显示控件的预置数据的内容, 控件不可编辑' },
+  { key: 'NORMAL', name: '普通', tips: 'NORMAL: 控件的基本功能均可操作' },
+  { key: 'DISABLED', name: '禁用', tips: 'DISABLED: UI呈现禁用效果的特定样式' },
+  { key: 'READONLY', name: '只读', tips: 'READONLY: 仅显示控件的预置数据的内容, 控件不可编辑' },
   {
-    key: Behavior.HIDDEN,
+    key: 'HIDDEN',
     name: '隐藏',
     tips: 'HIDDEN: 运行态时不显示。对应表单数据默认不会提交, 可在高级-数据提交中进行配置',
   },

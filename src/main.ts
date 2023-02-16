@@ -4,7 +4,7 @@ import App from './App.vue';
 import './style.less';
 import 'ant-design-vue/dist/antd.css';
 
-import HexForm from '/@lowcode-engine/build';
+import HexLowcodeEngine from '/@lowcode-engine/build';
 
 async function bootstrap() {
   const app = createApp(App);
@@ -12,7 +12,7 @@ async function bootstrap() {
   // 初始化UI框架
   app.use(AntDesignVue);
 
-  app.use(HexForm);
+  app.use(HexLowcodeEngine);
 
   app.mount('#app');
 }

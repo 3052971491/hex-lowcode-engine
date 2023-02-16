@@ -39,5 +39,5 @@ export default defineComponent({
 </script>
 
 <style lang="less">
-@import '/@/styles/hex-form-editor.less';
+@import '/@/styles/hex-lowcode-engine.less';
 </style>
