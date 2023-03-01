@@ -80,7 +80,7 @@ import { computed, inject, ref } from 'vue';
 import { GlobalOutlined, FontColorsOutlined } from '@ant-design/icons-vue';
 import { isNil } from 'lodash-es';
 import { AttributeItem } from '../attribute-editor/interface';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { formatConversion, fuzzyQuery } from '/@/utils/i18n';
 import { set, get } from '/@/utils/schema';
 import { buildUUID } from '/@/utils/common';

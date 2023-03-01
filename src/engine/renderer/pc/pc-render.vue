@@ -23,7 +23,7 @@
 import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
 import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 const core = inject(HexCoreInjectionKey);
 

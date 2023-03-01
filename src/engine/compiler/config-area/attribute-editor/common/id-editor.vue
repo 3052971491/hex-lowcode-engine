@@ -6,7 +6,7 @@
 <script lang="ts" setup name="IdEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
 // import { set, get } from '/@/engine/utils/schema';
 

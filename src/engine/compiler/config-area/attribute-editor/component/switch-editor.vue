@@ -6,7 +6,7 @@
 <script lang="ts" setup name="SwitchEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { set, get } from '/@/utils/schema';
 import { AttributeItem } from '../../attribute-editor/interface';
 

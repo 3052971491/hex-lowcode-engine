@@ -10,7 +10,7 @@
 <script lang="ts" setup name="RowAlignEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
 import { set, get } from '/@/utils/schema';
 

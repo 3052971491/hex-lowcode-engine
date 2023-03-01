@@ -70,7 +70,7 @@
 import { inject, onMounted, Ref, ref } from 'vue';
 import { DeleteOutlined } from '@ant-design/icons-vue';
 import { buildUUID } from '/@/utils/common';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { formatConversion } from '/@/utils/i18n';
 
 const core = inject(HexCoreInjectionKey);

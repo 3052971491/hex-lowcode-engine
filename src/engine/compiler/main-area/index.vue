@@ -4,8 +4,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import Render from '/@/engine/render/render.vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import Render from '/@/engine/renderer/render.vue';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { inject, reactive } from 'vue';
 
 const core = inject(HexCoreInjectionKey);

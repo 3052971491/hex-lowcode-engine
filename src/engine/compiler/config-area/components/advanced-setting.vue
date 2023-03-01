@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import FormItemWrapper from './form-item-wrapper.vue';
 import CollapseItemWrapper from './collapse-item-wrapper.vue';
 

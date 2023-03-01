@@ -56,7 +56,7 @@ import type { LowCodeSchema } from '/@/types/schema.d';
 import { inject, computed } from 'vue';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { FormOutlined } from '@ant-design/icons-vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { set, get } from '/@/utils/schema';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';

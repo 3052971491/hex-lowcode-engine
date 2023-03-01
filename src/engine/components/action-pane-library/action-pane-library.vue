@@ -60,7 +60,7 @@
 <script lang="ts" setup>
 import { editor, languages } from 'monaco-editor/esm/vs/editor/editor.api';
 import { computed, inject, onMounted, ref, nextTick, reactive } from 'vue';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { StringParsedToFunction } from '/@/utils/func';

@@ -36,7 +36,7 @@ import type { LowCodeSchema } from '/@/types/schema.d';
 import HexDraggable from '../hex-draggable/hex-draggable.vue';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
 import { buildElementSchema } from '/@/utils/draggable-api';
-import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 interface ElementList {
   /** 组件类型名称 */

@@ -24,7 +24,7 @@ import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, defineComponent, inject } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/render/render-inject-key';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import ElementWrapper from '../../components/element-wrapper.vue';
 

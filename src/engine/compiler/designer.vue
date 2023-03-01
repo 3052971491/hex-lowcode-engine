@@ -20,8 +20,8 @@ import SiderArea from './sider-area/index.vue';
 import MainArea from './main-area/index.vue';
 import ToolbarArea from './toolbar-area/index.vue';
 import ConfigArea from './config-area/index.vue';
-import { useHexCore } from '../render/central/useHexCore';
-import { HexCoreInjectionKey } from '../render/render-inject-key';
+import { useHexCore } from '/@/engine/renderer/central/useHexCore';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 const core = useHexCore();
 provide(HexCoreInjectionKey, core);
