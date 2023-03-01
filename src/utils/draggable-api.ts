@@ -6,7 +6,7 @@ import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponen
 
 export function buildElementSchema(element: LowCodeSchema.Schema): LowCodeSchema.Schema {
   const newSchema = cloneDeep(element);
-  newSchema.id = buildUUID(16);
+  newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
 
   if (newSchema.tag === 'LAYOUT') {
     let obj = null;
@@ -46,7 +46,7 @@ export function buildElementSchemaByType(
   const newSchema = findElementSchemaByType(classification, componentName);
 
   if (newSchema) {
-    newSchema.id = buildUUID(16);
+    newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
     return newSchema;
   }
   return undefined;
