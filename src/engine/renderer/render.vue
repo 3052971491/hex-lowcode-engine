@@ -13,22 +13,22 @@
 
 <script lang="ts" setup>
 import { computed, defineComponent, inject, onMounted, provide, ref } from 'vue';
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
 import { RedactStateInjectionKey, HexCoreInjectionKey, DataEngineInjectionKey } from './render-inject-key';
 
 interface Props {
-  value?: LowCodeSchema.ProjectSchema;
+  value?: LowCode.ProjectSchema;
   /** 设备类型 */
-  device?: LowCodeSchema.Device;
+  device?: LowCode.Device;
   /** 当前渲染器是否是编辑状态 */
   redactState?: boolean;
 }
 
 interface StateType {
-  config?: LowCodeSchema.ProjectSchema;
+  config?: LowCode.ProjectSchema;
 }
 const props = withDefaults(defineProps<Props>(), {
   value: undefined,

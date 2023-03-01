@@ -52,7 +52,7 @@
   </collapse-Item-wrapper>
 </template>
 <script lang="ts" setup name="RulesEditor">
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { inject, computed } from 'vue';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { FormOutlined } from '@ant-design/icons-vue';
@@ -76,7 +76,7 @@ const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-const modelValue = computed<LowCodeSchema.RuleMap>({
+const modelValue = computed<LowCode.RuleMap>({
   set(val) {
     set(props.attribute, val, schema.value);
   },

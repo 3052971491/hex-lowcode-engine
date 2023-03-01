@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { inject, onMounted, ref } from 'vue';
 import { Empty } from 'ant-design-vue';
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import HexDraggable from '../hex-draggable/hex-draggable.vue';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
 import { buildElementSchema } from '/@/utils/draggable-api';
@@ -42,7 +42,7 @@ interface ElementList {
   /** 组件类型名称 */
   label: string;
   /** 组件列表 */
-  list: LowCodeSchema.Schema[];
+  list: LowCode.Schema[];
 }
 
 const core = inject(HexCoreInjectionKey);
@@ -70,11 +70,11 @@ const elementList: ElementList[] = [
 
 const loading = ref(true);
 
-const onClone = (e: LowCodeSchema.Schema) => {
+const onClone = (e: LowCode.Schema) => {
   return buildElementSchema(e);
 };
 
-const handleAddElementDbClick = (e: LowCodeSchema.Schema) => {
+const handleAddElementDbClick = (e: LowCode.Schema) => {
   const newEl = buildElementSchema(e);
   core?.state.projectConfig?.componentsTree.push(newEl);
   core?.handleUpdateSelectData(newEl);

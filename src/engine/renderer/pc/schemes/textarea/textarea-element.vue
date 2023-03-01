@@ -8,10 +8,10 @@
 import { cloneDeep } from 'lodash-es';
 import { computed, defineComponent } from 'vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 
 interface Props {
-  schema: LowCodeSchema.Schema;
+  schema: LowCode.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
 import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
@@ -28,7 +28,7 @@ import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 const core = inject(HexCoreInjectionKey);
 
 interface Props {
-  value: LowCodeSchema.ProjectSchema;
+  value: LowCode.ProjectSchema;
   /** 当前渲染器是否是编辑状态 */
   redactState?: boolean;
 }

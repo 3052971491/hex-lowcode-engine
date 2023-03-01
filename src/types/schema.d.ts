@@ -1,8 +1,7 @@
 import type { I18nMap } from './i18n.d';
-import type { PcSchemaPro } from './pc-schema.d';
-import type { CompositeValue, JSExpression, JSFunction } from '/@/lowcode-pro/engine/types/value-type.d';
+import type { CompositeValue, JSExpression, JSFunction } from '/@/types/value-type.d';
 
-export namespace LowCodeSchema {
+export namespace LowCode {
   /**
    * Schema 大类
    * @description 基础组件 | 业务组件 | 布局组件 | 高级组件
@@ -14,6 +13,12 @@ export namespace LowCodeSchema {
    * @description WEB端 | 移动端
    */
   export type Device = 'PC' | 'MOBILE';
+
+  /**
+   * Schema 图标类型
+   * @description 默认
+   */
+  export type IconType = 'DEFAULT';
 
   /**
    * Schema 校验规则类型
@@ -79,7 +84,7 @@ export namespace LowCodeSchema {
     /** icon, 配置组件库使用 */
     icon: string;
     /** icon类型, 配置组件库使用 */
-    iconType: 'DEFAULT';
+    iconType: IconType;
     /** 子集, 仅布局组件使用 */
     children?: Schema[];
     /** 是否可显示, 配置组件库使用 */
@@ -92,14 +97,18 @@ export namespace LowCodeSchema {
     lifeCycles?: {
       [key: string]: any;
     };
+    /** 是否被a-form-item包裹 */
+    formItemFlag?: boolean;
     /** 属性 */
-    props?: CompositeValue;
+    props?: {
+      [key: string]: any;
+    };
     /** 事件 */
     events?: {
       [key: string]: any;
     };
     /** 是否渲染 */
-    condition: true;
+    condition: boolean;
     /**
      * 循环数据
      * @description 只有为数组才生效
@@ -110,6 +119,14 @@ export namespace LowCodeSchema {
      * @description 值为数组, 下标0为迭代变量名, 下标1为索引变量名
      */
     loopArgs?: string[];
+  }
+
+  /**
+   * 组件节点描述-Props基类
+   */
+  export interface NodeSchemaProps extends CompositeValue {
+    /** 样式 */
+    __style__: string;
   }
 
   /** 应用描述 */
@@ -181,29 +198,7 @@ export namespace LowCodeSchema {
   }
 
   /**
-   * 组件节点描述-Props基类
-   */
-  export interface NodeSchemaProps extends CompositeValue {
-    /** 样式 */
-    __style__: string;
-  }
-
-  /**
-   * WEB端-组件节点描述-Props基类
-   */
-  export interface NodePCSchemaProps extends NodeSchemaProps {}
-
-  /**
-   * WEB端-组件节点描述-基类
-   */
-  export interface PCSchema extends NodeSchema {
-    /** 是否被a-form-item包裹 */
-    formItemFlag?: boolean;
-    props: PcSchemaPro.PcSchemaProProps;
-  }
-
-  /**
    * 组件节点描述
    */
-  export type Schema = PCSchema;
+  export type Schema = NodeSchema;
 }

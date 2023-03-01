@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
 import ElementEditWrapper from './element-edit-wrapper.vue';
 import ElementViewWrapper from './element-view-wrapper.vue';
@@ -25,7 +25,7 @@ import { useElementWrapper } from '../hooks/useElementWrapper';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 interface Props {
-  schema: LowCodeSchema.Schema;
+  schema: LowCode.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {

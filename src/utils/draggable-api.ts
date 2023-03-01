@@ -1,10 +1,10 @@
 import { cloneDeep } from 'lodash-es';
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 
 import { buildUUID } from '/@/utils/common';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
 
-export function buildElementSchema(element: LowCodeSchema.Schema): LowCodeSchema.Schema {
+export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
   newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
 
@@ -40,9 +40,9 @@ export function buildElementSchema(element: LowCodeSchema.Schema): LowCodeSchema
  * @returns
  */
 export function buildElementSchemaByType(
-  classification: LowCodeSchema.Category,
+  classification: LowCode.Category,
   componentName: string,
-): LowCodeSchema.Schema | undefined {
+): LowCode.Schema | undefined {
   const newSchema = findElementSchemaByType(classification, componentName);
 
   if (newSchema) {
@@ -59,10 +59,10 @@ export function buildElementSchemaByType(
  * @returns
  */
 export function findElementSchemaByType(
-  classification: LowCodeSchema.Category,
+  classification: LowCode.Category,
   componentName: string,
-): LowCodeSchema.Schema | undefined {
-  let schema: LowCodeSchema.Schema | null = null;
+): LowCode.Schema | undefined {
+  let schema: LowCode.Schema | null = null;
   if (classification === 'BASIC') {
     const idx = BasicComponents.findIndex((item) => {
       return item.componentType === componentName;

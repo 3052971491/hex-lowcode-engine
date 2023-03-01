@@ -52,13 +52,13 @@ export interface JSFunction {
   [key: string]: any;
 }
 export interface JSONObject {
-  [key: string]: JSONValue;
+  [key: any]: JSONValue;
 }
 
 export type CompositeValue = JSONValue | JSExpression | JSFunction | CompositeObject | CompositeArray;
 
 export interface CompositeObject {
-  [key: string]: CompositeValue;
+  [key: any]: CompositeValue;
 }
 
 export type CompositeArray = CompositeValue[];

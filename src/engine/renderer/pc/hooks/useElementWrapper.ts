@@ -1,5 +1,5 @@
 import { computed, ComputedRef } from 'vue';
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 
 interface ElementWrapper {
   /**
@@ -32,8 +32,8 @@ interface ElementWrapper {
  * @param redactState 是否编辑器状态
  */
 export function useElementWrapper(
-  schema: LowCodeSchema.Schema,
-  selectScheme: LowCodeSchema.Schema | undefined | null,
+  schema: LowCode.Schema,
+  selectScheme: LowCode.Schema | undefined | null,
   redactState: boolean | undefined = true,
 ): ElementWrapper {
   const isSelect = computed(() => {

@@ -12,11 +12,11 @@
 import { computed, defineComponent } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import ElementWrapper from '../../components/element-wrapper.vue';
-import { LowCodeSchema } from '/@/types/schema.d';
+import { LowCode } from '/@/types/schema.d';
 import ColumnElement from './column-element.vue';
 
 interface Props {
-  schema: LowCodeSchema.PCSchema;
+  schema: LowCode.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {

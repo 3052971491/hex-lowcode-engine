@@ -63,14 +63,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
 
 interface Props {
-  schema: LowCodeSchema.Schema;
+  schema: LowCode.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -1,90 +1,94 @@
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
-import type { CompositeValue } from '/@/types/value-type.d';
 
-export namespace PcSchemaPro {
-  export interface InputProps extends LowCodeSchema.NodePcSchemaProps {
+export namespace PcSchema {
+  export interface InputSchemeProps extends LowCode.NodeSchemaProps {
     /** 标签 */
-    label?: I18n;
+    label: I18n;
     /** 占位提示 */
-    placeholder?: I18n;
+    placeholder: I18n;
     /** 默认值 */
-    defaultValue?: I18n;
+    defaultValue: I18n;
     /** 尺寸 */
-    size?: LowCodeSchema.Size;
+    size: LowCode.Size;
     /** 状态 */
-    behavior?: LowCodeSchema.Behavior;
+    behavior: LowCode.Behavior;
     /** 描述信息 */
-    tips?: I18n;
+    tips: I18n;
     /** 校验规则 */
-    rules?: LowCodeSchema.RuleMap;
+    rules: LowCode.RuleMap;
     /** 是否显示清除按钮 */
-    allowClear?: boolean;
+    allowClear: boolean;
     /** 带标签的 input，设置前置标签 */
-    addonBefore?: I18n;
+    addonBefore: I18n;
     /** 带标签的 input，设置后置标签 */
-    addonAfter?: I18n;
+    addonAfter: I18n;
     /** 是否有边框 */
-    bordered?: boolean;
+    bordered: boolean;
     /** 是否展示字数 */
-    showCount?: boolean;
+    showCount: boolean;
     /** 最大长度 */
-    maxlength?: number;
+    maxlength: number;
     /** 自动去除头尾空字符 */
-    trim?: boolean;
+    trim: boolean;
     /** 自动获取焦点 */
-    autofocus?: boolean;
+    autofocus: boolean;
+  }
+  export interface InputScheme extends LowCode.NodeSchema {
+    props: InputSchemeProps;
   }
 
-  export interface RowProps extends LowCodeSchema.NodePcSchemaProps {
+  export interface RowSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局下的垂直对齐方式 */
-    align?: 'top' | 'middle' | 'bottom';
+    align: 'top' | 'middle' | 'bottom';
     /** flex 布局下的水平排列方式 */
-    justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+    justify: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
     /** 是否自动换行 */
-    wrap?: boolean;
+    wrap: boolean;
     /**
      * 列间距
      * @description 单位: px
      */
-    rowGutter?: number;
+    rowGutter: number;
     /**
      * 行间距
      * @description 单位: px
      */
-    columnGutter?: number;
+    columnGutter: number;
+  }
+  export interface RowScheme extends LowCode.NodeSchema {
+    props: RowSchemeProps;
   }
 
-  export interface ColumnProps extends LowCodeSchema.NodeSchemeProps {
+  export interface ColumnSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局填充 */
-    flex?: string | number | null;
+    flex: string | number | null;
     /** 栅格左侧的间隔格数，间隔内不可以有栅格 */
-    offset?: number;
+    offset: number;
     /** 栅格顺序，flex 布局模式下有效 */
-    order?: number;
+    order: number;
     /** 栅格向左移动格数 */
-    pull?: number;
+    pull: number;
     /** 栅格向右移动格数 */
-    push?: number;
+    push: number;
     /** 栅格占位格数，为 0 时相当于 display: none */
-    span?: number | null;
+    span: number | null;
     /** ≥2000px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xxxl?: number | object | null;
+    xxxl: number | object | null;
     /** <576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xs?: number | object | null;
+    xs: number | object | null;
     /** ≥576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    sm?: number | object | null;
+    sm: number | object | null;
     /** ≥768px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    md?: number | object | null;
+    md: number | object | null;
     /** ≥992px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    lg?: number | object | null;
+    lg: number | object | null;
     /** ≥1200px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xl?: number | object | null;
+    xl: number | object | null;
     /** ≥1600px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xxl?: number | object | null;
+    xxl: number | object | null;
   }
-
-  export interface PcSchemaProProps extends InputProps, RowProps, ColumnProps {
-    [key: string]: CompositeValue;
+  export interface ColumnScheme extends LowCode.NodeSchema {
+    props: ColumnSchemeProps;
   }
 }

@@ -1,4 +1,4 @@
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { reactive } from 'vue';
 import ProjectConfig from '/@/schema/project-schema';
 import { buildUUID } from '/@/utils/common';
@@ -6,7 +6,7 @@ import { cloneDeep, isNil } from 'lodash-es';
 
 interface StateType {
   /** 应用配置 */
-  projectConfig?: LowCodeSchema.ProjectSchema;
+  projectConfig?: LowCode.ProjectSchema;
   /** 历史进度 */
   history?: {
     /** 当前下标 */
@@ -14,14 +14,14 @@ interface StateType {
     /** 保存步骤数量限制 */
     maxStep: number;
     /** 步骤列表 */
-    steps: LowCodeSchema.ProjectSchema[];
+    steps: LowCode.ProjectSchema[];
   };
   /** 选中组件节点 */
   selectedData?: {
     /** 节点唯一标识 */
     selectedId: string;
     /** 组件节点描述 */
-    selectedScheme?: LowCodeSchema.Schema | null;
+    selectedScheme?: LowCode.Schema | null;
   };
 }
 
@@ -32,7 +32,7 @@ export interface HexCoreFactory {
    * 生成应用配置
    * @param project 应用配置
    */
-  buildProjectConfig(project?: LowCodeSchema.ProjectSchema): void;
+  buildProjectConfig(project?: LowCode.ProjectSchema): void;
   /**
    * 初始化
    */
@@ -74,7 +74,7 @@ export interface HexCoreFactory {
   /** 重置选中组件节点信息 */
   handleResetSelectData(): void;
   /** 更新选中组件节点信息 */
-  handleUpdateSelectData(element: LowCodeSchema.Schema): void;
+  handleUpdateSelectData(element: LowCode.Schema): void;
 }
 export function useHexCore(): HexCoreFactory {
   const state = reactive<StateType>({
@@ -99,7 +99,7 @@ export function useHexCore(): HexCoreFactory {
     }
   }
 
-  function buildProjectConfig(project?: LowCodeSchema.ProjectSchema) {
+  function buildProjectConfig(project?: LowCode.ProjectSchema) {
     let config = cloneDeep(ProjectConfig);
     if (!isNil(project)) {
       config = project;
@@ -237,7 +237,7 @@ export function useHexCore(): HexCoreFactory {
     }
   }
 
-  function handleUpdateSelectData(element: LowCodeSchema.Schema): void {
+  function handleUpdateSelectData(element: LowCode.Schema): void {
     if (isNil(element)) {
       handleResetSelectData();
       return;

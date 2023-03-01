@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeSchema } from '/@/types/schema.d';
+import type { LowCode } from '/@/types/schema.d';
 import { computed, defineComponent, inject } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
@@ -29,7 +29,7 @@ import { useElementWrapper } from '../../hooks/useElementWrapper';
 import ElementWrapper from '../../components/element-wrapper.vue';
 
 interface Props {
-  schema: LowCodeSchema.Schema;
+  schema: LowCode.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
