@@ -33,7 +33,7 @@
 import { inject, onMounted, ref } from 'vue';
 import { Empty } from 'ant-design-vue';
 import type { LowCode } from '/@/types/schema.d';
-import HexDraggable from '../hex-draggable/hex-draggable.vue';
+import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
 import { buildElementSchema } from '/@/utils/draggable-api';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';

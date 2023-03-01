@@ -76,7 +76,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '/@/engine/components/hex-draggable/hex-draggable.less';
+@import '/@/components/hex-draggable/hex-draggable.less';
 
 :deep(.hex-draggable) {
   height: 100%;
