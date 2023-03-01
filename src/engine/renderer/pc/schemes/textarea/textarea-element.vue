@@ -5,22 +5,17 @@
 </template>
 
 <script lang="ts" setup>
-import { cloneDeep } from 'lodash-es';
 import { computed, defineComponent } from 'vue';
-import ElementWrapper from '../../components/element-wrapper.vue';
-import type { LowCode } from '/@/types/schema.d';
+import { PcSchema } from '/@/schema/common/interface';
+import { useElement } from '../../hooks/useElement';
 
 interface Props {
-  schema: LowCode.Schema;
+  schema: PcSchema.InputScheme;
 }
-
 const props = withDefaults(defineProps<Props>(), {
   schema: undefined,
 });
-
-const ectype = computed(() => {
-  return cloneDeep(props.schema);
-});
+const { ectype, ElementWrapper } = useElement<PcSchema.InputScheme>(props);
 
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;

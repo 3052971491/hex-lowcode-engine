@@ -31,11 +31,11 @@ const ROW_ATTRIBUTE: Array<AttributeItem> = [
 
 const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'flex', label: 'flex 布局填充', editor: 'flex-editor', merge: true },
-  { type: 'Column', name: 'offset', label: '栅格左侧的间隔格数', editor: 'input-number-editor' },
-  { type: 'Column', name: 'order', label: '栅格顺序', editor: 'input-number-editor' },
-  { type: 'Column', name: 'pull', label: '栅格向左移动格数', editor: 'input-number-editor' },
-  { type: 'Column', name: 'push', label: '栅格向右移动格数', editor: 'input-number-editor' },
-  { type: 'Column', name: 'span', label: '栅格占位格数', editor: 'input-number-editor' },
+  { type: 'Column', name: 'offset', label: '左侧间隔格数', editor: 'input-number-editor' },
+  { type: 'Column', name: 'order', label: '顺序', editor: 'input-number-editor' },
+  { type: 'Column', name: 'pull', label: '向左移动格数', editor: 'input-number-editor' },
+  { type: 'Column', name: 'push', label: '向右移动格数', editor: 'input-number-editor' },
+  { type: 'Column', name: 'span', label: '占位格数', editor: 'input-number-editor' },
   { type: 'Column', name: 'xxxl', label: ' ≥2000px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'xs', label: '<576px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'sm', label: '≥576px 响应式栅格', editor: 'input-number-editor' },
