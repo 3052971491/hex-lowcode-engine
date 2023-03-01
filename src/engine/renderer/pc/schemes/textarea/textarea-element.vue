@@ -24,6 +24,7 @@ const ectype = computed(() => {
 
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;
+  if (!obj) return {};
   return {
     allowClear: obj.allowClear,
     bordered: obj.bordered,

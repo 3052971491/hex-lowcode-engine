@@ -30,6 +30,7 @@ const ectype = computed(() => {
 const ectypeProps = computed(() => {
   if (!ectype.value) return {};
   const obj = ectype.value.props;
+  if (!obj) return {};
   return {
     align: obj.align,
     justify: obj.justify,

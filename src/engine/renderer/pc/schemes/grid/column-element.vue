@@ -55,6 +55,7 @@ const ectype = computed(() => {
 const ectypeProps = computed(() => {
   if (!ectype.value) return {};
   const obj = ectype.value.props;
+  if (!obj) return {};
   return {
     flex: obj.flex,
     offset: obj.offset,
