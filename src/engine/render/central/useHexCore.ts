@@ -1,12 +1,12 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { reactive } from 'vue';
-import ProjectConfig from '/@lowcode-engine/schema/project-scheme';
-import { buildUUID } from '/@lowcode-engine/utils/common';
+import ProjectConfig from '/@/schema/project-schema';
+import { buildUUID } from '/@/utils/common';
 import { cloneDeep, isNil } from 'lodash-es';
 
 interface StateType {
   /** 应用配置 */
-  projectConfig?: LowCodeScheme.ProjectScheme;
+  projectConfig?: LowCodeSchema.ProjectSchema;
   /** 历史进度 */
   history?: {
     /** 当前下标 */
@@ -14,14 +14,14 @@ interface StateType {
     /** 保存步骤数量限制 */
     maxStep: number;
     /** 步骤列表 */
-    steps: LowCodeScheme.ProjectScheme[];
+    steps: LowCodeSchema.ProjectSchema[];
   };
   /** 选中组件节点 */
   selectedData?: {
     /** 节点唯一标识 */
     selectedId: string;
     /** 组件节点描述 */
-    selectedScheme?: LowCodeScheme.Scheme | null;
+    selectedScheme?: LowCodeSchema.Schema | null;
   };
 }
 
@@ -32,7 +32,7 @@ export interface HexCoreFactory {
    * 生成应用配置
    * @param project 应用配置
    */
-  buildProjectConfig(project?: LowCodeScheme.ProjectScheme): void;
+  buildProjectConfig(project?: LowCodeSchema.ProjectSchema): void;
   /**
    * 初始化
    */
@@ -74,7 +74,7 @@ export interface HexCoreFactory {
   /** 重置选中组件节点信息 */
   handleResetSelectData(): void;
   /** 更新选中组件节点信息 */
-  handleUpdateSelectData(element: LowCodeScheme.Scheme): void;
+  handleUpdateSelectData(element: LowCodeSchema.Schema): void;
 }
 export function useHexCore(): HexCoreFactory {
   const state = reactive<StateType>({
@@ -99,7 +99,7 @@ export function useHexCore(): HexCoreFactory {
     }
   }
 
-  function buildProjectConfig(project?: LowCodeScheme.ProjectScheme) {
+  function buildProjectConfig(project?: LowCodeSchema.ProjectSchema) {
     let config = cloneDeep(ProjectConfig);
     if (!isNil(project)) {
       config = project;
@@ -237,7 +237,7 @@ export function useHexCore(): HexCoreFactory {
     }
   }
 
-  function handleUpdateSelectData(element: LowCodeScheme.Scheme): void {
+  function handleUpdateSelectData(element: LowCodeSchema.Schema): void {
     if (isNil(element)) {
       handleResetSelectData();
       return;

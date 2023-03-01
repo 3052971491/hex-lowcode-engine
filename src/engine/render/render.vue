@@ -12,23 +12,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, onMounted, provide, reactive, ref } from 'vue';
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import { computed, defineComponent, inject, onMounted, provide, ref } from 'vue';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
 import { RedactStateInjectionKey, HexCoreInjectionKey, DataEngineInjectionKey } from './render-inject-key';
 
 interface Props {
-  value?: LowCodeScheme.ProjectScheme;
+  value?: LowCodeSchema.ProjectSchema;
   /** 设备类型 */
-  device?: LowCodeScheme.Device;
+  device?: LowCodeSchema.Device;
   /** 当前渲染器是否是编辑状态 */
   redactState?: boolean;
 }
 
 interface StateType {
-  config?: LowCodeScheme.ProjectScheme;
+  config?: LowCodeSchema.ProjectSchema;
 }
 const props = withDefaults(defineProps<Props>(), {
   value: undefined,
@@ -76,7 +76,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '/@lowcode-engine/components/hex-draggable/hex-draggable.less';
+@import '/@/engine/components/hex-draggable/hex-draggable.less';
 
 :deep(.hex-draggable) {
   height: 100%;

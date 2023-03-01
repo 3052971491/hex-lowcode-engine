@@ -62,9 +62,9 @@ import {
 import HexModal from '/@/components/hex-modal/index.vue';
 import MenuItem from './components/menu-item.vue';
 import LibraryItem from './components/library-item.vue';
-import ElementLibrary from '/@lowcode-engine/components/element-library/element-library.vue';
-import I18nLibrary from '/@lowcode-engine/components/i18n-library/i18n-library.vue';
-import ActionPaneLibrary from '/@lowcode-engine/components/action-pane-library/action-pane-library.vue';
+import ElementLibrary from '/@/engine/components/element-library/element-library.vue';
+import I18nLibrary from '/@/engine/components/i18n-library/i18n-library.vue';
+import ActionPaneLibrary from '/@/engine/components/action-pane-library/action-pane-library.vue';
 // import DataSourceLibrary from './components/data-source-library.vue';
 // import ModalLibrary from './components/modal-library.vue';
 

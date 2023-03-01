@@ -30,19 +30,19 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
 import { inject, onMounted, ref } from 'vue';
-import HexDraggable from '../hex-draggable/hex-draggable.vue';
-import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@lowcode-engine/schema/pc';
-import { buildElementScheme } from '/@lowcode-engine/utils/draggable-api';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
 import { Empty } from 'ant-design-vue';
+import type { LowCodeSchema } from '/@/types/schema.d';
+import HexDraggable from '../hex-draggable/hex-draggable.vue';
+import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
+import { buildElementSchema } from '/@/utils/draggable-api';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 
 interface ElementList {
   /** 组件类型名称 */
   label: string;
   /** 组件列表 */
-  list: LowCodeScheme.Scheme[];
+  list: LowCodeSchema.Schema[];
 }
 
 const core = inject(HexCoreInjectionKey);
@@ -70,12 +70,12 @@ const elementList: ElementList[] = [
 
 const loading = ref(true);
 
-const onClone = (e: LowCodeScheme.Scheme) => {
-  return buildElementScheme(e);
+const onClone = (e: LowCodeSchema.Schema) => {
+  return buildElementSchema(e);
 };
 
-const handleAddElementDbClick = (e: LowCodeScheme.Scheme) => {
-  const newEl = buildElementScheme(e);
+const handleAddElementDbClick = (e: LowCodeSchema.Schema) => {
+  const newEl = buildElementSchema(e);
   core?.state.projectConfig?.componentsTree.push(newEl);
   core?.handleUpdateSelectData(newEl);
   core?.handleUpdateHistoryData();

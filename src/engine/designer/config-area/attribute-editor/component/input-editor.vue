@@ -7,8 +7,8 @@
 import { inject, computed } from 'vue';
 import { isNil } from 'lodash-es';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@lowcode-engine/utils/scheme';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { set, get } from '/@/utils/schema';
 import { AttributeItem } from '../../attribute-editor/interface';
 
 interface Props {
@@ -23,33 +23,33 @@ const props = withDefaults(defineProps<Props>(), {
 
 const core = inject(HexCoreInjectionKey);
 
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 
 const modelValue = computed({
   set(val) {
     if (
-      isNil(scheme.value.props[props.attribute]) ||
-      Object.prototype.toString.call(scheme.value.props[props.attribute]) === '[object String]'
+      isNil(schema.value.props[props.attribute]) ||
+      Object.prototype.toString.call(schema.value.props[props.attribute]) === '[object String]'
     ) {
-      set(props.attribute, val, scheme.value);
+      set(props.attribute, val, schema.value);
       return;
     }
     if (props.option.i18n) {
-      const obj = get(props.attribute, scheme.value) as any;
+      const obj = get(props.attribute, schema.value) as any;
       // 获取当前语种
       obj['zh-CN'] = val;
-      set(props.attribute, obj, scheme.value);
+      set(props.attribute, obj, schema.value);
       return;
     }
-    set(props.attribute, val, scheme.value);
+    set(props.attribute, val, schema.value);
   },
   get() {
-    const val: any = get(props.attribute, scheme.value);
+    const val: any = get(props.attribute, schema.value);
     if (
-      isNil(scheme.value.props[props.attribute]) ||
-      Object.prototype.toString.call(scheme.value.props[props.attribute]) === '[object String]'
+      isNil(schema.value.props[props.attribute]) ||
+      Object.prototype.toString.call(schema.value.props[props.attribute]) === '[object String]'
     ) {
       return val;
     }

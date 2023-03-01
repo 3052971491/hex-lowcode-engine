@@ -10,9 +10,9 @@
 <script lang="ts" setup name="RowAlignEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
-import { set, get } from '/@lowcode-engine/utils/scheme';
+import { set, get } from '/@/utils/schema';
 
 interface Props {
   label: string;
@@ -25,15 +25,15 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 const modelValue = computed({
   set(val: string) {
-    set(props.attribute, val, scheme.value);
+    set(props.attribute, val, schema.value);
   },
   get() {
-    return get(props.attribute, scheme.value);
+    return get(props.attribute, schema.value);
   },
 });
 </script>

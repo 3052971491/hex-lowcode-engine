@@ -1,40 +1,40 @@
 import type { I18nMap } from './i18n.d';
-import type { PcSchemePro } from './pc-scheme.d';
+import type { PcSchemaPro } from './pc-schema.d';
 import type { CompositeValue, JSExpression, JSFunction } from '/@/lowcode-pro/engine/types/value-type.d';
 
-export namespace LowCodeScheme {
+export namespace LowCodeSchema {
   /**
-   * Scheme 大类
+   * Schema 大类
    * @description 基础组件 | 业务组件 | 布局组件 | 高级组件
    */
   export type Category = 'BASIC' | 'BUSINESS' | 'LAYOUT' | 'ADVANCED';
 
   /**
-   * Scheme 设备
+   * Schema 设备
    * @description WEB端 | 移动端
    */
   export type Device = 'PC' | 'MOBILE';
 
   /**
-   * Scheme 校验规则类型
+   * Schema 校验规则类型
    * @description 必填 | 最小值 | 最大值 | 最小长度 | 最大长度 | 自定义
    */
   export type RuleType = 'required' | 'min' | 'max' | 'minlength' | 'maxlength' | 'custom';
 
   /**
-   * Scheme 状态
+   * Schema 状态
    * @description 正常态 | 只读态 | 禁用态 | 隐藏态
    */
   export type Behavior = 'normal' | 'readonly' | 'disabled' | 'hidden';
 
   /**
-   * Scheme 大小
+   * Schema 大小
    * @description 小 | 中 | 大
    */
   export type Size = 'small' | 'middle' | 'large';
 
   /**
-   * Scheme 弹框类型
+   * Schema 弹框类型
    * @description 模态框 | 抽屉
    */
   export type DialogType = 'modal' | 'drawer';
@@ -63,7 +63,7 @@ export namespace LowCodeScheme {
   /**
    * 组件节点描述-基类
    */
-  export interface NodeScheme {
+  export interface NodeSchema {
     /** 显示设备 */
     device: Device;
     /** 组件tag标识 */
@@ -81,7 +81,7 @@ export namespace LowCodeScheme {
     /** icon类型, 配置组件库使用 */
     iconType: 'DEFAULT';
     /** 子集, 仅布局组件使用 */
-    children?: Scheme[];
+    children?: Schema[];
     /** 是否可显示, 配置组件库使用 */
     internal?: boolean;
     /** 组件唯一标识 */
@@ -113,7 +113,7 @@ export namespace LowCodeScheme {
   }
 
   /** 应用描述 */
-  export interface ProjectScheme {
+  export interface ProjectSchema {
     /**
      * 唯一标识
      */
@@ -141,11 +141,11 @@ export namespace LowCodeScheme {
     /**
      * 组件节点树
      */
-    componentsTree: Scheme[];
+    componentsTree: Schema[];
     /**
      * 弹框节点树
      */
-    dialogComponentsTree: DialogScheme[];
+    dialogComponentsTree: DialogSchema[];
     /** 编译前全量代码 */
     originCode: string;
     /**
@@ -169,7 +169,7 @@ export namespace LowCodeScheme {
   }
 
   /** 弹出框节点描述 */
-  export interface DialogScheme {
+  export interface DialogSchema {
     /** 组件唯一标识 */
     id: string;
     /** 类型 */
@@ -177,13 +177,13 @@ export namespace LowCodeScheme {
     /** 弹框名称 */
     name: string;
     /** 组件节点树 */
-    componentsTree: Scheme[];
+    componentsTree: Schema[];
   }
 
   /**
    * 组件节点描述-Props基类
    */
-  export interface NodeSchemeProps extends CompositeValue {
+  export interface NodeSchemaProps extends CompositeValue {
     /** 样式 */
     __style__: string;
   }
@@ -191,19 +191,19 @@ export namespace LowCodeScheme {
   /**
    * WEB端-组件节点描述-Props基类
    */
-  export interface NodePCSchemeProps extends NodeSchemeProps {}
+  export interface NodePCSchemaProps extends NodeSchemaProps {}
 
   /**
    * WEB端-组件节点描述-基类
    */
-  export interface PCScheme extends NodeScheme {
+  export interface PCSchema extends NodeSchema {
     /** 是否被a-form-item包裹 */
     formItemFlag?: boolean;
-    props: PcSchemePro.PcSchemeProProps;
+    props: PcSchemaPro.PcSchemaProProps;
   }
 
   /**
    * 组件节点描述
    */
-  export type Scheme = PCScheme;
+  export type Schema = PCSchema;
 }

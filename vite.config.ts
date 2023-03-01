@@ -20,10 +20,6 @@ export default defineConfig({
         find: /\/@\//,
         replacement: `${pathResolve('src')}/`,
       },
-      {
-        find: /\/@lowcode-engine/,
-        replacement: `${pathResolve('src/engine')}/`,
-      },
     ],
   },
   css: {

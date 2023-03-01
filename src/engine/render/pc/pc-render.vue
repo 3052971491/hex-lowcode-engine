@@ -5,7 +5,7 @@
       <hex-draggable v-model:value="modelValue.componentsTree" class="w-full h-full" @add="onAdd" @update="onUpdate">
         <template #item="{ element }">
           <div class="item hex-draggable-handle">
-            <component :is="`${element.componentType}Element`" :scheme="element"></component>
+            <component :is="`${element.componentType}Element`" :schema="element"></component>
           </div>
         </template>
       </hex-draggable>
@@ -13,22 +13,22 @@
     <!-- 预览模式 -->
     <template v-else>
       <template v-for="item in modelValue.componentsTree" :key="item.id">
-        <component :is="`${item.componentType}Element`" :scheme="item"></component>
+        <component :is="`${item.componentType}Element`" :schema="item"></component>
       </template>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
-import HexDraggable from '/@lowcode-engine/components/hex-draggable/hex-draggable.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 
 const core = inject(HexCoreInjectionKey);
 
 interface Props {
-  value?: LowCodeScheme.ProjectScheme;
+  value: LowCodeSchema.ProjectSchema;
   /** 当前渲染器是否是编辑状态 */
   redactState?: boolean;
 }

@@ -1,11 +1,11 @@
 <template>
   <template v-if="isPreview">
-    <ElementEditWrapper :scheme="scheme">
+    <ElementEditWrapper :schema="schema">
       <slot></slot>
     </ElementEditWrapper>
   </template>
   <template v-else>
-    <ElementViewWrapper :scheme="scheme">
+    <ElementViewWrapper :schema="schema">
       <template v-if="isDefault">
         <div v-show="!isHidden">
           <slot></slot>
@@ -17,19 +17,19 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
 import ElementEditWrapper from './element-edit-wrapper.vue';
 import ElementViewWrapper from './element-view-wrapper.vue';
 import { useElementWrapper } from '../hooks/useElementWrapper';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/render/render-inject-key';
 
 interface Props {
-  scheme: LowCodeScheme.Scheme;
+  schema: LowCodeSchema.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 
 const core = inject(HexCoreInjectionKey);
@@ -40,7 +40,7 @@ const selectedScheme = computed(() => {
 });
 
 const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
-  props.scheme,
+  props.schema,
   selectedScheme.value,
   redactState,
 );

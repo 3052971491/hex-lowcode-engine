@@ -80,10 +80,10 @@ import { computed, inject, ref } from 'vue';
 import { GlobalOutlined, FontColorsOutlined } from '@ant-design/icons-vue';
 import { isNil } from 'lodash-es';
 import { AttributeItem } from '../attribute-editor/interface';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { formatConversion, fuzzyQuery } from '/@lowcode-engine/utils/i18n';
-import { set, get } from '/@lowcode-engine/utils/scheme';
-import { buildUUID } from '/@lowcode-engine/utils/common';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { formatConversion, fuzzyQuery } from '/@/utils/i18n';
+import { set, get } from '/@/utils/schema';
+import { buildUUID } from '/@/utils/common';
 
 interface Props {
   /** 标题 */
@@ -99,7 +99,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 
@@ -110,10 +110,10 @@ const tips = computed(() => {
 const i18nPopconfirm = ref(false);
 
 const I18nStatus = computed(() => {
-  if (isNil(scheme.value.props[props.name])) {
+  if (isNil(schema.value.props[props.name])) {
     return false;
   }
-  return Object.prototype.toString.call(scheme.value.props[props.name]) !== '[object String]';
+  return Object.prototype.toString.call(schema.value.props[props.name]) !== '[object String]';
 });
 
 /** 多语言文案 */
@@ -139,7 +139,7 @@ const handleCreateI18nClick = () => {
       'zh-CN': null,
       'en-US': null,
     },
-    scheme.value,
+    schema.value,
   );
   if (core?.state.projectConfig?.i18n) {
     core.state.projectConfig.i18n['zh-CN'][id] = '';
@@ -148,36 +148,36 @@ const handleCreateI18nClick = () => {
 };
 const updateI18nByEn = computed({
   set(val: string) {
-    const obj = get(props.name, scheme.value);
+    const obj = get(props.name, schema.value);
     obj['en-US'] = val;
-    set(props.name, obj, scheme.value);
+    set(props.name, obj, schema.value);
     if (core?.state.projectConfig?.i18n) {
       core.state.projectConfig.i18n['en-US'][obj.key] = val;
     }
   },
   get() {
-    return get(props.name, scheme.value)['en-US'];
+    return get(props.name, schema.value)['en-US'];
   },
 });
 
 const updateI18nByZh = computed({
   set(val: string) {
-    const obj = get(props.name, scheme.value);
+    const obj = get(props.name, schema.value);
     obj['zh-CN'] = val;
-    set(props.name, obj, scheme.value);
+    set(props.name, obj, schema.value);
     if (core?.state.projectConfig?.i18n) {
       core.state.projectConfig.i18n['zh-CN'][obj.key] = val;
     }
   },
   get() {
-    return get(props.name, scheme.value)['zh-CN'];
+    return get(props.name, schema.value)['zh-CN'];
   },
 });
 
 /** 解除文案关联 */
 const handleDeleteControlClick = () => {
   filterText.value = '';
-  set(props.name, null, scheme.value);
+  set(props.name, null, schema.value);
   i18nPopconfirm.value = false;
 };
 
@@ -192,7 +192,7 @@ const handleSelectI18nClick = (item: any) => {
       'zh-CN': item['zh-CN'],
       'en-US': item['en-US'],
     },
-    scheme.value,
+    schema.value,
   );
 };
 </script>

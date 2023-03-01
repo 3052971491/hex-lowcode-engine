@@ -1,5 +1,5 @@
 <template>
-  <ElementWrapper :scheme="scheme">
+  <ElementWrapper :schema="schema">
     <a-input v-bind="ectypeProps"></a-input>
   </ElementWrapper>
 </template>
@@ -8,19 +8,18 @@
 import { computed, defineComponent } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import ElementWrapper from '../../components/element-wrapper.vue';
-import { LowCodeScheme } from '/@/types/scheme';
-import { Behavior } from '/@lowcode-engine/enum/element-option-enum';
+import { LowCodeSchema } from '/@/types/schema.d';
 
 interface Props {
-  scheme: LowCodeScheme.Scheme;
+  schema: LowCodeSchema.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 
 const ectype = computed(() => {
-  return cloneDeep(props.scheme);
+  return cloneDeep(props.schema);
 });
 
 const ectypeProps = computed(() => {
@@ -28,7 +27,7 @@ const ectypeProps = computed(() => {
   return {
     allowClear: obj.allowClear,
     bordered: obj.bordered,
-    disabled: obj.behavior === Behavior.DISABLED,
+    disabled: obj.behavior === 'disabled',
     placeholder: obj.placeholder,
     size: obj.size,
     maxlength: obj.maxlength,

@@ -37,9 +37,9 @@
 import { computed, inject, ref } from 'vue';
 import { UndoOutlined, RedoOutlined, CloudUploadOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
-import Render from '/@lowcode-engine/render/render.vue';
+import Render from '/@/engine/render/render.vue';
 import HexJsonPretty from '/@/components/hex-json-pretty/index.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 import { cloneDeep } from 'lodash-es';
 import { message } from 'ant-design-vue';
 

@@ -1,9 +1,9 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
-import type { CompositeValue } from '/@/types/value-type';
+import type { CompositeValue } from '/@/types/value-type.d';
 
-export namespace PcSchemePro {
-  export interface InputProps extends LowCodeScheme.NodePCSchemeProps {
+export namespace PcSchemaPro {
+  export interface InputProps extends LowCodeSchema.NodePcSchemaProps {
     /** 标签 */
     label?: I18n;
     /** 占位提示 */
@@ -11,13 +11,13 @@ export namespace PcSchemePro {
     /** 默认值 */
     defaultValue?: I18n;
     /** 尺寸 */
-    size?: LowCodeScheme.Size;
+    size?: LowCodeSchema.Size;
     /** 状态 */
-    behavior?: LowCodeScheme.Behavior;
+    behavior?: LowCodeSchema.Behavior;
     /** 描述信息 */
     tips?: I18n;
     /** 校验规则 */
-    rules?: LowCodeScheme.RuleMap;
+    rules?: LowCodeSchema.RuleMap;
     /** 是否显示清除按钮 */
     allowClear?: boolean;
     /** 带标签的 input，设置前置标签 */
@@ -36,7 +36,7 @@ export namespace PcSchemePro {
     autofocus?: boolean;
   }
 
-  export interface RowProps extends LowCodeScheme.NodePCSchemeProps {
+  export interface RowProps extends LowCodeSchema.NodePcSchemaProps {
     /** flex 布局下的垂直对齐方式 */
     align?: 'top' | 'middle' | 'bottom';
     /** flex 布局下的水平排列方式 */
@@ -55,7 +55,7 @@ export namespace PcSchemePro {
     columnGutter?: number;
   }
 
-  export interface ColumnProps extends LowCodeScheme.NodeSchemeProps {
+  export interface ColumnProps extends LowCodeSchema.NodeSchemeProps {
     /** flex 布局填充 */
     flex?: string | number | null;
     /** 栅格左侧的间隔格数，间隔内不可以有栅格 */
@@ -84,7 +84,7 @@ export namespace PcSchemePro {
     xxl?: number | object | null;
   }
 
-  export interface PcSchemeProProps extends InputProps, RowProps, ColumnProps {
+  export interface PcSchemaProProps extends InputProps, RowProps, ColumnProps {
     [key: string]: CompositeValue;
   }
 }

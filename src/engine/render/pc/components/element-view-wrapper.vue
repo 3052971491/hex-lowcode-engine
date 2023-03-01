@@ -1,11 +1,11 @@
 <template>
   <!-- 是否a-form-item包裹 -->
-  <template v-if="scheme?.formItemFlag">
-    <a-form-item :rules="getRules()" :extra="scheme.props.tips">
+  <template v-if="schema?.formItemFlag">
+    <a-form-item :rules="getRules()" :extra="schema.props.tips">
       <template #label>
-        {{ scheme.props.label }}
+        {{ schema.props.label }}
       </template>
-      <!-- <template #extra>{{ scheme.props.tips }}</template> -->
+      <!-- <template #extra>{{ schema.props.tips }}</template> -->
       <slot></slot>
     </a-form-item>
   </template>
@@ -15,17 +15,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/render/render-inject-key';
 import { useFormItem } from '../hooks/useFormItem';
 
 interface Props {
-  scheme: LowCodeScheme.Scheme;
+  schema: LowCodeSchema.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 const core = inject(HexCoreInjectionKey);
 
@@ -35,5 +35,5 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { getRules } = useFormItem(props.scheme);
+const { getRules } = useFormItem(props.schema);
 </script>

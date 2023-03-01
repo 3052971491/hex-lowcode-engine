@@ -15,9 +15,8 @@
 <script lang="ts" setup name="SizeEditor">
 import { ref, inject, onMounted, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@lowcode-engine/utils/scheme';
-import { Size } from '/@lowcode-engine/enum/element-option-enum';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { set, get } from '/@/utils/schema';
 import { AttributeItem } from '../../attribute-editor/interface';
 
 interface Props {
@@ -31,21 +30,21 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 const modelValue = computed({
   set(val) {
-    set(props.attribute, val, scheme.value);
+    set(props.attribute, val, schema.value);
   },
   get() {
-    return get(props.attribute, scheme.value);
+    return get(props.attribute, schema.value);
   },
 });
 
 const source = [
-  { key: Size.SMALL, name: '小', tips: '小号尺寸' },
-  { key: Size.MIDDLE, name: '中', tips: '中号尺寸' },
-  { key: Size.LARGE, name: '大', tips: '大号尺寸' },
+  { key: 'small', name: '小', tips: '小号尺寸' },
+  { key: 'middle', name: '中', tips: '中号尺寸' },
+  { key: 'large', name: '大', tips: '大号尺寸' },
 ];
 </script>

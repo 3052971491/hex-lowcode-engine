@@ -1,28 +1,28 @@
 import { cloneDeep } from 'lodash-es';
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 import { buildUUID } from '/@/utils/common';
-import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/scheme/pc';
+import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
 
-export function buildElementScheme(element: LowCodeScheme.Scheme): LowCodeScheme.Scheme {
-  const newScheme = cloneDeep(element);
-  newScheme.id = buildUUID(16);
+export function buildElementSchema(element: LowCodeSchema.Schema): LowCodeSchema.Schema {
+  const newSchema = cloneDeep(element);
+  newSchema.id = buildUUID(16);
 
-  if (newScheme.tag === 'LAYOUT') {
+  if (newSchema.tag === 'LAYOUT') {
     let obj = null;
-    switch (newScheme.componentType) {
+    switch (newSchema.componentType) {
       case 'Row':
-        obj = buildElementSchemeByType('LAYOUT', 'Column');
+        obj = buildElementSchemaByType('LAYOUT', 'Column');
         if (obj) {
-          newScheme.children?.push(obj);
+          newSchema.children?.push(obj);
         }
-        obj = buildElementSchemeByType('LAYOUT', 'Column');
+        obj = buildElementSchemaByType('LAYOUT', 'Column');
         if (obj) {
-          newScheme.children?.push(obj);
+          newSchema.children?.push(obj);
         }
-        obj = buildElementSchemeByType('LAYOUT', 'Column');
+        obj = buildElementSchemaByType('LAYOUT', 'Column');
         if (obj) {
-          newScheme.children?.push(obj);
+          newSchema.children?.push(obj);
         }
         break;
 
@@ -30,7 +30,7 @@ export function buildElementScheme(element: LowCodeScheme.Scheme): LowCodeScheme
         break;
     }
   }
-  return newScheme;
+  return newSchema;
 }
 
 /**
@@ -39,15 +39,15 @@ export function buildElementScheme(element: LowCodeScheme.Scheme): LowCodeScheme
  * @param componentName 组件类型
  * @returns
  */
-export function buildElementSchemeByType(
-  classification: LowCodeScheme.Category,
+export function buildElementSchemaByType(
+  classification: LowCodeSchema.Category,
   componentName: string,
-): LowCodeScheme.Scheme | undefined {
-  const newScheme = findElementSchemeByType(classification, componentName);
+): LowCodeSchema.Schema | undefined {
+  const newSchema = findElementSchemaByType(classification, componentName);
 
-  if (newScheme) {
-    newScheme.id = buildUUID(16);
-    return newScheme;
+  if (newSchema) {
+    newSchema.id = buildUUID(16);
+    return newSchema;
   }
   return undefined;
 }
@@ -58,11 +58,11 @@ export function buildElementSchemeByType(
  * @param componentName 组件类型
  * @returns
  */
-export function findElementSchemeByType(
-  classification: LowCodeScheme.Category,
+export function findElementSchemaByType(
+  classification: LowCodeSchema.Category,
   componentName: string,
-): LowCodeScheme.Scheme | undefined {
-  let schema: LowCodeScheme.Scheme | null = null;
+): LowCodeSchema.Schema | undefined {
+  let schema: LowCodeSchema.Schema | null = null;
   if (classification === 'BASIC') {
     const idx = BasicComponents.findIndex((item) => {
       return item.componentType === componentName;

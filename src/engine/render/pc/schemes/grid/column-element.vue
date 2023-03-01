@@ -1,18 +1,18 @@
 <template>
   <a-col v-bind="ectypeProps">
-    <ElementWrapper :scheme="scheme" :class="classMap">
+    <ElementWrapper :schema="schema" :class="classMap">
       <template v-if="isPreview">
         <hex-draggable v-model:value="ectype.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element }">
             <div class="item hex-draggable-handle">
-              <component :is="`${ectype.componentType}Element`" :scheme="element"></component>
+              <component :is="`${ectype.componentType}Element`" :schema="element"></component>
             </div>
           </template>
         </hex-draggable>
       </template>
       <template v-else>
         <template v-for="item in ectype.children" :key="item.id">
-          <component :is="`${item.componentType}Element`" :scheme="item"></component>
+          <component :is="`${item.componentType}Element`" :schema="item"></component>
         </template>
       </template>
     </ElementWrapper>
@@ -20,20 +20,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, defineComponent, inject } from 'vue';
 import { cloneDeep } from 'lodash-es';
-import HexDraggable from '/@lowcode-engine/components/hex-draggable/hex-draggable.vue';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import HexDraggable from '/@/engine/components/hex-draggable/hex-draggable.vue';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/render/render-inject-key';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import ElementWrapper from '../../components/element-wrapper.vue';
 
 interface Props {
-  scheme: LowCodeScheme.Scheme;
+  schema: LowCodeSchema.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
@@ -43,13 +43,13 @@ const selectedScheme = computed(() => {
 });
 
 const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
-  props.scheme,
+  props.schema,
   selectedScheme.value,
   redactState,
 );
 
 const ectype = computed(() => {
-  return cloneDeep(props.scheme);
+  return cloneDeep(props.schema);
 });
 
 const ectypeProps = computed(() => {
@@ -73,8 +73,8 @@ const ectypeProps = computed(() => {
 });
 
 const onAdd = ({ newIndex }: { newIndex: number }) => {
-  // if (props.scheme?.children && props.scheme?.children[newIndex]) {
-  //   core?.handleUpdateSelectData(props.scheme.children[newIndex]);
+  // if (props.schema?.children && props.schema?.children[newIndex]) {
+  //   core?.handleUpdateSelectData(props.schema.children[newIndex]);
   //   core?.handleUpdateHistoryData();
   // }
 };

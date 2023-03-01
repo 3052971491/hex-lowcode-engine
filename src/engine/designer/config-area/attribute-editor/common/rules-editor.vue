@@ -52,12 +52,12 @@
   </collapse-Item-wrapper>
 </template>
 <script lang="ts" setup name="RulesEditor">
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { inject, computed } from 'vue';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { FormOutlined } from '@ant-design/icons-vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@/utils/scheme';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { set, get } from '/@/utils/schema';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { AttributeItem } from '../../attribute-editor/interface';
@@ -73,15 +73,15 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-const modelValue = computed<LowCodeScheme.RuleMap>({
+const modelValue = computed<LowCodeSchema.RuleMap>({
   set(val) {
-    set(props.attribute, val, scheme.value);
+    set(props.attribute, val, schema.value);
   },
   get() {
-    return get(props.attribute, scheme.value) as any[];
+    return get(props.attribute, schema.value) as any[];
   },
 });
 </script>

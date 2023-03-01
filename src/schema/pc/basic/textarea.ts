@@ -1,10 +1,10 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 /**
  * Textarea 多行文本
  * 参考地址: https://www.antdv.com/components/input-cn#components-input-demo-textarea
  */
-const Textarea: LowCodeScheme.Scheme = {
+const Textarea: LowCodeSchema.Schema = {
   device: 'PC',
   tag: 'BASIC',
   description: '',

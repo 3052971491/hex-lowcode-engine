@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { computed, defineComponent, inject } from 'vue';
 import { AttributeItem } from '../attribute-editor/interface';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 import { editor } from '../attribute-editor/register-glob-comp';
 import Attributes from '../attribute-editor/index';
 import CollapseItemWrapper from './collapse-item-wrapper.vue';

@@ -138,5 +138,5 @@ const unchoose = () => {
 };
 </script>
 <style lang="less" scoped>
-@import '/@lowcode-engine/components/hex-draggable/hex-draggable.less';
+@import '/@/engine/components/hex-draggable/hex-draggable.less';
 </style>

@@ -1,5 +1,5 @@
 import { computed, ComputedRef } from 'vue';
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 interface ElementWrapper {
   /**
@@ -27,23 +27,23 @@ interface ElementWrapper {
 
 /**
  * 组件包裹根容器-Hooks
- * @param scheme 当前组件节点描述
+ * @param schema 当前组件节点描述
  * @param selectScheme 选中组件节点描述
  * @param redactState 是否编辑器状态
  */
 export function useElementWrapper(
-  scheme: LowCodeScheme.Scheme,
-  selectScheme: LowCodeScheme.Scheme | undefined | null,
+  schema: LowCodeSchema.Schema,
+  selectScheme: LowCodeSchema.Schema | undefined | null,
   redactState: boolean | undefined = true,
 ): ElementWrapper {
   const isSelect = computed(() => {
     if (!redactState || !selectScheme) return false;
-    return scheme.id === selectScheme.id;
+    return schema.id === selectScheme.id;
   });
 
   const isDefault = computed((): boolean => {
     return (
-      scheme.props.behavior === 'normal' || scheme.props.behavior === 'disabled' || scheme.props.behavior === 'hidden'
+      schema.props.behavior === 'normal' || schema.props.behavior === 'disabled' || schema.props.behavior === 'hidden'
     );
   });
 
@@ -52,12 +52,12 @@ export function useElementWrapper(
   });
 
   const isReadonly = computed(() => {
-    return scheme.props.behavior === 'readonly';
+    return schema.props.behavior === 'readonly';
   });
 
   const isHidden = computed(() => {
     if (redactState) return false;
-    return scheme.props.behavior === 'hidden';
+    return schema.props.behavior === 'hidden';
   });
 
   return { isSelect, isDefault, isPreview, isReadonly, isHidden };

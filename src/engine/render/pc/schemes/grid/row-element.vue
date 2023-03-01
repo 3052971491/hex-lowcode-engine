@@ -1,8 +1,8 @@
 <template>
-  <ElementWrapper :scheme="scheme" :class="classMap">
+  <ElementWrapper :schema="schema" :class="classMap">
     <a-row v-bind="ectypeProps" class="p-1">
-      <template v-if="scheme?.children && scheme?.children?.length > 0">
-        <ColumnElement v-for="item in scheme.children" :key="item.id" :scheme="item"></ColumnElement>
+      <template v-if="schema?.children && schema?.children?.length > 0">
+        <ColumnElement v-for="item in schema.children" :key="item.id" :schema="item"></ColumnElement>
       </template>
     </a-row>
   </ElementWrapper>
@@ -12,19 +12,19 @@
 import { computed, defineComponent } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import ElementWrapper from '../../components/element-wrapper.vue';
-import { LowCodeScheme } from '/@/types/scheme.d';
+import { LowCodeSchema } from '/@/types/schema.d';
 import ColumnElement from './column-element.vue';
 
 interface Props {
-  scheme: LowCodeScheme.PCScheme;
+  schema: LowCodeSchema.PCSchema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 
 const ectype = computed(() => {
-  return cloneDeep(props.scheme);
+  return cloneDeep(props.schema);
 });
 
 const ectypeProps = computed(() => {

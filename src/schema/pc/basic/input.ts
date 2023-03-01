@@ -1,9 +1,9 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 /**
  * Input 单行文本
  * 参考地址: https://www.antdv.com/components/input-cn
  */
-const Input: LowCodeScheme.Scheme = {
+const Input: LowCodeSchema.Schema = {
   device: 'PC',
   tag: 'BASIC',
   description: '',

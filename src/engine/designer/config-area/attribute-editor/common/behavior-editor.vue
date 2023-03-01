@@ -15,8 +15,8 @@
 <script lang="ts" setup name="BehaviorEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { set, get } from '/@/utils/scheme';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { set, get } from '/@/utils/schema';
 import { AttributeItem } from '../../attribute-editor/interface';
 
 interface Props {
@@ -29,15 +29,15 @@ const props = withDefaults(defineProps<Props>(), {
   attribute: '',
 });
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 const modelValue = computed({
   set(val) {
-    set(props.attribute, val, scheme.value);
+    set(props.attribute, val, schema.value);
   },
   get() {
-    return get(props.attribute, scheme.value);
+    return get(props.attribute, schema.value);
   },
 });
 

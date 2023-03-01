@@ -67,12 +67,11 @@
 </template>
 
 <script lang="ts" setup>
-import { I18nMap } from '/@/types/i18n';
 import { inject, onMounted, Ref, ref } from 'vue';
 import { DeleteOutlined } from '@ant-design/icons-vue';
-import { buildUUID } from '/@lowcode-engine/utils/common';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
-import { formatConversion } from '/@lowcode-engine/utils/i18n';
+import { buildUUID } from '/@/utils/common';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
+import { formatConversion } from '/@/utils/i18n';
 
 const core = inject(HexCoreInjectionKey);
 interface i18n {

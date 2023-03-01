@@ -1,9 +1,9 @@
 import { App } from 'vue';
 import pkg from '/@/../package.json';
 
-import RegisterComponents from './register-components';
-import HexFormEditor from '../designer/designer.vue';
-import HexFormRender from '../render/render.vue';
+import RegisterComponents from '/@/engine/render/register-components';
+import HexFormEditor from '/@/engine/designer/designer.vue';
+import HexFormRender from '/@/engine/render/render.vue';
 
 const components = [HexFormEditor, HexFormRender];
 

@@ -1,11 +1,11 @@
 <template>
-  <div v-if="scheme?.tag !== 'LAYOUT'" :class="classMap" class="element-edit-wrapper">
+  <div v-if="schema?.tag !== 'LAYOUT'" :class="classMap" class="element-edit-wrapper">
     <!-- 遮罩层 -->
     <div class="mask" @click.stop="handleSelectCurrentComponentClick()"></div>
     <!-- 面包屑列表 -->
     <div v-if="isSelect" class="instance-node-selector">
       <div v-for="item in 4" :key="item" class="instance-node-selector-current" @click.stop="handleSelectElement(item)">
-        {{ scheme?.componentName }}
+        {{ schema?.componentName }}
       </div>
     </div>
     <!-- 操作按钮组 -->
@@ -24,12 +24,12 @@
       </a-tooltip>
     </div>
     <!-- 是否a-form-item包裹 -->
-    <template v-if="scheme?.formItemFlag">
+    <template v-if="schema?.formItemFlag">
       <a-form-item :rules="getRules()">
         <template #label>
-          {{ scheme.props.label }}
+          {{ schema.props.label }}
         </template>
-        <template #extra>{{ scheme.props.tips }}</template>
+        <template #extra>{{ schema.props.tips }}</template>
         <template #help></template>
         <slot></slot>
       </a-form-item>
@@ -41,7 +41,7 @@
   <div v-else class="container-edit-wrapper" :class="classMap" @click.stop="handleSelectCurrentComponentClick()">
     <div v-if="isSelect" class="instance-node-selector">
       <div v-for="item in 4" :key="item" class="instance-node-selector-current" @click.stop="handleSelectElement(item)">
-        {{ scheme?.componentName }}
+        {{ schema?.componentName }}
       </div>
     </div>
     <div v-if="isSelect" class="borders-actions">
@@ -63,18 +63,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/render/render-inject-key';
 import { CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
 
 interface Props {
-  scheme: LowCodeScheme.Scheme;
+  schema: LowCodeSchema.Schema;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  scheme: undefined,
+  schema: undefined,
 });
 
 const core = inject(HexCoreInjectionKey);
@@ -85,12 +85,12 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { getRules } = useFormItem(props.scheme);
+const { getRules } = useFormItem(props.schema);
 getRules();
 
 const isSelect = computed(() => {
-  if (!redactState || !selectedScheme.value || !props.scheme) return false;
-  return props.scheme.id === selectedScheme.value.id;
+  if (!redactState || !selectedScheme.value || !props.schema) return false;
+  return props.schema.id === selectedScheme.value.id;
 });
 
 const classMap = computed<string[]>(() => {
@@ -109,8 +109,8 @@ const handleSelectElement = (item: any) => {
  * 选中当前组件
  */
 const handleSelectCurrentComponentClick = () => {
-  if (props.scheme) {
-    core?.handleUpdateSelectData(props.scheme);
+  if (props.schema) {
+    core?.handleUpdateSelectData(props.schema);
   }
 };
 </script>

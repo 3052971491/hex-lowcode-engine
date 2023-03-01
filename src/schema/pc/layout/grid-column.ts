@@ -1,10 +1,10 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 /**
  * Column 栅格布局
  * 参考地址: https://www.antdv.com/components/grid-cn
  */
-const Column: LowCodeScheme.Scheme = {
+const Column: LowCodeSchema.Schema = {
   device: 'PC',
   tag: 'LAYOUT',
   description: '',

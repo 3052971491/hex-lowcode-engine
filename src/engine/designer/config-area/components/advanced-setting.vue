@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full">
     <a-form
-      v-if="scheme"
+      v-if="schema"
       layout="horizontal"
       label-align="left"
       :label-wrap="true"
@@ -10,7 +10,7 @@
       }"
     >
       <form-Item-wrapper label="是否渲染" name="condition" :option="{}">
-        <a-switch v-model:checked="scheme.condition"></a-switch>
+        <a-switch v-model:checked="schema.condition"></a-switch>
       </form-Item-wrapper>
       <collapse-Item-wrapper label="循环" name="" :option="{}">
         <form-Item-wrapper label="循环数据" name="loop" :option="{}">
@@ -29,27 +29,27 @@
 
 <script lang="ts" setup>
 import { computed, inject } from 'vue';
-import { HexCoreInjectionKey } from '/@lowcode-engine/render/render-inject-key';
+import { HexCoreInjectionKey } from '/@/engine/render/render-inject-key';
 import FormItemWrapper from './form-item-wrapper.vue';
 import CollapseItemWrapper from './collapse-item-wrapper.vue';
 
 const core = inject(HexCoreInjectionKey);
-const scheme = computed(() => {
+const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
 
 /** 迭代变量名 */
 const iterationName = computed({
   set(val: string) {
-    if (!scheme.value) return;
-    if (!scheme.value?.loopArgs) {
-      scheme.value.loopArgs = [];
+    if (!schema.value) return;
+    if (!schema.value?.loopArgs) {
+      schema.value.loopArgs = [];
     }
-    scheme.value.loopArgs[0] = val;
+    schema.value.loopArgs[0] = val;
   },
   get() {
-    if (scheme.value && scheme.value?.loopArgs) {
-      return scheme.value?.loopArgs[0] ?? '';
+    if (schema.value && schema.value?.loopArgs) {
+      return schema.value?.loopArgs[0] ?? '';
     }
     return '';
   },
@@ -57,15 +57,15 @@ const iterationName = computed({
 /** 索引变量名 */
 const indexName = computed({
   set(val: string) {
-    if (!scheme.value) return;
-    if (!scheme.value?.loopArgs) {
-      scheme.value.loopArgs = [''];
+    if (!schema.value) return;
+    if (!schema.value?.loopArgs) {
+      schema.value.loopArgs = [''];
     }
-    scheme.value.loopArgs[1] = val;
+    schema.value.loopArgs[1] = val;
   },
   get() {
-    if (scheme.value && scheme.value?.loopArgs) {
-      return scheme.value?.loopArgs[1] ?? '';
+    if (schema.value && schema.value?.loopArgs) {
+      return schema.value?.loopArgs[1] ?? '';
     }
     return '';
   },

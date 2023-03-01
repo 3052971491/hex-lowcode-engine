@@ -1,9 +1,9 @@
-import type { LowCodeScheme } from '/@/types/scheme.d';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 /**
  * 页面配置
  */
-const ProjectConfig: LowCodeScheme.ProjectScheme = {
+const ProjectConfig: LowCodeSchema.ProjectSchema = {
   id: '',
   utils: [],
   css: '',

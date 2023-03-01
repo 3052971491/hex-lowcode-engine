@@ -1,6 +1,5 @@
 import type { Rule } from 'ant-design-vue/es/form';
-import type { LowCodeScheme } from '/@/types/scheme.d';
-import { RuleType } from '/@lowcode-engine/enum/element-option-enum';
+import type { LowCodeSchema } from '/@/types/schema.d';
 
 interface FormItem {
   /**
@@ -14,29 +13,29 @@ interface FormItem {
  * @param 当前组件节点描述
  * @returns
  */
-export function useFormItem(scheme: LowCodeScheme.Scheme): FormItem {
+export function useFormItem(schema: LowCodeSchema.Schema): FormItem {
   function getRules() {
-    if (!scheme || !scheme.props.hasOwnProperty('rules')) return [];
-    const { rules } = scheme.props;
+    if (!schema || !schema.props.hasOwnProperty('rules')) return [];
+    const { rules } = schema.props;
     const arr: Rule[] = [];
     if (rules && rules.length > 0) {
-      rules.forEach((rule: LowCodeScheme.Rule) => {
+      rules.forEach((rule: LowCodeSchema.Rule) => {
         if (!rule.enable) return;
         const obj: Rule = {
           message: rule.message ? rule.message : '',
           trigger: ['change', 'blur'],
         };
         switch (rule.type) {
-          case RuleType.REQUIRED:
+          case 'required':
             obj.required = rule.enable;
             break;
-          case RuleType.MINLENGTH:
+          case 'minlength':
             obj.min = rule.value;
             break;
-          case RuleType.MAXLENGTH:
+          case 'maxlength':
             obj.max = rule.value;
             break;
-          case RuleType.MIN:
+          case 'min':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
                 if (value < rule.value) {
@@ -46,7 +45,7 @@ export function useFormItem(scheme: LowCodeScheme.Scheme): FormItem {
               return Promise.resolve();
             };
             break;
-          case RuleType.MAX:
+          case 'max':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
                 if (value > rule.value) {
@@ -56,7 +55,7 @@ export function useFormItem(scheme: LowCodeScheme.Scheme): FormItem {
               return Promise.resolve();
             };
             break;
-          case RuleType.CUSTOM:
+          case 'custom':
             break;
           default:
             break;
