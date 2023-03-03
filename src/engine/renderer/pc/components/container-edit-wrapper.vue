@@ -13,6 +13,14 @@
     <div v-if="isSelect" class="borders-actions">
       <a-tooltip placement="bottom">
         <template #title>
+          <span>选中父节点</span>
+        </template>
+        <div class="borders-action" @click.stop="($event) => handleSelectParentElementClick($event)">
+          <select-outlined />
+        </div>
+      </a-tooltip>
+      <a-tooltip placement="bottom">
+        <template #title>
           <span>复制</span>
         </template>
         <div class="borders-action" @click.stop="($event) => handleCopyCurrentElementClick($event)">
@@ -40,7 +48,7 @@ import {
   RedactStateInjectionKey,
   ComponentBreadcrumbs,
 } from '/@/engine/renderer/render-inject-key';
-import { CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
+import { CopyOutlined, DeleteOutlined, SelectOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
 
 interface Props {
@@ -89,7 +97,12 @@ const handleSelectElement = (item: LowCode.Schema, index: number) => {
     core?.handleUpdateSelectData(item);
   }
 };
-
+/** 选中父级节点 */
+const handleSelectParentElementClick = (event: Event) => {
+  if (props.parentSchema) {
+    core?.handleUpdateSelectData(props.parentSchema);
+  }
+};
 /**
  * 选中当前组件
  */
@@ -171,7 +184,7 @@ const handleCopyCurrentElementClick = (event: Event) => {
   .instance-node-selector {
     position: absolute;
     top: calc(100% + 2px);
-    right: 54px;
+    right: 84px;
     z-index: 999;
     display: flex;
     align-items: flex-end;
