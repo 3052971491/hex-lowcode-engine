@@ -45,6 +45,10 @@ withDefaults(
 }
 .menu-item-active {
   border-left: 3px solid #1890ff;
+
   background-color: rgba(0, 0, 0, 0.06);
+}
+.active-icon {
+  color: #1890ff;
 }
 </style>
