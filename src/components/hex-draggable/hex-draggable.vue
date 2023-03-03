@@ -73,7 +73,18 @@ const props = withDefaults(defineProps<Props>(), {
   },
 });
 
-const emit = defineEmits(['update:value', 'add', 'start', 'end', 'update', 'remove', 'sort', 'choose', 'unchoose']);
+const emit = defineEmits([
+  'update:value',
+  'change',
+  'add',
+  'start',
+  'end',
+  'update',
+  'remove',
+  'sort',
+  'choose',
+  'unchoose',
+]);
 
 /** 配置 */
 const option = reactive<HexDraggable.Options>({
@@ -101,6 +112,7 @@ const modelValue = computed({
   },
   set(val) {
     emit('update:value', val);
+    emit('change', val);
   },
 });
 

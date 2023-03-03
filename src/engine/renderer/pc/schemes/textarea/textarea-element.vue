@@ -5,16 +5,18 @@
 </template>
 
 <script lang="ts" setup>
+import type { LowCode } from '/@/types/schema.d';
 import { computed, defineComponent } from 'vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
 
 interface Props {
   schema: PcSchema.InputScheme;
+  parentSchema: LowCode.NodeSchema;
+  parentSchemaList: LowCode.NodeSchema[];
+  indexOfParentList: number;
 }
-const props = withDefaults(defineProps<Props>(), {
-  schema: undefined,
-});
+const props = withDefaults(defineProps<Props>(), {});
 const { ectype, ElementWrapper } = useElement<PcSchema.InputScheme>(props);
 
 const ectypeProps = computed(() => {

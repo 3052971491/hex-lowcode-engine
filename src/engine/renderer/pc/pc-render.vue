@@ -3,18 +3,30 @@
     <!-- 编辑模式 -->
     <template v-if="redactState">
       <hex-draggable v-model:value="modelValue.componentsTree" class="w-full h-full" @add="onAdd" @update="onUpdate">
-        <template #item="{ element }">
+        <template #item="{ element, index }">
           <div class="item hex-draggable-handle">
-            <component :is="`${element.componentType}Element`" :schema="element"></component>
+            <component
+              :is="`${element.componentType}Element`"
+              :schema="element"
+              :parent-schema="modelValue"
+              :parent-schema-list="modelValue.componentsTree"
+              :index-of-parent-list="index"
+            ></component>
           </div>
         </template>
       </hex-draggable>
     </template>
     <!-- 预览模式 -->
     <template v-else>
-      <template v-for="item in modelValue.componentsTree" :key="item.id">
-        <component :is="`${item.componentType}Element`" :schema="item"></component>
-      </template>
+      <div v-for="(item, index) in modelValue.componentsTree" :key="item.id">
+        <component
+          :is="`${item.componentType}Element`"
+          :schema="item"
+          :parent-schema="modelValue"
+          :parent-schema-list="modelValue.componentsTree"
+          :index-of-parent-list="index"
+        ></component>
+      </div>
     </template>
   </div>
 </template>

@@ -2,18 +2,30 @@
   <a-col v-bind="ectypeProps">
     <ElementWrapper :schema="schema" :class="classMap">
       <template v-if="isPreview">
-        <hex-draggable v-model:value="ectype.children" @add="onAdd" @update="onUpdate">
-          <template #item="{ element }">
+        <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
+          <template #item="{ element, index }">
             <div class="item hex-draggable-handle">
-              <component :is="`${ectype.componentType}Element`" :schema="element"></component>
+              <component
+                :is="`${element.componentType}Element`"
+                :schema="element"
+                :parent-schema="ectype"
+                :parent-schema-list="ectype.children"
+                :index-of-parent-list="index"
+              ></component>
             </div>
           </template>
         </hex-draggable>
       </template>
       <template v-else>
-        <template v-for="item in ectype.children" :key="item.id">
-          <component :is="`${item.componentType}Element`" :schema="item"></component>
-        </template>
+        <div v-for="(item, index) in ectype.children" :key="item.id">
+          <component
+            :is="`${item.componentType}Element`"
+            :schema="item"
+            :parent-schema="ectype"
+            :parent-schema-list="ectype.children"
+            :index-of-parent-list="index"
+          />
+        </div>
       </template>
     </ElementWrapper>
   </a-col>
@@ -21,19 +33,26 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, defineComponent, inject } from 'vue';
+import { computed, defineComponent, inject, reactive } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import ElementWrapper from '../../components/element-wrapper.vue';
+import { PcSchema } from '/@/schema/common/interface';
 
 interface Props {
-  schema: LowCode.Schema;
+  schema: PcSchema.ColumnScheme;
+  parentSchema: PcSchema.RowScheme;
+  parentSchemaList: PcSchema.ColumnScheme[];
+  indexOfParentList: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   schema: undefined,
+});
+const state = reactive({
+  schema: props.schema,
 });
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
@@ -41,7 +60,6 @@ const redactState = inject(RedactStateInjectionKey);
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
-
 const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
   props.schema,
   selectedScheme.value,
@@ -74,10 +92,10 @@ const ectypeProps = computed(() => {
 });
 
 const onAdd = ({ newIndex }: { newIndex: number }) => {
-  // if (props.schema?.children && props.schema?.children[newIndex]) {
-  //   core?.handleUpdateSelectData(props.schema.children[newIndex]);
-  //   core?.handleUpdateHistoryData();
-  // }
+  if (props.schema?.children && props.schema?.children[newIndex]) {
+    core?.handleUpdateSelectData(props.schema.children[newIndex]);
+    core?.handleUpdateHistoryData();
+  }
 };
 
 const onUpdate = () => {
@@ -85,7 +103,8 @@ const onUpdate = () => {
 };
 
 const classMap = computed(() => {
-  return ['border'];
+  if (!redactState) return [];
+  return [];
 });
 </script>
 
@@ -95,9 +114,6 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-.border {
-  border: 1px #00000073 dashed;
-}
 :deep(.draggable) {
   min-height: 68px;
 }

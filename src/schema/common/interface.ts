@@ -57,6 +57,7 @@ export namespace PcSchema {
     columnGutter: number;
   }
   export interface RowScheme extends LowCode.NodeSchema {
+    children: ColumnScheme[];
     props: RowSchemeProps;
   }
 
@@ -89,6 +90,7 @@ export namespace PcSchema {
     xxl: number | object | null;
   }
   export interface ColumnScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
     props: ColumnSchemeProps;
   }
 }

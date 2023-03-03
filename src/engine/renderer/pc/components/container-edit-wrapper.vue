@@ -1,14 +1,10 @@
 <template>
-  <div :class="classMap" class="element-edit-wrapper">
-    <!-- 遮罩层 -->
-    <div class="mask" @click.stop="handleSelectCurrentComponentClick()"></div>
-    <!-- 面包屑列表 -->
+  <div class="container-edit-wrapper" :class="classMap" @click.stop="handleSelectCurrentComponentClick()">
     <div v-if="isSelect" class="instance-node-selector">
       <div v-for="item in 4" :key="item" class="instance-node-selector-current" @click.stop="handleSelectElement(item)">
         {{ schema?.componentName }}
       </div>
     </div>
-    <!-- 操作按钮组 -->
     <div v-if="isSelect" class="borders-actions">
       <a-tooltip placement="bottom">
         <template #title>
@@ -23,20 +19,7 @@
         <div class="borders-action"><DeleteOutlined /></div>
       </a-tooltip>
     </div>
-    <!-- 是否a-form-item包裹 -->
-    <template v-if="schema?.formItemFlag">
-      <a-form-item :rules="getRules()">
-        <template #label>
-          {{ schema.props?.label }}
-        </template>
-        <template #extra>{{ schema.props?.tips }}</template>
-        <template #help></template>
-        <slot></slot>
-      </a-form-item>
-    </template>
-    <template v-else>
-      <slot></slot>
-    </template>
+    <slot></slot>
   </div>
 </template>
 
@@ -94,15 +77,15 @@ const handleSelectCurrentComponentClick = () => {
 </script>
 
 <style lang="less" scoped>
-.element-edit-wrapper {
+.container-edit-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
-  border: 1px transparent solid;
+  min-height: 68px;
+  border: 1px rgba(0, 0, 0, 0.25) solid;
 
   &:hover {
-    border: 1px #1890ff dashed;
-
+    // border: 1px #1890ff dashed;
     &::before {
       position: relative;
       top: calc(100%);
@@ -110,14 +93,6 @@ const handleSelectCurrentComponentClick = () => {
       color: #1890ff;
       content: '';
     }
-  }
-  .mask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 998;
   }
 
   .borders-actions {
