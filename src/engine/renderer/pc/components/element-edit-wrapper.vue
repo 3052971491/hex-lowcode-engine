@@ -4,9 +4,14 @@
     <div class="mask" @click.stop="handleSelectCurrentComponentClick()"></div>
     <!-- 面包屑列表 -->
     <div v-if="isSelect" class="instance-node-selector">
-      <div v-for="item in 4" :key="item" class="instance-node-selector-current" @click.stop="handleSelectElement(item)">
-        {{ schema?.componentName }}
-      </div>
+      <span
+        v-for="(item, index) in breadcrumbsArr"
+        :key="index"
+        class="instance-node-selector-current"
+        @click.stop="handleSelectElement(item, index)"
+      >
+        {{ item?.componentName }}
+      </span>
     </div>
     <!-- 操作按钮组 -->
     <div v-if="isSelect" class="borders-actions">
@@ -47,7 +52,11 @@
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
 import { computed, inject } from 'vue';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
+import {
+  HexCoreInjectionKey,
+  RedactStateInjectionKey,
+  ComponentBreadcrumbs,
+} from '/@/engine/renderer/render-inject-key';
 import { CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
 
@@ -64,8 +73,14 @@ const core = inject(HexCoreInjectionKey);
 
 const redactState = inject(RedactStateInjectionKey);
 
+const breadcrumbs = inject(ComponentBreadcrumbs);
+
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
+});
+
+const breadcrumbsArr = computed(() => {
+  return breadcrumbs?.getBreadcrumbs().reverse();
 });
 
 const { getRules, onCopy, onDelete } = useFormItem(props.schema, props);
@@ -84,8 +99,11 @@ const classMap = computed<string[]>(() => {
   return map;
 });
 
-const handleSelectElement = (item: any) => {
-  console.log(`选择的是第 ${item} 个`);
+const handleSelectElement = (item: LowCode.Schema, index: number) => {
+  // 除当前组件
+  if (index !== 0) {
+    core?.handleUpdateSelectData(item);
+  }
 };
 
 /**
@@ -180,6 +198,8 @@ const handleCopyCurrentElementClick = (event: Event) => {
     right: 54px;
     z-index: 999;
     display: flex;
+    align-items: flex-end;
+    width: auto;
     border-radius: 4px;
     flex-direction: column;
 
@@ -187,6 +207,7 @@ const handleCopyCurrentElementClick = (event: Event) => {
       display: none;
       margin-bottom: 4px;
       padding: 2px 4px;
+      width: max-content;
       font-size: 14px;
       border-radius: 4px;
       color: #fff;

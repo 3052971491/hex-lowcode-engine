@@ -33,9 +33,10 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject } from 'vue';
+import { computed, inject, provide, reactive } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
-import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { HexCoreInjectionKey, ComponentBreadcrumbs } from '/@/engine/renderer/render-inject-key';
+import { useComponentBreadcrumbs } from './hooks/useComponentBreadcrumbs';
 
 const core = inject(HexCoreInjectionKey);
 
@@ -69,6 +70,10 @@ const onAdd = ({ newIndex }: { newIndex: number }) => {
 const onUpdate = () => {
   core?.handleUpdateHistoryData();
 };
+
+// 面包屑开始的地方
+const breadcrumbs = useComponentBreadcrumbs([]);
+provide(ComponentBreadcrumbs, breadcrumbs);
 </script>
 
 <style lang="less" scoped></style>

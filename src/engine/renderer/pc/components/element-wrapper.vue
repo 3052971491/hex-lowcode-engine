@@ -35,12 +35,18 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject } from 'vue';
+import { computed, inject, provide } from 'vue';
 import ElementEditWrapper from './element-edit-wrapper.vue';
 import ContainerEditWrapper from './container-edit-wrapper.vue';
 import ElementViewWrapper from './element-view-wrapper.vue';
 import { useElementWrapper } from '../hooks/useElementWrapper';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
+import {
+  HexCoreInjectionKey,
+  RedactStateInjectionKey,
+  ComponentBreadcrumbs,
+} from '/@/engine/renderer/render-inject-key';
+import { useComponentBreadcrumbs } from '../hooks/useComponentBreadcrumbs';
+import { cloneDeep } from 'lodash';
 
 interface Props {
   schema: LowCode.Schema;
@@ -53,6 +59,13 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
+const breadcrumbs = inject(ComponentBreadcrumbs);
+
+// 开始一次新的面包屑, 由于赋值是引用类型, 所以不影响属性面板修改
+const arr = breadcrumbs?.getBreadcrumbs().slice();
+const componentBreadcrumbs = useComponentBreadcrumbs(arr);
+componentBreadcrumbs.setBreadcrumbs(props.schema);
+provide(ComponentBreadcrumbs, componentBreadcrumbs);
 
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
