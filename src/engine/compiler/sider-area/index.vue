@@ -2,10 +2,10 @@
   <a-layout-sider theme="light" class="sider-area" :width="width">
     <div class="w-full h-full flex">
       <div
-        class="h-full w-16 min-w-16 p-2 flex flex-col menu-container"
+        class="h-full w-12 min-w-12 flex flex-col menu-container"
         :style="{ borderColor: width === 64 ? 'transparent' : '#f0f2f5' }"
       >
-        <div class="w-full mb-4">
+        <div class="w-full p-1 mb-2 mt-2">
           <img class="w-full" alt="hex-form" :src="Logo" />
         </div>
         <div class="menu-list w-full flex-1 flex flex-col justify-between">
