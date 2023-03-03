@@ -1,13 +1,13 @@
 <template>
   <!-- 是否a-form-item包裹 -->
   <template v-if="schema?.formItemFlag">
-    <a-form-item :rules="getRules()" :extra="schema.props.tips">
+    <!-- <a-form-item :rules="getRules()" :extra="schema.props.tips">
       <template #label>
         {{ schema.props.label }}
       </template>
-      <!-- <template #extra>{{ schema.props.tips }}</template> -->
+
       <slot></slot>
-    </a-form-item>
+    </a-form-item> -->
   </template>
   <template v-else>
     <slot></slot>

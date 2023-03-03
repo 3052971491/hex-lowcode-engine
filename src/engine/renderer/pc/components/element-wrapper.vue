@@ -1,10 +1,22 @@
 <template>
   <div class="element-wrapper">
     <template v-if="isPreview">
-      <ElementEditWrapper v-if="schema?.tag !== 'LAYOUT'" :schema="schema">
+      <ElementEditWrapper
+        v-if="schema?.tag !== 'LAYOUT'"
+        :schema="schema"
+        :parent-schema="parentSchema"
+        :parent-schema-list="parentSchemaList"
+        :index-of-parent-list="indexOfParentList"
+      >
         <slot></slot>
       </ElementEditWrapper>
-      <ContainerEditWrapper v-else :schema="schema">
+      <ContainerEditWrapper
+        v-else
+        :schema="schema"
+        :parent-schema="parentSchema"
+        :parent-schema-list="parentSchemaList"
+        :index-of-parent-list="indexOfParentList"
+      >
         <slot></slot>
       </ContainerEditWrapper>
     </template>
@@ -32,11 +44,12 @@ import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer
 
 interface Props {
   schema: LowCode.Schema;
+  parentSchema: LowCode.Schema;
+  parentSchemaList: LowCode.Schema[];
+  indexOfParentList: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  schema: undefined,
-});
+const props = withDefaults(defineProps<Props>(), {});
 
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);

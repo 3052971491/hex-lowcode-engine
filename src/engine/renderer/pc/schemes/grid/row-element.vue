@@ -1,5 +1,11 @@
 <template>
-  <ElementWrapper :schema="schema" :class="classMap">
+  <ElementWrapper
+    :schema="schema"
+    :parent-schema="parentSchema"
+    :parent-schema-list="parentSchemaList"
+    :index-of-parent-list="indexOfParentList"
+    :class="classMap"
+  >
     <a-row v-bind="ectypeProps">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <ColumnElement
@@ -33,9 +39,7 @@ interface Props {
   indexOfParentList: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  schema: undefined,
-});
+const props = withDefaults(defineProps<Props>(), {});
 
 const ectype = computed(() => {
   return cloneDeep(props.schema);

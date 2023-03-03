@@ -1,5 +1,10 @@
 <template>
-  <ElementWrapper :schema="schema">
+  <ElementWrapper
+    :schema="schema"
+    :parent-schema="parentSchema"
+    :parent-schema-list="parentSchemaList"
+    :index-of-parent-list="indexOfParentList"
+  >
     <a-input v-bind="ectypeProps"></a-input>
   </ElementWrapper>
 </template>

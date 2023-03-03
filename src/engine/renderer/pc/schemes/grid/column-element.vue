@@ -1,6 +1,12 @@
 <template>
   <a-col v-bind="ectypeProps">
-    <ElementWrapper :schema="schema" :class="classMap">
+    <ElementWrapper
+      :schema="schema"
+      :parent-schema="parentSchema"
+      :parent-schema-list="parentSchemaList"
+      :index-of-parent-list="indexOfParentList"
+      :class="classMap"
+    >
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">
@@ -8,8 +14,8 @@
               <component
                 :is="`${element.componentType}Element`"
                 :schema="element"
-                :parent-schema="ectype"
-                :parent-schema-list="ectype.children"
+                :parent-schema="state.schema"
+                :parent-schema-list="state.schema.children"
                 :index-of-parent-list="index"
               ></component>
             </div>
@@ -48,9 +54,7 @@ interface Props {
   indexOfParentList: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  schema: undefined,
-});
+const props = withDefaults(defineProps<Props>(), {});
 const state = reactive({
   schema: props.schema,
 });
