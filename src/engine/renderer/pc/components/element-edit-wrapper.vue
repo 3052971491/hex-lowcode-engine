@@ -14,7 +14,9 @@
         <template #title>
           <span>复制</span>
         </template>
-        <div class="borders-action"><CopyOutlined /></div>
+        <div class="borders-action" @click.stop="($event) => handleCopyCurrentElementClick($event)">
+          <CopyOutlined />
+        </div>
       </a-tooltip>
       <a-tooltip placement="bottom">
         <template #title>
@@ -44,7 +46,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject, nextTick, reactive } from 'vue';
+import { computed, inject } from 'vue';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { CopyOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
@@ -66,7 +68,7 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { getRules } = useFormItem(props.schema);
+const { getRules, onCopy, onDelete } = useFormItem(props.schema, props);
 getRules();
 
 const isSelect = computed(() => {
@@ -96,30 +98,18 @@ const handleSelectCurrentComponentClick = () => {
 };
 /** 删除当前组件 */
 const handleDeleteCurrentElementClick = (event: Event) => {
-  // 判断是否有父级容器
-  if (props.parentSchemaList) {
-    let nextSelected: LowCode.Schema;
-
-    if (props.parentSchemaList.length === 1) {
-      // 当父级容器的children只有1项时, 则需要选中父级容器
-      if (props.parentSchema) {
-        nextSelected = props.parentSchema;
-      }
-    } else if (props.parentSchemaList.length === props.indexOfParentList + 1) {
-      // 当删除的是父级容器的最后一个时, 则需要选中倒数第二个
-      nextSelected = props.parentSchemaList[props.indexOfParentList - 1];
-    } else {
-      // 否则默认选中下一个
-      nextSelected = props.parentSchemaList[props.indexOfParentList + 1];
-    }
-
-    nextTick(() => {
-      // 删除当前组件, 此处写法是解决props无法直接修改, 采用中间变量, 其引用地址是相同的
-      const arr = props.parentSchemaList;
-      arr.splice(props.indexOfParentList, 1);
-      core?.handleUpdateSelectData(nextSelected);
-      core?.handleUpdateHistoryData();
-    });
+  const nextSelected = onDelete(event);
+  if (nextSelected) {
+    core?.handleUpdateSelectData(nextSelected);
+    core?.handleUpdateHistoryData();
+  }
+};
+/** 复制当前组件 */
+const handleCopyCurrentElementClick = (event: Event) => {
+  const copySelected = onCopy(event);
+  if (copySelected) {
+    core?.handleUpdateSelectData(copySelected);
+    core?.handleUpdateHistoryData();
   }
 };
 </script>

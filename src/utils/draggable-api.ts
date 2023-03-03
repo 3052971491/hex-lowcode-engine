@@ -32,6 +32,14 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   }
   return newSchema;
 }
+export function copyElementSchema(element: LowCode.Schema): LowCode.Schema {
+  const newSchema = cloneDeep(element);
+  newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
+  if (newSchema.tag === 'LAYOUT') {
+    newSchema.children = [];
+  }
+  return newSchema;
+}
 
 /**
  * 通过组件类型生成对应组件
