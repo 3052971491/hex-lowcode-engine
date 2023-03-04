@@ -21,13 +21,26 @@
 </template>
 
 <script lang="ts" setup name="setting-area">
-import { ref } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import SettingPane from './components/setting-pane.vue';
 import AttributeSetting from './components/attribute-setting.vue';
 import StyleSetting from './components/style-setting.vue';
 import AdvancedSetting from './components/advanced-setting.vue';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 
+const core = inject(HexCoreInjectionKey);
 const activeKey = ref('1');
+
+const selected = ref<string>('');
+const currentId = computed(() => {
+  return core?.state.selectedData?.selectedId ?? '';
+});
+watch(currentId, (val) => {
+  if (val !== selected.value) {
+    activeKey.value = '1';
+    selected.value = val ?? '';
+  }
+});
 </script>
 
 <style lang="less" scoped>

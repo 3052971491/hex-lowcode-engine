@@ -70,7 +70,7 @@ if (core?.state.selectedData) {
   // 此处待优化
   watch(core?.state.selectedData, () => {
     if (core?.state.selectedData?.selectedId === props.schema.id) {
-      core.handleUpdateBreadcrumbs(componentBreadcrumbs.getBreadcrumbs());
+      core.handleUpdateBreadcrumbs(core?.state.selectedData?.selectedId ? componentBreadcrumbs.getBreadcrumbs() : []);
     }
   });
 }

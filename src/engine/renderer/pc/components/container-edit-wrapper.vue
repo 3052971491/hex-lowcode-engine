@@ -114,18 +114,14 @@ const handleSelectCurrentComponentClick = () => {
 /** 删除当前组件 */
 const handleDeleteCurrentElementClick = (event: Event) => {
   const nextSelected = onDelete(event);
-  if (nextSelected) {
-    core?.handleUpdateSelectData(nextSelected);
-    core?.handleUpdateHistoryData();
-  }
+  core?.handleUpdateSelectData(nextSelected);
+  core?.handleUpdateHistoryData();
 };
 /** 复制当前组件 */
 const handleCopyCurrentElementClick = (event: Event) => {
   const copySelected = onCopy(event);
-  if (copySelected) {
-    core?.handleUpdateSelectData(copySelected);
-    core?.handleUpdateHistoryData();
-  }
+  core?.handleUpdateSelectData(copySelected);
+  core?.handleUpdateHistoryData();
 };
 </script>
 

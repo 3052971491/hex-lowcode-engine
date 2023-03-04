@@ -1,20 +1,28 @@
 <template>
   <div class="w-full h-full">
-    <div class="settings-navigator">
-      <a-breadcrumb>
-        <a-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" @click="handleSelectComponent(item)">
-          <a href="JavaScript:void(0)">{{ item.componentName }}</a>
-        </a-breadcrumb-item>
-      </a-breadcrumb>
-    </div>
-    <div class="settings-content">
-      <slot></slot>
-    </div>
+    <template v-if="core?.state.selectedData?.selectedId">
+      <div class="settings-navigator">
+        <a-breadcrumb>
+          <a-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" @click="handleSelectComponent(item)">
+            <a href="JavaScript:void(0)">{{ item.componentName }}</a>
+          </a-breadcrumb-item>
+        </a-breadcrumb>
+      </div>
+      <div class="settings-content">
+        <slot></slot>
+      </div>
+    </template>
+    <template v-else>
+      <div class="w-full h-full p-3 flex justify-center items-center">
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无组数据"></a-empty>
+      </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts" setup name="setting-area">
 import { inject, computed } from 'vue';
+import { Empty } from 'ant-design-vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { LowCode } from '/@/types/schema';
 

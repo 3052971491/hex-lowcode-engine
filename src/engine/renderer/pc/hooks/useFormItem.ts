@@ -82,11 +82,12 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
     if (!props) return undefined;
     // 判断是否有父级容器
     if (props.parentSchemaList) {
-      let nextSelected: LowCode.Schema;
+      let nextSelected: LowCode.Schema | undefined;
 
       if (props.parentSchemaList.length === 1) {
         // 当父级容器的children只有1项时, 则需要选中父级容器
-        if (props.parentSchema) {
+        // 需过滤根级组件(根据是否存在componentsTree属性判断)
+        if (props.parentSchema && !props.parentSchema.hasOwnProperty('componentsTree')) {
           nextSelected = props.parentSchema;
         }
       } else if (props.parentSchemaList.length === props.indexOfParentList + 1) {
@@ -97,12 +98,10 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
         nextSelected = props.parentSchemaList[props.indexOfParentList + 1];
       }
 
-      nextTick(() => {
-        // 删除当前组件, 此处写法是解决props无法直接修改, 采用中间变量, 其引用地址是相同的
-        const arr = props.parentSchemaList;
-        arr.splice(props.indexOfParentList, 1);
-        return nextSelected;
-      });
+      // 删除当前组件, 此处写法是解决props无法直接修改, 采用中间变量, 其引用地址是相同的
+      const arr = props.parentSchemaList;
+      arr.splice(props.indexOfParentList, 1);
+      return nextSelected;
     }
   }
 

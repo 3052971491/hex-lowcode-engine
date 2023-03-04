@@ -78,7 +78,7 @@ export interface HexCoreFactory {
   /** 更新选中组件面包屑信息 */
   handleUpdateBreadcrumbs(schemas?: LowCode.Schema[]): void;
   /** 更新选中组件节点信息 */
-  handleUpdateSelectData(element: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
+  handleUpdateSelectData(element?: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
 }
 export function useHexCore(): HexCoreFactory {
   const state = reactive<StateType>({
