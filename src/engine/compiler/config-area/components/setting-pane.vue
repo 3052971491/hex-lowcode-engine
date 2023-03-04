@@ -2,9 +2,9 @@
   <div class="w-full h-full">
     <div class="settings-navigator">
       <a-breadcrumb>
-        <a-breadcrumb-item>布局</a-breadcrumb-item>
-        <a-breadcrumb-item>容器</a-breadcrumb-item>
-        <a-breadcrumb-item>文本</a-breadcrumb-item>
+        <a-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" @click="handleSelectComponent(item)">
+          <a href="JavaScript:void(0)">{{ item.componentName }}</a>
+        </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="settings-content">
@@ -13,7 +13,27 @@
   </div>
 </template>
 
-<script lang="ts" setup name="setting-area"></script>
+<script lang="ts" setup name="setting-area">
+import { inject, computed } from 'vue';
+import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { LowCode } from '/@/types/schema';
+
+const core = inject(HexCoreInjectionKey);
+const breadcrumbs = computed(() => {
+  return (
+    core?.state.selectedData?.breadcrumbs
+      .filter((item, index) => {
+        return index < 3;
+      })
+      .reverse() ?? []
+  );
+});
+
+const handleSelectComponent = (schema: LowCode.Schema) => {
+  if (schema.id === core?.state.selectedData?.selectedId) return;
+  core?.handleUpdateSelectData(schema);
+};
+</script>
 
 <style lang="less" scoped>
 .settings-navigator {

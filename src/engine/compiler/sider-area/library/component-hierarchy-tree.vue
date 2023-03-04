@@ -45,7 +45,6 @@ import { computed, inject, onMounted, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons-vue';
-import { TreeProps } from 'ant-design-vue';
 
 const core = inject(HexCoreInjectionKey);
 

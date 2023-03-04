@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject, provide } from 'vue';
+import { computed, inject, provide, watch } from 'vue';
 import ElementEditWrapper from './element-edit-wrapper.vue';
 import ContainerEditWrapper from './container-edit-wrapper.vue';
 import ElementViewWrapper from './element-view-wrapper.vue';
@@ -46,7 +46,6 @@ import {
   ComponentBreadcrumbs,
 } from '/@/engine/renderer/render-inject-key';
 import { useComponentBreadcrumbs } from '../hooks/useComponentBreadcrumbs';
-import { cloneDeep } from 'lodash';
 
 interface Props {
   schema: LowCode.Schema;
@@ -66,6 +65,15 @@ const arr = breadcrumbs?.getBreadcrumbs().slice();
 const componentBreadcrumbs = useComponentBreadcrumbs(arr);
 componentBreadcrumbs.setBreadcrumbs(props.schema);
 provide(ComponentBreadcrumbs, componentBreadcrumbs);
+if (core?.state.selectedData) {
+  // 此处watch是了更新面包屑, 缺陷是每个组件都会有一个watch, 消耗性能
+  // 此处待优化
+  watch(core?.state.selectedData, () => {
+    if (core?.state.selectedData?.selectedId === props.schema.id) {
+      core.handleUpdateBreadcrumbs(componentBreadcrumbs.getBreadcrumbs());
+    }
+  });
+}
 
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;

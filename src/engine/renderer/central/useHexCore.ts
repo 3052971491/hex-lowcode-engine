@@ -22,6 +22,8 @@ interface StateType {
     selectedId: string;
     /** 组件节点描述 */
     selectedScheme?: LowCode.Schema | null;
+    /** 面包屑 */
+    breadcrumbs: LowCode.Schema[];
   };
 }
 
@@ -73,8 +75,10 @@ export interface HexCoreFactory {
   buildSelectedData(): void;
   /** 重置选中组件节点信息 */
   handleResetSelectData(): void;
+  /** 更新选中组件面包屑信息 */
+  handleUpdateBreadcrumbs(schemas?: LowCode.Schema[]): void;
   /** 更新选中组件节点信息 */
-  handleUpdateSelectData(element: LowCode.Schema): void;
+  handleUpdateSelectData(element: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
 }
 export function useHexCore(): HexCoreFactory {
   const state = reactive<StateType>({
@@ -226,6 +230,7 @@ export function useHexCore(): HexCoreFactory {
     const result = {
       selectedId: '',
       selectedScheme: null,
+      breadcrumbs: [],
     };
     state.selectedData = result;
   }
@@ -234,10 +239,17 @@ export function useHexCore(): HexCoreFactory {
     if (state.selectedData) {
       state.selectedData.selectedId = '';
       state.selectedData.selectedScheme = null;
+      state.selectedData.breadcrumbs = [];
     }
   }
 
-  function handleUpdateSelectData(element: LowCode.Schema): void {
+  function handleUpdateBreadcrumbs(schemas: LowCode.Schema[]) {
+    if (schemas && state.selectedData) {
+      state.selectedData.breadcrumbs = schemas && schemas.length > 0 ? schemas : [];
+    }
+  }
+
+  function handleUpdateSelectData(element: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void {
     if (isNil(element)) {
       handleResetSelectData();
       return;
@@ -245,6 +257,10 @@ export function useHexCore(): HexCoreFactory {
     if (state.selectedData) {
       state.selectedData.selectedId = element.id;
       state.selectedData.selectedScheme = element;
+
+      if (breadcrumbs) {
+        handleUpdateBreadcrumbs(breadcrumbs);
+      }
     }
   }
   // #endregion
@@ -266,6 +282,7 @@ export function useHexCore(): HexCoreFactory {
     saveHistoryDataStorage,
     buildSelectedData,
     handleResetSelectData,
+    handleUpdateBreadcrumbs,
     handleUpdateSelectData,
   };
 }
