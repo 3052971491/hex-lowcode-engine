@@ -65,6 +65,7 @@ import LibraryItem from './components/library-item.vue';
 import ElementLibrary from '/@/engine/components/element-library/element-library.vue';
 import I18nLibrary from '/@/engine/components/i18n-library/i18n-library.vue';
 import ActionPaneLibrary from '/@/engine/components/action-pane-library/action-pane-library.vue';
+import ComponentHierarchyTree from './library/component-hierarchy-tree.vue';
 // import DataSourceLibrary from './components/data-source-library.vue';
 // import ModalLibrary from './components/modal-library.vue';
 
@@ -86,7 +87,7 @@ const topMenu: Array<IMenuItem> = [
     label: '组件层次结构树',
     value: 'structure-library',
     icon: PartitionOutlined,
-    component: '',
+    component: ComponentHierarchyTree,
   },
   {
     label: '组件库',
