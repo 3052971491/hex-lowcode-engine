@@ -17,8 +17,9 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '单行文本';
     this.componentType = ComponentType.Input;
+    this.formItemFlag = true;
     this.props = {
-      label: '',
+      label: this.componentName,
       placeholder: '',
       defaultValue: '',
       size: 'middle',
@@ -77,8 +78,9 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '多行文本';
     this.componentType = ComponentType.Textarea;
+    this.formItemFlag = true;
     this.props = {
-      label: '',
+      label: this.componentName,
       placeholder: '',
       defaultValue: '',
       size: 'middle',
