@@ -23,5 +23,4 @@ const ProjectConfig: LowCode.ProjectSchema = {
   methods: {},
   lifeCycles: {},
 };
-
 export default ProjectConfig;

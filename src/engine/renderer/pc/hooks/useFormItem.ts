@@ -27,7 +27,7 @@ interface Props {
  */
 export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
   function getRules() {
-    if (!schema || !schema.props.hasOwnProperty('rules')) return [];
+    if (!schema || !schema.props?.hasOwnProperty('rules')) return [];
     const { rules } = schema.props;
     const arr: Rule[] = [];
     if (rules && rules.length > 0) {
@@ -42,15 +42,15 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
             obj.required = rule.enable;
             break;
           case 'minlength':
-            obj.min = rule.value;
+            obj.min = rule.value as any;
             break;
           case 'maxlength':
-            obj.max = rule.value;
+            obj.max = rule.value as any;
             break;
           case 'min':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
-                if (value < rule.value) {
+                if (rule.value && value < rule.value) {
                   return Promise.reject(obj.message);
                 }
               }
@@ -60,7 +60,7 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
           case 'max':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
-                if (value > rule.value) {
+                if (rule.value && value > rule.value) {
                   return Promise.reject(obj.message);
                 }
               }

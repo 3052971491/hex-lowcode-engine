@@ -6,7 +6,7 @@ import type { LowCode } from '/@/types/schema.d';
  * @param schema 单个组件节点描述
  */
 export function set(attribute: string, value: any, schema: LowCode.Schema) {
-  if (schema.props.hasOwnProperty(attribute)) {
+  if (schema.props?.hasOwnProperty(attribute)) {
     schema.props[attribute] = value;
   }
 }
@@ -17,7 +17,7 @@ export function set(attribute: string, value: any, schema: LowCode.Schema) {
  * @param schema 单个组件节点描述
  */
 export function get(attribute: string, schema: LowCode.Schema) {
-  if (schema.props.hasOwnProperty(attribute)) {
+  if (schema.props?.hasOwnProperty(attribute)) {
     return schema.props[attribute];
   }
   return undefined;

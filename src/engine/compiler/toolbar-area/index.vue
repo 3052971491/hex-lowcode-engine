@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar-area w-full flex justify-between">
-    <a-space class="ml-2 mt-2 mb-2">
+    <a-space class="ml-2">
       <a-tooltip title="后退">
         <a-button :disabled="core?.undoDisabled()" @click="core?.undoHistoryStep()">
           <template #icon><undo-outlined /></template>
@@ -22,9 +22,17 @@
         </a-button>
       </a-tooltip>
     </a-space>
-    <a-space class="mr-2 mt-2 mb-2" :size="0">
-      <a-button type="link" size="small" @click="handlePreviewClick"> 预览 </a-button>
-      <a-button type="link" size="small" @click="handlePreviewJsonClick"> 查看JSON </a-button>
+    <a-space class="mr-2 mt-2 mb-2">
+      <a-tooltip title="预览">
+        <a-button @click="handlePreviewClick">
+          <template #icon><play-circle-outlined /></template>
+        </a-button>
+      </a-tooltip>
+      <a-tooltip title="JSON 代码">
+        <a-button @click="handlePreviewJsonClick">
+          <template #icon><project-outlined /></template>
+        </a-button>
+      </a-tooltip>
     </a-space>
     <hex-modal v-model:visible="visible" :name="modalTitle" :is-footer="false">
       <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
@@ -35,7 +43,14 @@
 
 <script lang="ts" setup>
 import { computed, inject, ref } from 'vue';
-import { UndoOutlined, RedoOutlined, CloudUploadOutlined, DeleteOutlined } from '@ant-design/icons-vue';
+import {
+  UndoOutlined,
+  RedoOutlined,
+  CloudUploadOutlined,
+  DeleteOutlined,
+  PlayCircleOutlined,
+  ProjectOutlined,
+} from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
 import Render from '/@/engine/renderer/render.vue';
 import HexJsonPretty from '/@/components/hex-json-pretty/index.vue';

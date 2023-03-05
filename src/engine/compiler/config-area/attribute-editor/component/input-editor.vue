@@ -30,6 +30,7 @@ const schema = computed(() => {
 const modelValue = computed({
   set(val) {
     if (
+      !schema.value.props ||
       isNil(schema.value.props[props.attribute]) ||
       Object.prototype.toString.call(schema.value.props[props.attribute]) === '[object String]'
     ) {
@@ -48,6 +49,7 @@ const modelValue = computed({
   get() {
     const val: any = get(props.attribute, schema.value);
     if (
+      !schema.value.props ||
       isNil(schema.value.props[props.attribute]) ||
       Object.prototype.toString.call(schema.value.props[props.attribute]) === '[object String]'
     ) {

@@ -86,7 +86,7 @@ export namespace LowCode {
     /** icon类型, 配置组件库使用 */
     iconType: IconType;
     /** 子集, 仅布局组件使用 */
-    children?: Schema[];
+    children?: NodeSchema[];
     /** 是否可显示, 配置组件库使用 */
     internal?: boolean;
     /** 组件唯一标识 */
@@ -113,7 +113,7 @@ export namespace LowCode {
      * 循环数据
      * @description 只有为数组才生效
      */
-    loop?: CompositeValue;
+    loop?: any;
     /**
      * 循环变量名
      * @description 值为数组, 下标0为迭代变量名, 下标1为索引变量名

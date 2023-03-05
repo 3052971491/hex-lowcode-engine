@@ -55,7 +55,7 @@ import 'monaco-editor/esm/vs/editor/contrib/hover/browser/hover';
 import { createDependencyProposals } from './prompt';
 
 interface Prop {
-  value?: string | null;
+  value?: any;
   /** 标题 */
   title?: string;
   /** 语言 */

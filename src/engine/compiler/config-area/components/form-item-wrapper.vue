@@ -110,7 +110,7 @@ const tips = computed(() => {
 const i18nPopconfirm = ref(false);
 
 const I18nStatus = computed(() => {
-  if (isNil(schema.value.props[props.name])) {
+  if (!schema.value.props || isNil(schema.value.props[props.name])) {
     return false;
   }
   return Object.prototype.toString.call(schema.value.props[props.name]) !== '[object String]';

@@ -36,17 +36,19 @@ const schema = computed(() => {
 
 const styleContent = computed({
   set(val: string) {
-    schema.value.props.__style__ = val;
+    if (schema.value.props) {
+      schema.value.props.__style__ = val;
+    }
   },
   get() {
-    return schema.value.props.__style__;
+    return schema.value.props?.__style__ ?? '';
   },
 });
 
 const visibleChange = (visible: boolean) => {
   if (visible) {
-    if (!schema.value.props.__style__) {
-      schema.value.props.__style__ = ':root {}';
+    if (schema.value.props && !schema.value.props?.__style__) {
+      schema.value.props.__style__ = ':root {}' ?? '';
     }
   }
 };
