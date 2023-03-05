@@ -93,4 +93,16 @@ export namespace PcSchema {
     children: LowCode.Schema[];
     props: ColumnSchemeProps;
   }
+
+  /** 表单容器 */
+  export interface FormSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: FormSchemaProps;
+  }
+  export interface FormSchemaProps extends LowCode.NodeSchemaProps {
+    /** 隐藏所有表单项的必选标记 */
+    hideRequiredMark: boolean;
+    /** label 标签的文本对齐方式 */
+    labelAlign: 'left' | 'right';
+  }
 }

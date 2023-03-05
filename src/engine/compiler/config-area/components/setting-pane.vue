@@ -14,7 +14,7 @@
     </template>
     <template v-else>
       <div class="w-full h-full p-3 flex justify-center items-center">
-        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无组数据"></a-empty>
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无数据"></a-empty>
       </div>
     </template>
   </div>

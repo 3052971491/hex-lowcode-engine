@@ -7,6 +7,7 @@ export enum ComponentType {
   'Textarea' = 'Textarea',
   'Row' = 'Row',
   'Column' = 'Column',
+  'Form' = 'Form',
 }
 
 export class Input extends Scheme<PcSchema.InputScheme> {
@@ -185,9 +186,28 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
   }
 }
 
+export class Form extends Scheme<PcSchema.FormSchema> {
+  props: PcSchema.FormSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/form-cn';
+    this.componentName = '表单';
+    this.componentType = ComponentType.Form;
+    this.children = [];
+    this.props = {
+      hideRequiredMark: false,
+      labelAlign: 'left',
+      __style__: '',
+    };
+  }
+}
+
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
+  [ComponentType.Form, new Form() as any],
 ]);

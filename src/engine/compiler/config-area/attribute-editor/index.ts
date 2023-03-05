@@ -45,11 +45,17 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'xxl', label: '≥1600px 响应式栅格', editor: 'input-number-editor' },
 ];
 
+const FROM_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
+  { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
+];
+
 const obj: { [key: string]: Array<AttributeItem> } = {
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
+  Form: FROM_ATTRIBUTE,
 };
 
 export default obj;
