@@ -42,8 +42,12 @@ export function useElementWrapper(
   });
 
   const isDefault = computed((): boolean => {
+    // 部分容器存在无此属性
+    if (!schema.props?.hasOwnProperty('behavior')) return true;
     return (
-      schema.props.behavior === 'normal' || schema.props.behavior === 'disabled' || schema.props.behavior === 'hidden'
+      schema.props?.behavior === 'normal' ||
+      schema.props?.behavior === 'disabled' ||
+      schema.props?.behavior === 'hidden'
     );
   });
 
@@ -52,12 +56,12 @@ export function useElementWrapper(
   });
 
   const isReadonly = computed(() => {
-    return schema.props.behavior === 'readonly';
+    return schema.props?.behavior === 'readonly';
   });
 
   const isHidden = computed(() => {
     if (redactState) return false;
-    return schema.props.behavior === 'hidden';
+    return schema.props?.behavior === 'hidden';
   });
 
   return { isSelect, isDefault, isPreview, isReadonly, isHidden };
