@@ -23,16 +23,14 @@ interface Props {
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
 }
-
-const dataEngine = inject(DataEngineInjectionKey);
 const props = withDefaults(defineProps<Props>(), {});
+const dataEngine = inject(DataEngineInjectionKey);
 const { ectype, ElementWrapper } = useElement<PcSchema.InputScheme>(props);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;
   if (!obj) return {};
-
   return {
     allowClear: obj.allowClear,
     bordered: obj.bordered,
