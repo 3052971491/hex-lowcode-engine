@@ -15,6 +15,7 @@ import { computed, defineComponent, inject } from 'vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
 import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { useElementDataEngine } from '../../hooks/useElementDataEngine';
 
 interface Props {
   schema: PcSchema.InputScheme;
@@ -24,21 +25,9 @@ interface Props {
 }
 
 const dataEngine = inject(DataEngineInjectionKey);
-const modelValue = computed({
-  set(val) {
-    if (dataEngine?.originData) {
-      dataEngine.originData[ectype.value.props.field] = val;
-    }
-  },
-  get() {
-    if (dataEngine?.originData) {
-      return dataEngine.originData[ectype.value.props.field];
-    }
-    return '';
-  },
-});
 const props = withDefaults(defineProps<Props>(), {});
 const { ectype, ElementWrapper } = useElement<PcSchema.InputScheme>(props);
+const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;
