@@ -33,9 +33,9 @@
           />
         </div>
         <a-space>
-          <a-button @click="form.validate()">校验</a-button>
-          <a-button @click="form.clearValidate()">清空校验</a-button>
-          <a-button @click="form.resetFields()">重置</a-button>
+          <a-button @click="handleValidate(1)">校验</a-button>
+          <a-button @click="handleValidate(2)">清空校验</a-button>
+          <a-button @click="handleValidate(3)">重置</a-button>
         </a-space>
       </template>
     </a-form>
@@ -43,13 +43,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, reactive, ref } from 'vue';
+import { computed, defineComponent, inject, provide, reactive, ref } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import { LowCode } from '/@/types/schema.d';
-import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
+import {
+  HexCoreInjectionKey,
+  RedactStateInjectionKey,
+  DataEngineInjectionKey,
+} from '/@/engine/renderer/render-inject-key';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import { useForm } from './useForm';
@@ -108,6 +112,29 @@ const classMap = computed(() => {
 });
 
 const form = useForm({ schema: ectype.value, formRef: formRef.value });
+if (!redactState) {
+  provide(DataEngineInjectionKey, {
+    id: props.schema.id,
+    model: '',
+    schema: props.schema,
+    originData: form.modelValue,
+  });
+}
+
+function handleValidate(index: number) {
+  const form1 = useForm({ schema: ectype.value, formRef: formRef.value });
+  if (index === 1) {
+    form1.validate().then((result) => {
+      console.log(result);
+    });
+  }
+  if (index === 2) {
+    form1.clearValidate();
+  }
+  if (index === 3) {
+    form1.resetFields();
+  }
+}
 </script>
 
 <script lang="ts">

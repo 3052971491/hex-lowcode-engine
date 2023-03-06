@@ -3,6 +3,8 @@ import type { I18n } from '/@/types/i18n.d';
 
 export namespace PcSchema {
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
     /** 标签 */
     label: I18n;
     /** 占位提示 */
@@ -100,6 +102,8 @@ export namespace PcSchema {
     props: FormSchemaProps;
   }
   export interface FormSchemaProps extends LowCode.NodeSchemaProps {
+    /** 数据模型, 即对应后端的表 */
+    model: string;
     /** 隐藏所有表单项的必选标记 */
     hideRequiredMark: boolean;
     /** label 标签的文本对齐方式 */

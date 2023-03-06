@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import type { PcSchema } from './interface';
 import { Scheme } from './FieldSchemaBase';
+import { buildUUID } from '/@/utils/common';
 
 export enum ComponentType {
   'Input' = 'Input',
@@ -20,6 +21,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.componentType = ComponentType.Input;
     this.formItemFlag = true;
     this.props = {
+      field: `Field_${buildUUID()}`,
       label: this.componentName,
       placeholder: '',
       defaultValue: '',
@@ -81,6 +83,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.componentType = ComponentType.Textarea;
     this.formItemFlag = true;
     this.props = {
+      field: `Field_${buildUUID()}`,
       label: this.componentName,
       placeholder: '',
       defaultValue: '',
@@ -197,6 +200,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
     this.componentType = ComponentType.Form;
     this.children = [];
     this.props = {
+      model: `Model_${buildUUID()}`,
       hideRequiredMark: false,
       labelAlign: 'left',
       __style__: '',
