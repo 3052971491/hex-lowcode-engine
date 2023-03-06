@@ -1,21 +1,10 @@
 <template>
   <div class="element-library">
     <a-skeleton active :loading="loading">
-      <a-row :gutter="[0, 6]">
-        <a-col :span="24">
-          <a-space class="w-full">
-            <a-select v-model:value="state.type" style="width: 80px">
-              <a-select-option value="">全部</a-select-option>
-              <a-select-option value="VALUE">变量</a-select-option>
-              <a-select-option value="REMOTE">远程</a-select-option>
-            </a-select>
-            <a-input-search class="w-full" placeholder="搜索" enter-button></a-input-search>
-          </a-space>
-        </a-col>
-        <a-col :span="24">
-          <a-button type="primary">添加</a-button>
-        </a-col>
-      </a-row>
+      <a-space class="w-full">
+        <a-input-search class="w-full" placeholder="搜索" enter-button></a-input-search>
+        <a-button type="primary">添加</a-button>
+      </a-space>
       <div class="w-full p-3">
         <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
       </div>

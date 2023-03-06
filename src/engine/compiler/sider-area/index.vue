@@ -67,7 +67,7 @@ import I18nLibrary from './library/i18n-library.vue';
 import ActionPaneLibrary from './library/action-pane-library.vue';
 import ComponentHierarchyTree from './library/component-hierarchy-tree.vue';
 import DataSourceLibrary from './library/data-source-library.vue';
-// import ModalLibrary from './components/modal-library.vue';
+import ModalLibrary from './library/modal-library.vue';
 
 export interface IMenuItem {
   /** 名称 */
@@ -99,7 +99,7 @@ const topMenu: Array<IMenuItem> = [
     label: '模态框',
     value: 'modal-library',
     icon: BlockOutlined,
-    component: '',
+    component: ModalLibrary,
   },
   {
     label: '数据源',
