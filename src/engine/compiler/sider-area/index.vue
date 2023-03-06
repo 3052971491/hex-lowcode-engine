@@ -66,7 +66,7 @@ import ElementLibrary from './library/element-library.vue';
 import I18nLibrary from './library/i18n-library.vue';
 import ActionPaneLibrary from './library/action-pane-library.vue';
 import ComponentHierarchyTree from './library/component-hierarchy-tree.vue';
-// import DataSourceLibrary from './components/data-source-library.vue';
+import DataSourceLibrary from './library/data-source-library.vue';
 // import ModalLibrary from './components/modal-library.vue';
 
 export interface IMenuItem {
@@ -105,7 +105,7 @@ const topMenu: Array<IMenuItem> = [
     label: '数据源',
     value: 'data-source-library',
     icon: ApiOutlined,
-    component: '',
+    component: DataSourceLibrary,
   },
   {
     label: '动作面板',
