@@ -1,6 +1,6 @@
 <template>
   <collapse-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
-    <div class="validation">
+    <div class="validation overflow-hidden">
       <div v-for="(item, index) in modelValue" :key="index" class="validation-rule-item">
         <span class="rule-item-body">{{ item.label }}</span>
         <div class="rule-item-actions">
@@ -9,7 +9,7 @@
               <span>编辑</span>
             </template>
             <a-popconfirm
-              placement="left"
+              placement="leftBottom"
               :show-cancel="false"
               :destroy-tooltip-on-hide="true"
               :arrow-point-at-center="true"
@@ -22,7 +22,7 @@
                     <a-switch v-model:checked="item.enable" />
                   </a-form-item>
                   <a-form-item v-if="item.type === 'custom'">
-                    <div v-if="item.type === 'custom'" style="width: 400px">
+                    <div v-if="item.type === 'custom'" style="width: 400px; height: 300px">
                       <hex-monaco-editor v-model:value="item.value" :title="item.label" :theme="Theme.DEFAULT" />
                     </div>
                   </a-form-item>
@@ -97,6 +97,7 @@ const modelValue = computed<LowCode.RuleMap>({
 <style lang="less" scoped>
 .validation {
   .validation-rule-item {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
