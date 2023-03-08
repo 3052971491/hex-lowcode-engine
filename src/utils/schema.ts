@@ -8,13 +8,13 @@ import type { LowCode } from '/@/types/schema.d';
  */
 export function set(attribute: string, value: any, schema: LowCode.Schema, isProps = true) {
   if (isProps) {
-    if (schema?.hasOwnProperty(attribute)) {
-      schema[attribute] = value;
+    if (schema.props?.hasOwnProperty(attribute)) {
+      schema.props[attribute] = value;
     }
     return;
   }
-  if (schema.props?.hasOwnProperty(attribute)) {
-    schema.props[attribute] = value;
+  if (schema.hasOwnProperty(attribute)) {
+    schema[attribute] = value;
   }
 }
 
@@ -26,13 +26,13 @@ export function set(attribute: string, value: any, schema: LowCode.Schema, isPro
  */
 export function get(attribute: string, schema: LowCode.Schema, isProps = true) {
   if (isProps) {
-    if (schema?.hasOwnProperty(attribute)) {
-      return schema[attribute];
+    if (schema.props?.hasOwnProperty(attribute)) {
+      return schema.props[attribute];
     }
     return undefined;
   }
-  if (schema.props?.hasOwnProperty(attribute)) {
-    return schema.props[attribute];
+  if (schema?.hasOwnProperty(attribute)) {
+    return schema[attribute];
   }
   return undefined;
 }

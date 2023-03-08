@@ -54,14 +54,13 @@ if (props.redactState) {
   core = inject(HexCoreInjectionKey);
 } else {
   core = useHexCore();
-  provide(DataEngineInjectionKey, null);
   core.buildProjectConfig(props.value);
   if (core.state.projectConfig) {
     modelValue.value = core.state.projectConfig;
   }
 }
 provide(HexCoreInjectionKey, core);
-
+provide(DataEngineInjectionKey, null);
 onMounted(() => {
   setTimeout(() => {
     pageSpinning.value = false;

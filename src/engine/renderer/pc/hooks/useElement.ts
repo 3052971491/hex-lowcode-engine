@@ -1,14 +1,14 @@
 import type { LowCode } from '/@/types/schema.d';
-import { cloneDeep } from 'lodash-es';
 import { computed, ComputedRef } from 'vue';
 import ElementWrapper from '../components/element-wrapper.vue';
+import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
 interface Props<T> {
   schema: T;
 }
-interface IElement<T> {
+interface IElement<T extends LowCode.NodeSchema> {
   /** 组件副本 */
-  ectype: ComputedRef<T>;
+  ectype: ComputedRef<Scheme<T>>;
   /** 组件包裹容器 */
   ElementWrapper: any;
   /** 注册监听事件 */
@@ -28,8 +28,9 @@ interface IElement<T> {
  * @returns
  */
 export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElement<T> {
-  const ectype = computed((): T => {
-    return cloneDeep(props.schema);
+  const ectype = computed((): Scheme<T> => {
+    // 每次初始化将会重新实例化, 解决历史Schema与新Schema不同步问题
+    return new Scheme(props.schema);
   });
 
   function registerEvent() {}

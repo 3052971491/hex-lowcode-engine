@@ -109,7 +109,7 @@ export function useHexCore(): HexCoreFactory {
       config = project;
     } else {
       config = cloneDeep(ProjectConfig);
-      config.id = buildUUID(16);
+      config.id = `View_${buildUUID(8)}`;
     }
     state.projectConfig = config;
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <template v-if="core?.state.selectedData?.selectedId">
+    <template v-if="hasSelectSchema">
       <div class="settings-navigator">
         <a-breadcrumb>
           <a-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" @click="handleSelectComponent(item)">
@@ -41,6 +41,10 @@ const handleSelectComponent = (schema: LowCode.Schema) => {
   if (schema.id === core?.state.selectedData?.selectedId) return;
   core?.handleUpdateSelectData(schema);
 };
+
+const hasSelectSchema = computed(() => {
+  return core?.state.selectedData?.selectedId && !core?.state.selectedData?.selectedId.includes('View_');
+});
 </script>
 
 <style lang="less" scoped>

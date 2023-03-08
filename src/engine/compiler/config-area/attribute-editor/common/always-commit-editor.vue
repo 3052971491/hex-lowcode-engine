@@ -29,10 +29,10 @@ const schema = computed(() => {
 });
 const modelValue = computed({
   set(val: string) {
-    set(props.attribute, val, schema.value, true);
+    set(props.attribute, val, schema.value, false);
   },
   get() {
-    return get(props.attribute, schema.value, true);
+    return get(props.attribute, schema.value, false);
   },
 });
 </script>

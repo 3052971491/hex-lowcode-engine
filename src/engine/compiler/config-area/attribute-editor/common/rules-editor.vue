@@ -81,7 +81,7 @@ const modelValue = computed<LowCode.RuleMap>({
     set(props.attribute, val, schema.value);
   },
   get() {
-    return get(props.attribute, schema.value) as any[];
+    return get(props.attribute, schema.value);
   },
 });
 </script>
