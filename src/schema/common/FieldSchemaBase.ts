@@ -71,6 +71,12 @@ export class Scheme<T extends LowCode.NodeSchema> {
    */
   loopArgs?: string[];
 
+  /**
+   * 是否始终提交
+   * @description 1、仅显示时提交数据：当组件隐藏时，默认是不会将数据提交到后台的。2、始终提交：无论组件显示与否，都提交当前字段数据。
+   */
+  alwaysCommit?: boolean;
+
   constructor(_data?: T) {
     if (_data) {
       for (const property in _data) {

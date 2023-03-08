@@ -15,11 +15,12 @@ interface Props {
   /** 属性名 */
   name?: string;
   /** 属性配置 */
-  option: AttributeItem;
+  option?: AttributeItem;
 }
 const props = withDefaults(defineProps<Props>(), {
   label: '',
   name: '',
+  option: undefined,
 });
 
 const activeKey = ref(['1']);

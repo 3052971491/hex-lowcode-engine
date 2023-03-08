@@ -9,5 +9,9 @@
   },
   "cSpell.words": [
     "sider"
-  ]
+  ],
+  // 开启 tailwind 提示
+  "editor.quickSuggestions": {
+    "strings": true
+  }
 }

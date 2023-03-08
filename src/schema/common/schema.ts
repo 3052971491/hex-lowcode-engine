@@ -20,6 +20,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.componentName = '单行文本';
     this.componentType = ComponentType.Input;
     this.formItemFlag = true;
+    this.alwaysCommit = false;
     this.props = {
       field: `Field_${buildUUID()}`,
       label: this.componentName,
@@ -82,6 +83,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.componentName = '多行文本';
     this.componentType = ComponentType.Textarea;
     this.formItemFlag = true;
+    this.alwaysCommit = false;
     this.props = {
       field: `Field_${buildUUID()}`,
       label: this.componentName,

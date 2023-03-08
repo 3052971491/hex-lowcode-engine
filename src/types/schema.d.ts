@@ -119,6 +119,12 @@ export namespace LowCode {
      * @description 值为数组, 下标0为迭代变量名, 下标1为索引变量名
      */
     loopArgs?: string[];
+    /**
+     * 是否始终提交
+     * @description 1、仅显示时提交数据：当组件隐藏时，默认是不会将数据提交到后台的。2、始终提交：无论组件显示与否，都提交当前字段数据。
+     */
+    alwaysCommit?: boolean;
+    [key: string]: any;
   }
 
   /**

@@ -13,11 +13,11 @@
         <component :is="getAttrEditorName(item)" :label="item.label" :attribute="item.name" :option="item" />
       </template>
       <!-- 高级 -->
-      <template v-for="(item, index) in currentFieldAdvancedAttributes" :key="'Advanced' + index">
-        <collapse-Item-wrapper label="高级" :option="item">
+      <collapse-Item-wrapper label="高级">
+        <template v-for="(item, index) in currentFieldAdvancedAttributes" :key="'Advanced' + index">
           <component :is="getAttrEditorName(item)" :label="item.label" :attribute="item.name" :option="item" />
-        </collapse-Item-wrapper>
-      </template>
+        </template>
+      </collapse-Item-wrapper>
     </a-form>
   </div>
 </template>
