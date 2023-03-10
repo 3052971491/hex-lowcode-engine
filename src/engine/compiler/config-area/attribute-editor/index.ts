@@ -19,6 +19,7 @@ const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'rules', label: '校验', editor: 'rules-editor' },
   { type: 'Input', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'Input', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Input', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
 /** 栅格-行 */

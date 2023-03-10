@@ -1,6 +1,6 @@
 <template>
   <a-collapse v-model:activeKey="activeKey" :bordered="false" expand-icon-position="right">
-    <a-collapse-panel key="1" :header="label">
+    <a-collapse-panel key="1" :header="label" :show-arrow="props.showArrow" :collapsible="props.collapsible">
       <slot></slot>
     </a-collapse-panel>
   </a-collapse>
@@ -16,11 +16,17 @@ interface Props {
   name?: string;
   /** 属性配置 */
   option?: AttributeItem;
+  /** 是否展示当前面板上的箭头 */
+  showArrow?: boolean;
+  /** 是否可折叠或指定可折叠触发区域 */
+  collapsible?: 'disabled' | 'header' | '';
 }
 const props = withDefaults(defineProps<Props>(), {
   label: '',
   name: '',
   option: undefined,
+  showArrow: true,
+  collapsible: '',
 });
 
 const activeKey = ref(['1']);

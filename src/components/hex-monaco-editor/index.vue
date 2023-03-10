@@ -10,7 +10,11 @@
         "
       >
         <div class="m-e-main_toolbar_left flex-1" :style="isThemeLightOrBlack ? 'color: #000' : 'color: #fff'">
-          <span>{{ title }}</span>
+          <span>
+            <slot name="title">
+              {{ title }}
+            </slot>
+          </span>
         </div>
 
         <div class="m-e-main_toolbar_right" :style="isThemeLightOrBlack ? 'color: #000' : 'color: #fff'">
@@ -480,10 +484,11 @@ defineExpose({
       box-shadow: 0px 2px 5px #000;
 
       .m-e-main_toolbar_left {
+        display: flex;
+        align-items: center;
         span {
           padding-left: 10px;
           font-size: 15px;
-          line-height: 40px;
           user-select: none;
         }
       }
@@ -513,7 +518,7 @@ defineExpose({
     .m-e-main_container {
       flex: 1;
       height: 100%;
-      min-height: 400px;
+      min-height: 360px;
     }
   }
 }
