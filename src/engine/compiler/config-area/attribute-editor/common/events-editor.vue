@@ -227,7 +227,7 @@ function onAddActionClick({ key: item }: { key: { title: string; value: string }
  * @param option 类型
  * @param option 动作配置
  */
-function onEditActionClick(type: string, option) {
+function onEditActionClick(type: string, option: any) {
   state.formModel = cloneDeep(option);
   visible.value = true;
 }
@@ -236,10 +236,10 @@ function onEditActionClick(type: string, option) {
  * @param option 类型
  * @param option 动作配置
  */
-function onDeleteActionClick(type: string, option) {
+function onDeleteActionClick(type: string, option: any) {
   console.log(type, option);
   if (schema.value?.events && schema.value?.events.hasOwnProperty(type)) {
-    schema.value.events[type].events = schema.value?.events[type].events.filter((item) => {
+    schema.value.events[type].events = schema.value?.events[type].events.filter((item: any) => {
       return item.uuid !== option.uuid;
     });
     if (schema.value.events[type].events.length < 1) {
@@ -267,7 +267,7 @@ const handleSubmit = () => {
           if (flag) break;
           const element: any = schema.value.events[key];
           // 查找当前编辑动作是否存在
-          const idx = element.events.findIndex((item) => {
+          const idx = element.events.findIndex((item: any) => {
             return item.uuid === state.formModel.uuid;
           });
 
