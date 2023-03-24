@@ -1,5 +1,5 @@
 import type { LowCode } from '/@/types/schema.d';
-import { computed, ComputedRef } from 'vue';
+import { computed, ComputedRef, Ref, onMounted } from 'vue';
 import ElementWrapper from '../components/element-wrapper.vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
@@ -21,6 +21,8 @@ interface IElement<T extends LowCode.NodeSchema> {
   registerInstance(): void;
   /** 注销当前组件实例 */
   unregisterInstance(): void;
+  /** 自动聚焦 */
+  autofocus(__instance__: Ref): void;
 }
 /**
  * 组件
@@ -39,6 +41,12 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElem
   function registerInstance() {}
   function unregisterInstance() {}
 
+  function autofocus(__instance__: Ref) {
+    if (__instance__.value && ectype.value.props?.autofocus) {
+      __instance__.value.focus();
+    }
+  }
+
   return {
     ectype,
     ElementWrapper,
@@ -47,5 +55,6 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElem
     registerOnMounted,
     registerInstance,
     unregisterInstance,
+    autofocus,
   };
 }

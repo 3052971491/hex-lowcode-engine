@@ -2,7 +2,7 @@
   <template v-if="schema?.formItemFlag">
     <a-form-item :name="schema.props?.field" :rules="getRules()">
       <template #label> {{ schema.props?.label }} </template>
-      <template #extra>{{ schema.props?.tips }}</template>
+      <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
       <!-- <template #help></template> -->
       <slot></slot>
     </a-form-item>

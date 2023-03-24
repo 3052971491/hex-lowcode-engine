@@ -21,13 +21,13 @@
       </ContainerEditWrapper>
     </template>
     <template v-else>
-      <ElementViewWrapper :schema="schema">
+      <ElementViewWrapper v-show="!isHidden" :schema="schema">
         <template v-if="isDefault">
-          <div v-show="!isHidden">
+          <div>
             <slot></slot>
           </div>
         </template>
-        <template v-else-if="isReadonly"> 只读状态(待完善) </template>
+        <template v-else-if="isReadonly"> {{ getReadonlyData }} </template>
       </ElementViewWrapper>
     </template>
   </div>
@@ -44,8 +44,10 @@ import {
   HexCoreInjectionKey,
   RedactStateInjectionKey,
   ComponentBreadcrumbs,
+  DataEngineInjectionKey,
 } from '/@/engine/renderer/render-inject-key';
 import { useComponentBreadcrumbs } from '../hooks/useComponentBreadcrumbs';
+import { useElementDataEngine } from '../hooks/useElementDataEngine';
 
 interface Props {
   schema: LowCode.Schema;
@@ -59,6 +61,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
 const breadcrumbs = inject(ComponentBreadcrumbs);
+const dataEngine = inject(DataEngineInjectionKey);
 
 // 开始一次新的面包屑, 由于赋值是引用类型, 所以不影响属性面板修改
 const arr = breadcrumbs?.getBreadcrumbs().slice();
@@ -84,4 +87,6 @@ const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapp
   selectedScheme.value,
   redactState,
 );
+
+const { getReadonlyData } = useElementDataEngine<LowCode.Schema>(props.schema, dataEngine);
 </script>

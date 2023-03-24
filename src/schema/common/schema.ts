@@ -24,7 +24,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.props = {
       field: `Field_${buildUUID()}`,
       label: this.componentName,
-      placeholder: '',
+      placeholder: '请输入',
       defaultValue: '',
       size: 'middle',
       behavior: 'normal',
@@ -47,7 +47,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
         type: 'required',
         label: '必填',
         value: null,
-        message: null,
+        message: '该字段不能为空',
       },
       {
         enable: false,
@@ -87,7 +87,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.props = {
       field: `Field_${buildUUID()}`,
       label: this.componentName,
-      placeholder: '',
+      placeholder: '请输入',
       defaultValue: '',
       size: 'middle',
       behavior: 'normal',
@@ -110,7 +110,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
         type: 'required',
         label: '必填',
         value: null,
-        message: null,
+        message: '该字段不能为空',
       },
       {
         enable: false,
