@@ -3,7 +3,7 @@
     <div class="w-full h-full flex">
       <div
         class="h-full w-12 min-w-12 flex flex-col menu-container"
-        :style="{ borderColor: width === 64 ? 'transparent' : '#f0f2f5' }"
+        :style="{ borderColor: width === 47 ? 'transparent' : '#f0f2f5' }"
       >
         <div class="w-full p-1 mb-2 mt-2">
           <img class="w-full" alt="hex-form" :src="Logo" />
@@ -38,7 +38,7 @@
           </hex-modal>
         </div>
       </div>
-      <transition v-if="width !== 64" name="h1">
+      <transition v-if="width !== 47" name="h1">
         <div class="flex-1 overflow-hidden library-container">
           <library-item v-if="!!data.currentMenu" :config="data.currentMenu"></library-item>
         </div>
@@ -146,7 +146,7 @@ function handleUpdateSidebarWidthClick(menu: IMenuItem) {
   if (menu.value === data.currentMenu?.value) {
     data.currentMenu = null;
     data.currentDrawer = null;
-    width.value = 64;
+    width.value = 47;
   } else {
     if (menu.drawer) {
       data.currentDrawer = menu;
