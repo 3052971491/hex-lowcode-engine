@@ -17,7 +17,13 @@ import type { LowCode } from '/@/types/schema.d';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
-import { RedactStateInjectionKey, HexCoreInjectionKey, DataEngineInjectionKey } from './render-inject-key';
+import { useInstanceCore, InstanceCoreFactory } from './central/useInstanceCore';
+import {
+  RedactStateInjectionKey,
+  HexCoreInjectionKey,
+  DataEngineInjectionKey,
+  ElementInstanceInjectionKey,
+} from './render-inject-key';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -37,6 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(['update:value']);
 let core: HexCoreFactory | undefined;
+let instanceCore: InstanceCoreFactory | undefined;
 const modelValue = computed({
   get() {
     return core?.state.projectConfig;
@@ -54,13 +61,16 @@ if (props.redactState) {
   core = inject(HexCoreInjectionKey);
 } else {
   core = useHexCore();
+  instanceCore = useInstanceCore();
   core.buildProjectConfig(props.value);
   if (core.state.projectConfig) {
     modelValue.value = core.state.projectConfig;
   }
 }
+
 provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
+provide(ElementInstanceInjectionKey, instanceCore);
 onMounted(() => {
   setTimeout(() => {
     pageSpinning.value = false;

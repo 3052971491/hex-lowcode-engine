@@ -1,5 +1,6 @@
 import { InjectionKey } from 'vue';
 import { HexCoreFactory } from './central/useHexCore';
+import { InstanceCoreFactory } from './central/useInstanceCore';
 import { LowCode } from '/@/types/schema';
 import { IComponentBreadcrumbs } from './pc/hooks/useComponentBreadcrumbs';
 
@@ -38,3 +39,9 @@ export interface IDataEngine {
  * @description
  */
 export const DataEngineInjectionKey = Symbol('data-engine') as InjectionKey<IDataEngine | null>;
+
+/**
+ * 渲染器-组件实例引擎
+ * @description
+ */
+export const ElementInstanceInjectionKey = Symbol('element-instance') as InjectionKey<InstanceCoreFactory | undefined>;
