@@ -144,6 +144,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 :deep(.draggable) {
+  padding-bottom: 12px;
   min-height: 68px;
 }
 </style>
