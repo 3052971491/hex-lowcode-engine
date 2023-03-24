@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full overflow-hidden flex flex-col">
     <template v-if="hasSelectSchema">
       <div class="settings-navigator">
         <a-breadcrumb>
@@ -8,7 +8,7 @@
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>
-      <div class="settings-content">
+      <div class="settings-content overflow-auto">
         <slot></slot>
       </div>
     </template>
@@ -51,10 +51,10 @@ const hasSelectSchema = computed(() => {
 .settings-navigator {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 99;
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  // margin-bottom: 0.5rem;
   padding: 6px 0.5rem;
   border-bottom: 1px solid rgba(31, 56, 88, 0.1);
   background-color: #fff;
