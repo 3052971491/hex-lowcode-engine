@@ -2,6 +2,8 @@ import type { LowCode } from '/@/types/schema.d';
 import { computed, ComputedRef, Ref, onMounted } from 'vue';
 import ElementWrapper from '../components/element-wrapper.vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
+import { Context } from '/@/utils/utils';
+import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 
 interface Props<T> {
   schema: T;
@@ -14,9 +16,9 @@ interface IElement<T extends LowCode.NodeSchema> {
   /** 注册监听事件 */
   registerEvent(): void;
   /** 注册生命周期OnMounted */
-  registerOnCreated(): void;
+  registerOnCreated(__instance__: any): void;
   /** 注册生命周期OnMounted */
-  registerOnMounted(): void;
+  registerOnMounted(__instance__: any): void;
   /** 注册当前组件实例 */
   registerInstance(): void;
   /** 注销当前组件实例 */
@@ -36,8 +38,16 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElem
   });
 
   function registerEvent() {}
-  function registerOnCreated() {}
-  function registerOnMounted() {}
+  function registerOnCreated(__instance__: InstanceCoreFactory) {
+    const __this__ = new Context<T>(__instance__);
+    console.log(__this__);
+  }
+  function registerOnMounted(__instance__: InstanceCoreFactory) {
+    const __this__ = new Context<T>(__instance__);
+
+    __this__.$(ectype.value.id)?.set('label', 'aaa');
+    console.log(__this__.$(ectype.value.id)?.get('label'));
+  }
   function registerInstance() {}
   function unregisterInstance() {}
 

@@ -27,7 +27,8 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const elementInstance = inject(ElementInstanceInjectionKey);
 const __instance__ = ref<any>();
-const { ectype, ElementWrapper, autofocus } = useElement<PcSchema.InputScheme>(props);
+const { ectype, ElementWrapper, autofocus, registerOnCreated, registerOnMounted } =
+  useElement<PcSchema.InputScheme>(props);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 elementInstance?.setInstance(ectype.value);
 const ectypeProps = computed(() => {
@@ -45,8 +46,10 @@ const ectypeProps = computed(() => {
     addonAfter: obj.addonAfter,
   };
 });
+registerOnCreated(elementInstance);
 onMounted(() => {
   autofocus(__instance__);
+  registerOnMounted(elementInstance);
 });
 </script>
 

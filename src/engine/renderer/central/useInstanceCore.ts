@@ -1,5 +1,3 @@
-import { reactive } from 'vue';
-
 export interface InstanceCoreFactory {
   /** 所有组件实例集合 */
   instances: any;
@@ -15,7 +13,6 @@ export interface InstanceCoreFactory {
 export function useInstanceCore(): InstanceCoreFactory {
   const instances = new Map([]);
   function setInstance(instance: any) {
-    console.log(instance);
     const { id } = instance;
     instances.set(id, instance);
   }

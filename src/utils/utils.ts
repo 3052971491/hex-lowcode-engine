@@ -1,11 +1,13 @@
+import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
+import { LowCode } from '../types/schema';
 
-interface IUtilsContext {
+interface IUtilsContext<T extends LowCode.NodeSchema> {
   /** 组件实例集合 */
-  instances: InstanceCoreFactory | undefined;
+  instances: InstanceCoreFactory;
 }
-export class UtilsContextFactory {
-  utils: IUtilsContext;
+export class Context<T extends LowCode.NodeSchema> {
+  public utils: IUtilsContext<T>;
 
   constructor(instanceContext: InstanceCoreFactory) {
     this.utils = {
@@ -13,8 +15,10 @@ export class UtilsContextFactory {
     };
   }
 
-  $(id: string) {
+  $(id: string): Scheme<T> | undefined {
     const { instances } = this.utils;
-    return instances?.getInstance(id);
+    console.log(instances);
+    if (!instances) return undefined;
+    return instances.getInstance(id);
   }
 }
