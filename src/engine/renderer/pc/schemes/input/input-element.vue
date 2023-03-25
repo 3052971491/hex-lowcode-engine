@@ -14,7 +14,7 @@ import type { LowCode } from '/@/types/schema.d';
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
-import { DataEngineInjectionKey, ElementInstanceInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useElementDataEngine } from '../../hooks/useElementDataEngine';
 
 interface Props {
@@ -25,12 +25,10 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
-const elementInstance = inject(ElementInstanceInjectionKey);
+/** 当前组件实例 */
 const __instance__ = ref<any>();
-const { ectype, ElementWrapper, autofocus, registerOnCreated, registerOnMounted } =
-  useElement<PcSchema.InputScheme>(props);
+const { ectype, ElementWrapper, autofocus } = useElement<PcSchema.InputScheme>(props);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
-elementInstance?.setInstance(ectype.value);
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;
   if (!obj) return {};
@@ -46,10 +44,8 @@ const ectypeProps = computed(() => {
     addonAfter: obj.addonAfter,
   };
 });
-registerOnCreated(elementInstance);
 onMounted(() => {
   autofocus(__instance__);
-  registerOnMounted(elementInstance);
 });
 </script>
 

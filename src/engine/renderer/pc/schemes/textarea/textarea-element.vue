@@ -25,11 +25,9 @@ interface Props {
 }
 const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
-const elementInstance = inject(ElementInstanceInjectionKey);
 const __instance__ = ref<any>();
 const { ectype, ElementWrapper, autofocus } = useElement<PcSchema.InputScheme>(props);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
-elementInstance?.setInstance(ectype.value);
 const ectypeProps = computed(() => {
   const obj = ectype.value.props;
   if (!obj) return {};

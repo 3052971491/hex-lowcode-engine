@@ -1,9 +1,10 @@
 import type { LowCode } from '/@/types/schema.d';
-import { computed, ComputedRef, Ref, onMounted } from 'vue';
+import { computed, ComputedRef, Ref, onMounted, inject } from 'vue';
 import ElementWrapper from '../components/element-wrapper.vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { Context } from '/@/utils/utils';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
+import { DataEngineInjectionKey, ElementInstanceInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 interface Props<T> {
   schema: T;
@@ -32,23 +33,28 @@ interface IElement<T extends LowCode.NodeSchema> {
  * @returns
  */
 export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElement<T> {
+  const elementInstance = inject(ElementInstanceInjectionKey);
+
   const ectype = computed((): Scheme<T> => {
     // 每次初始化将会重新实例化, 解决历史Schema与新Schema不同步问题
     return new Scheme(props.schema);
   });
 
   function registerEvent() {}
-  function registerOnCreated(__instance__: InstanceCoreFactory) {
-    const __this__ = new Context<T>(__instance__);
-    console.log(__this__);
-  }
-  function registerOnMounted(__instance__: InstanceCoreFactory) {
-    const __this__ = new Context<T>(__instance__);
 
-    __this__.$(ectype.value.id)?.set('label', 'aaa');
-    console.log(__this__.$(ectype.value.id)?.get('label'));
+  function registerOnCreated(__instance__: InstanceCoreFactory | undefined) {
+    if (!__instance__) return;
+    const __this__ = new Context<T>(__instance__);
   }
-  function registerInstance() {}
+
+  function registerOnMounted(__instance__: InstanceCoreFactory | undefined) {
+    if (!__instance__) return;
+    const __this__ = new Context<T>(__instance__);
+  }
+
+  function registerInstance() {
+    elementInstance?.setInstance(ectype.value);
+  }
   function unregisterInstance() {}
 
   function autofocus(__instance__: Ref) {
@@ -56,6 +62,12 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>): IElem
       __instance__.value.focus();
     }
   }
+
+  registerInstance();
+  registerOnCreated(elementInstance);
+  onMounted(() => {
+    registerOnMounted(elementInstance);
+  });
 
   return {
     ectype,
