@@ -104,15 +104,15 @@ const jsConversion = () => {
   });
 };
 
-const onDidChangeEditorText = () => {
+const onDidChangeEditorText = (val: string) => {
   state.markers = monaco.value?.getEditorMarkers()!;
 
-  if (state.markers.length < 1) {
-    if (core?.state.projectConfig) {
-      core.state.projectConfig.originCode = str.value;
-    }
-    jsConversion();
+  // if (state.markers.length < 1) {
+  if (core?.state.projectConfig) {
+    core.state.projectConfig.originCode = val;
   }
+  jsConversion();
+  // }
   resetReferenceCount();
 };
 

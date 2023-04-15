@@ -1,15 +1,14 @@
 <template>
-  <template v-if="schema?.formItemFlag">
-    <a-form-item :name="schema.props?.field" :rules="getRules()">
-      <template #label> {{ schema.props?.label }} </template>
-      <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
-      <!-- <template #help></template> -->
-      <slot></slot>
-    </a-form-item>
-  </template>
-  <template v-else>
+  <a-form-item v-if="schema?.formItemFlag" :name="getName()" :rules="getRules()">
+    <template #label> {{ schema.props?.label }} </template>
+    <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
+    <!-- <template #help></template> -->
     <slot></slot>
-  </template>
+  </a-form-item>
+
+  <div v-else>
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -33,5 +32,5 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { getRules } = useFormItem(props.schema);
+const { getRules, getName } = useFormItem(props.schema);
 </script>

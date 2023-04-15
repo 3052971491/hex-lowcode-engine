@@ -8,6 +8,11 @@ interface FormItem {
    * 获取校验规则
    */
   getRules(): Rule[];
+  /**
+   * 获取name
+   * @description 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的
+   */
+  getName(): string;
   /** 删除当前组件 */
   onDelete(event: Event): LowCode.Schema | undefined;
   /** 复制当前组件 */
@@ -50,7 +55,7 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
           case 'min':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
-                if (rule.value && value < rule.value) {
+                if (rule.value && value < Number(rule.value)) {
                   return Promise.reject(obj.message);
                 }
               }
@@ -60,7 +65,7 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
           case 'max':
             obj.validator = async (_rule: Rule, value: number) => {
               if (typeof value === 'number') {
-                if (rule.value && value > rule.value) {
+                if (rule.value && value > Number(rule.value)) {
                   return Promise.reject(obj.message);
                 }
               }
@@ -76,6 +81,10 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
       });
     }
     return arr;
+  }
+
+  function getName() {
+    return !schema.alwaysCommit && schema.props?.behavior === 'hidden' ? undefined : schema.props?.field;
   }
 
   function onDelete() {
@@ -116,6 +125,7 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
   }
   return {
     getRules,
+    getName,
     onDelete,
     onCopy,
   };

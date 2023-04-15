@@ -1,6 +1,7 @@
 import { PcSchema } from '/@/schema/common/interface';
 import { FormInstance } from 'ant-design-vue';
 import { NamePath } from 'ant-design-vue/lib/form/interface';
+import { reject } from 'lodash-es';
 import { reactive } from 'vue';
 
 interface Props {
@@ -53,8 +54,19 @@ export function useForm(props: Props): IForm {
     props.formRef?.clearValidate(nameList);
   }
 
-  function validate(nameList?: NamePath[] | string) {
-    return props.formRef?.validate(nameList)!;
+  function validate(nameList?: NamePath[] | string): Promise<{
+    [key: string]: any;
+  }> {
+    return new Promise((resolve, reject) => {
+      props.formRef
+        ?.validate(nameList)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   function validateFields(nameList?: NamePath[] | string) {

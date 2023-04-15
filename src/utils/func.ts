@@ -1,8 +1,9 @@
 import { JSFunction } from '/@/types/value-type';
 
-export function BuildFunction(...args: any) {
+export function BuildFunction(name: string, ...args: any) {
   const code = `try {
         ${args[args.length - 1]}
+        ${name ? `return ${name}()` : ''}
       } catch (error) {
         console.error(error);
       }`;
@@ -51,7 +52,7 @@ export function StringParsedToFunction(
   }
 }`;
 
-  const res = BuildFunction(assemblyCode).call(context);
+  const res = BuildFunction('', assemblyCode).call(context);
   const methods = res();
 
   const obj: {
