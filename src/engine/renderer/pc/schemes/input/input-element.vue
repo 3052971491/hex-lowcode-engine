@@ -41,7 +41,7 @@ const ectypeProps = computed(() => {
         if (element.events.length > 0) {
           element.events.forEach(({ name }: { name: string }) => {
             if (core?.state.__js__[name]) {
-              opt.onChange[key] = core.state.__js__[name];
+              opt[key] = core.state.__js__[name];
             }
           });
         }
