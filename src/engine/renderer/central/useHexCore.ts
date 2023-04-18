@@ -25,6 +25,9 @@ interface StateType {
     /** 面包屑 */
     breadcrumbs: LowCode.Schema[];
   };
+  __js__: {
+    [key: string]: any;
+  };
 }
 
 export interface HexCoreFactory {
@@ -85,6 +88,7 @@ export function useHexCore(): HexCoreFactory {
     projectConfig: undefined,
     history: undefined,
     selectedData: undefined,
+    __js__: {},
   });
 
   buildProjectConfig();

@@ -36,7 +36,7 @@
     </a-dropdown>
 
     <hex-modal v-model:visible="visible" :name="modalTitle" @ok="handleSubmit">
-      <div class="w-full h-full overflow-hidden flex flex-col">
+      <div class="w-full overflow-hidden flex flex-col">
         <a-row>
           <a-col :span="9">
             <a-typography-title :level="5">响应动作</a-typography-title>
@@ -45,42 +45,49 @@
             <a-typography-title :level="5">动作名称</a-typography-title>
           </a-col>
         </a-row>
-        <a-row class="flex-1" :gutter="8">
-          <a-col :span="9">
-            <div class="action-setting-selector-inner">
-              <div class="action-setting-selector-category">
-                <div class="action-setting-ul">
-                  <a-radio-group v-model:value="state.formModel.type" class="w-full" @change="handleTypeChange">
-                    <li class="action-setting-li" :class="['BuiltInAction' === state.formModel.type ? 'active' : '']">
-                      <a-radio value="BuiltInAction">内置动作</a-radio>
-                    </li>
-                    <li class="action-setting-li" :class="['PageJS' === state.formModel.type ? 'active' : '']">
-                      <a-radio value="PageJS">页面 JS</a-radio>
-                    </li>
-                  </a-radio-group>
-                </div>
-              </div>
-              <div class="code-actions-items-container">
-                <div class="action-setting-ul">
-                  <div class="mb-1">
-                    <a-input v-model:value="state.filterText" placeholder="搜索" allow-clear></a-input>
+        <a-form ref="formRef" :model="state.formModel" class="flex-1" hide-required-mark>
+          <a-row class="flex-1" :gutter="8">
+            <a-col :span="9">
+              <div class="action-setting-selector-inner">
+                <div class="action-setting-selector-category">
+                  <div class="action-setting-ul">
+                    <a-form-item name="type" :rules="[{ required: true, message: '', trigger: ['change', 'blur'] }]">
+                      <a-radio-group v-model:value="state.formModel.type" class="w-full" @change="handleTypeChange">
+                        <li
+                          class="action-setting-li"
+                          :class="['BuiltInAction' === state.formModel.type ? 'active' : '']"
+                        >
+                          <a-radio value="BuiltInAction">内置动作</a-radio>
+                        </li>
+                        <li class="action-setting-li" :class="['PageJS' === state.formModel.type ? 'active' : '']">
+                          <a-radio value="PageJS">页面 JS</a-radio>
+                        </li>
+                      </a-radio-group>
+                    </a-form-item>
                   </div>
-                  <a-radio-group v-model:value="state.formModel.id" class="w-full">
-                    <li
-                      v-for="(item, index) in actionIds"
-                      :key="index"
-                      class="action-setting-li"
-                      :class="[item.value === state.formModel.id ? 'active' : '']"
-                    >
-                      <a-radio :value="item.value">{{ item.label }}</a-radio>
-                    </li>
-                  </a-radio-group>
+                </div>
+                <div class="code-actions-items-container">
+                  <div class="action-setting-ul">
+                    <div class="mb-1">
+                      <a-input v-model:value="state.filterText" placeholder="搜索" allow-clear></a-input>
+                    </div>
+                    <a-form-item name="id">
+                      <a-radio-group v-model:value="state.formModel.name" class="w-full">
+                        <li
+                          v-for="(item, index) in actionIds"
+                          :key="index"
+                          class="action-setting-li"
+                          :class="[item.value === state.formModel.name ? 'active' : '']"
+                        >
+                          <a-radio :value="item.value">{{ item.label }}</a-radio>
+                        </li>
+                      </a-radio-group>
+                    </a-form-item>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a-col>
-          <a-col :span="15">
-            <a-form ref="formRef" :model="state.formModel" class="h-full" hide-required-mark>
+            </a-col>
+            <a-col :span="15">
               <a-form-item
                 name="name"
                 :rules="[{ required: true, message: '动作名称不能为空', trigger: ['change', 'blur'] }]"
@@ -100,15 +107,15 @@
                   </template>
                 </hex-monaco-editor>
               </a-form-item>
-            </a-form>
-          </a-col>
-        </a-row>
+            </a-col>
+          </a-row>
+        </a-form>
       </div>
     </hex-modal>
   </collapse-Item-wrapper>
 </template>
 <script lang="ts" setup name="EventsEditor">
-import { inject, computed, ref, reactive } from 'vue';
+import { inject, computed, ref, reactive, unref } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import { cloneDeep } from 'lodash';
@@ -182,6 +189,8 @@ const actionOptions: {
 const modalTitle = ref('');
 const formRef = ref<FormInstance>();
 const state = reactive({
+  isAdd: true,
+  actionType: '',
   filterText: null,
   formModel: {
     id: '',
@@ -193,19 +202,38 @@ const state = reactive({
 });
 
 const actionIds = computed(() => {
-  const pageJsList = [{ label: '添加新动作', value: '' }];
+  const pageJsList: any[] = [];
   const builtInActionList = [
     { label: '打开 URL', value: 'openUrl' },
     { label: '打开弹框', value: 'openPopUp' },
     { label: '关闭弹框', value: 'closePopUp' },
   ];
   const arr = state.formModel.type === 'PageJS' ? pageJsList : builtInActionList;
+  if (state.formModel.type === 'PageJS') {
+    for (const key in core?.state.projectConfig?.methods) {
+      if (Object.prototype.hasOwnProperty.call(core?.state.projectConfig?.methods, key)) {
+        pageJsList.push({
+          label: key,
+          value: key,
+        });
+      }
+    }
+  }
+  const filterPageJsList = unref(pageJsList).filter((item) => {
+    return item.label.includes(state.actionType);
+  });
+  if (filterPageJsList.length > 0) {
+    pageJsList.unshift({ label: '添加新动作', value: state.actionType + (filterPageJsList.length + 1) });
+  } else {
+    pageJsList.unshift({ label: '添加新动作', value: state.actionType });
+  }
+
   return arr.filter((item) => {
     return item.label.includes(state.filterText ?? '');
   });
 });
 const handleTypeChange = () => {
-  state.formModel.id = actionIds.value[0].value;
+  state.formModel.id = state.actionType;
 };
 const visible = ref(false);
 /**
@@ -214,11 +242,15 @@ const visible = ref(false);
 function onAddActionClick({ key: item }: { key: { title: string; value: string } }) {
   modalTitle.value = item.title;
   // 规则: 如果组件节点描述-事件中存在该类型: `${类型}${事件长度}`, 否则 `${类型}`
-  if (!schema.value.events?.hasOwnProperty(item.value)) {
-    state.formModel.name = item.value;
+  const arr = unref(actionIds).filter((item) => {
+    return item.label.includes(state.actionType);
+  });
+  if (arr.length > 0) {
+    state.formModel.name = item.value + arr.length;
   } else {
-    state.formModel.name = item.value + schema.value.events[item.value].events.length;
+    state.formModel.name = item.value;
   }
+  state.actionType = item.value;
   state.formModel.id = item.value;
   visible.value = true;
 }
@@ -237,7 +269,6 @@ function onEditActionClick(type: string, option: any) {
  * @param option 动作配置
  */
 function onDeleteActionClick(type: string, option: any) {
-  console.log(type, option);
   if (schema.value?.events && schema.value?.events.hasOwnProperty(type)) {
     schema.value.events[type].events = schema.value?.events[type].events.filter((item: any) => {
       return item.uuid !== option.uuid;
@@ -271,7 +302,7 @@ const handleSubmit = () => {
             return item.uuid === state.formModel.uuid;
           });
 
-          if (key === state.formModel.id) {
+          if (key === state.actionType) {
             flag = true;
             if (idx === -1) {
               element.events.push(cloneDeep(state.formModel));
@@ -284,14 +315,13 @@ const handleSubmit = () => {
       if (!flag) {
         const obj: any = {
           type: 'JSExpression',
-          value: '',
+          value: state.actionType,
           events: [],
         };
         obj.events.push(cloneDeep(state.formModel));
-        schema.value.events[state.formModel.id] = obj;
+        schema.value.events[state.actionType] = obj;
       }
 
-      console.log(schema.value.events);
       state.formModel = {
         id: '',
         type: 'PageJS',

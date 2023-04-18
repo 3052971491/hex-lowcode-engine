@@ -24,6 +24,7 @@ import {
   DataEngineInjectionKey,
   ElementInstanceInjectionKey,
 } from './render-inject-key';
+import { run } from '/@/utils/func';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -65,6 +66,10 @@ if (props.redactState) {
   core.buildProjectConfig(props.value);
   if (core.state.projectConfig) {
     modelValue.value = core.state.projectConfig;
+
+    // 运行JS-Function
+    const result = run(modelValue.value?.originCode ?? '');
+    core.state.__js__ = result;
   }
 }
 

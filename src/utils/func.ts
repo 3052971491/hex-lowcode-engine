@@ -69,3 +69,39 @@ export function StringParsedToFunction(
 
   return obj;
 }
+
+export function run(code?: string, context: any = null): Object {
+  if (code) {
+    // 匹配所有以export function 开头, { 结尾的字符串
+    const regExp = /export function.*{/g;
+    const result = code.match(regExp);
+
+    // 所有方法的名称
+    const functionName: string[] =
+      result?.map((res: string) => {
+        const flag = 'export function';
+        const first = res.indexOf(flag);
+        if (first === -1) {
+          return '';
+        }
+        const last = res.indexOf('(');
+        if (last === -1) {
+          return '';
+        }
+        return res.substring(flag.length, last).trim();
+      }) ?? [];
+    let originCode = code;
+    // 去除export
+    originCode = originCode.replaceAll('export', '');
+    const assemblyCode = `return function () {
+  ${originCode}
+  return {
+    ${functionName.join(',')}
+  }
+}`;
+
+    const res = BuildFunction('', assemblyCode).call(context);
+    return res();
+  }
+  return {};
+}
