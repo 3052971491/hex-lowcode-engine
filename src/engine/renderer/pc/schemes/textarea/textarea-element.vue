@@ -5,17 +5,19 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-textarea ref="__instance__" v-model:value="modelValue" v-bind="ectypeProps"></a-textarea>
+    <a-textarea ref="__instance__" v-model:value="modelValue" v-bind="prop"></a-textarea>
   </ElementWrapper>
 </template>
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, defineComponent, inject, onMounted, ref } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
+import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
-import { useElement } from '../../hooks/useElement';
-import { DataEngineInjectionKey, ElementInstanceInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { DataEngineInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+
 import { useElementDataEngine } from '../../hooks/useElementDataEngine';
+import { useElement } from '../../hooks/useElement';
 
 interface Props {
   schema: PcSchema.InputScheme;
@@ -24,13 +26,14 @@ interface Props {
   indexOfParentList: number;
 }
 const props = withDefaults(defineProps<Props>(), {});
+const core = inject(HexCoreInjectionKey);
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
-const { ectype, ElementWrapper, autofocus } = useElement<PcSchema.InputScheme>(props);
+
+const { ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
-const ectypeProps = computed(() => {
-  const obj = ectype.value.props;
-  if (!obj) return {};
+
+const prop = ectypeProps((obj) => {
   return {
     allowClear: obj.allowClear,
     bordered: obj.bordered,
@@ -42,10 +45,7 @@ const ectypeProps = computed(() => {
     addonBefore: obj.addonBefore,
     addonAfter: obj.addonAfter,
   };
-});
-onMounted(() => {
-  autofocus(__instance__);
-});
+}, core);
 </script>
 
 <script lang="ts">

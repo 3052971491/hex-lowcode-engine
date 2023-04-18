@@ -5,17 +5,19 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-input ref="__instance__" v-model:value="modelValue" v-bind="ectypeProps"></a-input>
+    <a-input ref="__instance__" v-model:value="modelValue" v-bind="prop"></a-input>
   </ElementWrapper>
 </template>
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, defineComponent, inject, onMounted, ref, unref } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
+import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
-import { useElement } from '../../hooks/useElement';
 import { DataEngineInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+
 import { useElementDataEngine } from '../../hooks/useElementDataEngine';
+import { useElement } from '../../hooks/useElement';
 
 interface Props {
   schema: PcSchema.InputScheme;
@@ -26,28 +28,12 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 const core = inject(HexCoreInjectionKey);
 const dataEngine = inject(DataEngineInjectionKey);
-/** 当前组件实例 */
 const __instance__ = ref<any>();
-const { ectype, ElementWrapper, autofocus } = useElement<PcSchema.InputScheme>(props);
+
+const { ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
-const ectypeProps = computed(() => {
-  const obj = ectype.value.props;
-  if (!obj) return {};
-  const opt: any = {};
-  if (ectype.value.events) {
-    for (const key in unref(ectype).events) {
-      if (Object.prototype.hasOwnProperty.call(unref(ectype).events, key)) {
-        const element = ectype.value.events[key];
-        if (element.events.length > 0) {
-          element.events.forEach(({ name }: { name: string }) => {
-            if (core?.state.__js__[name]) {
-              opt[key] = core.state.__js__[name];
-            }
-          });
-        }
-      }
-    }
-  }
+
+const prop = ectypeProps((obj) => {
   return {
     allowClear: obj.allowClear,
     bordered: obj.bordered,
@@ -58,9 +44,8 @@ const ectypeProps = computed(() => {
     showCount: obj.showCount,
     addonBefore: obj.addonBefore,
     addonAfter: obj.addonAfter,
-    ...opt,
   };
-});
+}, core);
 </script>
 
 <script lang="ts">

@@ -62,3 +62,6 @@ export interface CompositeObject {
 }
 
 export type CompositeArray = CompositeValue[];
+export interface Fn<T = any, R = T> {
+  (...arg: T[]): R;
+}
