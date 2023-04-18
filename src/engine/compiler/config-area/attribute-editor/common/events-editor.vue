@@ -42,7 +42,7 @@
             <a-typography-title :level="5">响应动作</a-typography-title>
           </a-col>
           <a-col :span="15">
-            <a-typography-title :level="5">动作名称</a-typography-title>
+            <a-typography-title v-if="!state.actionName" :level="5">动作名称</a-typography-title>
           </a-col>
         </a-row>
         <a-form ref="formRef" :model="state.formModel" class="flex-1" hide-required-mark>
@@ -52,14 +52,11 @@
                 <div class="action-setting-selector-category">
                   <div class="action-setting-ul">
                     <a-form-item name="type" :rules="[{ required: true, message: '', trigger: ['change', 'blur'] }]">
-                      <a-radio-group v-model:value="state.formModel.type" class="w-full" @change="handleTypeChange">
-                        <li
-                          class="action-setting-li"
-                          :class="['BuiltInAction' === state.formModel.type ? 'active' : '']"
-                        >
+                      <a-radio-group v-model:value="state.actionType" class="w-full" @change="initActionMap">
+                        <li class="action-setting-li" :class="['BuiltInAction' === state.actionType ? 'active' : '']">
                           <a-radio value="BuiltInAction">内置动作</a-radio>
                         </li>
-                        <li class="action-setting-li" :class="['PageJS' === state.formModel.type ? 'active' : '']">
+                        <li class="action-setting-li" :class="['PageJS' === state.actionType ? 'active' : '']">
                           <a-radio value="PageJS">页面 JS</a-radio>
                         </li>
                       </a-radio-group>
@@ -72,12 +69,12 @@
                       <a-input v-model:value="state.filterText" placeholder="搜索" allow-clear></a-input>
                     </div>
                     <a-form-item name="id">
-                      <a-radio-group v-model:value="state.formModel.name" class="w-full">
+                      <a-radio-group v-model:value="state.actionName" class="w-full" @change="handleActionNameChange">
                         <li
                           v-for="(item, index) in actionIds"
                           :key="index"
                           class="action-setting-li"
-                          :class="[item.value === state.formModel.name ? 'active' : '']"
+                          :class="[item.value === state.actionName ? 'active' : '']"
                         >
                           <a-radio :value="item.value">{{ item.label }}</a-radio>
                         </li>
@@ -89,10 +86,10 @@
             </a-col>
             <a-col :span="15">
               <a-form-item
+                v-if="!state.actionName"
                 name="name"
                 :rules="[{ required: true, message: '动作名称不能为空', trigger: ['change', 'blur'] }]"
               >
-                <!-- <template #extra>点击 确定 之后将在动作面板中创建一个该名称的新动作 </template> -->
                 <a-input v-model:value="state.formModel.name" placeholder="请输入动作名称"></a-input>
               </a-form-item>
               <a-form-item name="params">
@@ -141,14 +138,6 @@ const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-const modelValue = computed({
-  set(val: string) {
-    set(props.attribute, val, schema.value, false);
-  },
-  get() {
-    return get(props.attribute, schema.value, false);
-  },
-});
 
 const eventsMap = computed(() => {
   const arr = [];
@@ -186,11 +175,13 @@ const actionOptions: {
     value: 'onBlur',
   },
 ];
+
 const modalTitle = ref('');
 const formRef = ref<FormInstance>();
 const state = reactive({
   isAdd: true,
-  actionType: '',
+  actionType: 'PageJS',
+  actionName: '',
   filterText: null,
   formModel: {
     id: '',
@@ -199,60 +190,61 @@ const state = reactive({
     params: '{}',
     uuid: '',
   },
+  actionMap: [] as any[],
 });
 
-const actionIds = computed(() => {
-  const pageJsList: any[] = [];
-  const builtInActionList = [
-    { label: '打开 URL', value: 'openUrl' },
-    { label: '打开弹框', value: 'openPopUp' },
-    { label: '关闭弹框', value: 'closePopUp' },
-  ];
-  const arr = state.formModel.type === 'PageJS' ? pageJsList : builtInActionList;
-  if (state.formModel.type === 'PageJS') {
+const visible = ref(false);
+
+const initActionMap = () => {
+  state.actionMap = [];
+  // 获取自定义JS集
+  if (state.actionType === 'PageJS') {
+    state.actionMap.push({ label: '添加新动作', value: '' });
     for (const key in core?.state.projectConfig?.methods) {
       if (Object.prototype.hasOwnProperty.call(core?.state.projectConfig?.methods, key)) {
-        pageJsList.push({
+        state.actionMap.push({
           label: key,
           value: key,
         });
       }
     }
-  }
-  const filterPageJsList = unref(pageJsList).filter((item) => {
-    return item.label.includes(state.actionType);
-  });
-  if (filterPageJsList.length > 0) {
-    pageJsList.unshift({ label: '添加新动作', value: state.actionType + (filterPageJsList.length + 1) });
   } else {
-    pageJsList.unshift({ label: '添加新动作', value: state.actionType });
+    state.actionMap = [
+      { label: '打开 URL', value: 'openUrl' },
+      { label: '打开弹框', value: 'openPopUp' },
+      { label: '关闭弹框', value: 'closePopUp' },
+    ];
   }
-
-  return arr.filter((item) => {
+};
+const actionIds = computed(() => {
+  return state.actionMap.filter((item) => {
     return item.label.includes(state.filterText ?? '');
   });
 });
-const handleTypeChange = () => {
-  state.formModel.id = state.actionType;
-};
-const visible = ref(false);
+
+function handleActionNameChange() {
+  if (state.actionName === '') {
+    const arr = unref(actionIds).filter((i) => {
+      return i.value.includes(state.formModel.id);
+    });
+    state.formModel.name =
+      arr.length > 0 ? `${state.formModel.id + (arr.length + 1)}_new` : `${state.formModel.id}_new`;
+  }
+}
+
 /**
  * 新增动作
  */
 function onAddActionClick({ key: item }: { key: { title: string; value: string } }) {
-  modalTitle.value = item.title;
-  // 规则: 如果组件节点描述-事件中存在该类型: `${类型}${事件长度}`, 否则 `${类型}`
-  const arr = unref(actionIds).filter((item) => {
-    return item.label.includes(state.actionType);
-  });
-  if (arr.length > 0) {
-    state.formModel.name = item.value + arr.length;
-  } else {
-    state.formModel.name = item.value;
-  }
-  state.actionType = item.value;
-  state.formModel.id = item.value;
   visible.value = true;
+  modalTitle.value = item.title;
+  state.formModel.id = item.value;
+  state.actionName = '';
+  initActionMap();
+  const arr = unref(actionIds).filter((i) => {
+    return i.value.includes(item.value);
+  });
+  state.formModel.name = arr.length > 0 ? `${item.value + (arr.length + 1)}_new` : `${item.value}_new`;
 }
 /**
  * 编辑动作
@@ -260,8 +252,10 @@ function onAddActionClick({ key: item }: { key: { title: string; value: string }
  * @param option 动作配置
  */
 function onEditActionClick(type: string, option: any) {
-  state.formModel = cloneDeep(option);
   visible.value = true;
+  state.actionName = option.name;
+  state.formModel = cloneDeep(option);
+  initActionMap();
 }
 /**
  * 删除动作
@@ -302,7 +296,7 @@ const handleSubmit = () => {
             return item.uuid === state.formModel.uuid;
           });
 
-          if (key === state.actionType) {
+          if (key === state.formModel.id) {
             flag = true;
             if (idx === -1) {
               element.events.push(cloneDeep(state.formModel));
@@ -315,11 +309,11 @@ const handleSubmit = () => {
       if (!flag) {
         const obj: any = {
           type: 'JSExpression',
-          value: state.actionType,
+          value: state.formModel.id,
           events: [],
         };
         obj.events.push(cloneDeep(state.formModel));
-        schema.value.events[state.actionType] = obj;
+        schema.value.events[state.formModel.id] = obj;
       }
 
       state.formModel = {
