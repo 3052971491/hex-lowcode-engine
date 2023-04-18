@@ -128,7 +128,7 @@ function handleCancelClick() {
 
     &-content {
       display: flex;
-      height: 100%;
+      // height: 100%;
       flex-direction: column;
 
       .ant-modal-body {
