@@ -123,6 +123,7 @@ import { set, get } from '/@/utils/schema';
 import HexModal from '/@/components/hex-modal/index.vue';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
+import { StringParsedToFunction } from '/@/utils/func';
 
 interface Props {
   label: string;
@@ -229,6 +230,8 @@ function handleActionNameChange() {
     });
     state.formModel.name =
       arr.length > 0 ? `${state.formModel.id + (arr.length + 1)}_new` : `${state.formModel.id}_new`;
+  } else {
+    state.formModel.name = state.actionName;
   }
 }
 
@@ -314,6 +317,14 @@ const handleSubmit = () => {
         };
         obj.events.push(cloneDeep(state.formModel));
         schema.value.events[state.formModel.id] = obj;
+      }
+
+      if (core?.state.projectConfig?.originCode) {
+        core.state.projectConfig.originCode += `\nexport function ${state.formModel.name}() {}`;
+        const val = core?.state.projectConfig?.originCode ?? '';
+        const obj = StringParsedToFunction(val, null);
+        core.state.projectConfig.methods = obj;
+        core?.saveHistoryDataStorage();
       }
 
       state.formModel = {
