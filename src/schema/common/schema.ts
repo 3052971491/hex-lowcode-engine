@@ -8,6 +8,7 @@ export enum ComponentType {
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
   'Switch' = 'Switch',
+  'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
   'Form' = 'Form',
@@ -251,6 +252,50 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
   }
 }
 
+export class Rate extends Scheme<PcSchema.RateScheme> {
+  props: PcSchema.RateSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/switch-cn';
+    this.componentName = '评分';
+    this.componentType = ComponentType.Rate;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      defaultValue: 0,
+      behavior: 'normal',
+      tips: '',
+      allowClear: true,
+      rules: [],
+      autofocus: false,
+      allowHalf: false,
+      character: null,
+      count: 5,
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+  }
+}
+
 export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
@@ -329,6 +374,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],
   [ComponentType.Switch, new Switch() as any],
+  [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Form, new Form() as any],

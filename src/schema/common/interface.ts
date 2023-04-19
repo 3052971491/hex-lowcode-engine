@@ -119,6 +119,36 @@ export namespace PcSchema {
     /** 非选中时的值 */
     unCheckedValue: boolean | string | number;
   }
+  export interface RateScheme extends LowCode.NodeSchema {
+    props: RateSchemeProps;
+  }
+
+  export interface RateSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 是否允许半选 */
+    allowHalf: boolean;
+    /** 自定义字符 */
+    character: string | null;
+    /** star 总数 */
+    count: number;
+    /** 自定义每项的提示信息 */
+    // tooltips: string[];
+  }
   export interface SwitchScheme extends LowCode.NodeSchema {
     props: SwitchSchemeProps;
   }

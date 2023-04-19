@@ -48,7 +48,7 @@ interface ElementList {
 const core = inject(HexCoreInjectionKey);
 
 const elementList: ElementList[] = [
-  { label: '表单控件', list: BasicComponents },
+  { label: '基础控件', list: BasicComponents },
   {
     label: '业务控件',
     list: BusinessComponents,

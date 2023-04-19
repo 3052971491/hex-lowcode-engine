@@ -64,6 +64,21 @@ const SWITCH_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const RATE_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Rate', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Rate', name: 'defaultValue', label: '默认值', editor: 'input-number-editor' },
+  { type: 'Rate', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Rate', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Rate', name: 'allowHalf', label: '是否允许半选', editor: 'switch-editor' },
+  { type: 'Rate', name: 'character', label: '自定义字符', editor: 'input-editor' },
+  { type: 'Rate', name: 'count', label: 'star 总数', editor: 'input-number-editor' },
+  { type: 'Rate', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'Rate', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Rate', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Rate', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Rate', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 /** 栅格-行 */
 const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'rowGutter', label: '列间距', editor: 'input-number-editor' },
@@ -99,6 +114,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,
   Switch: SWITCH_ATTRIBUTES,
+  Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
