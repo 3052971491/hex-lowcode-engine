@@ -76,13 +76,14 @@ export namespace PcSchema {
     /** 是否启用键盘快捷行为 */
     /** 带有前缀图标的 input */
     // prefix: string;
+    /** 是否启用键盘快捷行为 */
     keyboard: boolean;
     /** 最大值 */
-    max?: number;
+    max: number | null;
     /** 最小值 */
-    min?: number;
+    min: number | null;
     /** 数值精度 */
-    precision?: number;
+    precision: number;
     /** 每次改变步数，可以为小数 */
     step: string | number;
     /** 字符值模式，开启后支持高精度小数。同时 change 事件将返回 string 类型 */
