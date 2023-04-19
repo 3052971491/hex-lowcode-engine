@@ -6,6 +6,7 @@ import { buildUUID } from '/@/utils/common';
 export enum ComponentType {
   'Input' = 'Input',
   'Textarea' = 'Textarea',
+  'InputNumber' = 'InputNumber',
   'Row' = 'Row',
   'Column' = 'Column',
   'Form' = 'Form',
@@ -137,6 +138,73 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
   }
 }
 
+export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
+  props: PcSchema.InputNumberSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/input-cn';
+    this.componentName = '数值输入';
+    this.componentType = ComponentType.InputNumber;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请输入',
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      addonBefore: '',
+      addonAfter: '',
+      bordered: true,
+      autofocus: false,
+      controls: true,
+      decimalSeparator: '',
+      keyboard: true,
+      max: undefined,
+      min: undefined,
+      precision: undefined,
+      step: 1,
+      stringMode: false,
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'min',
+        label: '最小值',
+        value: null,
+        message: null,
+      },
+      {
+        enable: false,
+        type: 'max',
+        label: '最大值',
+        value: null,
+        message: null,
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+  }
+}
+
 export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
@@ -213,6 +281,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
+  [ComponentType.InputNumber, new InputNumber() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Form, new Form() as any],

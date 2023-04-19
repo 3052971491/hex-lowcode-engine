@@ -110,8 +110,7 @@ onMounted(() => {
 
 .hex-draggable {
   :deep(.draggable-item) {
-    flex: 1;
-    max-width: 50%;
+    width: 100%;
 
     &:nth-child(2n) {
       margin-left: 4px;
@@ -122,7 +121,10 @@ onMounted(() => {
     }
   }
   :deep(.draggable) {
-    display: flex;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4px;
   }
 }
 </style>

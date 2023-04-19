@@ -40,6 +40,58 @@ export namespace PcSchema {
     props: InputSchemeProps;
   }
 
+  export interface InputNumberSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 带标签的 input，设置前置标签 */
+    addonBefore: I18n;
+    /** 带标签的 input，设置后置标签 */
+    addonAfter: I18n;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 是否显示增减按钮 */
+    controls: boolean;
+    /** 小数点 */
+    decimalSeparator: string;
+    /** 	指定输入框展示值的格式 */
+    // formatter: fn;
+    /** 指定从 formatter 里转换回数字的方式，和 formatter 搭配使用 */
+    // parser: fu;
+    /** 是否启用键盘快捷行为 */
+    /** 带有前缀图标的 input */
+    // prefix: string;
+    keyboard: boolean;
+    /** 最大值 */
+    max?: number;
+    /** 最小值 */
+    min?: number;
+    /** 数值精度 */
+    precision?: number;
+    /** 每次改变步数，可以为小数 */
+    step: string | number;
+    /** 字符值模式，开启后支持高精度小数。同时 change 事件将返回 string 类型 */
+    stringMode: boolean;
+  }
+  export interface InputNumberScheme extends LowCode.NodeSchema {
+    props: InputNumberSchemeProps;
+  }
+
   export interface RowSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局下的垂直对齐方式 */
     align: 'top' | 'middle' | 'bottom';
