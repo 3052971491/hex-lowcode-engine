@@ -1,6 +1,6 @@
 import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
-import { RadioProps } from 'ant-design-vue';
+import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 
 export namespace PcSchema {
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
@@ -145,7 +145,7 @@ export namespace PcSchema {
     /** 用于设置 Radio options 类型 */
     optionType: 'default' | 'button';
     /** 子元素集合 */
-    options: RadioProps[];
+    options: RadioGroupChildOption[];
   }
   export interface RadioScheme extends LowCode.NodeSchema {
     props: RadioSchemeProps;
