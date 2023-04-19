@@ -64,6 +64,18 @@ const SWITCH_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const RADIO_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Input', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Input', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Input', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Input', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Input', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Input', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Input', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Input', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const RATE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Rate', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Rate', name: 'defaultValue', label: '默认值', editor: 'input-number-editor' },
@@ -114,6 +126,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,
   Switch: SWITCH_ATTRIBUTES,
+  Radio: RADIO_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,

@@ -8,6 +8,7 @@ export enum ComponentType {
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
   'Switch' = 'Switch',
+  'Radio' = 'Radio',
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
@@ -252,6 +253,49 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
   }
 }
 
+export class Radio extends Scheme<PcSchema.RadioScheme> {
+  props: PcSchema.RadioSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/radio-cn';
+    this.componentName = '单选框';
+    this.componentType = ComponentType.Radio;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      buttonStyle: 'outline',
+      optionType: 'default',
+      options: [],
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+  }
+}
+
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
@@ -374,6 +418,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],
   [ComponentType.Switch, new Switch() as any],
+  [ComponentType.Radio, new Radio() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],

@@ -1,5 +1,6 @@
 import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
+import { RadioProps } from 'ant-design-vue';
 
 export namespace PcSchema {
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
@@ -119,6 +120,37 @@ export namespace PcSchema {
     /** 非选中时的值 */
     unCheckedValue: boolean | string | number;
   }
+
+  export interface SwitchScheme extends LowCode.NodeSchema {
+    props: SwitchSchemeProps;
+  }
+
+  export interface RadioSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** RadioButton 的风格样式，目前有描边和填色两种风格 */
+    buttonStyle: 'outline' | 'solid';
+    /** 用于设置 Radio options 类型 */
+    optionType: 'default' | 'button';
+    /** 子元素集合 */
+    options: RadioProps[];
+  }
+  export interface RadioScheme extends LowCode.NodeSchema {
+    props: RadioSchemeProps;
+  }
+
   export interface RateScheme extends LowCode.NodeSchema {
     props: RateSchemeProps;
   }
@@ -148,9 +180,6 @@ export namespace PcSchema {
     count: number;
     /** 自定义每项的提示信息 */
     // tooltips: string[];
-  }
-  export interface SwitchScheme extends LowCode.NodeSchema {
-    props: SwitchSchemeProps;
   }
 
   export interface RowSchemeProps extends LowCode.NodeSchemaProps {
