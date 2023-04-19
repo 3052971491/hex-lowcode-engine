@@ -39,7 +39,7 @@ const INPUT_NUMBER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'max', label: '最大值', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'min', label: '最小值', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'precision', label: '数值精度', editor: 'input-number-editor' },
-  { type: 'InputNumber', name: '步数', label: '自动聚焦', editor: 'input-number-editor' },
+  { type: 'InputNumber', name: 'step', label: '自动聚焦', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'stringMode', label: '字符值模式', editor: 'switch-editor' },
   { type: 'InputNumber', name: 'rules', label: '校验', editor: 'rules-editor' },
   { type: 'InputNumber', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
