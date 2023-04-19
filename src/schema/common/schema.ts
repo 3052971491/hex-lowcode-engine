@@ -7,6 +7,7 @@ export enum ComponentType {
   'Input' = 'Input',
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
+  'Switch' = 'Switch',
   'Row' = 'Row',
   'Column' = 'Column',
   'Form' = 'Form',
@@ -143,7 +144,7 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
 
   constructor() {
     super();
-    this.docUrl = 'https://www.antdv.com/components/input-cn';
+    this.docUrl = 'https://www.antdv.com/components/input-number-cn';
     this.componentName = '数值输入';
     this.componentType = ComponentType.InputNumber;
     this.formItemFlag = true;
@@ -193,6 +194,51 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
         label: '最大值',
         value: null,
         message: null,
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+  }
+}
+
+export class Switch extends Scheme<PcSchema.SwitchScheme> {
+  props: PcSchema.SwitchSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/switch-cn';
+    this.componentName = '开关';
+    this.componentType = ComponentType.Switch;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      defaultValue: false,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      autofocus: false,
+      checkedChildren: '',
+      checkedValue: true,
+      unCheckedChildren: '',
+      unCheckedValue: false,
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
       },
       {
         enable: false,
@@ -282,6 +328,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],
+  [ComponentType.Switch, new Switch() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Form, new Form() as any],

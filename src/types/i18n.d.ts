@@ -11,4 +11,4 @@ export interface I18nMap {
   [lang: string]: { [key: string]: string };
 }
 
-export type I18n = string | I18nData | null;
+export type I18n = string | number | boolean | I18nData | null;

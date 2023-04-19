@@ -93,6 +93,36 @@ export namespace PcSchema {
     props: InputNumberSchemeProps;
   }
 
+  export interface SwitchSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 选中时的内容 */
+    checkedChildren: string;
+    /** 选中时的值 */
+    checkedValue: boolean | string | number;
+    /** 非选中时的内容 */
+    unCheckedChildren: string;
+    /** 非选中时的值 */
+    unCheckedValue: boolean | string | number;
+  }
+  export interface SwitchScheme extends LowCode.NodeSchema {
+    props: SwitchSchemeProps;
+  }
+
   export interface RowSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局下的垂直对齐方式 */
     align: 'top' | 'middle' | 'bottom';

@@ -3,7 +3,7 @@ import { AttributeItem } from './interface';
 /** 单行文本, 多行文本属性配置 */
 const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
-  { type: 'Input', name: 'defaultValue', label: '默认值', editor: 'input-editor', i18n: true },
+  { type: 'Input', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
   { type: 'Input', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
   { type: 'Input', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Input', name: 'behavior', label: '状态', editor: 'behavior-editor' },
@@ -24,7 +24,7 @@ const INPUT_ATTRIBUTES: Array<AttributeItem> = [
 
 const INPUT_NUMBER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
-  { type: 'InputNumber', name: 'defaultValue', label: '默认值', editor: 'input-number-editor', i18n: true },
+  { type: 'InputNumber', name: 'defaultValue', label: '默认值', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
   { type: 'InputNumber', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'InputNumber', name: 'behavior', label: '状态', editor: 'behavior-editor' },
@@ -33,7 +33,7 @@ const INPUT_NUMBER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'addonAfter', label: '输入框后附加内容', editor: 'input-editor', i18n: true },
   { type: 'InputNumber', name: 'bordered', label: '边框', editor: 'switch-editor' },
   { type: 'InputNumber', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
-  { type: 'InputNumber', name: 'controls', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'InputNumber', name: 'controls', label: '显示增减按钮', editor: 'switch-editor' },
   { type: 'InputNumber', name: 'decimalSeparator', label: '小数点', editor: 'input-editor' },
   { type: 'InputNumber', name: 'keyboard', label: '键盘快捷行为', editor: 'switch-editor' },
   { type: 'InputNumber', name: 'max', label: '最大值', editor: 'input-number-editor' },
@@ -41,6 +41,23 @@ const INPUT_NUMBER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'InputNumber', name: 'precision', label: '数值精度', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'step', label: '自动聚焦', editor: 'input-number-editor' },
   { type: 'InputNumber', name: 'stringMode', label: '字符值模式', editor: 'switch-editor' },
+  { type: 'InputNumber', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'InputNumber', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'InputNumber', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'InputNumber', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const SWITCH_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Switch', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Switch', name: 'defaultValue', label: '默认值', editor: 'switch-editor' },
+  { type: 'Switch', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Switch', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Switch', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Switch', name: 'checkedChildren', label: '选中时的内容', editor: 'input-editor', i18n: true },
+  { type: 'Switch', name: 'checkedValue', label: '选中时的值', editor: 'switch-editor' },
+  { type: 'Switch', name: 'unCheckedChildren', label: '非选中时的内容', editor: 'input-editor', i18n: true },
+  { type: 'Switch', name: 'unCheckedValue', label: '非选中时的值', editor: 'switch-editor' },
+  { type: 'Switch', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
   { type: 'InputNumber', name: 'rules', label: '校验', editor: 'rules-editor' },
   { type: 'InputNumber', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'InputNumber', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
@@ -81,6 +98,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,
+  Switch: SWITCH_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
