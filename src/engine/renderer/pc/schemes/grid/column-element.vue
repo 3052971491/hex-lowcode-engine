@@ -38,8 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { LowCode } from '/@/types/schema.d';
-import { computed, defineComponent, inject, reactive } from 'vue';
+import { defineComponent, computed, inject, reactive } from 'vue';
 import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
@@ -64,11 +63,7 @@ const redactState = inject(RedactStateInjectionKey);
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
-const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
-  props.schema,
-  selectedScheme.value,
-  redactState,
-);
+const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, redactState);
 
 const ectype = computed(() => {
   return cloneDeep(props.schema);

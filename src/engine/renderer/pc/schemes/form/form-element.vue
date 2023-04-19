@@ -87,11 +87,7 @@ const onAdd = ({ newIndex }: { newIndex: number }) => {
 const onUpdate = () => {
   core?.handleUpdateHistoryData();
 };
-const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
-  props.schema,
-  selectedScheme.value,
-  redactState,
-);
+const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, redactState);
 const ectype = computed(() => {
   return cloneDeep(props.schema);
 });

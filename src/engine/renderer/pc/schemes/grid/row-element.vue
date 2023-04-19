@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-row v-bind="ectypeProps">
+    <a-row ref="__instance__" v-bind="prop">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <ColumnElement
           v-for="(item, index) in schema.children"
@@ -22,13 +22,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject } from 'vue';
-import { cloneDeep } from 'lodash-es';
-import ElementWrapper from '../../components/element-wrapper.vue';
 import { LowCode } from '/@/types/schema.d';
-import ColumnElement from './column-element.vue';
-import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { PcSchema } from '/@/schema/common/interface';
+import ElementWrapper from '../../components/element-wrapper.vue';
+import ColumnElement from './column-element.vue';
+import { defineComponent, computed, inject, ref } from 'vue';
+import { RedactStateInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+
+import { useElement } from '../../hooks/useElement';
 
 const redactState = inject(RedactStateInjectionKey);
 
@@ -40,22 +41,18 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
+const core = inject(HexCoreInjectionKey);
+const __instance__ = ref<any>();
+const { ectypeProps } = useElement<PcSchema.RowScheme>(props, __instance__);
 
-const ectype = computed(() => {
-  return cloneDeep(props.schema);
-});
-
-const ectypeProps = computed(() => {
-  if (!ectype.value) return {};
-  const obj = ectype.value.props;
-  if (!obj) return {};
+const prop = ectypeProps((obj) => {
   return {
     align: obj.align,
     justify: obj.justify,
     wrap: obj.wrap,
     gutter: [`${obj.rowGutter}`, `${obj.columnGutter}`],
   };
-});
+}, core);
 
 const classMap = computed(() => {
   if (!redactState) return [];
@@ -68,4 +65,3 @@ export default defineComponent({
   name: 'RowElement',
 });
 </script>
-<style lang="less" scoped></style>
