@@ -33,6 +33,27 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      keep_classnames: true,
+    },
+    sourcemap: false,
+    chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        // 最小化拆分包
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        },
+      },
+    },
+  },
   // build: {
   //   rollupOptions: {
   //     external: ['vue', 'ant-design-vue'],
