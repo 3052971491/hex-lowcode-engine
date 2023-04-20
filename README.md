@@ -4,17 +4,17 @@
     </a> 
     <br> 
     <br>
-    <h1>HexForm</h1>
+    <h1>Hex Lowcode Engine</h1>
     
     
     
 </div>
 <div align="center">
-    一款高效的Vue3低代码表单，可视化设计 <br>
+    一款高效的Vue3低代码引擎 <br>
 </div>
 
 ## 介绍
-一款高效的Vue3低代码表单，可视化设计<br>
+一款高效的Vue3低代码引擎<br>
 目前处于项目初始阶段，有感兴趣的小伙伴可以联系我！！<br>
 基于开源项目mt-form-vue (https://github.com/3052971491/mt-form-vue) 的全新升级版本<br>
 
