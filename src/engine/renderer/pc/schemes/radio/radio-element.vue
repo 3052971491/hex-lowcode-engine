@@ -6,9 +6,16 @@
     :index-of-parent-list="indexOfParentList"
   >
     <a-radio-group ref="__instance__" v-model:value="modelValue" v-bind="prop">
-      <a-radio-button v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
-        {{ item.label }}
-      </a-radio-button>
+      <template v-if="ectype.props.optionType === 'button'">
+        <a-radio-button v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
+          {{ item.label }}
+        </a-radio-button>
+      </template>
+      <template v-else>
+        <a-radio v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
+          {{ item.label }}
+        </a-radio>
+      </template>
     </a-radio-group>
   </ElementWrapper>
 </template>
@@ -40,7 +47,6 @@ const { modelValue } = useElementDataEngine<PcSchema.RadioScheme>(props.schema, 
 const prop = ectypeProps((obj) => {
   return {
     buttonStyle: obj.buttonStyle,
-    optionType: obj.optionType,
     disabled: obj.behavior === 'disabled',
     size: obj.size,
   };
