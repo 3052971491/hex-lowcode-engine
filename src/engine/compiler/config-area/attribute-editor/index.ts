@@ -142,6 +142,7 @@ const CARD_ATTRIBUTES: Array<AttributeItem> = [
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
+  { type: 'Form', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const obj: { [key: string]: Array<AttributeItem> } = {
