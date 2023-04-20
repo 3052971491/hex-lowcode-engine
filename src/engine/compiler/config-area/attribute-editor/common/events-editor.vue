@@ -159,7 +159,7 @@ const eventsMap = computed(() => {
   return arr;
 });
 
-const actionOptions: {
+let actionOptions: {
   title: string;
   value: string;
 }[] = [
@@ -176,6 +176,15 @@ const actionOptions: {
     value: 'onBlur',
   },
 ];
+
+if (unref(schema).componentType === 'Collapse') {
+  actionOptions = [
+    {
+      title: 'onChange 值发生变化',
+      value: 'onChange',
+    },
+  ];
+}
 
 const modalTitle = ref('');
 const formRef = ref<FormInstance>();

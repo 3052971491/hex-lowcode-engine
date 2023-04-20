@@ -145,6 +145,53 @@ const SPACE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Space', name: 'direction', label: '间距方向', editor: 'direction-editor', merge: true },
 ];
 
+const COLLAPSE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Collapse', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Collapse', name: 'accordion', label: '手风琴模式', editor: 'switch-editor' },
+  { type: 'Collapse', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  {
+    type: 'Collapse',
+    name: 'collapsible',
+    label: '所有子面板可折叠触发区域',
+    editor: 'collapsible-editor',
+    merge: true,
+  },
+  {
+    type: 'Collapse',
+    name: 'destroyInactivePanel',
+    label: '销毁折叠隐藏的面板',
+    editor: 'switch-editor',
+  },
+  {
+    type: 'Collapse',
+    name: 'expandIconPosition',
+    label: '图标位置',
+    editor: 'expand-icon-position-editor',
+    merge: true,
+  },
+  { type: 'Collapse', name: 'ghost', label: '幽灵模式', editor: 'switch-editor' },
+  { type: 'Collapse', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const COLLAPSE_PANEL_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'CollapsePanel', name: 'header', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'CollapsePanel', name: 'key', label: '值', editor: 'input-editor' },
+  {
+    type: 'CollapsePanel',
+    name: 'forceRender',
+    label: '隐藏时是否渲染DOM',
+    editor: 'switch-editor',
+  },
+  {
+    type: 'Collapse',
+    name: 'collapsible',
+    label: '可折叠触发区域',
+    editor: 'collapsible-editor',
+    merge: true,
+  },
+  { type: 'CollapsePanel', name: 'showArrow', label: '是否展示箭头', editor: 'switch-editor' },
+];
+
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
@@ -163,6 +210,8 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Column: COLUMN_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,
   Space: SPACE_ATTRIBUTES,
+  Collapse: COLLAPSE_ATTRIBUTE,
+  CollapsePanel: COLLAPSE_PANEL_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
 };
 

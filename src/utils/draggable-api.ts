@@ -3,6 +3,7 @@ import type { LowCode } from '/@/types/schema.d';
 
 import { buildUUID } from '/@/utils/common';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
+import { log } from 'console';
 
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
@@ -25,7 +26,30 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
           newSchema.children?.push(obj);
         }
         break;
+      case 'Collapse':
+        obj = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
 
+        if (obj && obj.props) {
+          obj.props.header = 'This is panel header 1';
+          obj.props.key = '1';
+          if (newSchema?.props) {
+            newSchema.props.defaultValue = obj.props.key;
+          }
+          newSchema.children?.push(obj);
+        }
+        obj = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
+        if (obj && obj.props) {
+          obj.props.header = 'This is panel header 2';
+          obj.props.key = '2';
+          newSchema.children?.push(obj);
+        }
+        obj = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
+        if (obj && obj.props) {
+          obj.props.header = 'This is panel header 3';
+          obj.props.key = '3';
+          newSchema.children?.push(obj);
+        }
+        break;
       default:
         break;
     }

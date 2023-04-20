@@ -283,9 +283,50 @@ export namespace PcSchema {
     /** 尺寸 */
     size: LowCode.Size;
   }
+
   export interface SpaceScheme extends LowCode.NodeSchema {
     children: LowCode.Schema[];
     props: SpaceSchemeProps;
+  }
+
+  export interface CollapseSchemeProps extends LowCode.NodeSchemaProps {
+    /** 默认值 */
+    defaultValue: string | string[];
+    /** 手风琴模式 */
+    accordion: boolean;
+    /** 带边框风格的折叠面板 */
+    bordered: boolean;
+    /** 所有子面板是否可折叠或指定可折叠触发区域 */
+    collapsible: 'header' | 'disabled' | null;
+    /** 销毁折叠隐藏的面板 */
+    destroyInactivePanel: boolean;
+    /** 图标位置 */
+    expandIconPosition: 'left' | 'right';
+    /** 使折叠面板透明且无边框 */
+    ghost: boolean;
+  }
+
+  export interface CollapseScheme extends LowCode.NodeSchema {
+    children: CollapsePanelScheme[];
+    props: CollapseSchemeProps;
+  }
+
+  export interface CollapsePanelSchemeProps extends LowCode.NodeSchemaProps {
+    /** 	面板头内容 */
+    header: string;
+    /** 对应 activeKey */
+    key: string | number | null;
+    /** 被隐藏时是否渲染 DOM 结构 */
+    forceRender: boolean;
+    /** 是否可折叠或指定可折叠触发区域 */
+    collapsible: 'header' | 'disabled' | null;
+    /** 是否展示当前面板上的箭头 */
+    showArrow: boolean;
+  }
+
+  export interface CollapsePanelScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: CollapsePanelSchemeProps;
   }
 
   /** 表单容器 */

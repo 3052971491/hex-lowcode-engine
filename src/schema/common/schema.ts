@@ -15,6 +15,8 @@ export enum ComponentType {
   'Column' = 'Column',
   'Card' = 'Card',
   'Space' = 'Space',
+  'Collapse' = 'Collapse',
+  'CollapsePanel' = 'CollapsePanel',
   'Form' = 'Form',
 }
 
@@ -493,6 +495,54 @@ export class Space extends Scheme<PcSchema.SpaceScheme> {
   }
 }
 
+export class Collapse extends Scheme<PcSchema.CollapseScheme> {
+  props: PcSchema.CollapseSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/collapse-cn';
+    this.componentName = '折叠面板';
+    this.componentType = ComponentType.Collapse;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = true;
+    this.props = {
+      defaultValue: '',
+      accordion: false,
+      bordered: true,
+      collapsible: null,
+      destroyInactivePanel: true,
+      expandIconPosition: 'left',
+      ghost: false,
+      __style__: '',
+    };
+  }
+}
+
+export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
+  props: PcSchema.CollapsePanelSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/collapse-cn';
+    this.componentName = '子折叠面板';
+    this.componentType = ComponentType.CollapsePanel;
+    this.children = [];
+    this.internal = false;
+    this.formItemFlag = false;
+    this.props = {
+      header: '',
+      key: null,
+      forceRender: false,
+      collapsible: null,
+      showArrow: true,
+      __style__: '',
+    };
+  }
+}
+
 export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
@@ -524,5 +574,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Column, new Column() as any],
   [ComponentType.Card, new Card() as any],
   [ComponentType.Space, new Space() as any],
+  [ComponentType.Collapse, new Collapse() as any],
+  [ComponentType.CollapsePanel, new CollapsePanel() as any],
   [ComponentType.Form, new Form() as any],
 ]);
