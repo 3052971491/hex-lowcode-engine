@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-space ref="__instance__" v-bind="ectypeProps">
+    <a-space ref="__instance__" v-bind="ectypeProps" class="w-full h-full">
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">
@@ -106,5 +106,10 @@ export default defineComponent({
 :deep(.draggable) {
   padding-bottom: 12px;
   min-height: 68px;
+}
+
+.ant-space-item {
+  width: 100%;
+  height: 100%;
 }
 </style>
