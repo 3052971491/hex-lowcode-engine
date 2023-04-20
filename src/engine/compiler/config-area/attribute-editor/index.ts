@@ -132,6 +132,13 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'xxl', label: '≥1600px 响应式栅格', editor: 'input-number-editor' },
 ];
 
+const CARD_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Card', name: 'title', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Card', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Card', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Card', name: 'hoverable', label: '鼠标移过时可浮起', editor: 'switch-editor' },
+];
+
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
@@ -147,6 +154,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
+  Card: CARD_ATTRIBUTES,
   Form: FROM_ATTRIBUTE,
 };
 

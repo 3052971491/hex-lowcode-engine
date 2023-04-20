@@ -13,6 +13,7 @@ export enum ComponentType {
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
+  'Card' = 'Card',
   'Form' = 'Form',
 }
 
@@ -448,6 +449,28 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
   }
 }
 
+export class Card extends Scheme<PcSchema.CardScheme> {
+  props: PcSchema.CardSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/card-cn';
+    this.componentName = '卡片';
+    this.componentType = ComponentType.Card;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = true;
+    this.props = {
+      title: 'Card title',
+      bordered: true,
+      hoverable: false,
+      size: 'small',
+      __style__: '',
+    };
+  }
+}
+
 export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
@@ -477,5 +500,6 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
+  [ComponentType.Card, new Card() as any],
   [ComponentType.Form, new Form() as any],
 ]);

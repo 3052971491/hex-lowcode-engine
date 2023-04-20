@@ -260,6 +260,21 @@ export namespace PcSchema {
     props: ColumnSchemeProps;
   }
 
+  export interface CardSchemeProps extends LowCode.NodeSchemaProps {
+    /** 卡片标题 */
+    title: string;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 鼠标移过时可浮起 */
+    hoverable: boolean;
+    /** 尺寸 */
+    size: LowCode.Size;
+  }
+  export interface CardScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: CardSchemeProps;
+  }
+
   /** 表单容器 */
   export interface FormSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
