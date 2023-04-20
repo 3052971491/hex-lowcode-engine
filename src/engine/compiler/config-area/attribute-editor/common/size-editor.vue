@@ -46,5 +46,6 @@ const source = [
   { key: 'small', name: '小', tips: '小号尺寸' },
   { key: 'middle', name: '中', tips: '中号尺寸' },
   { key: 'large', name: '大', tips: '大号尺寸' },
+  { key: 'default', name: '默认', tips: '默认尺寸' },
 ];
 </script>

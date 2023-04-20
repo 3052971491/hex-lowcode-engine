@@ -36,7 +36,7 @@ export namespace LowCode {
    * Schema 大小
    * @description 小 | 中 | 大
    */
-  export type Size = 'small' | 'middle' | 'large';
+  export type Size = 'small' | 'middle' | 'large' | 'default';
 
   /**
    * Schema 弹框类型

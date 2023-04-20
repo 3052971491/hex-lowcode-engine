@@ -6,10 +6,9 @@
     :index-of-parent-list="indexOfParentList"
   >
     <a-radio-group ref="__instance__" v-model:value="modelValue" v-bind="prop">
-      <a-radio-button value="a">Hangzhou</a-radio-button>
-      <a-radio-button value="b">Shanghai</a-radio-button>
-      <a-radio-button value="c">Beijing</a-radio-button>
-      <a-radio-button value="d">Chengdu</a-radio-button>
+      <a-radio-button v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
+        {{ item.label }}
+      </a-radio-button>
     </a-radio-group>
   </ElementWrapper>
 </template>
@@ -25,7 +24,7 @@ import { useElementDataEngine } from '../../hooks/useElementDataEngine';
 import { useElement } from '../../hooks/useElement';
 
 interface Props {
-  schema: PcSchema.InputScheme;
+  schema: PcSchema.RadioScheme;
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
@@ -35,8 +34,8 @@ const core = inject(HexCoreInjectionKey);
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
-const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
+const { ectype, ectypeProps } = useElement<PcSchema.RadioScheme>(props, __instance__);
+const { modelValue } = useElementDataEngine<PcSchema.RadioScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {
   return {

@@ -267,7 +267,7 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
       field: `Field_${buildUUID()}`,
       label: this.componentName,
       defaultValue: null,
-      size: 'middle',
+      size: 'default',
       behavior: 'normal',
       tips: '',
       rules: [],
