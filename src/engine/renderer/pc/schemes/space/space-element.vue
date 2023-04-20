@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-card ref="__instance__" v-bind="ectypeProps">
+    <a-space ref="__instance__" v-bind="ectypeProps">
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">
@@ -33,7 +33,7 @@
           />
         </div>
       </template>
-    </a-card>
+    </a-space>
   </ElementWrapper>
 </template>
 
@@ -53,7 +53,7 @@ const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
 
 interface Props {
-  schema: PcSchema.CardScheme;
+  schema: PcSchema.SpaceScheme;
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
@@ -85,9 +85,8 @@ const ectypeProps = computed(() => {
   if (!ectype.value) return {};
   const obj = ectype.value.props;
   return {
-    title: obj.title,
-    bordered: obj.bordered,
-    hoverable: obj.hoverable,
+    align: obj.align,
+    direction: obj.direction,
     size: obj.size,
   };
 });
@@ -100,7 +99,7 @@ const classMap = computed(() => {
 
 <script lang="ts">
 export default defineComponent({
-  name: 'CardElement',
+  name: 'SpaceElement',
 });
 </script>
 <style lang="less" scoped>

@@ -139,6 +139,12 @@ const CARD_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Card', name: 'hoverable', label: '鼠标移过时可浮起', editor: 'switch-editor' },
 ];
 
+const SPACE_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Space', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Space', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
+  { type: 'Space', name: 'direction', label: '间距方向', editor: 'direction-editor', merge: true },
+];
+
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
@@ -156,6 +162,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,
+  Space: SPACE_ATTRIBUTES,
   Form: FROM_ATTRIBUTE,
 };
 

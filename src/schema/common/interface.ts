@@ -275,6 +275,19 @@ export namespace PcSchema {
     props: CardSchemeProps;
   }
 
+  export interface SpaceSchemeProps extends LowCode.NodeSchemaProps {
+    /** 对齐方式 */
+    align: 'start' | 'end' | 'center' | 'baseline';
+    /** 间距方向 */
+    direction: 'vertical' | 'horizontal';
+    /** 尺寸 */
+    size: LowCode.Size;
+  }
+  export interface SpaceScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: SpaceSchemeProps;
+  }
+
   /** 表单容器 */
   export interface FormSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];

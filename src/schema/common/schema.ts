@@ -14,6 +14,7 @@ export enum ComponentType {
   'Row' = 'Row',
   'Column' = 'Column',
   'Card' = 'Card',
+  'Space' = 'Space',
   'Form' = 'Form',
 }
 
@@ -471,6 +472,27 @@ export class Card extends Scheme<PcSchema.CardScheme> {
   }
 }
 
+export class Space extends Scheme<PcSchema.SpaceScheme> {
+  props: PcSchema.SpaceSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/space-cn';
+    this.componentName = '间距';
+    this.componentType = ComponentType.Space;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = true;
+    this.props = {
+      align: 'start',
+      direction: 'horizontal',
+      size: 'small',
+      __style__: '',
+    };
+  }
+}
+
 export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
@@ -501,5 +523,6 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Card, new Card() as any],
+  [ComponentType.Space, new Space() as any],
   [ComponentType.Form, new Form() as any],
 ]);
