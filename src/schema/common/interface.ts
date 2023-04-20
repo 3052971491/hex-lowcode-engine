@@ -151,6 +151,28 @@ export namespace PcSchema {
     props: RadioSchemeProps;
   }
 
+  export interface CheckboxSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n | I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 子元素集合 */
+    options: RadioGroupChildOption[];
+  }
+  export interface CheckboxScheme extends LowCode.NodeSchema {
+    props: CheckboxSchemeProps;
+  }
+
   export interface RateScheme extends LowCode.NodeSchema {
     props: RateSchemeProps;
   }

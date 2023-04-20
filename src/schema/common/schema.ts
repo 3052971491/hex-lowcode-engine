@@ -9,6 +9,7 @@ export enum ComponentType {
   'InputNumber' = 'InputNumber',
   'Switch' = 'Switch',
   'Radio' = 'Radio',
+  'Checkbox' = 'Checkbox',
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
@@ -302,6 +303,53 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
   }
 }
 
+export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
+  props: PcSchema.CheckboxSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/checkbox-cn';
+    this.componentName = '多选框';
+    this.componentType = ComponentType.Checkbox;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      defaultValue: [],
+      size: 'default',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      options: [],
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    this.props.options = [
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+      { label: '选项三', value: '3' },
+    ];
+  }
+}
+
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
@@ -425,6 +473,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.InputNumber, new InputNumber() as any],
   [ComponentType.Switch, new Switch() as any],
   [ComponentType.Radio, new Radio() as any],
+  [ComponentType.Checkbox, new Checkbox() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
