@@ -1,41 +1,38 @@
 <template>
-  <a-tab-pane v-bind="ectypeProps">
-    <template #tab>134</template>
-    <ElementWrapper
-      :schema="schema"
-      :parent-schema="parentSchema"
-      :parent-schema-list="parentSchemaList"
-      :index-of-parent-list="indexOfParentList"
-      :class="classMap"
-    >
-      <template v-if="isPreview">
-        <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
-          <template #item="{ element, index }">
-            <div class="item hex-draggable-handle">
-              <component
-                :is="`${element.componentType}Element`"
-                :schema="element"
-                :parent-schema="state.schema"
-                :parent-schema-list="state.schema.children"
-                :index-of-parent-list="index"
-              ></component>
-            </div>
-          </template>
-        </hex-draggable>
-      </template>
-      <template v-else>
-        <div v-for="(item, index) in ectype.children" :key="item.id">
-          <component
-            :is="`${item.componentType}Element`"
-            :schema="item"
-            :parent-schema="ectype"
-            :parent-schema-list="ectype.children"
-            :index-of-parent-list="index"
-          />
-        </div>
-      </template>
-    </ElementWrapper>
-  </a-tab-pane>
+  <ElementWrapper
+    :schema="schema"
+    :parent-schema="parentSchema"
+    :parent-schema-list="parentSchemaList"
+    :index-of-parent-list="indexOfParentList"
+    :class="classMap"
+  >
+    <template v-if="isPreview">
+      <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
+        <template #item="{ element, index }">
+          <div class="item hex-draggable-handle">
+            <component
+              :is="`${element.componentType}Element`"
+              :schema="element"
+              :parent-schema="state.schema"
+              :parent-schema-list="state.schema.children"
+              :index-of-parent-list="index"
+            ></component>
+          </div>
+        </template>
+      </hex-draggable>
+    </template>
+    <template v-else>
+      <div v-for="(item, index) in ectype.children" :key="item.id">
+        <component
+          :is="`${item.componentType}Element`"
+          :schema="item"
+          :parent-schema="ectype"
+          :parent-schema-list="ectype.children"
+          :index-of-parent-list="index"
+        />
+      </div>
+    </template>
+  </ElementWrapper>
 </template>
 
 <script lang="ts" setup>
@@ -68,16 +65,6 @@ const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, reda
 
 const ectype = computed(() => {
   return cloneDeep(props.schema);
-});
-
-const ectypeProps = computed(() => {
-  if (!ectype.value) return {};
-  const obj = ectype.value.props;
-  return {
-    tab: obj.tab,
-    key: obj.value,
-    forceRender: obj.forceRender,
-  };
 });
 
 const onAdd = ({ newIndex }: { newIndex: number }) => {
