@@ -192,6 +192,35 @@ const COLLAPSE_PANEL_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'CollapsePanel', name: 'showArrow', label: '是否展示箭头', editor: 'switch-editor' },
 ];
 
+const TABS: Array<AttributeItem> = [
+  { type: 'Tabs', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Tabs', name: 'type', label: '页签基本样式', editor: 'type-editor', merge: true },
+  { type: 'Tabs', name: 'animated', label: '是否使用动画切换', editor: 'switch-editor' },
+  { type: 'Tabs', name: 'centered', label: '标签居中展示', editor: 'switch-editor' },
+  {
+    type: 'Tabs',
+    name: 'destroyInactiveTabPane',
+    label: '隐藏时销毁DOM',
+    editor: 'switch-editor',
+  },
+  { type: 'Tabs', name: 'hideAdd', label: '隐藏加号图标', editor: 'switch-editor' },
+  { type: 'Tabs', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Tabs', name: 'tabBarGutter', label: '间隙', editor: 'input-number-editor' },
+  { type: 'Tabs', name: 'tabPosition', label: '页签位置', editor: 'tab-position-editor', merge: true },
+  { type: 'Collapse', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const TAB_PANE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'TabPane', name: 'tab', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'TabPane', name: 'value', label: '值', editor: 'input-editor' },
+  {
+    type: 'TabPane',
+    name: 'forceRender',
+    label: '隐藏时是否渲染DOM',
+    editor: 'switch-editor',
+  },
+];
+
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
@@ -212,6 +241,8 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Space: SPACE_ATTRIBUTES,
   Collapse: COLLAPSE_ATTRIBUTE,
   CollapsePanel: COLLAPSE_PANEL_ATTRIBUTE,
+  Tabs: TABS,
+  TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
 };
 

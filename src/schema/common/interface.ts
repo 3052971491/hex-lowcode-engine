@@ -329,6 +329,46 @@ export namespace PcSchema {
     props: CollapsePanelSchemeProps;
   }
 
+  export interface TabsSchemeProps extends LowCode.NodeSchemaProps {
+    /** 默认值 */
+    defaultValue: string;
+    /** 页签基本样式 */
+    type: 'line' | 'card';
+    /** 是否使用动画切换 Tabs，在 tabPosition="top" | "bottom" 时有效 */
+    animated: boolean;
+    /** 标签居中展示 */
+    centered: boolean;
+    /** 被隐藏时是否销毁 DOM 结构 */
+    destroyInactiveTabPane: boolean;
+    /** 是否隐藏加号图标，在 type="editable-card" 时有效 */
+    hideAdd: boolean;
+    /** 大小，提供 large default 和 small 三种大小 */
+    size: LowCode.Size;
+    /** tabs 之间的间隙 */
+    tabBarGutter: number | null;
+    /** 页签位置 */
+    tabPosition: 'top' | 'right' | 'bottom' | 'left';
+  }
+
+  export interface TabsScheme extends LowCode.NodeSchema {
+    children: TabPaneScheme[];
+    props: TabsSchemeProps;
+  }
+
+  export interface TabPaneSchemeProps extends LowCode.NodeSchemaProps {
+    /** 	选项卡头显示文字 */
+    tab: string;
+    /** 对应 activeKey */
+    value: string;
+    /** 被隐藏时是否渲染 DOM 结构 */
+    forceRender: boolean;
+  }
+
+  export interface TabPaneScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: TabPaneSchemeProps;
+  }
+
   /** 表单容器 */
   export interface FormSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];

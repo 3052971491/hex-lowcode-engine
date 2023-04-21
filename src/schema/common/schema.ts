@@ -17,6 +17,8 @@ export enum ComponentType {
   'Space' = 'Space',
   'Collapse' = 'Collapse',
   'CollapsePanel' = 'CollapsePanel',
+  'Tabs' = 'Tabs',
+  'TabPane' = 'TabPane',
   'Form' = 'Form',
 }
 
@@ -543,6 +545,54 @@ export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
   }
 }
 
+export class Tabs extends Scheme<PcSchema.TabsScheme> {
+  props: PcSchema.TabsSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/tabs-cn';
+    this.componentName = '标签页';
+    this.componentType = ComponentType.Tabs;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = true;
+    this.props = {
+      defaultValue: '',
+      type: 'line',
+      animated: false,
+      centered: false,
+      destroyInactiveTabPane: true,
+      hideAdd: false,
+      size: 'default',
+      tabBarGutter: null,
+      tabPosition: 'top',
+      __style__: '',
+    };
+  }
+}
+
+export class TabPane extends Scheme<PcSchema.TabPaneScheme> {
+  props: PcSchema.TabPaneSchemeProps;
+
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/tabs-cn';
+    this.componentName = '子标签页';
+    this.componentType = ComponentType.TabPane;
+    this.children = [];
+    this.internal = false;
+    this.formItemFlag = false;
+    this.props = {
+      tab: '',
+      value: '',
+      forceRender: false,
+      __style__: '',
+    };
+  }
+}
+
 export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
@@ -576,5 +626,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Space, new Space() as any],
   [ComponentType.Collapse, new Collapse() as any],
   [ComponentType.CollapsePanel, new CollapsePanel() as any],
+  [ComponentType.Tabs, new Tabs() as any],
+  [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
 ]);

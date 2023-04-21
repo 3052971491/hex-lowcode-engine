@@ -177,7 +177,7 @@ let actionOptions: {
   },
 ];
 
-if (unref(schema).componentType === 'Collapse') {
+if (unref(schema).componentType === 'Collapse' || unref(schema).componentType === 'Tabs') {
   actionOptions = [
     {
       title: 'onChange 值发生变化',

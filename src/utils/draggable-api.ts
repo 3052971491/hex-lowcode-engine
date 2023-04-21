@@ -21,10 +21,6 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
         if (obj) {
           newSchema.children?.push(obj);
         }
-        obj = buildElementSchemaByType('LAYOUT', 'Column');
-        if (obj) {
-          newSchema.children?.push(obj);
-        }
         break;
       case 'Collapse':
         obj = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
@@ -43,10 +39,22 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
           obj.props.key = '2';
           newSchema.children?.push(obj);
         }
-        obj = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
+        break;
+      case 'Tabs':
+        obj = buildElementSchemaByType('LAYOUT', 'TabPane');
+
         if (obj && obj.props) {
-          obj.props.header = 'This is panel header 3';
-          obj.props.key = '3';
+          obj.props.tab = 'Tab  1';
+          obj.props.value = '1';
+          if (newSchema?.props) {
+            newSchema.props.defaultValue = obj.props.value;
+          }
+          newSchema.children?.push(obj);
+        }
+        obj = buildElementSchemaByType('LAYOUT', 'TabPane');
+        if (obj && obj.props) {
+          obj.props.tab = 'Tab  2';
+          obj.props.value = '2';
           newSchema.children?.push(obj);
         }
         break;
