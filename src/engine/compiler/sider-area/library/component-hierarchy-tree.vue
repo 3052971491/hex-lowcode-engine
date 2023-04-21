@@ -36,6 +36,9 @@
           </div>
         </template>
       </a-tree>
+      <div v-if="treeData.length < 1" class="w-full p-3">
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
+      </div>
     </a-skeleton>
   </div>
 </template>
@@ -45,6 +48,7 @@ import { computed, inject, onMounted, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons-vue';
+import { Empty } from 'ant-design-vue';
 
 const core = inject(HexCoreInjectionKey);
 
