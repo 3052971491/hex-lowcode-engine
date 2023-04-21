@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash-es';
 import { computed, ComputedRef, onMounted } from 'vue';
+import dayjs, { Dayjs } from 'dayjs';
 import { IDataEngine } from '../../render-inject-key';
 import { LowCode } from '/@/types/schema';
 
@@ -17,7 +18,7 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(schema: T, da
       schema.props?.trim && schema.props?.defaultValue ? schema.props?.defaultValue.trim() : schema.props?.defaultValue;
   }
   const modelValue = computed({
-    set(val: string) {
+    set(val: any) {
       if (dataEngine?.originData) {
         dataEngine.originData[schema.props?.field] = schema.props?.trim && val ? val.trim() : val;
       }

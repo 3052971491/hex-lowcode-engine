@@ -173,6 +173,54 @@ export namespace PcSchema {
     props: CheckboxSchemeProps;
   }
 
+  export interface DatePickerSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 日期格式 */
+    format: string;
+    /** 绑定值的格式 */
+    valueFormat: string;
+    /** 不可选择的日期 */
+    disabledDate:
+      | string
+      | {
+          type: string;
+          start: number;
+          end: number;
+        };
+    /** 设置选择器类型 */
+    picker: 'date' | 'week' | 'month' | 'quarter' | 'year';
+    /** 增加时间选择功能 */
+    showTime: boolean;
+    /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
+    showNow: boolean;
+    /** 是否展示“今天”按钮 */
+    showToday: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+  }
+  export interface DatePickerScheme extends LowCode.NodeSchema {
+    props: DatePickerSchemeProps;
+  }
+
   export interface RateScheme extends LowCode.NodeSchema {
     props: RateSchemeProps;
   }

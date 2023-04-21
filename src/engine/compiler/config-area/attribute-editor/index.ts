@@ -92,6 +92,28 @@ const CHECKBOX_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Checkbox', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const DATE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'DatePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'DatePicker', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'DatePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'DatePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'DatePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'DatePicker', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'DatePicker', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'DatePicker', name: 'format', label: '显示日期格式', editor: 'format-editor', merge: true },
+  { type: 'DatePicker', name: 'valueFormat', label: '绑定值的格式', editor: 'value-format-editor', merge: true },
+
+  { type: 'DatePicker', name: 'picker', label: '设置选择器类型', editor: 'picker-editor', merge: true },
+  { type: 'DatePicker', name: 'showTime', label: '时间选择', editor: 'switch-editor' },
+  { type: 'DatePicker', name: 'showNow', label: '是否显示“此刻”', editor: 'switch-editor' },
+  { type: 'DatePicker', name: 'showToday', label: '是否显示“今天”', editor: 'switch-editor' },
+  { type: 'DatePicker', name: 'disabledDate', label: '可选择时间区间', editor: 'disabled-date-editor', merge: true },
+  { type: 'DatePicker', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'DatePicker', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'DatePicker', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'DatePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const RATE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Rate', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Rate', name: 'defaultValue', label: '默认值', editor: 'input-number-editor' },
@@ -234,6 +256,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Switch: SWITCH_ATTRIBUTES,
   Radio: RADIO_ATTRIBUTES,
   Checkbox: CHECKBOX_ATTRIBUTES,
+  DatePicker: DATE_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
