@@ -52,7 +52,7 @@ const { ectype } = useElement<PcSchema.ButtonGroupSchema>(props, __instance__);
 
 const classMap = computed(() => {
   if (!redactState) return [];
-  return ['button-group-wrapper'];
+  return [];
 });
 </script>
 
@@ -62,10 +62,6 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-.button-group-wrapper {
-  min-height: 48px;
-}
-
 .button-group {
   display: flex;
   flex-wrap: wrap;

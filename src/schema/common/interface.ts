@@ -45,6 +45,26 @@ export namespace PcSchema {
     /** 设置按钮载入状态 */
     loading: boolean;
   }
+
+  export interface DividerSchemaProps extends LowCode.NodeSchemaProps {
+    /** 内容 */
+    content: string;
+    /** 水平还是垂直类型 */
+    type: 'horizontal' | 'vertical';
+    /** 是否虚线 */
+    dashed: boolean;
+    /** 标题位置 */
+    orientation: 'left' | 'right' | 'center';
+    /** 文字是否显示为普通正文样式 */
+    plain: boolean;
+    /** 标题和最近 left/right 边框之间的距离 */
+    orientationMargin: string | number;
+  }
+
+  export interface DividerSchema extends LowCode.NodeSchema {
+    props: DividerSchemaProps;
+  }
+
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;

@@ -7,6 +7,7 @@ export enum ComponentType {
   'Text' = 'Text',
   'ButtonGroup' = 'ButtonGroup',
   'Button' = 'Button',
+  'Divider' = 'Divider',
   'Input' = 'Input',
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
@@ -83,6 +84,28 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
     };
   }
 }
+
+export class Divider extends Scheme<PcSchema.DividerSchema> {
+  props: PcSchema.DividerSchemaProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/divider-cn';
+    this.tag = 'BASIC';
+    this.componentName = '分割线';
+    this.componentType = ComponentType.Divider;
+    this.props = {
+      content: '',
+      type: 'horizontal',
+      dashed: false,
+      orientation: 'left',
+      plain: false,
+      orientationMargin: 0,
+      __style__: '',
+    };
+  }
+}
+
 export class Input extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
@@ -777,6 +800,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Text, new Text() as any],
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
   [ComponentType.Button, new Button() as any],
+  [ComponentType.Divider, new Divider() as any],
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],

@@ -108,7 +108,7 @@ export default defineComponent({
   min-height: 68px;
 }
 
-.ant-space-item {
+:deep(.ant-space-item) {
   width: 100%;
   height: 100%;
 }

@@ -8,6 +8,16 @@ const TEXT_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Text', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const DIVIDER_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Divider', name: 'content', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Divider', name: 'type', label: '方向', editor: 'type-editor', merge: true },
+  { type: 'Divider', name: 'dashed', label: '是否虚线', editor: 'switch-editor' },
+  { type: 'Divider', name: 'orientation', label: '标题位置', editor: 'orientation-editor', merge: true },
+  { type: 'Divider', name: 'plain', label: '标题是为否普通正文', editor: 'switch-editor' },
+  // { type: 'Divider', name: 'orientationMargin', label: ' 标题与边框之间的距离', editor: 'input-number-editor' },
+  { type: 'Divider', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 /** 单行文本, 多行文本属性配置 */
 const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
@@ -295,6 +305,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Text: TEXT_ATTRIBUTE,
   ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
   Button: BUTTON_ATTRIBUTE,
+  Divider: DIVIDER_ATTRIBUTE,
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,

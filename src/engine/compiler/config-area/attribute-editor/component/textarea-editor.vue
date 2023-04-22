@@ -1,6 +1,6 @@
 <template>
   <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
-    <a-textarea v-model:value="modelValue" placeholder="请输入" :autosize="{ minRows: 2, maxRows: 6 }" />
+    <a-textarea v-model:value="modelValue" placeholder="请输入" :auto-size="{ minRows: 2, maxRows: 6 }" />
   </form-Item-wrapper>
 </template>
 <script lang="ts" setup name="TextareaEditor">
