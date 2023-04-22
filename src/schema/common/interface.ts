@@ -3,6 +3,36 @@ import type { I18n } from '/@/types/i18n.d';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 
 export namespace PcSchema {
+  export interface ButtonGroupSchema extends LowCode.NodeSchema {
+    children: ButtonSchema[];
+    props: ButtonGroupSchemaProps;
+  }
+
+  export interface ButtonGroupSchemaProps extends LowCode.NodeSchemaProps {
+    /** 对齐方式 */
+    align: 'flex-start' | 'center' | 'flex-end';
+  }
+
+  export interface ButtonSchema extends LowCode.NodeSchema {
+    props: ButtonSchemaProps;
+  }
+
+  export interface ButtonSchemaProps extends LowCode.NodeSchemaProps {
+    /** 名称 */
+    title: string;
+    /** 按钮类型 */
+    type: 'primary' | 'dashed' | 'link' | 'text' | 'default';
+    /** 将按钮宽度调整为其父宽度的选项 */
+    block: boolean;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 幽灵模式 */
+    ghost: boolean;
+    /** 设置危险按钮 */
+    danger: boolean;
+    /** 设置按钮载入状态 */
+    loading: boolean;
+  }
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;
@@ -474,36 +504,5 @@ export namespace PcSchema {
     hideRequiredMark: boolean;
     /** label 标签的文本对齐方式 */
     labelAlign: 'left' | 'right';
-  }
-
-  export interface ButtonGroupSchema extends LowCode.NodeSchema {
-    children: ButtonSchema[];
-    props: ButtonGroupSchemaProps;
-  }
-
-  export interface ButtonGroupSchemaProps extends LowCode.NodeSchemaProps {
-    /** 对齐方式 */
-    align: 'flex-start' | 'center' | 'flex-end';
-  }
-
-  export interface ButtonSchema extends LowCode.NodeSchema {
-    props: ButtonSchemaProps;
-  }
-
-  export interface ButtonSchemaProps extends LowCode.NodeSchemaProps {
-    /** 名称 */
-    title: string;
-    /** 按钮类型 */
-    type: 'primary' | 'dashed' | 'link' | 'text' | 'default';
-    /** 将按钮宽度调整为其父宽度的选项 */
-    block: boolean;
-    /** 尺寸 */
-    size: LowCode.Size;
-    /** 幽灵模式 */
-    ghost: boolean;
-    /** 设置危险按钮 */
-    danger: boolean;
-    /** 设置按钮载入状态 */
-    loading: boolean;
   }
 }

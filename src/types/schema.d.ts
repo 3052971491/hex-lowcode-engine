@@ -6,7 +6,7 @@ export namespace LowCode {
    * Schema 大类
    * @description 基础组件 | 业务组件 | 布局组件 | 高级组件
    */
-  export type Category = 'BASIC' | 'BUSINESS' | 'LAYOUT' | 'ADVANCED';
+  export type Category = 'BASIC' | 'FORM' | 'BUSINESS' | 'LAYOUT' | 'ADVANCED';
 
   /**
    * Schema 设备

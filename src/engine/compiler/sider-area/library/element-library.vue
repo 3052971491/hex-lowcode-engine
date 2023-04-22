@@ -40,7 +40,13 @@ import { computed, inject, onMounted, ref } from 'vue';
 import { Empty } from 'ant-design-vue';
 import type { LowCode } from '/@/types/schema.d';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
-import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
+import {
+  BasicComponents,
+  FormComponents,
+  BusinessComponents,
+  LayoutComponents,
+  AdvancedComponents,
+} from '/@/schema/pc';
 import { buildElementSchema } from '/@/utils/draggable-api';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 
@@ -57,6 +63,9 @@ const elementList = ref<ElementList[]>([]);
 
 const menuTheme = computed(() => (index: string) => {
   if (index === '基础控件') {
+    return 'basic-theme';
+  }
+  if (index === '表单控件') {
     return 'basic-theme';
   }
   if (index === '业务控件') {
@@ -88,6 +97,19 @@ const onSearch = () => {
     {
       label: '基础控件',
       list: BasicComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+    {
+      label: '表单控件',
+      list: FormComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
           flag = true;

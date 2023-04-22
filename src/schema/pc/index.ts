@@ -2,6 +2,7 @@ import type { LowCode } from '/@/types/schema.d';
 import { ComponentType, SchemaMap } from '../common/schema';
 
 const BasicComponents: LowCode.Schema[] = [];
+const FormComponents: LowCode.Schema[] = [];
 const BusinessComponents: LowCode.Schema[] = [];
 const LayoutComponents: LowCode.Schema[] = [];
 const AdvancedComponents: LowCode.Schema[] = [];
@@ -9,6 +10,8 @@ const AdvancedComponents: LowCode.Schema[] = [];
 for (const item of SchemaMap) {
   if (item[1].tag === 'BASIC') {
     BasicComponents.push(item[1]);
+  } else if (item[1].tag === 'FORM') {
+    FormComponents.push(item[1]);
   } else if (item[1].tag === 'BUSINESS') {
     BusinessComponents.push(item[1]);
   } else if (item[1].tag === 'LAYOUT') {
@@ -23,4 +26,4 @@ for (const item of SchemaMap) {
   }
 }
 
-export { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents };
+export { BasicComponents, FormComponents, BusinessComponents, LayoutComponents, AdvancedComponents };

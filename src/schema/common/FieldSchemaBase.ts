@@ -8,7 +8,7 @@ export class Scheme<T extends LowCode.NodeSchema> {
   device: LowCode.Device = 'PC';
 
   /** 组件tag标识 */
-  tag: LowCode.Category = 'BASIC';
+  tag: LowCode.Category = 'FORM';
 
   /** 描述 */
   description: string = '';

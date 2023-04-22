@@ -3,7 +3,6 @@ import type { LowCode } from '/@/types/schema.d';
 
 import { buildUUID } from '/@/utils/common';
 import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
-import { log } from 'console';
 
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);

@@ -4,6 +4,8 @@ import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
 
 export enum ComponentType {
+  'ButtonGroup' = 'ButtonGroup',
+  'Button' = 'Button',
   'Input' = 'Input',
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
@@ -22,10 +24,48 @@ export enum ComponentType {
   'Tabs' = 'Tabs',
   'TabPane' = 'TabPane',
   'Form' = 'Form',
-  'ButtonGroup' = 'ButtonGroup',
-  'Button' = 'Button',
 }
 
+export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
+  props: PcSchema.ButtonGroupSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'BASIC';
+    this.docUrl = 'https://www.antdv.com/components/button-cn';
+    this.componentName = '按钮';
+    this.componentType = ComponentType.ButtonGroup;
+    this.children = [];
+    this.props = {
+      align: 'flex-start',
+      __style__: '',
+    };
+  }
+}
+
+export class Button extends Scheme<PcSchema.ButtonSchema> {
+  props: PcSchema.ButtonSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'BASIC';
+    this.docUrl = 'https://www.antdv.com/components/button-cn';
+    this.componentName = '子按钮';
+    this.componentType = ComponentType.Button;
+    this.internal = false;
+    this.children = [];
+    this.props = {
+      title: '',
+      type: 'default',
+      block: false,
+      size: 'middle',
+      ghost: false,
+      danger: false,
+      loading: false,
+      __style__: '',
+    };
+  }
+}
 export class Input extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
@@ -702,7 +742,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
 
   constructor() {
     super();
-    this.tag = 'LAYOUT';
+    this.tag = 'ADVANCED';
     this.docUrl = 'https://www.antdv.com/components/form-cn';
     this.componentName = '表单';
     this.componentType = ComponentType.Form;
@@ -716,48 +756,9 @@ export class Form extends Scheme<PcSchema.FormSchema> {
   }
 }
 
-export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
-  props: PcSchema.ButtonGroupSchemaProps;
-
-  constructor() {
-    super();
-    this.tag = 'ADVANCED';
-    this.docUrl = 'https://www.antdv.com/components/button-cn';
-    this.componentName = '按钮';
-    this.componentType = ComponentType.ButtonGroup;
-    this.children = [];
-    this.props = {
-      align: 'flex-start',
-      __style__: '',
-    };
-  }
-}
-
-export class Button extends Scheme<PcSchema.ButtonSchema> {
-  props: PcSchema.ButtonSchemaProps;
-
-  constructor() {
-    super();
-    this.tag = 'ADVANCED';
-    this.docUrl = 'https://www.antdv.com/components/button-cn';
-    this.componentName = '子按钮';
-    this.componentType = ComponentType.Button;
-    this.internal = false;
-    this.children = [];
-    this.props = {
-      title: '',
-      type: 'default',
-      block: false,
-      size: 'middle',
-      ghost: false,
-      danger: false,
-      loading: false,
-      __style__: '',
-    };
-  }
-}
-
 export const SchemaMap: Map<ComponentType, any> = new Map([
+  [ComponentType.ButtonGroup, new ButtonGroup() as any],
+  [ComponentType.Button, new Button() as any],
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],
@@ -776,6 +777,4 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Tabs, new Tabs() as any],
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
-  [ComponentType.ButtonGroup, new ButtonGroup() as any],
-  [ComponentType.Button, new Button() as any],
 ]);
