@@ -1,6 +1,7 @@
 <template>
   <div class="element-library">
     <a-skeleton active :loading="loading">
+      <a-input-search v-model:value="filterText" placeholder="搜索组件" enter-button class="mb-2" @search="onSearch" />
       <div v-for="(menu, i) in elementList" :key="i" class="w-full mb-6">
         <div class="text-lg font-bold mb-2">{{ menu.label }}</div>
         <template v-if="menu.list.length > 0">
@@ -14,7 +15,7 @@
           >
             <template #item="{ element }">
               <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
-                <div class="item" :class="menuTheme(i)">{{ element.componentName }}</div>
+                <div class="item" :class="menuTheme(menu.label)">{{ element.componentName }}</div>
               </div>
             </template>
           </hex-draggable>
@@ -25,6 +26,11 @@
           </div>
         </template>
       </div>
+      <template v-if="elementList.length < 1">
+        <div class="w-full p-3">
+          <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无组件"></a-empty>
+        </div>
+      </template>
     </a-skeleton>
   </div>
 </template>
@@ -46,44 +52,20 @@ interface ElementList {
 }
 
 const core = inject(HexCoreInjectionKey);
+const filterText = ref('');
+const elementList = ref<ElementList[]>([]);
 
-const elementList: ElementList[] = [
-  { label: '基础控件', list: BasicComponents },
-  {
-    label: '业务控件',
-    list: BusinessComponents,
-  },
-  {
-    label: '布局控件',
-    list: LayoutComponents.filter((item) => {
-      if (item.hasOwnProperty('internal')) {
-        return item.internal;
-      }
-      return true;
-    }),
-  },
-  {
-    label: '高级控件',
-    list: AdvancedComponents.filter((item) => {
-      if (item.hasOwnProperty('internal')) {
-        return item.internal;
-      }
-      return true;
-    }),
-  },
-];
-
-const menuTheme = computed(() => (index: number) => {
-  if (index === 0) {
+const menuTheme = computed(() => (index: string) => {
+  if (index === '基础控件') {
     return 'basic-theme';
   }
-  if (index === 1) {
+  if (index === '业务控件') {
     return 'basic-theme';
   }
-  if (index === 2) {
+  if (index === '布局控件') {
     return 'container-theme';
   }
-  if (index === 3) {
+  if (index === '高级控件') {
     return 'advanced-theme';
   }
   return 'basic-theme';
@@ -101,9 +83,67 @@ const handleAddElementDbClick = (e: LowCode.Schema) => {
   core?.handleUpdateSelectData(newEl);
   core?.handleUpdateHistoryData();
 };
+const onSearch = () => {
+  elementList.value = [
+    {
+      label: '基础控件',
+      list: BasicComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+    {
+      label: '业务控件',
+      list: BusinessComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+    {
+      label: '布局控件',
+      list: LayoutComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+    {
+      label: '高级控件',
+      list: AdvancedComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+  ];
+  elementList.value = elementList.value.filter((item) => item.list.length > 0);
+};
 
 onMounted(() => {
   setTimeout(() => {
+    onSearch();
     loading.value = false;
   }, 180);
 });
