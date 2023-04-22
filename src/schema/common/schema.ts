@@ -4,6 +4,7 @@ import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
 
 export enum ComponentType {
+  'Text' = 'Text',
   'ButtonGroup' = 'ButtonGroup',
   'Button' = 'Button',
   'Input' = 'Input',
@@ -24,6 +25,23 @@ export enum ComponentType {
   'Tabs' = 'Tabs',
   'TabPane' = 'TabPane',
   'Form' = 'Form',
+}
+
+export class Text extends Scheme<PcSchema.TextSchema> {
+  props: PcSchema.TextSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'BASIC';
+    this.componentName = '文本';
+    this.componentType = ComponentType.Text;
+    this.props = {
+      content: '文本',
+      showTitle: false,
+      maxLine: 0,
+      __style__: '',
+    };
+  }
 }
 
 export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
@@ -53,7 +71,6 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
     this.componentName = '子按钮';
     this.componentType = ComponentType.Button;
     this.internal = false;
-    this.children = [];
     this.props = {
       title: '',
       type: 'default',
@@ -757,6 +774,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
 }
 
 export const SchemaMap: Map<ComponentType, any> = new Map([
+  [ComponentType.Text, new Text() as any],
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
   [ComponentType.Button, new Button() as any],
   [ComponentType.Input, new Input() as any],

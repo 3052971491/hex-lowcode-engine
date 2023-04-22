@@ -186,7 +186,7 @@ if (unref(schema).componentType === 'Collapse' || unref(schema).componentType ==
   ];
 }
 
-if (unref(schema).componentType === 'Button') {
+if (unref(schema).componentType === 'Button' || unref(schema).componentType === 'Text') {
   actionOptions = [
     {
       title: 'onClick 值发生变化',

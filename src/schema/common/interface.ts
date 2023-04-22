@@ -3,6 +3,18 @@ import type { I18n } from '/@/types/i18n.d';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 
 export namespace PcSchema {
+  export interface TextSchema extends LowCode.NodeSchema {
+    props: TextSchemaProps;
+  }
+
+  export interface TextSchemaProps extends LowCode.NodeSchemaProps {
+    /** 内容 */
+    content: string;
+    /** title */
+    showTitle: boolean;
+    /** 最大行数 */
+    maxLine: number;
+  }
   export interface ButtonGroupSchema extends LowCode.NodeSchema {
     children: ButtonSchema[];
     props: ButtonGroupSchemaProps;

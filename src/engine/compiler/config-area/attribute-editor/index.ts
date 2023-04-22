@@ -1,5 +1,13 @@
 import { AttributeItem } from './interface';
 
+const TEXT_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Text', name: 'content', label: '内容', editor: 'textarea-editor', i18n: true },
+  { type: 'Text', name: 'maxLine', label: '最大行数', editor: 'input-number-editor' },
+  { type: 'Text', name: 'showTitle', label: '开启文本提示', editor: 'switch-editor' },
+  { type: 'Text', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Text', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 /** 单行文本, 多行文本属性配置 */
 const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
@@ -284,6 +292,9 @@ const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
 ];
 
 const obj: { [key: string]: Array<AttributeItem> } = {
+  Text: TEXT_ATTRIBUTE,
+  ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
+  Button: BUTTON_ATTRIBUTE,
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,
@@ -302,8 +313,6 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Tabs: TABS,
   TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
-  ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
-  Button: BUTTON_ATTRIBUTE,
 };
 
 export default obj;
