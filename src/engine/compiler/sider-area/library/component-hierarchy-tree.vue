@@ -3,7 +3,7 @@
     <a-skeleton active :loading="loading">
       <a-input-search
         v-model:value="filterText"
-        placeholder="搜索组件"
+        placeholder="搜索组件(通过唯一标识)"
         class="mb-2"
         :loading="filterTextLoading"
         enter-button
@@ -104,14 +104,14 @@ const getParentKey = (key: string | number, tree: LowCode.Schema[]): LowCode.Sch
     const node = tree[i];
     if (node.children) {
       const index = node.children.findIndex((item) => {
-        return item?.props?.label === key || item.id === key;
+        return item.id === key;
       });
       if (index !== -1) {
         parentKey = node.children[index];
       } else if (getParentKey(key, node.children)) {
         parentKey = getParentKey(key, node.children);
       }
-    } else if (node?.props?.label === key || node.id === key) {
+    } else if (node.id === key) {
       parentKey = node;
     }
   }
@@ -122,6 +122,8 @@ const onSearch = () => {
   const findSchema = getParentKey(filterText.value, treeData.value);
   if (findSchema) {
     core?.handleUpdateSelectData(findSchema);
+  } else {
+    core?.handleResetSelectData();
   }
 };
 const loading = ref(true);
