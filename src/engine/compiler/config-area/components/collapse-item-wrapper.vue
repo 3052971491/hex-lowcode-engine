@@ -41,4 +41,7 @@ const activeKey = ref(['1']);
 :deep(.lc-field) {
   padding: 0.5rem 0;
 }
+:deep(.ant-collapse-content) {
+  background-color: #fff !important;
+}
 </style>
