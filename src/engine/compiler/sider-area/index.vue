@@ -43,6 +43,16 @@
           <library-item v-if="!!data.currentMenu" :config="data.currentMenu"></library-item>
         </div>
       </transition>
+      <div
+        class="hover-show-handle"
+        :class="{
+          isLeft: !data.currentMenu,
+        }"
+        @click="handleIsClose(!!data.currentMenu)"
+      >
+        <double-left-outlined v-if="!!data.currentMenu" />
+        <double-right-outlined v-else />
+      </div>
     </div>
   </a-layout-sider>
 </template>
@@ -58,8 +68,11 @@ import {
   CodeOutlined,
   GlobalOutlined,
   PartitionOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
 } from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
+import { isLeaf } from 'ant-design-vue/lib/vc-cascader/utils/commonUtil';
 import MenuItem from './components/menu-item.vue';
 import LibraryItem from './components/library-item.vue';
 import ElementLibrary from './library/element-library.vue';
@@ -166,6 +179,17 @@ function handleUpdateSidebarWidthClick(menu: IMenuItem) {
 const isActive = computed(() => (item: IMenuItem) => {
   return data.currentMenu?.value === item.value;
 });
+
+const handleIsClose = (isClose: boolean) => {
+  data.currentMenu = null;
+  data.currentDrawer = null;
+  if (isClose) {
+    width.value = 47;
+  } else {
+    data.currentMenu = topMenu[1] as any;
+    width.value = 364;
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -190,5 +214,37 @@ const isActive = computed(() => (item: IMenuItem) => {
 }
 .modal-library-item {
   padding: 0;
+}
+
+.sider-area {
+  &:hover {
+    .hover-show-handle {
+      opacity: 1;
+    }
+  }
+  .hover-show-handle {
+    position: absolute;
+    top: calc(50% - 60px);
+    right: -30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #1890ff;
+    background-color: #ebf3ff;
+    opacity: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+    transform: translate(-50%, 0);
+  }
+
+  .isLeft {
+    right: -30px;
+  }
 }
 </style>
