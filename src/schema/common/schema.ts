@@ -11,6 +11,7 @@ export enum ComponentType {
   'Radio' = 'Radio',
   'Checkbox' = 'Checkbox',
   'DatePicker' = 'DatePicker',
+  'RangePicker' = 'RangePicker',
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
@@ -408,6 +409,55 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
   }
 }
 
+export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
+  props: PcSchema.RangePickerSchemeProps;
+
+  constructor() {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/date-picker-cn';
+    this.componentName = '日期区间';
+    this.componentType = ComponentType.RangePicker;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: ['开始日期', '结束日期'],
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      allowClear: true,
+      bordered: true,
+      format: 'YYYY-MM-DD',
+      valueFormat: 'YYYY-MM-DD',
+      disabledDate: '',
+      picker: 'date',
+      showTime: false,
+      autofocus: false,
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+  }
+}
+
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
@@ -672,6 +722,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Radio, new Radio() as any],
   [ComponentType.Checkbox, new Checkbox() as any],
   [ComponentType.DatePicker, new DatePicker() as any],
+  [ComponentType.RangePicker, new RangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],

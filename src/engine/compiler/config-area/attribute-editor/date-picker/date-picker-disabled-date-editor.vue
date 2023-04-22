@@ -5,7 +5,9 @@
         <a-select-option value="">无限制</a-select-option>
         <a-select-option value="afterToday">可选今天之后(含今天)</a-select-option>
         <a-select-option value="beforeToday">可选今天之前(含今天)</a-select-option>
-        <a-select-option value="duration">不可选区间(含开始和结束)</a-select-option>
+        <a-select-option v-if="schema.componentType !== 'RangePicker'" value="duration"
+          >不可选区间(含开始和结束)</a-select-option
+        >
         <a-select-option value="interselectable">可选区间(含开始和结束)</a-select-option>
       </a-select>
     </form-item-wrapper>
