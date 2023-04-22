@@ -12,3 +12,8 @@ export interface I18nMap {
 }
 
 export type I18n = string | number | boolean | I18nData | null;
+export interface i18n {
+  id: string;
+  'en-US': string;
+  'zh-CN': string;
+}

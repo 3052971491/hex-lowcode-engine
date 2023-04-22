@@ -12,7 +12,9 @@ const ProjectConfig: LowCode.ProjectSchema = {
     'zh-CN': {},
     'en-US': {},
   },
-  config: {},
+  config: {
+    i18n: 'zh-CN',
+  },
   componentsTree: [],
   dialogComponentsTree: [],
   originCode: `/**

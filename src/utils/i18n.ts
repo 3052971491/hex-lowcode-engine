@@ -1,15 +1,11 @@
-import type { I18nMap } from '/@/types/i18n.d';
+import type { I18nMap, i18n } from '/@/types/i18n.d';
 
-export interface i18n {
-  id: string;
-  'en-US': string;
-  'zh-CN': string;
-}
 export const formatConversion = (list: i18n[] | I18nMap, flag = true): i18n[] | I18nMap => {
   if (flag && !Array.isArray(list)) {
     const data: i18n[] = [];
     for (const type in list) {
       if (Object.prototype.hasOwnProperty.call(list, type)) {
+        console.log(type);
         let obj: any = {};
         for (const key in (list as any)?.[type]) {
           if (Object.prototype.hasOwnProperty.call((list as any)?.[type], key)) {

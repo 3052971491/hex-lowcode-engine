@@ -76,7 +76,7 @@
   </a-form-item>
 </template>
 <script lang="ts" setup name="FormItemWrapper">
-import { computed, inject, ref } from 'vue';
+import { computed, inject, ref, watch, watchEffect } from 'vue';
 import { GlobalOutlined, FontColorsOutlined } from '@ant-design/icons-vue';
 import { isNil } from 'lodash-es';
 import { AttributeItem } from '../attribute-editor/interface';
@@ -84,6 +84,7 @@ import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { formatConversion, fuzzyQuery } from '/@/utils/i18n';
 import { set, get } from '/@/utils/schema';
 import { buildUUID } from '/@/utils/common';
+import type { i18n } from '/@/types/i18n';
 
 interface Props {
   /** 标题 */
@@ -118,15 +119,37 @@ const I18nStatus = computed(() => {
 
 /** 多语言文案 */
 const filterText = ref('');
-const i18nSearchResultList = computed(() => {
-  if (!filterText.value) {
-    return [];
-  }
-  if (core?.state.projectConfig?.i18n) {
-    return fuzzyQuery(formatConversion(core?.state.projectConfig?.i18n) as any, filterText.value);
-  }
-  return [];
-});
+
+const i18nSearchResultList = ref<i18n[]>([]);
+
+if (core?.state?.projectConfig?.i18n) {
+  watch(
+    core.state.projectConfig,
+    () => {
+      i18nSearchResultList.value = fuzzyQuery(
+        formatConversion(core?.state.projectConfig?.i18n as any) as any,
+        filterText.value,
+      );
+    },
+    {
+      deep: true,
+    },
+  );
+}
+
+watch(
+  filterText,
+  (val) => {
+    if (core?.state.projectConfig?.i18n) {
+      i18nSearchResultList.value = fuzzyQuery(formatConversion(core?.state.projectConfig?.i18n) as any, val);
+    } else {
+      i18nSearchResultList.value = [];
+    }
+  },
+  {
+    immediate: true,
+  },
+);
 
 /** 创建新的多语言文案 */
 const handleCreateI18nClick = () => {
