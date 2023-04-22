@@ -14,7 +14,7 @@
           >
             <template #item="{ element }">
               <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
-                <div class="item">{{ element.componentName }}</div>
+                <div class="item" :class="menuTheme(i)">{{ element.componentName }}</div>
               </div>
             </template>
           </hex-draggable>
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, onMounted, ref } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 import { Empty } from 'ant-design-vue';
 import type { LowCode } from '/@/types/schema.d';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
@@ -68,6 +68,22 @@ const elementList: ElementList[] = [
   },
 ];
 
+const menuTheme = computed(() => (index: number) => {
+  if (index === 0) {
+    return 'basic-theme';
+  }
+  if (index === 1) {
+    return 'basic-theme';
+  }
+  if (index === 2) {
+    return 'container-theme';
+  }
+  if (index === 3) {
+    return 'advanced-theme';
+  }
+  return 'basic-theme';
+});
+
 const loading = ref(true);
 
 const onClone = (e: LowCode.Schema) => {
@@ -98,12 +114,33 @@ onMounted(() => {
     height: 36px;
     border: 1px solid #f1faff;
     border-radius: 2px;
+    color: #314666;
     background-color: rgba(9, 96, 189, 0.1);
+    transition: background-color 0.2s ease;
     cursor: move;
     user-select: none;
+  }
+
+  .basic-theme {
+    background-color: rgba(0, 102, 255, 0.08);
+    &:hover {
+      background-color: rgba(0, 45, 113, 0.125);
+    }
+  }
+
+  .container-theme {
+    background-color: #eaf9f4;
 
     &:hover {
-      border-color: #0960bd;
+      background-color: #deede8;
+    }
+  }
+
+  .advanced-theme {
+    background-color: #fffaf2;
+
+    &:hover {
+      background-color: #f2eee6;
     }
   }
 }
