@@ -61,6 +61,19 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
       default:
         break;
     }
+  } else if (newSchema.tag === 'ADVANCED') {
+    let obj = null;
+    switch (newSchema.componentType) {
+      case 'ButtonGroup':
+        obj = buildElementSchemaByType('ADVANCED', 'Button');
+        if (obj?.props) {
+          obj.props.title = 'Default Button';
+          newSchema.children?.push(obj);
+        }
+        break;
+      default:
+        break;
+    }
   }
   return newSchema;
 }

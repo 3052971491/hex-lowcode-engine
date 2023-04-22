@@ -186,6 +186,15 @@ if (unref(schema).componentType === 'Collapse' || unref(schema).componentType ==
   ];
 }
 
+if (unref(schema).componentType === 'Button') {
+  actionOptions = [
+    {
+      title: 'onClick 值发生变化',
+      value: 'onClick',
+    },
+  ];
+}
+
 const modalTitle = ref('');
 const formRef = ref<FormInstance>();
 const state = reactive({

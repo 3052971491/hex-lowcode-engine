@@ -267,6 +267,22 @@ const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
+];
+
+const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Button', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Button', name: 'title', label: '名称', editor: 'input-editor', i18n: true },
+  { type: 'Button', name: 'type', label: '按钮类型', editor: 'type-editor', merge: true },
+  { type: 'Button', name: 'ghost', label: '幽灵模式', editor: 'switch-editor' },
+  { type: 'Button', name: 'danger', label: '设置危险按钮', editor: 'switch-editor' },
+  { type: 'Button', name: 'loading', label: '加载状态', editor: 'switch-editor' },
+  { type: 'Button', name: 'block', label: '宽度占满', editor: 'switch-editor' },
+  { type: 'Button', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Button', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const obj: { [key: string]: Array<AttributeItem> } = {
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
@@ -286,6 +302,8 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Tabs: TABS,
   TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
+  ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
+  Button: BUTTON_ATTRIBUTE,
 };
 
 export default obj;

@@ -22,6 +22,8 @@ export enum ComponentType {
   'Tabs' = 'Tabs',
   'TabPane' = 'TabPane',
   'Form' = 'Form',
+  'ButtonGroup' = 'ButtonGroup',
+  'Button' = 'Button',
 }
 
 export class Input extends Scheme<PcSchema.InputScheme> {
@@ -714,6 +716,47 @@ export class Form extends Scheme<PcSchema.FormSchema> {
   }
 }
 
+export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
+  props: PcSchema.ButtonGroupSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = 'https://www.antdv.com/components/button-cn';
+    this.componentName = '按钮';
+    this.componentType = ComponentType.ButtonGroup;
+    this.children = [];
+    this.props = {
+      align: 'flex-start',
+      __style__: '',
+    };
+  }
+}
+
+export class Button extends Scheme<PcSchema.ButtonSchema> {
+  props: PcSchema.ButtonSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = 'https://www.antdv.com/components/button-cn';
+    this.componentName = '子按钮';
+    this.componentType = ComponentType.Button;
+    this.internal = false;
+    this.children = [];
+    this.props = {
+      title: '',
+      type: 'default',
+      block: false,
+      size: 'middle',
+      ghost: false,
+      danger: false,
+      loading: false,
+      __style__: '',
+    };
+  }
+}
+
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
@@ -733,4 +776,6 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Tabs, new Tabs() as any],
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
+  [ComponentType.ButtonGroup, new ButtonGroup() as any],
+  [ComponentType.Button, new Button() as any],
 ]);

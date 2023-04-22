@@ -32,7 +32,7 @@ export class Scheme<T extends LowCode.NodeSchema> {
   children?: LowCode.NodeSchema[];
 
   /** 是否可显示, 配置组件库使用 */
-  internal?: boolean;
+  internal?: boolean = true;
 
   /** 组件唯一标识 */
   id: string = '';

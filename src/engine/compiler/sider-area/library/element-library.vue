@@ -64,7 +64,12 @@ const elementList: ElementList[] = [
   },
   {
     label: '高级控件',
-    list: AdvancedComponents,
+    list: AdvancedComponents.filter((item) => {
+      if (item.hasOwnProperty('internal')) {
+        return item.internal;
+      }
+      return true;
+    }),
   },
 ];
 
