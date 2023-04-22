@@ -60,11 +60,11 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
       default:
         break;
     }
-  } else if (newSchema.tag === 'ADVANCED') {
+  } else if (newSchema.tag === 'BASIC') {
     let obj = null;
     switch (newSchema.componentType) {
       case 'ButtonGroup':
-        obj = buildElementSchemaByType('ADVANCED', 'Button');
+        obj = buildElementSchemaByType('BASIC', 'Button');
         if (obj?.props) {
           obj.props.title = 'Default Button';
           newSchema.children?.push(obj);

@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 lib
-
+/stats.html
 # Editor directories and files
 !.vscode/extensions.json
 .idea
