@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-space ref="__instance__" v-bind="ectypeProps" class="w-full h-full">
+    <a-space ref="__instance__" v-bind="ectypeProps" class="w-full h-full" :class="[ectype.props.className]">
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">

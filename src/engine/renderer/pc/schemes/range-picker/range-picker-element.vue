@@ -5,7 +5,13 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-range-picker ref="__instance__" v-model:value="modelValue" v-bind="prop" class="w-full"></a-range-picker>
+    <a-range-picker
+      ref="__instance__"
+      v-model:value="modelValue"
+      v-bind="prop"
+      class="w-full"
+      :class="[ectype.props.className]"
+    ></a-range-picker>
   </ElementWrapper>
 </template>
 
@@ -30,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.RangePickerScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.RangePickerScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.RangePickerScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {

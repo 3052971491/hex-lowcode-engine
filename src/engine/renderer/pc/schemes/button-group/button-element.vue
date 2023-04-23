@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-button ref="__instance__" v-bind="prop">{{ ectype.props.title }}</a-button>
+    <a-button ref="__instance__" v-bind="prop" :class="[ectype.props.className]">{{ ectype.props.title }}</a-button>
   </ElementWrapper>
 </template>
 

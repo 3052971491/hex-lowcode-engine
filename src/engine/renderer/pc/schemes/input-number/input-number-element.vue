@@ -5,7 +5,13 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-input-number ref="__instance__" v-model:value="modelValue" v-bind="prop" class="w-full"></a-input-number>
+    <a-input-number
+      ref="__instance__"
+      v-model:value="modelValue"
+      v-bind="prop"
+      class="w-full"
+      :class="[ectype.props.className]"
+    ></a-input-number>
   </ElementWrapper>
 </template>
 
@@ -29,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.InputNumberScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.InputNumberScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputNumberScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {

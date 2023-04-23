@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-collapse ref="__instance__" v-model:activeKey="activeKey" v-bind="prop">
+    <a-collapse ref="__instance__" v-model:activeKey="activeKey" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <CollapsePanelElement
           v-for="(item, index) in schema.children"

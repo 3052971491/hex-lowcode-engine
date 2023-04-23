@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-row ref="__instance__" v-bind="prop">
+    <a-row ref="__instance__" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <ColumnElement
           v-for="(item, index) in schema.children"
@@ -42,7 +42,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
-const { ectypeProps } = useElement<PcSchema.RowScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.RowScheme>(props, __instance__);
 
 const prop = ectypeProps((obj) => {
   return {
