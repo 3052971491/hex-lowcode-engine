@@ -28,6 +28,7 @@ interface StateType {
   __js__: {
     [key: string]: any;
   };
+  __css__: string;
 }
 
 export interface HexCoreFactory {
@@ -87,6 +88,7 @@ export function useHexCore(): HexCoreFactory {
     history: undefined,
     selectedData: undefined,
     __js__: {},
+    __css__: '',
   });
 
   buildProjectConfig();

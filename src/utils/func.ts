@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { JSFunction } from '/@/types/value-type';
 
 export function BuildFunction(name: string, ...args: any) {
@@ -104,4 +105,32 @@ export function run(code?: string, context: any = null): Object {
     return res();
   }
   return {};
+}
+
+function createStyleSheet() {
+  const head = document.head || document.getElementsByTagName('head')[0];
+  const oldStyle = document.getElementById('hex-lowcode-engine');
+  if (oldStyle) {
+    head.removeChild(oldStyle);
+  }
+  const style = document.createElement('style');
+  style.setAttribute('data-for', 'page');
+  style.setAttribute('id', 'hex-lowcode-engine');
+
+  return [head, style];
+}
+
+/** 全局注册样式 */
+export function registerGlobalStyle(css = '') {
+  const [head, style] = createStyleSheet();
+  style.appendChild(document.createTextNode(css));
+  head.appendChild(style);
+}
+
+export function removeGlobalStyle() {
+  const head = document.getElementsByTagName('head')[0];
+  const oldStyle = document.getElementById('hex-lowcode-engine');
+  if (oldStyle) {
+    head.removeChild(oldStyle);
+  }
 }

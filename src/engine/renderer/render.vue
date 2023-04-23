@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, onMounted, provide, ref } from 'vue';
+import { computed, defineComponent, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
@@ -24,7 +24,7 @@ import {
   DataEngineInjectionKey,
   ElementInstanceInjectionKey,
 } from './render-inject-key';
-import { run } from '/@/utils/func';
+import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -76,10 +76,21 @@ if (props.redactState) {
 provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
 provide(ElementInstanceInjectionKey, instanceCore);
+
 onMounted(() => {
-  setTimeout(() => {
-    pageSpinning.value = false;
-  }, 500);
+  nextTick(() => {
+    setTimeout(() => {
+      pageSpinning.value = false;
+      if (!props.redactState) {
+        registerGlobalStyle(core?.state.__css__);
+      }
+    }, 50);
+  });
+});
+onBeforeUnmount(() => {
+  if (!props.redactState) {
+    removeGlobalStyle();
+  }
 });
 </script>
 

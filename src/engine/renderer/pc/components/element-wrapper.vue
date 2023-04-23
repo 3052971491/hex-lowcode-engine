@@ -1,5 +1,5 @@
 <template>
-  <div class="element-wrapper" :class="schema.props?.className">
+  <div class="element-wrapper" :class="[!redactState ? schema.props?.className : '']">
     <template v-if="isPreview">
       <ElementEditWrapper
         v-if="schema?.tag !== 'LAYOUT'"
@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject, provide, watch } from 'vue';
+import { computed, inject, onMounted, provide, watch } from 'vue';
 import ElementEditWrapper from './element-edit-wrapper.vue';
 import ContainerEditWrapper from './container-edit-wrapper.vue';
 import ElementViewWrapper from './element-view-wrapper.vue';
@@ -87,4 +87,12 @@ const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapp
 );
 
 const { getReadonlyData } = useElementDataEngine<LowCode.Schema>(props.schema, dataEngine);
+
+onMounted(() => {
+  if (!redactState && core?.state && props.schema.props?.className && props.schema.props?.__style__) {
+    const cssText = props.schema.props?.__style__;
+    const result = cssText?.replace(':root', `.${props.schema.props?.className}`);
+    core.state.__css__ += result;
+  }
+});
 </script>
