@@ -1,5 +1,5 @@
 <template>
-  <div class="element-wrapper">
+  <div class="element-wrapper" :class="schema.props?.className">
     <template v-if="isPreview">
       <ElementEditWrapper
         v-if="schema?.tag !== 'LAYOUT'"
@@ -23,9 +23,7 @@
     <template v-else>
       <ElementViewWrapper v-show="!isHidden" :schema="schema">
         <template v-if="isDefault">
-          <div>
-            <slot></slot>
-          </div>
+          <slot></slot>
         </template>
         <template v-else-if="isReadonly"> {{ getReadonlyData }} </template>
       </ElementViewWrapper>

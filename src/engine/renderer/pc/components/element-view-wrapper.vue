@@ -1,13 +1,15 @@
 <template>
-  <a-form-item v-if="schema?.formItemFlag" :name="getName()" :rules="getRules()">
-    <template #label> {{ schema.props?.label }} </template>
-    <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
-    <!-- <template #help></template> -->
-    <slot></slot>
-  </a-form-item>
+  <div class="element-wrapper-container">
+    <a-form-item v-if="schema?.formItemFlag" :name="getName()" :rules="getRules()">
+      <template #label> {{ schema.props?.label }} </template>
+      <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
+      <!-- <template #help></template> -->
+      <slot></slot>
+    </a-form-item>
 
-  <div v-else>
-    <slot></slot>
+    <template v-else>
+      <slot></slot>
+    </template>
   </div>
 </template>
 

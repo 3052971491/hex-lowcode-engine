@@ -8,7 +8,7 @@
     <div
       ref="__instance__"
       class="w-full"
-      :class="[ectype.props.className, textWrapperStyle ? 'textWrapper' : '']"
+      :class="[textWrapperStyle ? 'textWrapper' : '']"
       :title="prop.showTitle ? prop.content : ''"
     >
       {{ prop.content }}
@@ -32,7 +32,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 
-const { ectype, ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
+const { ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
 
 const prop = ectypeProps((obj) => {
   return {
