@@ -83,9 +83,7 @@ function handlePreviewJsonClick() {
   visible.value = true;
 }
 
-const element = computed(() => {
-  return cloneDeep(core?.state.projectConfig);
-});
+const element = ref(cloneDeep(core?.state.projectConfig));
 
 function handleSaveClick() {
   core?.saveCurrentHistoryData();

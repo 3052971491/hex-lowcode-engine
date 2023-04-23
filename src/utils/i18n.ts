@@ -5,7 +5,6 @@ export const formatConversion = (list: i18n[] | I18nMap, flag = true): i18n[] | 
     const data: i18n[] = [];
     for (const type in list) {
       if (Object.prototype.hasOwnProperty.call(list, type)) {
-        console.log(type);
         let obj: any = {};
         for (const key in (list as any)?.[type]) {
           if (Object.prototype.hasOwnProperty.call((list as any)?.[type], key)) {
