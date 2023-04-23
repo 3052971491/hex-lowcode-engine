@@ -50,6 +50,8 @@ const visibleChange = (visible: boolean) => {
     if (schema.value.props && !schema.value.props?.__style__) {
       schema.value.props.__style__ = ':root {}' ?? '';
     }
+  } else {
+    core?.saveCurrentHistoryData();
   }
 };
 </script>

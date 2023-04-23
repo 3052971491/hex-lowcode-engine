@@ -34,7 +34,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
 
 const prop = ectypeProps((obj) => {
   return {

@@ -70,20 +70,21 @@ const modalType = ref('');
 const modalTitle = ref('');
 
 const visible = ref(false);
+const element = ref();
 
 function handlePreviewClick() {
   modalType.value = ComponentTypeEnum.RENDER_PREVIEW;
   modalTitle.value = '预览';
   visible.value = true;
+  element.value = cloneDeep(core?.state.projectConfig);
 }
 
 function handlePreviewJsonClick() {
   modalType.value = ComponentTypeEnum.JSON_PREVIEW;
   modalTitle.value = '查看JSON';
   visible.value = true;
+  element.value = cloneDeep(core?.state.projectConfig);
 }
-
-const element = ref(cloneDeep(core?.state.projectConfig));
 
 function handleSaveClick() {
   core?.saveCurrentHistoryData();
