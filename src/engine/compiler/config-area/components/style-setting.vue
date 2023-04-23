@@ -16,7 +16,7 @@
             <hex-monaco-editor v-model:value="styleContent" title="CSS" :theme="Theme.DEFAULT" :language="Lang.SCSS" />
           </div>
         </template>
-        <a-button class="ml-2">源码编辑</a-button>
+        <a-button class="ml-2 mt-2">源码编辑</a-button>
       </a-popconfirm>
     </template>
   </div>
