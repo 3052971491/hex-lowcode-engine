@@ -8,9 +8,7 @@
     <div
       ref="__instance__"
       class="w-full"
-      :class="{
-        textWrapper: textWrapperStyle,
-      }"
+      :class="[ectype.props.className, textWrapperStyle ? 'textWrapper' : '']"
       :title="prop.showTitle ? prop.content : ''"
     >
       {{ prop.content }}

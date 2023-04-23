@@ -97,10 +97,11 @@ export namespace LowCode {
     lifeCycles?: {
       [key: string]: any;
     };
+
     /** 是否被a-form-item包裹 */
     formItemFlag?: boolean;
     /** 属性 */
-    props?: {
+    props?: NodeSchemaProps & {
       [key: string]: any;
     };
     /** 事件 */
@@ -131,6 +132,8 @@ export namespace LowCode {
    * 组件节点描述-Props基类
    */
   export interface NodeSchemaProps extends CompositeValue {
+    /** 类名 */
+    className: string;
     /** 样式 */
     __style__: string;
   }

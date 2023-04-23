@@ -40,6 +40,7 @@ export class Text extends Scheme<PcSchema.TextSchema> {
       content: '文本',
       showTitle: false,
       maxLine: 0,
+      className: '',
       __style__: '',
     };
   }
@@ -57,6 +58,7 @@ export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
     this.children = [];
     this.props = {
       align: 'flex-start',
+      className: '',
       __style__: '',
     };
   }
@@ -80,6 +82,7 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
       ghost: false,
       danger: false,
       loading: false,
+      className: '',
       __style__: '',
     };
   }
@@ -101,6 +104,7 @@ export class Divider extends Scheme<PcSchema.DividerSchema> {
       orientation: 'left',
       plain: false,
       orientationMargin: 0,
+      className: '',
       __style__: '',
     };
   }
@@ -133,6 +137,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
       maxlength: 255,
       trim: false,
       autofocus: false,
+      className: '',
       __style__: '',
     };
 
@@ -196,6 +201,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
       maxlength: 255,
       trim: false,
       autofocus: false,
+      className: '',
       __style__: '',
     };
 
@@ -263,6 +269,7 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
       precision: 0,
       step: 1,
       stringMode: false,
+      className: '',
       __style__: '',
     };
 
@@ -322,6 +329,7 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
       checkedValue: true,
       unCheckedChildren: '',
       unCheckedValue: false,
+      className: '',
       __style__: '',
     };
 
@@ -365,6 +373,7 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
       buttonStyle: 'outline',
       optionType: 'default',
       options: [],
+      className: '',
       __style__: '',
     };
 
@@ -412,6 +421,7 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
       tips: '',
       rules: [],
       options: [],
+      className: '',
       __style__: '',
     };
 
@@ -469,6 +479,7 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
       showNow: false,
       showToday: true,
       autofocus: false,
+      className: '',
       __style__: '',
     };
 
@@ -518,6 +529,7 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
       picker: 'date',
       showTime: false,
       autofocus: false,
+      className: '',
       __style__: '',
     };
 
@@ -562,6 +574,7 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
       allowHalf: false,
       character: null,
       count: 5,
+      className: '',
       __style__: '',
     };
 
@@ -602,6 +615,7 @@ export class Row extends Scheme<PcSchema.RowScheme> {
       wrap: true,
       rowGutter: 0,
       columnGutter: 0,
+      className: '',
       __style__: '',
     };
   }
@@ -633,6 +647,7 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
       lg: null,
       xl: null,
       xxl: null,
+      className: '',
       __style__: '',
     };
   }
@@ -655,6 +670,7 @@ export class Card extends Scheme<PcSchema.CardScheme> {
       bordered: true,
       hoverable: false,
       size: 'small',
+      className: '',
       __style__: '',
     };
   }
@@ -676,6 +692,7 @@ export class Space extends Scheme<PcSchema.SpaceScheme> {
       align: 'start',
       direction: 'horizontal',
       size: 'small',
+      className: '',
       __style__: '',
     };
   }
@@ -701,6 +718,7 @@ export class Collapse extends Scheme<PcSchema.CollapseScheme> {
       destroyInactivePanel: true,
       expandIconPosition: 'left',
       ghost: false,
+      className: '',
       __style__: '',
     };
   }
@@ -724,6 +742,7 @@ export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
       forceRender: false,
       collapsible: null,
       showArrow: true,
+      className: '',
       __style__: '',
     };
   }
@@ -751,6 +770,7 @@ export class Tabs extends Scheme<PcSchema.TabsScheme> {
       size: 'default',
       tabBarGutter: null,
       tabPosition: 'top',
+      className: '',
       __style__: '',
     };
   }
@@ -772,6 +792,7 @@ export class TabPane extends Scheme<PcSchema.TabPaneScheme> {
       tab: '',
       value: '',
       forceRender: false,
+      className: '',
       __style__: '',
     };
   }
@@ -791,6 +812,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
       model: `Model_${buildUUID()}`,
       hideRequiredMark: false,
       labelAlign: 'left',
+      className: '',
       __style__: '',
     };
   }

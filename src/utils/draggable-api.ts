@@ -7,6 +7,9 @@ import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponen
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
   newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
+  if (newSchema.props) {
+    newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
+  }
 
   if (newSchema.tag === 'LAYOUT') {
     let obj = null;
@@ -79,6 +82,10 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
 export function copyElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
   newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
+  if (newSchema.props) {
+    newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
+  }
+
   if (newSchema.tag === 'LAYOUT') {
     newSchema.children = [];
   }
@@ -99,6 +106,9 @@ export function buildElementSchemaByType(
 
   if (newSchema) {
     newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
+    if (newSchema.props) {
+      newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
+    }
     return newSchema;
   }
   return undefined;
