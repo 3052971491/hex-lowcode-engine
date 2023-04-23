@@ -1,5 +1,5 @@
 <template>
-  <a-collapse-panel v-bind="ectypeProps">
+  <a-collapse-panel v-bind="ectypeProps" :class="[ectype.props.className]">
     <template #header>{{ ectypeProps.header }}</template>
     <ElementWrapper
       :schema="schema"

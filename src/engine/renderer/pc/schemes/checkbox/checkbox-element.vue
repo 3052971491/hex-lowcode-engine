@@ -5,7 +5,7 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-checkbox-group ref="__instance__" v-model:value="modelValue" v-bind="prop">
+    <a-checkbox-group ref="__instance__" v-model:value="modelValue" v-bind="prop" :class="[ectype.props.className]">
       <a-checkbox v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
         {{ item.label }}
       </a-checkbox>

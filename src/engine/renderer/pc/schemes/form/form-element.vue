@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-form ref="formRef" :model="form.modelValue" v-bind="ectypeProps">
+    <a-form ref="formRef" :model="form.modelValue" v-bind="ectypeProps" :class="[ectype.props.className]">
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">

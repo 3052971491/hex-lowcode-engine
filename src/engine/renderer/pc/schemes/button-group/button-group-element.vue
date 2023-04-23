@@ -12,6 +12,7 @@
       :style="{
         justifyContent: ectype.props.align,
       }"
+      :class="[ectype.props.className]"
     >
       <template v-if="schema?.children && schema?.children?.length > 0">
         <ButtonElement

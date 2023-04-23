@@ -1,5 +1,5 @@
 <template>
-  <a-col v-bind="ectypeProps">
+  <a-col v-bind="ectypeProps" :class="[ectype.props.className]">
     <ElementWrapper
       :schema="schema"
       :parent-schema="parentSchema"

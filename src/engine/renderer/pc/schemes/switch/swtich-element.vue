@@ -5,7 +5,12 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-switch ref="__instance__" v-model:checked="modelValue" v-bind="prop"></a-switch>
+    <a-switch
+      ref="__instance__"
+      v-model:checked="modelValue"
+      v-bind="prop"
+      :class="[ectype.props.className]"
+    ></a-switch>
   </ElementWrapper>
 </template>
 
@@ -29,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.SwitchScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.SwitchScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.SwitchScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {

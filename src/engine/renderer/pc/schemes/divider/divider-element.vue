@@ -5,7 +5,7 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-divider ref="__instance__" class="w-full" v-bind="prop">
+    <a-divider ref="__instance__" class="w-full" v-bind="prop" :class="[ectype.props.className]">
       {{ ectype.props.content }}
     </a-divider>
   </ElementWrapper>

@@ -6,10 +6,10 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-tabs ref="__instance__" v-model:activeKey="activeKey" v-bind="prop">
+    <a-tabs ref="__instance__" v-model:activeKey="activeKey" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <template v-for="(item, index) in schema.children" :key="item.props?.value ?? item.id">
-          <a-tab-pane v-bind="ectypePaneProps(item)">
+          <a-tab-pane v-bind="ectypePaneProps(item)" :class="[item.props.className]">
             <TabPaneElement
               :schema="item"
               :parent-schema="schema"

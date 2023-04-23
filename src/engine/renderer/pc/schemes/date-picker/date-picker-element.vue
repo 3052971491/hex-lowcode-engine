@@ -5,7 +5,13 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-date-picker ref="__instance__" v-model:value="modelValue" v-bind="prop" class="w-full"></a-date-picker>
+    <a-date-picker
+      ref="__instance__"
+      v-model:value="modelValue"
+      v-bind="prop"
+      class="w-full"
+      :class="[ectype.props.className]"
+    ></a-date-picker>
   </ElementWrapper>
 </template>
 
@@ -30,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {

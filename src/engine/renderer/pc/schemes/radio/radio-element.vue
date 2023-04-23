@@ -5,7 +5,7 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-radio-group ref="__instance__" v-model:value="modelValue" v-bind="prop">
+    <a-radio-group ref="__instance__" v-model:value="modelValue" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="ectype.props.optionType === 'button'">
         <a-radio-button v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
           {{ item.label }}

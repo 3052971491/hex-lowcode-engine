@@ -5,7 +5,12 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-textarea ref="__instance__" v-model:value="modelValue" v-bind="prop"></a-textarea>
+    <a-textarea
+      ref="__instance__"
+      v-model:value="modelValue"
+      v-bind="prop"
+      :class="[ectype.props.className]"
+    ></a-textarea>
   </ElementWrapper>
 </template>
 
@@ -29,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.InputScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 
 const prop = ectypeProps((obj) => {
