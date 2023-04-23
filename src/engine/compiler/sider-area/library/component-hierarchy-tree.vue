@@ -22,7 +22,13 @@
       >
         <template #title="item">
           <div class="tree-node">
-            <span>{{ item.componentName }}</span>
+            <div class="flex items-center">
+              <span>{{ item.componentName }}</span>
+              <a-tooltip>
+                <template #title>循环</template>
+                <sync-outlined v-if="item.condition" class="mx-2" style="color: #67bbbb" />
+              </a-tooltip>
+            </div>
             <div v-if="item.props.hasOwnProperty('behavior')" class="eye">
               <eye-outlined
                 v-if="isSelected(item) && item.props.behavior !== 'hidden'"
@@ -47,7 +53,7 @@
 import { computed, inject, onMounted, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons-vue';
+import { EyeOutlined, EyeInvisibleOutlined, SyncOutlined } from '@ant-design/icons-vue';
 import { Empty } from 'ant-design-vue';
 
 const core = inject(HexCoreInjectionKey);

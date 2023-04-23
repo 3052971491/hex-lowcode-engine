@@ -57,19 +57,19 @@ export class Scheme<T extends LowCode.NodeSchema> {
   };
 
   /** 是否渲染 */
-  condition: boolean = true;
+  condition: boolean = false;
 
   /**
    * 循环数据
    * @description 只有为数组才生效
    */
-  loop?: CompositeValue;
+  loop?: CompositeValue = null;
 
   /**
    * 循环变量名
    * @description 值为数组, 下标0为迭代变量名, 下标1为索引变量名
    */
-  loopArgs?: string[];
+  loopArgs?: string[] = ['item', 'index'];
 
   /**
    * 是否始终提交
