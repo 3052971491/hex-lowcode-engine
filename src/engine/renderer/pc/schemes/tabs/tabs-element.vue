@@ -29,7 +29,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import TabPaneElement from './tab-pane-element.vue';
 import { defineComponent, computed, inject, ref, watch, unref } from 'vue';
-import { RedactStateInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 import { useElement } from '../../hooks/useElement';
 
@@ -43,7 +43,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.TabsScheme>(props, __instance__);
 
@@ -58,7 +57,7 @@ const prop = ectypeProps((obj) => {
     tabBarGutter: obj.tabBarGutter,
     tabPosition: obj.tabPosition,
   };
-}, core);
+});
 
 const ectypePaneProps = computed(() => (ectype: PcSchema.TabPaneScheme) => {
   if (!ectype) return {};

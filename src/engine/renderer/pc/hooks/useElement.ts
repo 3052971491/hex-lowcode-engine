@@ -4,9 +4,11 @@ import { computed, ComputedRef, Ref, onMounted, inject, unref } from 'vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { Context } from '/@/utils/utils';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
-import { ElementInstanceInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { ElementInstanceInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { HexCoreFactory } from '../../central/useHexCore';
 import { Fn } from '/@/types/value-type';
+import { useI18n } from './useI18n';
+import { forIn } from 'lodash-es';
 
 interface Props<T> {
   schema: T;
@@ -14,7 +16,7 @@ interface Props<T> {
 interface IElement<T extends LowCode.NodeSchema> {
   /** 组件副本 */
   ectype: ComputedRef<Scheme<T>>;
-  ectypeProps(fn: Fn, core: HexCoreFactory | undefined): { [key: string]: any };
+  ectypeProps(fn: Fn): { [key: string]: any };
   /** 注册监听事件 */
   registerEvent(): void;
   /** 注册生命周期OnMounted */
@@ -35,16 +37,20 @@ interface IElement<T extends LowCode.NodeSchema> {
  */
 export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __instance__?: Ref<any>): IElement<T> {
   const elementInstance = inject(ElementInstanceInjectionKey);
+  const core = inject(HexCoreInjectionKey);
+  const { getI18n } = useI18n(core?.state.projectConfig);
 
   const ectype = computed((): Scheme<T> => {
     // 每次初始化将会重新实例化, 解决历史Schema与新Schema不同步问题
     return new Scheme(props.schema);
   });
 
-  const ectypeProps = (fn: Fn, core: HexCoreFactory | undefined) => {
+  const ectypeProps = (fn: Fn) => {
     const obj = unref(ectype).props;
     if (!obj) return {};
     const opt: any = {};
+
+    // 动作设置
     if (ectype.value.events && core) {
       for (const key in unref(ectype).events) {
         if (Object.prototype.hasOwnProperty.call(unref(ectype).events, key)) {
@@ -59,9 +65,18 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
         }
       }
     }
+
+    // 多语言转换
+    const result = fn(obj);
+    for (const key in result) {
+      if (Object.prototype.hasOwnProperty.call(result, key)) {
+        const element = result[key];
+        opt[key] = getI18n(element);
+      }
+    }
+
     return {
       ...opt,
-      ...fn(obj),
     };
   };
 

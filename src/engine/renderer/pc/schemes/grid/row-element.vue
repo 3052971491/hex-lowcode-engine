@@ -27,7 +27,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import ColumnElement from './column-element.vue';
 import { defineComponent, computed, inject, ref } from 'vue';
-import { RedactStateInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 import { useElement } from '../../hooks/useElement';
 
@@ -41,7 +41,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const __instance__ = ref<any>();
 const { ectypeProps } = useElement<PcSchema.RowScheme>(props, __instance__);
 
@@ -52,7 +51,7 @@ const prop = ectypeProps((obj) => {
     wrap: obj.wrap,
     gutter: [`${obj.rowGutter}`, `${obj.columnGutter}`],
   };
-}, core);
+});
 
 const classMap = computed(() => {
   if (!redactState) return [];

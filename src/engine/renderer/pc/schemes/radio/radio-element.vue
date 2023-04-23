@@ -25,7 +25,7 @@ import type { LowCode } from '/@/types/schema.d';
 import { defineComponent, inject, ref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
-import { DataEngineInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 import { useElementDataEngine } from '../../hooks/useElementDataEngine';
 import { useElement } from '../../hooks/useElement';
@@ -37,7 +37,6 @@ interface Props {
   indexOfParentList: number;
 }
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
@@ -50,7 +49,7 @@ const prop = ectypeProps((obj) => {
     disabled: obj.behavior === 'disabled',
     size: obj.size,
   };
-}, core);
+});
 </script>
 
 <script lang="ts">

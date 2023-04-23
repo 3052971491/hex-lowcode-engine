@@ -27,7 +27,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import CollapsePanelElement from './collapse-panel-element.vue';
 import { defineComponent, computed, inject, ref, watch, unref } from 'vue';
-import { RedactStateInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 
 import { useElement } from '../../hooks/useElement';
 
@@ -41,7 +41,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.CollapseScheme>(props, __instance__);
 
@@ -54,7 +53,7 @@ const prop = ectypeProps((obj) => {
     expandIconPosition: obj.expandIconPosition,
     ghost: obj.ghost,
   };
-}, core);
+});
 
 const activeKey = ref<string | string[]>('');
 

@@ -14,7 +14,7 @@
 import { computed, defineComponent, inject, ref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
-import { RedactStateInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useElement } from '../../hooks/useElement';
 
 interface Props {
@@ -24,7 +24,6 @@ interface Props {
   indexOfParentList: number;
 }
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
 const __instance__ = ref<any>();
 
@@ -39,7 +38,7 @@ const prop = ectypeProps((obj) => {
     danger: obj.danger,
     loading: obj.loading,
   };
-}, core);
+});
 
 const classMap = computed(() => {
   const arr = [];

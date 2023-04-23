@@ -20,10 +20,9 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema';
-import { defineComponent, inject, ref, computed } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
-import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useElement } from '../../hooks/useElement';
 
 interface Props {
@@ -33,7 +32,6 @@ interface Props {
   indexOfParentList: number;
 }
 const props = withDefaults(defineProps<Props>(), {});
-const core = inject(HexCoreInjectionKey);
 const __instance__ = ref<any>();
 
 const { ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
@@ -44,7 +42,7 @@ const prop = ectypeProps((obj) => {
     showTitle: obj.showTitle,
     maxLine: obj.maxLine > 0 ? obj.maxLine : 0,
   };
-}, core);
+});
 
 const textWrapperStyle = computed(() => {
   return prop.maxLine >= 0;
