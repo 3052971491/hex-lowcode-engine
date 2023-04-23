@@ -72,9 +72,7 @@ export interface HexCoreFactory {
   loadHistoryDataStorage(): void;
   /** 保存历史进度信息至浏览器 */
   saveHistoryDataStorage(): void;
-  /**
-   * 生成选中组件节点信息
-   */
+  /** 生成选中组件节点信息 */
   buildSelectedData(): void;
   /** 重置选中组件节点信息 */
   handleResetSelectData(): void;
