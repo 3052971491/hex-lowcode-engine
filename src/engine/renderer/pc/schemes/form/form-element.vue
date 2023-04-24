@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-form ref="formRef" :model="form.modelValue" v-bind="ectypeProps" :class="[ectype.props.className]">
+    <a-form ref="__instance__" :model="form.modelValue" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="isPreview">
         <hex-draggable v-model:value="state.schema.children" @add="onAdd" @update="onUpdate">
           <template #item="{ element, index }">
@@ -39,7 +39,6 @@
 
 <script lang="ts" setup>
 import { computed, defineComponent, inject, provide, reactive, ref } from 'vue';
-import { cloneDeep } from 'lodash-es';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
@@ -52,8 +51,9 @@ import {
 import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import { useForm } from './useForm';
+import { useElement } from '../../hooks/useElement';
 
-const formRef = ref<FormInstance>();
+const __instance__ = ref<FormInstance>();
 
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
@@ -82,27 +82,23 @@ const onAdd = ({ newIndex }: { newIndex: number }) => {
 const onUpdate = () => {
   core?.handleUpdateHistoryData();
 };
+const { ectype, ectypeProps } = useElement<PcSchema.FormSchema>(props, __instance__);
 const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, redactState);
-const ectype = computed(() => {
-  return cloneDeep(props.schema);
-});
-
-const ectypeProps = computed(() => {
-  if (!ectype.value) return {};
-  const obj = ectype.value.props;
-  if (!obj) return {};
-  return {
-    hideRequiredMark: obj.hideRequiredMark,
-    labelAlign: obj.labelAlign,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      hideRequiredMark: obj.hideRequiredMark,
+      labelAlign: obj.labelAlign,
+    };
+  }),
+);
 
 const classMap = computed(() => {
   if (!redactState) return [];
   return [];
 });
 
-const form = useForm({ schema: ectype.value, formRef: formRef.value });
+const form = useForm({ schema: ectype.value, formRef: __instance__.value });
 if (!redactState) {
   provide(DataEngineInjectionKey, {
     id: props.schema.id,

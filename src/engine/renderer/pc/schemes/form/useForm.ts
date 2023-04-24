@@ -3,9 +3,10 @@ import { FormInstance } from 'ant-design-vue';
 import { NamePath } from 'ant-design-vue/lib/form/interface';
 import { reject } from 'lodash-es';
 import { reactive } from 'vue';
+import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
 interface Props {
-  schema: PcSchema.FormSchema;
+  schema: Scheme<PcSchema.FormSchema>;
   formRef: FormInstance | undefined;
 }
 
