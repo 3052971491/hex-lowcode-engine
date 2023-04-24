@@ -32,11 +32,6 @@
             :index-of-parent-list="index"
           />
         </div>
-        <a-space>
-          <a-button @click="handleValidate(1)">校验</a-button>
-          <a-button @click="handleValidate(2)">清空校验</a-button>
-          <a-button @click="handleValidate(3)">重置</a-button>
-        </a-space>
       </template>
     </a-form>
   </ElementWrapper>
@@ -115,21 +110,6 @@ if (!redactState) {
     schema: props.schema,
     originData: form.modelValue,
   });
-}
-
-function handleValidate(index: number) {
-  const form1 = useForm({ schema: ectype.value, formRef: formRef.value });
-  if (index === 1) {
-    form1.validate().then((result) => {
-      console.log(result);
-    });
-  }
-  if (index === 2) {
-    form1.clearValidate();
-  }
-  if (index === 3) {
-    form1.resetFields();
-  }
 }
 </script>
 
