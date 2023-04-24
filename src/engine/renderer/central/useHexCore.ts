@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 import ProjectConfig from '/@/schema/project-schema';
 import { buildUUID } from '/@/utils/common';
 import { cloneDeep, isNil } from 'lodash-es';
+import { Context } from '/@/utils/utils';
 
 interface StateType {
   /** 应用配置 */
@@ -29,6 +30,7 @@ interface StateType {
     [key: string]: any;
   };
   __css__: string;
+  __this__: Context | undefined;
 }
 
 export interface HexCoreFactory {
@@ -81,6 +83,11 @@ export interface HexCoreFactory {
   handleUpdateBreadcrumbs(schemas?: LowCode.Schema[]): void;
   /** 更新选中组件节点信息 */
   handleUpdateSelectData(element?: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
+  /**
+   * JS-API 运行时上下文
+   * @returns
+   */
+  context(): Context | undefined;
 }
 export function useHexCore(): HexCoreFactory {
   const state = reactive<StateType>({
@@ -89,6 +96,7 @@ export function useHexCore(): HexCoreFactory {
     selectedData: undefined,
     __js__: {},
     __css__: '',
+    __this__: undefined,
   });
 
   buildProjectConfig();
@@ -267,6 +275,10 @@ export function useHexCore(): HexCoreFactory {
       }
     }
   }
+
+  function context() {
+    return state.__this__;
+  }
   // #endregion
   return {
     state,
@@ -288,5 +300,6 @@ export function useHexCore(): HexCoreFactory {
     handleResetSelectData,
     handleUpdateBreadcrumbs,
     handleUpdateSelectData,
+    context,
   };
 }

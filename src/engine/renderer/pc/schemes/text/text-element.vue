@@ -34,16 +34,18 @@ const __instance__ = ref<any>();
 
 const { ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    content: obj?.content ?? '',
-    showTitle: obj.showTitle,
-    maxLine: obj.maxLine > 0 ? obj.maxLine : 0,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      content: obj?.content ?? '',
+      showTitle: obj.showTitle,
+      maxLine: obj.maxLine > 0 ? obj.maxLine : 0,
+    };
+  }),
+);
 
 const textWrapperStyle = computed(() => {
-  return prop.maxLine >= 0;
+  return prop.value.maxLine >= 0;
 });
 </script>
 

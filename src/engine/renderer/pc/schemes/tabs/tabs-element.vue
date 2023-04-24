@@ -46,18 +46,20 @@ const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.TabsScheme>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    type: obj.type,
-    animated: obj.animated,
-    centered: obj.centered,
-    destroyInactiveTabPane: obj.destroyInactiveTabPane,
-    hideAdd: obj.hideAdd,
-    size: obj.size,
-    tabBarGutter: obj.tabBarGutter,
-    tabPosition: obj.tabPosition,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      type: obj.type,
+      animated: obj.animated,
+      centered: obj.centered,
+      destroyInactiveTabPane: obj.destroyInactiveTabPane,
+      hideAdd: obj.hideAdd,
+      size: obj.size,
+      tabBarGutter: obj.tabBarGutter,
+      tabPosition: obj.tabPosition,
+    };
+  }),
+);
 
 const ectypePaneProps = computed(() => (ectype: PcSchema.TabPaneScheme) => {
   if (!ectype) return {};

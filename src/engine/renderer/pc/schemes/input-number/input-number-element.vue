@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { defineComponent, inject, ref } from 'vue';
+import { computed, defineComponent, inject, ref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
@@ -38,24 +38,26 @@ const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.InputNumberScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.InputNumberScheme>(props.schema, dataEngine);
 
-const prop = ectypeProps((obj) => {
-  return {
-    bordered: obj.bordered,
-    disabled: obj.behavior === 'disabled',
-    placeholder: obj.placeholder,
-    size: obj.size,
-    addonBefore: obj.addonBefore,
-    addonAfter: obj.addonAfter,
-    controls: obj.controls,
-    decimalSeparator: obj.decimalSeparator,
-    keyboard: obj.keyboard,
-    max: obj.max,
-    min: obj.min,
-    precision: obj.precision,
-    step: obj.step,
-    stringMode: obj.stringMode,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      bordered: obj.bordered,
+      disabled: obj.behavior === 'disabled',
+      placeholder: obj.placeholder,
+      size: obj.size,
+      addonBefore: obj.addonBefore,
+      addonAfter: obj.addonAfter,
+      controls: obj.controls,
+      decimalSeparator: obj.decimalSeparator,
+      keyboard: obj.keyboard,
+      max: obj.max,
+      min: obj.min,
+      precision: obj.precision,
+      step: obj.step,
+      stringMode: obj.stringMode,
+    };
+  }),
+);
 </script>
 
 <script lang="ts">

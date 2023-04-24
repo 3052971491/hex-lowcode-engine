@@ -1,14 +1,10 @@
 import type { LowCode } from '/@/types/schema.d';
 import { computed, ComputedRef, Ref, onMounted, inject, unref } from 'vue';
-
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
-import { Context } from '/@/utils/utils';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import { ElementInstanceInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
-import { HexCoreFactory } from '../../central/useHexCore';
 import { Fn } from '/@/types/value-type';
 import { useI18n } from './useI18n';
-import { forIn } from 'lodash-es';
 
 interface Props<T> {
   schema: T;
@@ -44,8 +40,9 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
     // 每次初始化将会重新实例化, 解决历史Schema与新Schema不同步问题
     return new Scheme(props.schema);
   });
+  registerInstance();
 
-  const ectypeProps = (fn: Fn) => {
+  function ectypeProps(fn: Fn) {
     const obj = unref(ectype).props;
     if (!obj) return {};
     const opt: any = {};
@@ -58,7 +55,7 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
           if (element.events.length > 0) {
             element.events.forEach(({ name }: { name: string }) => {
               if (core?.state.__js__[name]) {
-                opt[key] = core.state.__js__[name];
+                opt[key] = core.state.__js__[name].bind(core.context());
               }
             });
           }
@@ -67,7 +64,7 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
     }
 
     // 多语言转换
-    const result = fn(obj);
+    const result = fn(ectype.value.props);
     for (const key in result) {
       if (Object.prototype.hasOwnProperty.call(result, key)) {
         const element = result[key];
@@ -78,18 +75,16 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
     return {
       ...opt,
     };
-  };
+  }
 
   function registerEvent() {}
 
   function registerOnCreated(__instance__: InstanceCoreFactory | undefined) {
-    if (!__instance__) return;
-    const __this__ = new Context<T>(__instance__);
+    // if (!__instance__) return;
   }
 
   function registerOnMounted(__instance__: InstanceCoreFactory | undefined) {
-    if (!__instance__) return;
-    const __this__ = new Context<T>(__instance__);
+    // if (!__instance__) return;
   }
 
   function registerInstance() {
@@ -103,7 +98,6 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
     }
   }
 
-  registerInstance();
   registerOnCreated(elementInstance);
   onMounted(() => {
     registerOnMounted(elementInstance);
@@ -112,7 +106,7 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
 
   return {
     ectype,
-    ectypeProps,
+    ectypeProps: unref(ectypeProps),
     registerEvent,
     registerOnCreated,
     registerOnMounted,

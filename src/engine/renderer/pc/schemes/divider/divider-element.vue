@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema';
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
@@ -29,15 +29,17 @@ const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.DividerSchema>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    type: obj.type,
-    dashed: obj.dashed,
-    orientation: obj.orientation,
-    plain: obj.plain,
-    // orientationMargin: `${obj.orientationMargin}px`,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      type: obj.type,
+      dashed: obj.dashed,
+      orientation: obj.orientation,
+      plain: obj.plain,
+      // orientationMargin: `${obj.orientationMargin}px`,
+    };
+  }),
+);
 </script>
 
 <script lang="ts">

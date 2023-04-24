@@ -44,16 +44,18 @@ const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.CollapseScheme>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    accordion: obj.accordion,
-    bordered: obj.bordered,
-    collapsible: obj.collapsible,
-    destroyInactivePanel: obj.destroyInactivePanel,
-    expandIconPosition: obj.expandIconPosition,
-    ghost: obj.ghost,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      accordion: obj.accordion,
+      bordered: obj.bordered,
+      collapsible: obj.collapsible,
+      destroyInactivePanel: obj.destroyInactivePanel,
+      expandIconPosition: obj.expandIconPosition,
+      ghost: obj.ghost,
+    };
+  }),
+);
 
 const activeKey = ref<string | string[]>('');
 

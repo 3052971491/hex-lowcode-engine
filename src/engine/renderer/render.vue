@@ -25,6 +25,7 @@ import {
   ElementInstanceInjectionKey,
 } from './render-inject-key';
 import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
+import { Context } from '/@/utils/utils';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -73,20 +74,21 @@ if (props.redactState) {
   }
 }
 
+onMounted(() => {
+  nextTick(() => {
+    pageSpinning.value = false;
+  });
+});
 provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
 provide(ElementInstanceInjectionKey, instanceCore);
 
-onMounted(() => {
-  nextTick(() => {
-    setTimeout(() => {
-      pageSpinning.value = false;
-      if (!props.redactState) {
-        registerGlobalStyle(core?.state.__css__);
-      }
-    }, 50);
-  });
-});
+if (!props.redactState && core?.state) {
+  registerGlobalStyle(core?.state.__css__);
+  const __this__ = new Context(instanceCore!);
+  core.state.__this__ = __this__;
+}
+
 onBeforeUnmount(() => {
   if (!props.redactState) {
     removeGlobalStyle();

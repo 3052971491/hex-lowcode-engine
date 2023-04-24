@@ -44,14 +44,16 @@ const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.RowScheme>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    align: obj.align,
-    justify: obj.justify,
-    wrap: obj.wrap,
-    gutter: [`${obj.rowGutter}`, `${obj.columnGutter}`],
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      align: obj.align,
+      justify: obj.justify,
+      wrap: obj.wrap,
+      gutter: [`${obj.rowGutter}`, `${obj.columnGutter}`],
+    };
+  }),
+);
 
 const classMap = computed(() => {
   if (!redactState) return [];

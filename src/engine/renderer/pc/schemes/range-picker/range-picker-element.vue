@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { defineComponent, inject, ref } from 'vue';
+import { computed, defineComponent, inject, ref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
@@ -39,46 +39,50 @@ const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.RangePickerScheme>(props, __instance__);
 const { modelValue } = useElementDataEngine<PcSchema.RangePickerScheme>(props.schema, dataEngine);
 
-const prop = ectypeProps((obj) => {
-  return {
-    allowClear: obj.allowClear,
-    bordered: obj.bordered,
-    disabled: obj.behavior === 'disabled',
-    placeholder: obj.placeholder,
-    size: obj.size,
-    format: obj.format,
-    valueFormat: obj.valueFormat,
-    disabledDate: (current: Dayjs) => {
-      if (!obj.disabledDate) {
-        return false;
-      }
-      if (obj.disabledDate === 'afterToday') {
-        return current && current < dayjs().endOf('day').subtract(1, 'day');
-      }
-      if (obj.disabledDate === 'beforeToday') {
-        return current && current > dayjs().endOf('day');
-      }
-      if (obj.disabledDate.type === 'interselectable') {
-        const { start, end } = obj.disabledDate;
-        if (start && end) {
-          return dayjs(current).unix() < dayjs(start).unix() || dayjs(current).unix() > dayjs(end).add(1, 'day').unix();
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      allowClear: obj.allowClear,
+      bordered: obj.bordered,
+      disabled: obj.behavior === 'disabled',
+      placeholder: obj.placeholder,
+      size: obj.size,
+      format: obj.format,
+      valueFormat: obj.valueFormat,
+      disabledDate: (current: Dayjs) => {
+        if (!obj.disabledDate) {
+          return false;
         }
-        if (start && !end) {
-          return dayjs(current).unix() < dayjs(start).unix();
+        if (obj.disabledDate === 'afterToday') {
+          return current && current < dayjs().endOf('day').subtract(1, 'day');
         }
-        if (!start && end) {
-          return dayjs(current).unix() > dayjs(end).add(1, 'day').unix();
+        if (obj.disabledDate === 'beforeToday') {
+          return current && current > dayjs().endOf('day');
         }
-        return false;
-      }
+        if (obj.disabledDate.type === 'interselectable') {
+          const { start, end } = obj.disabledDate;
+          if (start && end) {
+            return (
+              dayjs(current).unix() < dayjs(start).unix() || dayjs(current).unix() > dayjs(end).add(1, 'day').unix()
+            );
+          }
+          if (start && !end) {
+            return dayjs(current).unix() < dayjs(start).unix();
+          }
+          if (!start && end) {
+            return dayjs(current).unix() > dayjs(end).add(1, 'day').unix();
+          }
+          return false;
+        }
 
-      return false;
-    },
-    mode: [obj.picker, obj.picker],
-    picker: obj.picker,
-    showTime: obj.showTime,
-  };
-});
+        return false;
+      },
+      mode: [obj.picker, obj.picker],
+      picker: obj.picker,
+      showTime: obj.showTime,
+    };
+  }),
+);
 </script>
 
 <script lang="ts">

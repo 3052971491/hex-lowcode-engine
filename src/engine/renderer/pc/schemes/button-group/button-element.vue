@@ -29,16 +29,18 @@ const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.ButtonSchema>(props, __instance__);
 
-const prop = ectypeProps((obj) => {
-  return {
-    type: obj.type,
-    block: obj.block,
-    ghost: obj.ghost,
-    size: obj.size,
-    danger: obj.danger,
-    loading: obj.loading,
-  };
-});
+const prop = computed(() =>
+  ectypeProps((obj) => {
+    return {
+      type: obj.type,
+      block: obj.block,
+      ghost: obj.ghost,
+      size: obj.size,
+      danger: obj.danger,
+      loading: obj.loading,
+    };
+  }),
+);
 
 const classMap = computed(() => {
   const arr = [];
