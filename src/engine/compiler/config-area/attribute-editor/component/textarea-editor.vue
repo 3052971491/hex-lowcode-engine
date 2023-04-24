@@ -34,17 +34,17 @@ const modelValue = computed({
       isNil(schema.value.props[props.attribute]) ||
       Object.prototype.toString.call(schema.value.props[props.attribute]) === '[object String]'
     ) {
-      set(props.attribute, val, schema.value);
+      set(props.attribute, val, schema.value, core?.state.projectConfig);
       return;
     }
     if (props.option.i18n) {
       const obj = get(props.attribute, schema.value) as any;
       // 获取当前语种
       obj['zh-CN'] = val;
-      set(props.attribute, obj, schema.value);
+      set(props.attribute, obj, schema.value, core?.state.projectConfig);
       return;
     }
-    set(props.attribute, val, schema.value);
+    set(props.attribute, val, schema.value, core?.state.projectConfig);
   },
   get() {
     const val: any = get(props.attribute, schema.value);

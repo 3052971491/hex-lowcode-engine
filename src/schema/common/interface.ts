@@ -31,7 +31,7 @@ export namespace PcSchema {
 
   export interface ButtonSchemaProps extends LowCode.NodeSchemaProps {
     /** 名称 */
-    title: string;
+    title: I18n;
     /** 按钮类型 */
     type: 'primary' | 'dashed' | 'link' | 'text' | 'default';
     /** 将按钮宽度调整为其父宽度的选项 */
@@ -48,7 +48,7 @@ export namespace PcSchema {
 
   export interface DividerSchemaProps extends LowCode.NodeSchemaProps {
     /** 内容 */
-    content: string;
+    content: I18n;
     /** 水平还是垂直类型 */
     type: 'horizontal' | 'vertical';
     /** 是否虚线 */
@@ -416,7 +416,7 @@ export namespace PcSchema {
 
   export interface CardSchemeProps extends LowCode.NodeSchemaProps {
     /** 卡片标题 */
-    title: string;
+    title: I18n;
     /** 是否有边框 */
     bordered: boolean;
     /** 鼠标移过时可浮起 */
@@ -467,7 +467,7 @@ export namespace PcSchema {
 
   export interface CollapsePanelSchemeProps extends LowCode.NodeSchemaProps {
     /** 	面板头内容 */
-    header: string;
+    header: I18n;
     /** 对应 activeKey */
     key: string | number | null;
     /** 被隐藏时是否渲染 DOM 结构 */
@@ -485,7 +485,7 @@ export namespace PcSchema {
 
   export interface TabsSchemeProps extends LowCode.NodeSchemaProps {
     /** 默认值 */
-    defaultValue: string;
+    defaultValue: I18n;
     /** 页签基本样式 */
     type: 'line' | 'card';
     /** 是否使用动画切换 Tabs，在 tabPosition="top" | "bottom" 时有效 */
@@ -511,7 +511,7 @@ export namespace PcSchema {
 
   export interface TabPaneSchemeProps extends LowCode.NodeSchemaProps {
     /** 	选项卡头显示文字 */
-    tab: string;
+    tab: I18n;
     /** 对应 activeKey */
     value: string;
     /** 被隐藏时是否渲染 DOM 结构 */

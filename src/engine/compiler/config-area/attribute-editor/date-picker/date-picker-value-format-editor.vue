@@ -33,7 +33,7 @@ const schema = computed(() => {
 });
 const modelValue = computed({
   set(val: string) {
-    set(props.attribute, val, schema.value);
+    set(props.attribute, val, schema.value, core?.state.projectConfig);
   },
   get() {
     if (isArray(get(props.attribute, schema.value))) {

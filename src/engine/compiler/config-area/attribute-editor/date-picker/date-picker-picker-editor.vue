@@ -30,7 +30,7 @@ const schema = computed(() => {
 });
 const modelValue = computed({
   set(val: string) {
-    set(props.attribute, val, schema.value);
+    set(props.attribute, val, schema.value, core?.state.projectConfig);
   },
   get() {
     return get(props.attribute, schema.value);
@@ -39,14 +39,14 @@ const modelValue = computed({
 
 const handleChange = (value: string) => {
   if (value === 'year') {
-    set('format', 'YYYY', schema.value);
-    set('valueFormat', 'YYYY', schema.value);
+    set('format', 'YYYY', schema.value, core?.state.projectConfig);
+    set('valueFormat', 'YYYY', schema.value, core?.state.projectConfig);
   } else if (value === 'month') {
-    set('format', 'MM', schema.value);
-    set('valueFormat', 'MM', schema.value);
+    set('format', 'MM', schema.value, core?.state.projectConfig);
+    set('valueFormat', 'MM', schema.value, core?.state.projectConfig);
   } else if (value === 'date') {
-    set('format', 'YYYY-MM-DD', schema.value);
-    set('valueFormat', 'YYYY-MM-DD', schema.value);
+    set('format', 'YYYY-MM-DD', schema.value, core?.state.projectConfig);
+    set('valueFormat', 'YYYY-MM-DD', schema.value, core?.state.projectConfig);
   }
 };
 </script>

@@ -66,9 +66,9 @@ const modelValue = computed({
         start: unref(start),
         end: unref(end),
       };
-      set(props.attribute, obj, schema.value);
+      set(props.attribute, obj, schema.value, core?.state.projectConfig);
     } else {
-      set(props.attribute, val, schema.value);
+      set(props.attribute, val, schema.value, core?.state.projectConfig);
     }
   },
   get() {
@@ -84,6 +84,6 @@ const handleChange = () => {
     start: unref(start),
     end: unref(end),
   };
-  set(props.attribute, obj, schema.value);
+  set(props.attribute, obj, schema.value, core?.state.projectConfig);
 };
 </script>

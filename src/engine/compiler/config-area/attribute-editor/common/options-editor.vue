@@ -76,7 +76,7 @@ const schema = computed(() => {
 });
 const modelValue = computed<RadioGroupChildOption[]>({
   set(val) {
-    set('options', val, schema.value);
+    set('options', val, schema.value, core?.state.projectConfig);
   },
   get() {
     return schema.value.props?.options ?? [];
@@ -85,7 +85,7 @@ const modelValue = computed<RadioGroupChildOption[]>({
 
 const defaultValue = computed<any[]>({
   set(val) {
-    set('defaultValue', val, schema.value);
+    set('defaultValue', val, schema.value, core?.state.projectConfig);
   },
   get() {
     return schema.value.props?.defaultValue ?? null;

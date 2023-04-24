@@ -119,7 +119,6 @@ import { cloneDeep } from 'lodash';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
-import { set, get } from '/@/utils/schema';
 import HexModal from '/@/components/hex-modal/index.vue';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
