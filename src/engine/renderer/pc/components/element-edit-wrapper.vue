@@ -43,7 +43,7 @@
     <!-- 是否a-form-item包裹 -->
     <template v-if="schema?.formItemFlag">
       <a-form-item :rules="getRules()">
-        <template #label> {{ schema.props?.label }} </template>
+        <template #label> {{ label }} </template>
         <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
         <!-- <template #help></template> -->
         <slot></slot>
@@ -65,6 +65,7 @@ import {
 } from '/@/engine/renderer/render-inject-key';
 import { CopyOutlined, DeleteOutlined, SelectOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
+import { useI18n } from '../hooks/useI18n';
 
 interface Props {
   schema: LowCode.Schema;
@@ -91,6 +92,11 @@ const breadcrumbsArr = computed(() => {
 
 const { getRules, onCopy, onDelete } = useFormItem(props.schema, props);
 getRules();
+
+const { getI18n } = useI18n(core?.state.projectConfig);
+const label = computed(() => {
+  return getI18n(props.schema.props?.label);
+});
 
 const isSelect = computed(() => {
   if (!redactState || !selectedScheme.value || !props.schema) return false;

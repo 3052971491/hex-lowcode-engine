@@ -159,10 +159,11 @@ const handleCreateI18nClick = () => {
     {
       type: 'i18n',
       key: id,
-      'zh-CN': null,
-      'en-US': null,
+      'zh-CN': '',
+      'en-US': '',
     },
     schema.value,
+    core?.state.projectConfig,
   );
   if (core?.state.projectConfig?.i18n) {
     core.state.projectConfig.i18n['zh-CN'][id] = '';
@@ -173,7 +174,6 @@ const updateI18nByEn = computed({
   set(val: string) {
     const obj = get(props.name, schema.value);
     obj['en-US'] = val;
-    set(props.name, obj, schema.value);
     if (core?.state.projectConfig?.i18n) {
       core.state.projectConfig.i18n['en-US'][obj.key] = val;
     }
@@ -182,12 +182,10 @@ const updateI18nByEn = computed({
     return get(props.name, schema.value)['en-US'];
   },
 });
-
 const updateI18nByZh = computed({
   set(val: string) {
     const obj = get(props.name, schema.value);
     obj['zh-CN'] = val;
-    set(props.name, obj, schema.value);
     if (core?.state.projectConfig?.i18n) {
       core.state.projectConfig.i18n['zh-CN'][obj.key] = val;
     }
@@ -200,7 +198,9 @@ const updateI18nByZh = computed({
 /** 解除文案关联 */
 const handleDeleteControlClick = () => {
   filterText.value = '';
-  set(props.name, null, schema.value);
+  if (schema.value?.props) {
+    schema.value.props[props.name] = '';
+  }
   i18nPopconfirm.value = false;
 };
 
@@ -216,6 +216,7 @@ const handleSelectI18nClick = (item: any) => {
       'en-US': item['en-US'],
     },
     schema.value,
+    core?.state.projectConfig,
   );
 };
 </script>
