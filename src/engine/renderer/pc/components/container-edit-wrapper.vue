@@ -80,6 +80,7 @@ getRules();
 
 const isSelect = computed(() => {
   if (!redactState || !selectedScheme.value || !props.schema) return false;
+  if (props.schema.componentType === 'Modal') return false;
   return props.schema.id === selectedScheme.value.id;
 });
 

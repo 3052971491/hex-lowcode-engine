@@ -23,6 +23,11 @@ interface StateType {
     selectedId: string;
     /** 组件节点描述 */
     selectedScheme?: LowCode.Schema | null;
+    /**
+     * 选中的模态框节点描述
+     * @description 用于模态框设计器
+     */
+    selectedModalScheme?: LowCode.Schema | null;
     /** 面包屑 */
     breadcrumbs: LowCode.Schema[];
   };
@@ -31,6 +36,8 @@ interface StateType {
   };
   __css__: string;
   __this__: Context | undefined;
+  /** 是否是模态框设计器 */
+  __isModalDesigner__: boolean;
 }
 
 export interface HexCoreFactory {
@@ -83,6 +90,8 @@ export interface HexCoreFactory {
   handleUpdateBreadcrumbs(schemas?: LowCode.Schema[]): void;
   /** 更新选中组件节点信息 */
   handleUpdateSelectData(element?: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
+  /** 更新选中模态框组件节点信息 */
+  handleUpdateModalSelectData(element?: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void;
   /**
    * JS-API 运行时上下文
    * @returns
@@ -97,6 +106,7 @@ export function useHexCore(): HexCoreFactory {
     __js__: {},
     __css__: '',
     __this__: undefined,
+    __isModalDesigner__: false,
   });
 
   buildProjectConfig();
@@ -276,6 +286,20 @@ export function useHexCore(): HexCoreFactory {
     }
   }
 
+  function handleUpdateModalSelectData(element: LowCode.Schema, breadcrumbs?: LowCode.Schema[]): void {
+    if (isNil(element)) {
+      handleResetSelectData();
+      return;
+    }
+    if (state.selectedData) {
+      state.selectedData.selectedModalScheme = element;
+
+      if (breadcrumbs) {
+        handleUpdateBreadcrumbs(breadcrumbs);
+      }
+    }
+  }
+
   function context() {
     return state.__this__;
   }
@@ -300,6 +324,7 @@ export function useHexCore(): HexCoreFactory {
     handleResetSelectData,
     handleUpdateBreadcrumbs,
     handleUpdateSelectData,
+    handleUpdateModalSelectData,
     context,
   };
 }

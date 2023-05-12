@@ -551,4 +551,12 @@ export namespace PcSchema {
     /** 是否显示footer */
     footer: boolean;
   }
+
+  export interface ModalContentSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+  }
+
+  export interface ModalFooterSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+  }
 }

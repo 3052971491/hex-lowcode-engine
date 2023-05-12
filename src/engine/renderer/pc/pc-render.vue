@@ -2,19 +2,38 @@
   <div class="pc-render w-full h-full">
     <!-- 编辑模式 -->
     <template v-if="redactState">
-      <hex-draggable v-model:value="modelValue.componentsTree" class="w-full h-full" @add="onAdd" @update="onUpdate">
-        <template #item="{ element, index }">
-          <div class="item hex-draggable-handle">
-            <component
-              :is="`${element.componentType}Element`"
-              :schema="element"
-              :parent-schema="modelValue"
-              :parent-schema-list="modelValue.componentsTree"
-              :index-of-parent-list="index"
-            ></component>
-          </div>
-        </template>
-      </hex-draggable>
+      <template v-if="!core?.state.__isModalDesigner__">
+        <hex-draggable v-model:value="modelValue.componentsTree" class="w-full h-full" @add="onAdd" @update="onUpdate">
+          <template #item="{ element, index }">
+            <div class="item hex-draggable-handle">
+              <component
+                :is="`${element.componentType}Element`"
+                :schema="element"
+                :parent-schema="modelValue"
+                :parent-schema-list="modelValue.componentsTree"
+                :index-of-parent-list="index"
+              ></component>
+            </div>
+          </template>
+        </hex-draggable>
+      </template>
+      <template v-else>
+        <PcModalDesigner
+          class="w-full h-full"
+          :schema="
+            modelValue.dialogComponentsTree.find(
+              (item) => item.id === core?.state.selectedData?.selectedModalScheme?.id,
+            )
+          "
+          :parent-schema="modelValue"
+          :parent-schema-list="modelValue.dialogComponentsTree"
+          :index-of-parent-list="
+            modelValue.dialogComponentsTree.findIndex(
+              (item) => item.id === core?.state.selectedData?.selectedModalScheme?.id,
+            )
+          "
+        />
+      </template>
     </template>
     <!-- 预览模式 -->
     <template v-else>
@@ -35,6 +54,7 @@
 import type { LowCode } from '/@/types/schema.d';
 import { computed, inject, provide, reactive } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
+import PcModalDesigner from './pc-modal-designer.vue';
 import { HexCoreInjectionKey, ComponentBreadcrumbs } from '/@/engine/renderer/render-inject-key';
 
 import { useComponentBreadcrumbs } from './hooks/useComponentBreadcrumbs';

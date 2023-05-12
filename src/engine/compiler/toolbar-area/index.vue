@@ -1,39 +1,49 @@
 <template>
   <div class="toolbar-area w-full flex justify-between">
-    <a-space class="ml-2">
-      <a-tooltip title="后退">
-        <a-button :disabled="core?.undoDisabled()" @click="core?.undoHistoryStep()">
-          <template #icon><undo-outlined /></template>
+    <template v-if="!core?.state.__isModalDesigner__">
+      <a-space class="ml-2">
+        <a-tooltip title="后退">
+          <a-button :disabled="core?.undoDisabled()" @click="core?.undoHistoryStep()">
+            <template #icon><undo-outlined /></template>
+          </a-button>
+        </a-tooltip>
+        <a-tooltip title="前进">
+          <a-button :disabled="core?.redoDisabled()" @click="core?.redoHistoryStep()">
+            <template #icon><redo-outlined /></template>
+          </a-button>
+        </a-tooltip>
+        <a-tooltip title="清空">
+          <a-button @click="handleClearClick">
+            <template #icon><delete-outlined /></template>
+          </a-button>
+        </a-tooltip>
+        <a-tooltip title="暂存">
+          <a-button @click="handleSaveClick">
+            <template #icon><cloud-upload-outlined /></template>
+          </a-button>
+        </a-tooltip>
+      </a-space>
+      <a-space class="mr-2 mt-2 mb-2">
+        <a-tooltip title="预览">
+          <a-button @click="handlePreviewClick">
+            <template #icon><play-circle-outlined /></template>
+          </a-button>
+        </a-tooltip>
+        <a-tooltip title="JSON 代码">
+          <a-button @click="handlePreviewJsonClick">
+            <template #icon><project-outlined /></template>
+          </a-button>
+        </a-tooltip>
+      </a-space>
+    </template>
+    <template v-else>
+      <a-space class="ml-2">模态框设计</a-space>
+      <a-space class="mr-2 mt-2 mb-2">
+        <a-button @click="handleExitModalDesignerClick">
+          <template #icon><RollbackOutlined /></template>
         </a-button>
-      </a-tooltip>
-      <a-tooltip title="前进">
-        <a-button :disabled="core?.redoDisabled()" @click="core?.redoHistoryStep()">
-          <template #icon><redo-outlined /></template>
-        </a-button>
-      </a-tooltip>
-      <a-tooltip title="清空">
-        <a-button @click="handleClearClick">
-          <template #icon><delete-outlined /></template>
-        </a-button>
-      </a-tooltip>
-      <a-tooltip title="暂存">
-        <a-button @click="handleSaveClick">
-          <template #icon><cloud-upload-outlined /></template>
-        </a-button>
-      </a-tooltip>
-    </a-space>
-    <a-space class="mr-2 mt-2 mb-2">
-      <a-tooltip title="预览">
-        <a-button @click="handlePreviewClick">
-          <template #icon><play-circle-outlined /></template>
-        </a-button>
-      </a-tooltip>
-      <a-tooltip title="JSON 代码">
-        <a-button @click="handlePreviewJsonClick">
-          <template #icon><project-outlined /></template>
-        </a-button>
-      </a-tooltip>
-    </a-space>
+      </a-space>
+    </template>
     <hex-modal v-model:visible="visible" :name="modalTitle" :is-footer="false">
       <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
       <hex-json-pretty v-else-if="modalType === ComponentTypeEnum.JSON_PREVIEW" v-model:value="element" />
@@ -50,6 +60,7 @@ import {
   DeleteOutlined,
   PlayCircleOutlined,
   ProjectOutlined,
+  RollbackOutlined,
 } from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
 import Render from '/@/engine/renderer/render.vue';
@@ -93,6 +104,13 @@ function handleSaveClick() {
 function handleClearClick() {
   core?.clear();
   // core?.handleUpdateHistoryData();
+}
+
+function handleExitModalDesignerClick() {
+  if (core) {
+    core.state.__isModalDesigner__ = false;
+    core.handleResetSelectData();
+  }
 }
 </script>
 

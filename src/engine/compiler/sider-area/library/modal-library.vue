@@ -14,7 +14,7 @@
             <a-list-item>
               <a-list-item-meta :description="item.description || '--'">
                 <template #title>
-                  <a href="#">{{ item.props.title }}</a>
+                  <a href="#" @click="handleGoToModalDesigner(item)">{{ item.props.title }}</a>
                 </template>
               </a-list-item-meta>
               <template #actions>
@@ -58,7 +58,7 @@ const state = reactive<{
   info: undefined!,
 });
 
-const { text, copy, copied, isSupported } = useClipboard();
+const { copy } = useClipboard();
 
 const visible = ref(false);
 const modalTitle = ref('');
@@ -70,8 +70,15 @@ const modalList = computed(() => {
 
 /** 新增模态框或者抽屉 */
 function onAdd() {
-  const result = buildElementSchemaByType('ADVANCED', 'Modal') as PcSchema.ModalSchema;
+  // 模态框
+  const result = buildElementSchemaByType('LAYOUT', 'Modal') as PcSchema.ModalSchema;
+
   if (result) {
+    // 内容区
+    const content = buildElementSchemaByType('LAYOUT', 'ModalContent') as PcSchema.ModalContentSchema;
+    // 操作区
+    const footer = buildElementSchemaByType('LAYOUT', 'ModalFooter') as PcSchema.ModalFooterSchema;
+    result.children.push(content, footer);
     state.info = result;
     visible.value = !visible.value;
     modalTitle.value = '新增模态框';
@@ -97,6 +104,7 @@ function handleDelete(result: PcSchema.ModalSchema) {
   if (core?.state.projectConfig) {
     const index = core.state.projectConfig.dialogComponentsTree.findIndex((item) => item.id === result.id);
     if (index !== -1) {
+      core.state.__isModalDesigner__ = false;
       core.state.projectConfig.dialogComponentsTree.splice(index, 1);
       core?.saveCurrentHistoryData();
     }
@@ -122,6 +130,15 @@ function handleOk() {
     core?.saveCurrentHistoryData();
     visible.value = !visible.value;
   });
+}
+
+/** 进入模态框设计页面 */
+function handleGoToModalDesigner(result: PcSchema.ModalSchema) {
+  if (core) {
+    core.state.__isModalDesigner__ = true;
+    core.handleUpdateModalSelectData(result, [result]);
+    core?.handleUpdateSelectData(result, [result]);
+  }
 }
 const loading = ref(true);
 onMounted(() => {

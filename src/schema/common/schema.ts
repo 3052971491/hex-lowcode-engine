@@ -27,6 +27,8 @@ export enum ComponentType {
   'TabPane' = 'TabPane',
   'Form' = 'Form',
   'Modal' = 'Modal',
+  'ModalContent' = 'ModalContent',
+  'ModalFooter' = 'ModalFooter',
 }
 
 export class Text extends Scheme<PcSchema.TextSchema> {
@@ -824,7 +826,7 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
 
   constructor() {
     super();
-    this.tag = 'ADVANCED';
+    this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
     this.componentName = '模态框';
     this.componentType = ComponentType.Modal;
@@ -837,6 +839,30 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
       className: '',
       __style__: '',
     };
+  }
+}
+
+export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/modal-cn';
+    this.componentName = '模态框-内容区';
+    this.componentType = ComponentType.ModalContent;
+    this.children = [];
+    this.internal = false;
+  }
+}
+
+export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
+  constructor() {
+    super();
+    this.tag = 'LAYOUT';
+    this.docUrl = 'https://www.antdv.com/components/modal-cn';
+    this.componentName = '模态框-操作区';
+    this.componentType = ComponentType.ModalFooter;
+    this.children = [];
+    this.internal = false;
   }
 }
 
@@ -864,4 +890,6 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
   [ComponentType.Modal, new Modal() as any],
+  [ComponentType.ModalContent, new ModalContent() as any],
+  [ComponentType.ModalFooter, new ModalFooter() as any],
 ]);
