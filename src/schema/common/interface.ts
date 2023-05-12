@@ -485,7 +485,7 @@ export namespace PcSchema {
 
   export interface TabsSchemeProps extends LowCode.NodeSchemaProps {
     /** 默认值 */
-    defaultValue: I18n;
+    defaultValue: string;
     /** 页签基本样式 */
     type: 'line' | 'card';
     /** 是否使用动画切换 Tabs，在 tabPosition="top" | "bottom" 时有效 */
