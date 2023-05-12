@@ -11,7 +11,11 @@
   >
     <template #title>
       <div class="hex-modal-title flex justify-between items-center">
-        <div>{{ name }}</div>
+        <div>
+          <slot name="title">
+            {{ name }}
+          </slot>
+        </div>
         <div class="flex justify-between items-center">
           <fullscreen-exit-outlined v-if="fullscreen" class="svg-icon" @click="handleCloseFullScreenClick" />
           <fullscreen-outlined v-else class="svg-icon" @click="handleOpenFullScreenClick" />
@@ -22,8 +26,10 @@
     <slot></slot>
     <template #footer>
       <template v-if="isFooter">
-        <a-button @click="handleCancelClick">取消</a-button>
-        <a-button type="primary" @click="handleOkClick">确认</a-button>
+        <slot name="footer">
+          <a-button @click="handleCancelClick">取消</a-button>
+          <a-button type="primary" @click="handleOkClick">确认</a-button>
+        </slot>
       </template>
     </template>
   </modal>
