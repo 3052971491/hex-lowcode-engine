@@ -171,7 +171,7 @@ export namespace LowCode {
     /**
      * 弹框节点树
      */
-    dialogComponentsTree: DialogSchema[];
+    dialogComponentsTree: Schema[];
     /** 编译前全量代码 */
     originCode: string;
     /**
@@ -192,18 +192,6 @@ export namespace LowCode {
     lifeCycles?: {
       [key: string]: JSExpression | JSFunction;
     };
-  }
-
-  /** 弹出框节点描述 */
-  export interface DialogSchema {
-    /** 组件唯一标识 */
-    id: string;
-    /** 类型 */
-    type: DialogType;
-    /** 弹框名称 */
-    name: string;
-    /** 组件节点树 */
-    componentsTree: Schema[];
   }
 
   /**

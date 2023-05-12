@@ -5,49 +5,123 @@
         <a-input-search class="w-full" placeholder="搜索" enter-button></a-input-search>
         <a-button type="primary" @click="onAdd">添加</a-button>
       </a-space>
-      <div v-if="state.list.length < 1" class="w-full p-3">
+      <div v-if="modalList.length < 1" class="w-full p-3">
         <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
       </div>
       <template v-else>
-        <a-list item-layout="vertical" :data-source="state.list" class="overflow-auto">
+        <a-list item-layout="vertical" :data-source="modalList" class="overflow-auto">
           <template #renderItem="{ item }">
             <a-list-item>
-              <a-list-item-meta :description="item.description">
+              <a-list-item-meta :description="item.description || '--'">
                 <template #title>
-                  <a href="#">{{ item.title }}</a>
+                  <a href="#">{{ item.props.title }}</a>
                 </template>
               </a-list-item-meta>
               <template #actions>
-                <CopyOutlined />
-                <EditOutlined />
-                <DeleteOutlined />
+                <CopyOutlined class="cursor-pointer" @click="handleCopy(item)" />
+                <EditOutlined class="cursor-pointer" @click="handleEdit(item)" />
+                <a-popconfirm ok-text="确认" cancel-text="取消" placement="right" @confirm="handleDelete(item)">
+                  <template #title>
+                    <div>确认是否删除该模态框?</div>
+                  </template>
+                  <DeleteOutlined class="cursor-pointer" />
+                </a-popconfirm>
               </template>
             </a-list-item>
           </template>
         </a-list>
       </template>
     </a-skeleton>
+    <hex-modal v-model:visible="visible" :name="modalTitle" @ok="handleOk">
+      <CreateOrUpdateModalInfo ref="modalInfo" :data="state.info"></CreateOrUpdateModalInfo>
+    </hex-modal>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, inject, onMounted, reactive, ref, watch } from 'vue';
-import type { LowCode } from '/@/types/schema.d';
-import { Empty } from 'ant-design-vue';
+import { Empty, message } from 'ant-design-vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { DeleteOutlined, EditOutlined, CopyOutlined } from '@ant-design/icons-vue';
+import HexModal from '/@/components/hex-modal/index.vue';
+import { useClipboard } from '@vueuse/core';
+import CreateOrUpdateModalInfo from './create-or-update-modal-info.vue';
+import { buildElementSchemaByType } from '/@/utils/draggable-api';
+import { PcSchema } from '/@/schema/common/interface';
 
 const core = inject(HexCoreInjectionKey);
-const state = reactive({
+const state = reactive<{
+  type: string;
+  info: PcSchema.ModalSchema;
+}>({
   type: '',
-  list: [] as any[],
+  info: undefined!,
 });
+
+const { text, copy, copied, isSupported } = useClipboard();
+
+const visible = ref(false);
+const modalTitle = ref('');
+const modalInfo = ref();
+
+const modalList = computed(() => {
+  return core?.state?.projectConfig?.dialogComponentsTree ?? [];
+});
+
 /** 新增模态框或者抽屉 */
 function onAdd() {
-  state.list.push(
-    { id: 'Model_qw9j1hi', title: '用户新增模态框', description: '用于新增用户和编辑用户的弹框' },
-    { id: 'Model_hj9j4ho', title: '菜单新增模态框', description: '--' },
-  );
+  const result = buildElementSchemaByType('ADVANCED', 'Modal') as PcSchema.ModalSchema;
+  if (result) {
+    state.info = result;
+    visible.value = !visible.value;
+    modalTitle.value = '新增模态框';
+  } else {
+    message.error('创建模态款失败, 请联系管理员');
+  }
+}
+
+/** 编辑模态框或者抽屉 */
+function handleEdit(result: PcSchema.ModalSchema) {
+  state.info = result;
+  visible.value = !visible.value;
+  modalTitle.value = '编辑模态框';
+}
+
+function handleCopy(result: PcSchema.ModalSchema) {
+  const { id } = result;
+  copy(id);
+  message.success(`已复制到系统剪贴板: ${id}`);
+}
+
+function handleDelete(result: PcSchema.ModalSchema) {
+  if (core?.state.projectConfig) {
+    const index = core.state.projectConfig.dialogComponentsTree.findIndex((item) => item.id === result.id);
+    if (index !== -1) {
+      core.state.projectConfig.dialogComponentsTree.splice(index, 1);
+      core?.saveCurrentHistoryData();
+    }
+  }
+}
+
+function handleOk() {
+  modalInfo.value.validate().then((res: PcSchema.ModalSchema) => {
+    if (core?.state.projectConfig) {
+      const index = core.state.projectConfig.dialogComponentsTree.findIndex((item) => item.id === res.id);
+      if (index === -1) {
+        // 新增
+        core.state.projectConfig.dialogComponentsTree.push(res);
+      } else {
+        // 编辑
+        const obj = core.state.projectConfig?.dialogComponentsTree[index];
+        if (obj.props && obj.props.title) {
+          obj.props.title = res.props.title;
+        }
+        obj.description = res.description;
+      }
+    }
+    core?.saveCurrentHistoryData();
+    visible.value = !visible.value;
+  });
 }
 const loading = ref(true);
 onMounted(() => {

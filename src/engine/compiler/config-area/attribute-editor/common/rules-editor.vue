@@ -85,7 +85,7 @@ const modelValue = computed<LowCode.RuleMap>({
   },
 });
 </script>
-<style lang="less">
+<!-- <style lang="less">
 .ant-popover-message {
   padding: 0;
 
@@ -93,7 +93,7 @@ const modelValue = computed<LowCode.RuleMap>({
     padding-left: 0;
   }
 }
-</style>
+</style> -->
 <style lang="less" scoped>
 .validation {
   .validation-rule-item {

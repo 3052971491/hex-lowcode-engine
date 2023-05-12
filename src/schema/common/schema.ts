@@ -26,6 +26,7 @@ export enum ComponentType {
   'Tabs' = 'Tabs',
   'TabPane' = 'TabPane',
   'Form' = 'Form',
+  'Modal' = 'Modal',
 }
 
 export class Text extends Scheme<PcSchema.TextSchema> {
@@ -818,6 +819,27 @@ export class Form extends Scheme<PcSchema.FormSchema> {
   }
 }
 
+export class Modal extends Scheme<PcSchema.ModalSchema> {
+  props: PcSchema.ModalSchemaProps;
+
+  constructor() {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = 'https://www.antdv.com/components/modal-cn';
+    this.componentName = '模态框';
+    this.componentType = ComponentType.Modal;
+    this.children = [];
+    this.internal = false;
+    this.props = {
+      title: 'Basic Modal',
+      visible: false,
+      footer: false,
+      className: '',
+      __style__: '',
+    };
+  }
+}
+
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Text, new Text() as any],
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
@@ -841,4 +863,5 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Tabs, new Tabs() as any],
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
+  [ComponentType.Modal, new Modal() as any],
 ]);

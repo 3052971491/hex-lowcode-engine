@@ -537,4 +537,18 @@ export namespace PcSchema {
     /** label 标签的文本对齐方式 */
     labelAlign: 'left' | 'right';
   }
+
+  export interface ModalSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: ModalSchemaProps;
+  }
+
+  export interface ModalSchemaProps extends LowCode.NodeSchemaProps {
+    /** 标题 */
+    title: I18n;
+    /** 默认显示 */
+    visible: boolean;
+    /** 是否显示footer */
+    footer: boolean;
+  }
 }
