@@ -8,6 +8,7 @@
     <div
       ref="__instance__"
       class="w-full"
+      v-bind="privateProp"
       :class="[textWrapperStyle ? 'textWrapper' : '']"
       :title="prop.showTitle ? prop.content : ''"
     >
@@ -18,7 +19,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema';
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, toRefs } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
@@ -43,6 +44,8 @@ const prop = computed(() =>
     };
   }),
 );
+
+const privateProp = computed(() => ectypeProps(() => {}));
 
 const textWrapperStyle = computed(() => {
   return prop.value.maxLine >= 0;
