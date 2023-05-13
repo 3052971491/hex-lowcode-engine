@@ -5,6 +5,9 @@ import RegisterComponents from '/@/engine/renderer/register-components';
 import HexFormEditor from '/@/engine/compiler/designer.vue';
 import HexFormRender from '/@/engine/renderer/render.vue';
 
+// 全局注册模态框
+import setupModalHelper from '/@/utils/shared/modal-helper/modal-service';
+
 const components = [HexFormEditor, HexFormRender];
 
 HexFormEditor.install = (app: App): void => {
@@ -22,6 +25,7 @@ export const install = (app: App) => {
       app.component(`${component.name}`, component);
     }
   });
+  setupModalHelper.init(app);
   return {
     app,
   };

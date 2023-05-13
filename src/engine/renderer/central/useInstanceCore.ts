@@ -8,6 +8,8 @@ export interface InstanceCoreFactory {
   setInstance(instance: any): void;
   /** 获取组件实例 */
   getInstance(id: string): any;
+  /** 获取根实例 */
+  getRootInstance(): any;
 }
 
 export function useInstanceCore(): InstanceCoreFactory {
@@ -20,9 +22,20 @@ export function useInstanceCore(): InstanceCoreFactory {
     return instances.get(id);
   }
 
+  function getRootInstance() {
+    let instance = null;
+    instances.forEach((value, key: any) => {
+      if (key.includes('View_')) {
+        instance = getInstance(key);
+      }
+    });
+    return instance;
+  }
+
   return {
     instances,
     setInstance,
     getInstance,
+    getRootInstance,
   };
 }

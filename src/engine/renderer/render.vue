@@ -26,6 +26,7 @@ import {
 } from './render-inject-key';
 import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 import { Context } from '/@/utils/utils';
+import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -71,14 +72,18 @@ if (props.redactState) {
     // 运行JS-Function
     const result = run(modelValue.value?.originCode ?? '');
     core.state.__js__ = result;
+
+    // 注册模态框Schema
+    if (core.state.projectConfig.dialogComponentsTree.length > 0) {
+      core.state.projectConfig.dialogComponentsTree.forEach((item) => {
+        instanceCore?.setInstance(new Scheme(item));
+      });
+    }
+    // 注册当前视图实例
+    instanceCore?.setInstance(modelValue.value);
   }
 }
 
-onMounted(() => {
-  nextTick(() => {
-    pageSpinning.value = false;
-  });
-});
 provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
 provide(ElementInstanceInjectionKey, instanceCore);
@@ -93,6 +98,12 @@ onBeforeUnmount(() => {
   if (!props.redactState) {
     removeGlobalStyle();
   }
+});
+
+onMounted(() => {
+  nextTick(() => {
+    pageSpinning.value = false;
+  });
 });
 </script>
 
