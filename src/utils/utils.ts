@@ -35,7 +35,7 @@ export class Context {
    * @param opt模态框配置
    */
   showModal(modalId: string, props: any = {}, opt: any = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // 获取模态框Schema
       const component = this.$(modalId);
 
@@ -48,24 +48,30 @@ export class Context {
         }
       }
 
-      // 执行开启前回调
+      // todo 执行开启前回调
+
       // 开启弹框
       const { modalHelper } = useModal();
 
       // 获取视图实例
       const root = this.root();
 
-      modalHelper.value.create(
-        ModalContainer,
-        {
-          schema: component,
-          redactState: false,
-          projectSchema: root,
-        },
-        { title: '新增角色' },
-      );
+      modalHelper.value
+        .create(
+          ModalContainer,
+          {
+            schema: component,
+            redactState: false,
+            projectSchema: root,
+            ...props,
+          },
+          { title: component?.props.title },
+        )
+        .then((res) => {
+          resolve(res);
+        });
 
-      // 执行关闭后回调
+      // todo 执行关闭后回调
     });
   }
 }

@@ -39,11 +39,13 @@ import {
   ElementInstanceInjectionKey,
   ComponentBreadcrumbs,
 } from '/@/engine/renderer/render-inject-key';
+import { Modal } from '/@/schema/common/schema';
 import { useHexCore } from '../../../central/useHexCore';
 import { useInstanceCore } from '../../../central/useInstanceCore';
 import { useComponentBreadcrumbs } from '../../hooks/useComponentBreadcrumbs';
 import { Context } from '/@/utils/utils';
 import { run } from '/@/utils/func';
+import { PcSchema } from '/@/schema/common/interface';
 
 const props = defineProps<{
   modalRef: any;
@@ -62,6 +64,16 @@ provide(ElementInstanceInjectionKey, instanceCore);
 provide(ComponentBreadcrumbs, breadcrumbs);
 
 core.buildProjectConfig(props.projectSchema);
+
+const { success, close } = useModal(props);
+
+// 替换原型链
+Modal.prototype.close = close;
+Modal.prototype.success = success;
+const ectype = computed(() => {
+  return new Modal(props.schema as PcSchema.ModalSchema);
+});
+
 if (core.state.projectConfig) {
   // 运行JS-Function
   const result = run(props.projectSchema?.originCode ?? '');
@@ -72,6 +84,9 @@ if (core.state.projectConfig) {
 
   // 注册当前视图实例
   instanceCore?.setInstance(props.projectSchema);
+
+  // 注册当前实例
+  instanceCore?.setInstance(ectype.value);
 }
 
 const contentSchema = computed(() => {
@@ -81,7 +96,4 @@ const contentSchema = computed(() => {
 const footerSchema = computed(() => {
   return props.schema?.children && props.schema?.children[1];
 });
-
-const { success, close } = useModal(props);
-function onSubmit() {}
 </script>

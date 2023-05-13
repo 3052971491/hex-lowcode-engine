@@ -824,7 +824,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
-  constructor() {
+  constructor(_data?: PcSchema.ModalSchema) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
@@ -839,7 +839,17 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
+
+  close() {}
+
+  success() {}
 }
 
 export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
