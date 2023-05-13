@@ -2,7 +2,7 @@
   <div class="element-library">
     <a-skeleton active :loading="loading">
       <a-space class="w-full">
-        <a-input-search class="w-full" placeholder="搜索" enter-button></a-input-search>
+        <a-input-search v-model:value="filterText" class="w-full" placeholder="搜索" enter-button></a-input-search>
         <a-button type="primary" @click="onAdd">添加</a-button>
       </a-space>
       <div v-if="modalList.length < 1" class="w-full p-3">
@@ -59,13 +59,18 @@ const state = reactive<{
 });
 
 const { copy } = useClipboard();
+const filterText = ref('');
 
 const visible = ref(false);
 const modalTitle = ref('');
 const modalInfo = ref();
 
 const modalList = computed(() => {
-  return core?.state?.projectConfig?.dialogComponentsTree ?? [];
+  return (
+    core?.state?.projectConfig?.dialogComponentsTree.filter(
+      (item) => item.id.includes(filterText.value) || item?.props?.title.includes(filterText.value),
+    ) ?? []
+  );
 });
 
 /** 新增模态框或者抽屉 */
