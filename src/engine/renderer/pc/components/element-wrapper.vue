@@ -2,7 +2,7 @@
   <div class="element-wrapper" :class="[!redactState ? schema.props?.className : '']">
     <template v-if="isPreview">
       <ElementEditWrapper
-        v-if="schema?.tag !== 'LAYOUT'"
+        v-if="schema?.tag !== 'LAYOUT' && schema.componentType !== 'Form'"
         :schema="schema"
         :parent-schema="parentSchema"
         :parent-schema-list="parentSchemaList"
