@@ -7,7 +7,7 @@ export interface RuntimeDataSource {
   /** 数据源列表 */
   list: RuntimeDataSourceConfig[];
   /** 所有请求数据的处理函数 */
-  dataHandler: JSFunction;
+  dataHandler: JSFunction | undefined;
 }
 
 /** 数据源对象 */

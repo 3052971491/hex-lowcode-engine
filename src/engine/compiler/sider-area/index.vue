@@ -226,6 +226,7 @@ const handleIsClose = (isClose: boolean) => {
     position: absolute;
     top: calc(50% - 60px);
     right: -30px;
+    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;

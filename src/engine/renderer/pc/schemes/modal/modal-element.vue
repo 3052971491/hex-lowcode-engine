@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, computed } from 'vue';
+import { provide, computed, getCurrentInstance } from 'vue';
 import { LowCode } from '/@/types/schema';
 import useModal from '/@/utils/shared/modal-helper';
 
