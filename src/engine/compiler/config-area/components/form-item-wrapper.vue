@@ -1,12 +1,13 @@
 <template>
   <a-form-item :name="props.name" :colon="false" class="lc-field">
     <template #label>
-      <a-tooltip placement="top">
+      <a-tooltip v-if="tooltip" placement="top">
         <template #title>
           <span>{{ tips }}</span>
         </template>
         {{ props.label }}
       </a-tooltip>
+      <span v-else>{{ props.label }}</span>
     </template>
     <div class="flex items-center" style="color: #8f9bb3">
       <slot></slot>
@@ -93,10 +94,13 @@ interface Props {
   name: string;
   /** 属性配置 */
   option: AttributeItem;
+  /** 是否开启tooltip提示 */
+  tooltip?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   label: '',
   name: '',
+  tooltip: true,
 });
 
 const core = inject(HexCoreInjectionKey);

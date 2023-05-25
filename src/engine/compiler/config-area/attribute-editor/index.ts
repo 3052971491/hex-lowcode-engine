@@ -287,6 +287,7 @@ const FROM_ATTRIBUTE: Array<AttributeItem> = [
 
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
+  { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
 ];
 
 const BUTTON_ATTRIBUTE: Array<AttributeItem> = [

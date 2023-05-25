@@ -78,7 +78,7 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
     this.componentType = ComponentType.Button;
     this.internal = false;
     this.props = {
-      title: '',
+      title: 'Default Button',
       type: 'default',
       block: false,
       size: 'middle',
