@@ -172,6 +172,7 @@ const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'align', label: '垂直对齐方式', editor: 'align-editor', merge: true },
   { type: 'Row', name: 'justify', label: '水平排列方式', editor: 'justify-editor', merge: true },
   { type: 'Row', name: 'wrap', label: '自动换行', editor: 'switch-editor' },
+  { type: 'Row', name: 'children', label: '子集', editor: 'children-editor' },
 ];
 
 const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
@@ -228,6 +229,7 @@ const COLLAPSE_ATTRIBUTE: Array<AttributeItem> = [
     merge: true,
   },
   { type: 'Collapse', name: 'ghost', label: '幽灵模式', editor: 'switch-editor' },
+  { type: 'Collapse', name: 'children', label: '子集', editor: 'children-editor' },
   { type: 'Collapse', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
@@ -265,7 +267,8 @@ const TABS: Array<AttributeItem> = [
   { type: 'Tabs', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Tabs', name: 'tabBarGutter', label: '间隙', editor: 'input-number-editor' },
   { type: 'Tabs', name: 'tabPosition', label: '页签位置', editor: 'tab-position-editor', merge: true },
-  { type: 'Collapse', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+  { type: 'Tabs', name: 'children', label: '子集', editor: 'children-editor' },
+  { type: 'Tabs', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
 const TAB_PANE_ATTRIBUTE: Array<AttributeItem> = [

@@ -60,6 +60,15 @@ const handleAddOptionClick = () => {
     case 'ButtonGroup':
       element = buildElementSchemaByType('BASIC', 'Button');
       break;
+    case 'Row':
+      element = buildElementSchemaByType('LAYOUT', 'Column');
+      break;
+    case 'Collapse':
+      element = buildElementSchemaByType('LAYOUT', 'CollapsePanel');
+      break;
+    case 'Tabs':
+      element = buildElementSchemaByType('LAYOUT', 'TabPane');
+      break;
     default:
       break;
   }
