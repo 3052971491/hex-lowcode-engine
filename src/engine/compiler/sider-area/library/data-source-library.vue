@@ -45,8 +45,8 @@
                   {{ element.name }}
                 </div>
                 <div>
-                  <form-outlined class="icon mr-1" @click="handleEditClick(element, index)" />
-                  <delete-outlined class="icon mr-1" @click="handleDeleteClick(element, index)" />
+                  <form-outlined class="icon mr-1" @click="handleEditItemClick(element, index)" />
+                  <delete-outlined class="icon mr-1" @click="handleDeleteItemClick(element, index)" />
                 </div>
               </div>
             </template>
@@ -211,14 +211,14 @@ const handleAddItemClick = (item: MenuInfo) => {
   state.isShowEngineDataPool = true;
 };
 /** 编辑 */
-const handleEditItemClick = () => {
+const handleEditItemClick = (options: RadioGroupChildOption, index: number) => {
   // 赋值
   // 打开编辑框
 };
 /** 删除 */
-const handleDeleteItemClick = () => {};
-/** 复制 */
-const handleCopyItemClick = () => {};
+const handleDeleteItemClick = (options: RadioGroupChildOption, index: number) => {
+  state.dataSource.list.splice(index, 1);
+};
 /** 取消 */
 const onCancel = () => {
   // 1、表单重置
@@ -241,11 +241,6 @@ const onSave = () => {
     state.isShowEngineDataPool = false;
   });
 };
-
-const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
-  state.dataSource.list.splice(index, 1);
-};
-const handleEditClick = (options: RadioGroupChildOption, index: number) => {};
 </script>
 
 <style lang="less" scoped>
