@@ -50,7 +50,7 @@ export interface RuntimeDataSourceConfig {
   errorHandler: ErrorHandler;
   /** 请求参数 */
   options: RuntimeOptionsConfig;
-  [otherKey: string]: unknown;
+  [otherKey: string]: any;
 }
 export type WillFetch = (options: RuntimeOptionsConfig) => Promise<RuntimeOptionsConfig> | RuntimeOptionsConfig;
 
