@@ -142,7 +142,7 @@ import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 import { RuntimeDataSource, RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
-import { cloneDeep } from 'lodash-es';
+import { clone, cloneDeep } from 'lodash-es';
 import { buildUUID } from '/@/utils/common';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 import { HolderOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons-vue';
@@ -166,6 +166,9 @@ const state = reactive<{
 const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
+    if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
+      state.dataSource = cloneDeep(core.state.projectConfig.dataSource);
+    }
     loading.value = false;
   }, 180);
 });
@@ -203,16 +206,28 @@ const initialData = computed({
   },
 });
 
-const list = computed(() => {
-  let arr = state.dataSource.list;
-  if (state.type) {
-    arr = arr.filter((item) => item.protocal === state.type);
-  }
-  if (state.filterText) {
-    arr = arr.filter((item) => item.name.includes(state.filterText));
-  }
-  return arr;
+const list = computed({
+  set(val: RuntimeDataSourceConfig[]) {
+    if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
+      core.state.projectConfig.dataSource.list = cloneDeep(val);
+      core.handleUpdateHistoryData();
+    }
+  },
+  get() {
+    let arr =
+      core?.state.projectConfig && core.state.projectConfig.dataSource
+        ? cloneDeep(core.state.projectConfig.dataSource.list)
+        : [];
+    if (state.type) {
+      arr = arr.filter((item) => item.protocal === state.type);
+    }
+    if (state.filterText) {
+      arr = arr.filter((item) => item.name.includes(state.filterText));
+    }
+    return arr;
+  },
 });
+
 /** 新增 */
 const handleAddItemClick = (item: MenuInfo) => {
   createOrUpdateState.category = item.key;
@@ -226,6 +241,10 @@ const handleEditItemClick = (options: RadioGroupChildOption, index: number) => {
 /** 删除 */
 const handleDeleteItemClick = (options: RadioGroupChildOption, index: number) => {
   state.dataSource.list.splice(index, 1);
+  if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
+    core.state.projectConfig.dataSource.list = cloneDeep(state.dataSource.list);
+    core.handleUpdateHistoryData();
+  }
 };
 /** 取消 */
 const onCancel = () => {
@@ -242,10 +261,20 @@ const onSave = () => {
       createOrUpdateState.info.id = buildUUID(16);
     }
     createOrUpdateState.info.protocal = createOrUpdateState.category;
+    if (createOrUpdateState.info.protocal === 'VALUE') {
+      delete createOrUpdateState.info.options;
+    } else {
+      delete createOrUpdateState.info.initialData;
+    }
     state.dataSource.list.push(cloneDeep(createOrUpdateState.info) as RuntimeDataSourceConfig);
-    // 3、表单重置
+    // 3、更新JSON
+    if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
+      core.state.projectConfig.dataSource.list = cloneDeep(state.dataSource.list);
+      core.handleUpdateHistoryData();
+    }
+    // 4、表单重置
     formRef.value?.resetFields();
-    // 4、关闭
+    // 5、关闭
     state.isShowEngineDataPool = false;
   });
 };

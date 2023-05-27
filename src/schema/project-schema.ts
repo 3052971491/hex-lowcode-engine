@@ -7,7 +7,10 @@ const ProjectConfig: LowCode.ProjectSchema = {
   id: '',
   utils: [],
   css: '',
-  dataSource: [],
+  dataSource: {
+    list: [],
+    dataHandler: undefined,
+  },
   i18n: {
     'zh-CN': {},
     'en-US': {},

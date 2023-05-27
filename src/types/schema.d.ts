@@ -1,5 +1,6 @@
 import type { I18nMap } from './i18n.d';
 import type { CompositeValue, JSExpression, JSFunction } from '/@/types/value-type.d';
+import { RuntimeDataSource, RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 
 export namespace LowCode {
   /**
@@ -155,7 +156,7 @@ export namespace LowCode {
     /**
      * 当前应用的公共数据源
      */
-    dataSource?: any;
+    dataSource?: RuntimeDataSource;
     /**
      * 国际化语料
      */
