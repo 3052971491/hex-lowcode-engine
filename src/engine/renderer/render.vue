@@ -90,6 +90,10 @@ provide(ElementInstanceInjectionKey, instanceCore);
 
 if (!props.redactState && core?.state) {
   registerGlobalStyle(core?.state.__css__);
+
+  // 实例, 全局变量, 远程API
+  console.log(core.state.projectConfig?.dataSource);
+
   const __this__ = new Context(instanceCore!);
   core.state.__this__ = __this__;
 }

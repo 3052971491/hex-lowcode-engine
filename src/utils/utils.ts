@@ -2,6 +2,7 @@ import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import useModal from './shared/modal-helper';
 import ModalContainer from '/@/engine/renderer/pc/schemes/modal/modal-element.vue';
+import { cloneDeep, forIn, isObject } from 'lodash-es';
 
 interface IUtilsContext {
   /** 组件实例集合 */
@@ -10,18 +11,32 @@ interface IUtilsContext {
 export class Context {
   public utils: IUtilsContext;
 
-  constructor(instanceContext: InstanceCoreFactory) {
+  public state: Record<string, unknown>;
+
+  constructor(instanceContext: InstanceCoreFactory, _state_: Record<string, unknown> = {}) {
+    // 方法
     this.utils = {
       instances: instanceContext,
     };
+
+    // 全局变量
+    this.state = cloneDeep(_state_);
+
+    // 全局数据源
   }
 
+  /**
+   * 获取组件实例
+   * @param id 组件唯一标识
+   * @returns
+   */
   $(id: string): Scheme<any> | undefined {
     const { instances } = this.utils;
     if (!instances) return undefined;
     return instances.getInstance(id);
   }
 
+  /** 获取渲染器实例 */
   root() {
     const { instances } = this.utils;
     if (!instances) return undefined;
@@ -73,5 +88,19 @@ export class Context {
 
       // todo 执行关闭后回调
     });
+  }
+
+  /**
+   * 设置全局变量
+   * @param value 值
+   */
+  setState(value: Record<string, unknown>) {
+    if (!isObject(value)) return;
+    for (const key in value) {
+      if (Object.prototype.hasOwnProperty.call(value, key)) {
+        const element = value[key];
+        this.state[key] = element;
+      }
+    }
   }
 }

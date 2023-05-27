@@ -79,6 +79,7 @@ if (core.state.projectConfig) {
   const result = run(props.projectSchema?.originCode ?? '');
   core.state.__js__ = result;
 
+  // 实例, 全局变量, 远程API
   const __this__ = new Context(instanceCore!);
   core.state.__this__ = __this__;
 
