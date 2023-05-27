@@ -94,17 +94,25 @@
             <a-form-item label="自动加载">
               <a-switch v-model:checked="createOrUpdateState.info.isInit" />
             </a-form-item>
-            <a-form-item label="加载方式">
+            <a-form-item label="加载方式" name="isSync" :rules="[{ required: true, message: '该字段不能为空' }]">
               <a-radio-group v-model:value="createOrUpdateState.info.isSync">
                 <a-radio-button :value="true">串行</a-radio-button>
                 <a-radio-button :value="false">并行</a-radio-button>
               </a-radio-group>
             </a-form-item>
             <template v-if="createOrUpdateState.info.options">
-              <a-form-item label="请求地址">
+              <a-form-item
+                label="请求地址"
+                :name="['options', 'uri']"
+                :rules="[{ required: true, message: '该字段不能为空' }]"
+              >
                 <a-textarea v-model:value="createOrUpdateState.info.options.uri" />
               </a-form-item>
-              <a-form-item label="请求方法">
+              <a-form-item
+                label="请求方法"
+                :name="['options', 'method']"
+                :rules="[{ required: true, message: '该字段不能为空' }]"
+              >
                 <a-radio-group v-model:value="createOrUpdateState.info.options.method">
                   <a-radio-button value="GET">GET</a-radio-button>
                   <a-radio-button value="POST">POST</a-radio-button>
