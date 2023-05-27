@@ -57,7 +57,7 @@
     </a-skeleton>
     <div v-if="state.isShowEngineDataPool" class="engine-data-pool-form-wrap">
       <div class="engine-data-pool-form-wrap-title">
-        <div>添加变量</div>
+        <div>{{ !createOrUpdateState.info.id ? '添加' : '编辑' }}变量</div>
         <a-space>
           <a-button type="primary" @click="onSave">保存</a-button>
           <a-button @click="onCancel">取消</a-button>
@@ -186,6 +186,8 @@ const createOrUpdateState = reactive<{
   category: '',
   info: {
     id: '',
+    name: '',
+    description: '',
     options: {
       uri: '',
     },
@@ -232,14 +234,27 @@ const list = computed({
 const handleAddItemClick = (item: MenuInfo) => {
   createOrUpdateState.category = item.key;
   state.isShowEngineDataPool = true;
+  createOrUpdateState.info = {
+    id: '',
+    name: '',
+    description: '',
+    options: {
+      uri: '',
+    },
+    initialData: '',
+  };
 };
 /** 编辑 */
-const handleEditItemClick = (options: RadioGroupChildOption, index: number) => {
-  // 赋值
+const handleEditItemClick = (options: RuntimeDataSourceConfig, index: number) => {
   // 打开编辑框
+  state.isShowEngineDataPool = true;
+  formRef.value?.resetFields();
+  // 赋值
+  createOrUpdateState.category = options.protocal;
+  createOrUpdateState.info = cloneDeep(options);
 };
 /** 删除 */
-const handleDeleteItemClick = (options: RadioGroupChildOption, index: number) => {
+const handleDeleteItemClick = (options: RuntimeDataSourceConfig, index: number) => {
   state.dataSource.list.splice(index, 1);
   if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
     core.state.projectConfig.dataSource.list = cloneDeep(state.dataSource.list);
@@ -255,18 +270,28 @@ const onCancel = () => {
 /** 保存 */
 const onSave = () => {
   // 1、表单校验
-  formRef.value?.validate().then((res) => {
+  formRef.value?.validate().then(() => {
     // 2、赋值
-    if (!createOrUpdateState.info.id) {
-      createOrUpdateState.info.id = buildUUID(16);
-    }
     createOrUpdateState.info.protocal = createOrUpdateState.category;
-    if (createOrUpdateState.info.protocal === 'VALUE') {
-      delete createOrUpdateState.info.options;
+    // 判断是否是新增
+    if (createOrUpdateState.info.id) {
+      // 编辑
+      const idx = state.dataSource.list.findIndex((item) => item.id === createOrUpdateState.info?.id ?? '');
+      if (idx !== -1) {
+        state.dataSource.list[idx] = cloneDeep(createOrUpdateState.info) as RuntimeDataSourceConfig;
+      }
     } else {
-      delete createOrUpdateState.info.initialData;
+      // 新增
+      createOrUpdateState.info.id = buildUUID(16);
+      // 移除初始化多余字段, 仅在新增时需要
+      if (createOrUpdateState.info.protocal === 'VALUE') {
+        delete createOrUpdateState.info.options;
+      } else {
+        delete createOrUpdateState.info.initialData;
+      }
+      state.dataSource.list.push(cloneDeep(createOrUpdateState.info) as RuntimeDataSourceConfig);
     }
-    state.dataSource.list.push(cloneDeep(createOrUpdateState.info) as RuntimeDataSourceConfig);
+
     // 3、更新JSON
     if (core?.state.projectConfig && core.state.projectConfig.dataSource) {
       core.state.projectConfig.dataSource.list = cloneDeep(state.dataSource.list);
