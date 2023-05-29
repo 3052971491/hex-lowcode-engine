@@ -142,9 +142,8 @@ import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 import { RuntimeDataSource, RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
-import { clone, cloneDeep } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
 import { buildUUID } from '/@/utils/common';
-import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 import { HolderOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons-vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 

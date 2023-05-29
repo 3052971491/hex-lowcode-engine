@@ -52,7 +52,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, inject, provide, reactive } from 'vue';
+import { computed, inject, provide } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import PcModalDesigner from './pc-modal-designer.vue';
 import { HexCoreInjectionKey, ComponentBreadcrumbs } from '/@/engine/renderer/render-inject-key';

@@ -98,6 +98,9 @@ export class Context {
     if (!isObject(value)) return;
     for (const key in value) {
       if (Object.prototype.hasOwnProperty.call(value, key)) {
+        if (!this.state.hasOwnProperty(key)) {
+          throw new Error(`数据源-变量中不存在参数: ${key}`);
+        }
         const element = value[key];
         this.state[key] = element;
       }

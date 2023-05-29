@@ -93,8 +93,15 @@ if (!props.redactState && core?.state) {
 
   // 实例, 全局变量, 远程API
   console.log(core.state.projectConfig?.dataSource);
+  /** 全局变量 */
+  const GlobalVariables: Record<string, unknown> = {};
+  core.state.projectConfig?.dataSource?.list
+    .filter((item) => item.protocal === 'VALUE')
+    .forEach((item) => {
+      GlobalVariables[item.name] = item.initialData;
+    });
 
-  const __this__ = new Context(instanceCore!);
+  const __this__ = new Context(instanceCore!, GlobalVariables);
   core.state.__this__ = __this__;
 }
 

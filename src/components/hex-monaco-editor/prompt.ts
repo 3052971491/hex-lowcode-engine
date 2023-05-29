@@ -1,7 +1,8 @@
 import * as monaco from 'monaco-editor';
 
 export function createDependencyProposals(range: any) {
-  const LanguageArr: string[] = ['$()']; // 提示名和补全代码相同的可以写这里
+  // 提示名和补全代码相同的可以写这里
+  const LanguageArr: string[] = [];
   const jsonArr: any[] = [];
   for (let i = 0; i < LanguageArr.length; i++) {
     const obj = {
@@ -13,18 +14,41 @@ export function createDependencyProposals(range: any) {
       documentation: '',
       range,
     };
-
     jsonArr.push(obj);
   }
 
   return [
     // 不相同的提示写这里
     {
-      label: 'if', // 提示名
+      label: '$()',
       kind: monaco.languages.CompletionItemKind.Function,
-      insertText: `\n#if()\n\t\n #end`, // 补全代码
+      insertText: `$('组件唯一标识');`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: '流程控制',
+      detail: '获取组件实例',
+      range,
+    },
+    {
+      label: 'root()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `root();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '获取根实例',
+      range,
+    },
+    {
+      label: 'showModal()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `showModal('弹框唯一标识', {}, {}).then((res) => {\n\t\n});`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '显示弹框',
+      range,
+    },
+    {
+      label: 'setState()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `setState({});`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '设置全局变量',
       range,
     },
     ...jsonArr,
