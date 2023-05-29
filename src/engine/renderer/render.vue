@@ -14,6 +14,7 @@
 <script lang="ts" setup>
 import { computed, defineComponent, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
+import { reject } from 'lodash-es';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
@@ -27,6 +28,7 @@ import {
 import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 import { Context } from '/@/utils/utils';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
+import { RuntimeDataSource, RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -88,20 +90,22 @@ provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
 provide(ElementInstanceInjectionKey, instanceCore);
 
+/** 全局变量 */
+const GlobalVariables: Record<string, unknown> = {};
+/** 远程API */
+const RemoteAPI: RuntimeDataSourceConfig[] = [];
+
 if (!props.redactState && core?.state) {
   registerGlobalStyle(core?.state.__css__);
 
-  // 实例, 全局变量, 远程API
-  console.log(core.state.projectConfig?.dataSource);
-  /** 全局变量 */
-  const GlobalVariables: Record<string, unknown> = {};
-  core.state.projectConfig?.dataSource?.list
-    .filter((item) => item.protocal === 'VALUE')
-    .forEach((item) => {
+  core.state.projectConfig?.dataSource?.list.forEach((item) => {
+    if (item.protocal === 'VALUE') {
       GlobalVariables[item.name] = item.initialData;
-    });
-
-  const __this__ = new Context(instanceCore!, GlobalVariables);
+    } else {
+      RemoteAPI.push(item);
+    }
+  });
+  const __this__ = new Context(instanceCore!, GlobalVariables, RemoteAPI);
   core.state.__this__ = __this__;
 }
 
@@ -113,9 +117,22 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
   nextTick(() => {
-    pageSpinning.value = false;
+    if (!props.redactState) {
+      runtimeDataSource(RemoteAPI).then(() => {
+        pageSpinning.value = false;
+      });
+    } else {
+      pageSpinning.value = false;
+    }
   });
 });
+
+function runtimeDataSource(remotes: RuntimeDataSourceConfig[]) {
+  return new Promise((resolve, reject) => {
+    core?.state?.__this__?.reloadDataSource();
+    resolve(true);
+  });
+}
 </script>
 
 <script lang="ts">

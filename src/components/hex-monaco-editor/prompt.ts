@@ -2,7 +2,7 @@ import * as monaco from 'monaco-editor';
 
 export function createDependencyProposals(range: any) {
   // 提示名和补全代码相同的可以写这里
-  const LanguageArr: string[] = [];
+  const LanguageArr: string[] = ['utils'];
   const jsonArr: any[] = [];
   for (let i = 0; i < LanguageArr.length; i++) {
     const obj = {

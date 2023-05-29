@@ -3,26 +3,50 @@ import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore'
 import useModal from './shared/modal-helper';
 import ModalContainer from '/@/engine/renderer/pc/schemes/modal/modal-element.vue';
 import { cloneDeep, forIn, isObject } from 'lodash-es';
+import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
+import { message } from 'ant-design-vue';
+import { MessageInstance } from 'ant-design-vue/lib/message';
 
 interface IUtilsContext {
   /** 组件实例集合 */
   instances: InstanceCoreFactory;
+  /** ant-design-vue Message 全局提示 */
+  message: MessageInstance;
+  /** 获取当前的语言环境 */
+  getLocale(): 'zh_CN' | 'en_US';
+  /** 格式化 */
+  formatter(): string;
 }
 export class Context {
   public utils: IUtilsContext;
 
   public state: Record<string, unknown>;
 
-  constructor(instanceContext: InstanceCoreFactory, _state_: Record<string, unknown> = {}) {
+  public dataSourceMap: RuntimeDataSourceConfig[];
+
+  constructor(
+    instanceContext: InstanceCoreFactory,
+    _state_: Record<string, unknown> = {},
+    _dataSourceMap: RuntimeDataSourceConfig[] = [],
+  ) {
     // 方法
     this.utils = {
       instances: instanceContext,
+      message,
+      getLocale: () => {
+        const flag = true;
+        return flag ? 'zh_CN' : 'en_US';
+      },
+      formatter: () => {
+        return '';
+      },
     };
 
     // 全局变量
     this.state = cloneDeep(_state_);
 
     // 全局数据源
+    this.dataSourceMap = cloneDeep(_dataSourceMap);
   }
 
   /**
@@ -105,5 +129,19 @@ export class Context {
         this.state[key] = element;
       }
     }
+  }
+
+  /**
+   * 重新请求所有自动加载设置为 true 的远程 API
+   */
+  reloadDataSource() {
+    const automaticDataSourceMap = this.dataSourceMap.filter((item) => item.isInit);
+
+    // 并行
+
+    // 串行
+
+    // 调用二次封装axios
+    console.log(automaticDataSourceMap);
   }
 }

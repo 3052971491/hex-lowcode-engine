@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, computed, getCurrentInstance } from 'vue';
+import { provide, computed, getCurrentInstance, onMounted, nextTick } from 'vue';
 import { LowCode } from '/@/types/schema';
 import useModal from '/@/utils/shared/modal-helper';
 
@@ -46,6 +46,7 @@ import { useComponentBreadcrumbs } from '../../hooks/useComponentBreadcrumbs';
 import { Context } from '/@/utils/utils';
 import { run } from '/@/utils/func';
 import { PcSchema } from '/@/schema/common/interface';
+import { RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 
 const props = defineProps<{
   modalRef: any;
@@ -74,20 +75,23 @@ const ectype = computed(() => {
   return new Modal(props.schema as PcSchema.ModalSchema);
 });
 
+/** 全局变量 */
+const GlobalVariables: Record<string, unknown> = {};
+/** 远程API */
+const RemoteAPI: RuntimeDataSourceConfig[] = [];
 if (core.state.projectConfig) {
   // 运行JS-Function
   const result = run(props.projectSchema?.originCode ?? '');
   core.state.__js__ = result;
 
-  // 实例, 全局变量, 远程API
-  /** 全局变量 */
-  const GlobalVariables: Record<string, unknown> = {};
-  core.state.projectConfig?.dataSource?.list
-    .filter((item) => item.protocal === 'VALUE')
-    .forEach((item) => {
+  core.state.projectConfig?.dataSource?.list.forEach((item) => {
+    if (item.protocal === 'VALUE') {
       GlobalVariables[item.name] = item.initialData;
-    });
-  const __this__ = new Context(instanceCore!, GlobalVariables);
+    } else {
+      RemoteAPI.push(item);
+    }
+  });
+  const __this__ = new Context(instanceCore!, GlobalVariables, RemoteAPI);
   core.state.__this__ = __this__;
 
   // 注册当前视图实例
