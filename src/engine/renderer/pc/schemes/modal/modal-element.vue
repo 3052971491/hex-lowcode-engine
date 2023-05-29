@@ -80,7 +80,14 @@ if (core.state.projectConfig) {
   core.state.__js__ = result;
 
   // 实例, 全局变量, 远程API
-  const __this__ = new Context(instanceCore!);
+  /** 全局变量 */
+  const GlobalVariables: Record<string, unknown> = {};
+  core.state.projectConfig?.dataSource?.list
+    .filter((item) => item.protocal === 'VALUE')
+    .forEach((item) => {
+      GlobalVariables[item.name] = item.initialData;
+    });
+  const __this__ = new Context(instanceCore!, GlobalVariables);
   core.state.__this__ = __this__;
 
   // 注册当前视图实例
