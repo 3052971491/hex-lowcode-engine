@@ -2,10 +2,11 @@ import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import useModal from './shared/modal-helper';
 import ModalContainer from '/@/engine/renderer/pc/schemes/modal/modal-element.vue';
-import { cloneDeep, forIn, isArray, isObject } from 'lodash-es';
+import { cloneDeep, isArray, isObject } from 'lodash-es';
 import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
 import { message } from 'ant-design-vue';
 import { MessageInstance } from 'ant-design-vue/lib/message';
+import http from '/@/utils/http';
 
 interface IUtilsContext {
   /** 组件实例集合 */
@@ -21,11 +22,33 @@ interface IUtilsContext {
 /** 执行数据源请求 */
 function load(dataSource: RuntimeDataSourceConfig): Promise<any> {
   return new Promise((resolve, reject) => {
-    const time = Math.ceil(10 * Math.random() * 100);
-    setTimeout(() => {
-      console.log(dataSource.name, time);
-      resolve(dataSource.name);
-    }, time);
+    // 请求发送前处理函数
+    const willFetch = () => {};
+    willFetch();
+    http
+      .request({
+        baseURL: 'https://v.api.aa1.cn/api/api-wenan-dujitang/index.php',
+        url: dataSource.options.api,
+        method: dataSource.options.method,
+        params: {
+          aa1: 'json',
+        },
+      })
+      .then((res) => {
+        // 数据适配
+        const fit = () => {};
+        fit();
+
+        // 请求完成回调函数
+        const didFetch = () => {};
+        didFetch();
+        resolve(dataSource.name);
+      })
+      .catch((error) => {
+        // 请求错误处理函数
+        const onError = () => {};
+        onError();
+      });
   });
 }
 

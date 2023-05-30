@@ -63,7 +63,6 @@ export interface RuntimeOptionsConfig {
    * 请求地址
    * @description 支持变量
    */
-  uri: string;
   api?: string;
   /**
    * 请求参数

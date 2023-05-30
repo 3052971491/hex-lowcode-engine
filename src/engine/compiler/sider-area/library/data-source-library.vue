@@ -103,10 +103,10 @@
             <template v-if="createOrUpdateState.info.options">
               <a-form-item
                 label="请求地址"
-                :name="['options', 'uri']"
+                :name="['options', 'api']"
                 :rules="[{ required: true, message: '该字段不能为空' }]"
               >
-                <a-textarea v-model:value="createOrUpdateState.info.options.uri" />
+                <a-textarea v-model:value="createOrUpdateState.info.options.api" />
               </a-form-item>
               <a-form-item
                 label="请求方法"
@@ -188,7 +188,7 @@ const createOrUpdateState = reactive<{
     name: '',
     description: '',
     options: {
-      uri: '',
+      api: '',
     },
     initialData: '',
   },
@@ -238,7 +238,7 @@ const handleAddItemClick = (item: MenuInfo) => {
     name: '',
     description: '',
     options: {
-      uri: '',
+      api: '',
     },
     initialData: '',
   };
