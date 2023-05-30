@@ -194,4 +194,12 @@ export class Context {
       }
     });
   }
+
+  http(name: string): Promise<any> {
+    const index = this.dataSourceMap.findIndex((item) => item.name === name);
+    if (index !== -1) {
+      return load(this.dataSourceMap[index]);
+    }
+    return Promise.reject(new Error(`数据源-远程 API中不存在: ${name}`));
+  }
 }

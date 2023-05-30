@@ -51,6 +51,22 @@ export function createDependencyProposals(range: any) {
       detail: '设置全局变量',
       range,
     },
+    {
+      label: 'reloadDataSource()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `reloadDataSource();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '重新请求所有自动加载的远程 API',
+      range,
+    },
+    {
+      label: 'http()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `http('远程API名称');`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '请求远程 API',
+      range,
+    },
     ...jsonArr,
   ] as any[];
 }
