@@ -99,7 +99,7 @@ function handlePreviewJsonClick() {
 
 function handleSaveClick() {
   core?.saveCurrentHistoryData();
-  message.success('存档成功', 100);
+  message.success('存档成功');
 }
 function handleClearClick() {
   core?.clear();

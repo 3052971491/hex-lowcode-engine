@@ -2,7 +2,7 @@ import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import useModal from './shared/modal-helper';
 import ModalContainer from '/@/engine/renderer/pc/schemes/modal/modal-element.vue';
-import { cloneDeep, forIn, isObject } from 'lodash-es';
+import { cloneDeep, forIn, isArray, isObject } from 'lodash-es';
 import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
 import { message } from 'ant-design-vue';
 import { MessageInstance } from 'ant-design-vue/lib/message';
@@ -17,6 +17,26 @@ interface IUtilsContext {
   /** 格式化 */
   formatter(): string;
 }
+
+/** 执行数据源请求 */
+function load(dataSource: RuntimeDataSourceConfig): Promise<any> {
+  return new Promise((resolve, reject) => {
+    const time = Math.ceil(10 * Math.random() * 100);
+    setTimeout(() => {
+      console.log(dataSource.name, time);
+      resolve(dataSource.name);
+    }, time);
+  });
+}
+
+/** 串行执行远程 API */
+function iteratorPromise(arr: RuntimeDataSourceConfig[]) {
+  let resolve = Promise.resolve();
+  arr.forEach((element) => {
+    resolve = resolve.then(() => load(element));
+  });
+}
+
 export class Context {
   public utils: IUtilsContext;
 
@@ -137,11 +157,41 @@ export class Context {
   reloadDataSource() {
     const automaticDataSourceMap = this.dataSourceMap.filter((item) => item.isInit);
 
-    // 并行
+    /** 串行 */
+    let serial: RuntimeDataSourceConfig[] = [];
+    /** 并行 */
+    const parallel: RuntimeDataSourceConfig[] = [];
 
-    // 串行
+    const result: any[] = [];
 
-    // 调用二次封装axios
-    console.log(automaticDataSourceMap);
+    automaticDataSourceMap.forEach((item, index) => {
+      if (item.isSync) {
+        serial.push(item);
+      } else {
+        parallel.push(item);
+        result.push(item);
+      }
+
+      if (index + 1 !== automaticDataSourceMap.length) {
+        if (automaticDataSourceMap[index + 1].isSync !== item.isSync) {
+          if (serial.length > 0) {
+            result.push(serial);
+            serial = [];
+          }
+        }
+      } else if (serial.length > 0) {
+        result.push(serial);
+        serial = [];
+      }
+    });
+
+    // 执行远程 API
+    result.forEach((item) => {
+      if (isArray(item) && item.length > 0) {
+        iteratorPromise(item);
+      } else if (item) {
+        load(item);
+      }
+    });
   }
 }
