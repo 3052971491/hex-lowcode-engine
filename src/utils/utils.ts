@@ -7,6 +7,7 @@ import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtim
 import { message } from 'ant-design-vue';
 import { MessageInstance } from 'ant-design-vue/lib/message';
 import http from '/@/utils/http';
+import { isURL } from './common';
 
 interface IUtilsContext {
   /** 组件实例集合 */
@@ -14,26 +15,33 @@ interface IUtilsContext {
   /** ant-design-vue Message 全局提示 */
   message: MessageInstance;
   /** 获取当前的语言环境 */
-  getLocale(): 'zh_CN' | 'en_US';
+  getLocale(): string;
   /** 格式化 */
   formatter(): string;
 }
 
 /** 执行数据源请求 */
-function load(dataSource: RuntimeDataSourceConfig): Promise<any> {
+function load(dataSource: RuntimeDataSourceConfig, root: any): Promise<any> {
   return new Promise((resolve, reject) => {
+    const config: Record<string, unknown> = {
+      baseURL: isURL(dataSource.options.api || '') ? undefined : root.config.remoteUrl,
+      url: dataSource.options.api,
+      method: dataSource.options.method,
+    };
+
+    // 参数
+    if (dataSource.options.params) {
+      if (['GET', 'DELETE'].includes(dataSource.options.method || '')) {
+        config.params = dataSource.options.params;
+      } else {
+        config.data = dataSource.options.params;
+      }
+    }
     // 请求发送前处理函数
     const willFetch = () => {};
     willFetch();
     http
-      .request({
-        baseURL: 'https://v.api.aa1.cn/api/api-wenan-dujitang/index.php',
-        url: dataSource.options.api,
-        method: dataSource.options.method,
-        params: {
-          aa1: 'json',
-        },
-      })
+      .request(config)
       .then((res) => {
         // 数据适配
         const fit = () => {};
@@ -53,10 +61,10 @@ function load(dataSource: RuntimeDataSourceConfig): Promise<any> {
 }
 
 /** 串行执行远程 API */
-function iteratorPromise(arr: RuntimeDataSourceConfig[]) {
+function iteratorPromise(arr: RuntimeDataSourceConfig[], root: any) {
   let resolve = Promise.resolve();
   arr.forEach((element) => {
-    resolve = resolve.then(() => load(element));
+    resolve = resolve.then(() => load(element, root));
   });
 }
 
@@ -77,8 +85,7 @@ export class Context {
       instances: instanceContext,
       message,
       getLocale: () => {
-        const flag = true;
-        return flag ? 'zh_CN' : 'en_US';
+        return this.root().config.i18n;
       },
       formatter: () => {
         return '';
@@ -211,9 +218,9 @@ export class Context {
     // 执行远程 API
     result.forEach((item) => {
       if (isArray(item) && item.length > 0) {
-        iteratorPromise(item);
+        iteratorPromise(item, this.root());
       } else if (item) {
-        load(item);
+        load(item, this.root());
       }
     });
   }
@@ -221,7 +228,7 @@ export class Context {
   http(name: string): Promise<any> {
     const index = this.dataSourceMap.findIndex((item) => item.name === name);
     if (index !== -1) {
-      return load(this.dataSourceMap[index]);
+      return load(this.dataSourceMap[index], this.root());
     }
     return Promise.reject(new Error(`数据源-远程 API中不存在: ${name}`));
   }

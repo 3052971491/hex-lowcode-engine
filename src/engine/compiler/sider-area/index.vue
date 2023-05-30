@@ -72,7 +72,6 @@ import {
   DoubleRightOutlined,
 } from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
-import { isLeaf } from 'ant-design-vue/lib/vc-cascader/utils/commonUtil';
 import MenuItem from './components/menu-item.vue';
 import LibraryItem from './components/library-item.vue';
 import ElementLibrary from './library/element-library.vue';
@@ -81,6 +80,7 @@ import ActionPaneLibrary from './library/action-pane-library.vue';
 import ComponentHierarchyTree from './library/component-hierarchy-tree.vue';
 import DataSourceLibrary from './library/data-source-library.vue';
 import ModalLibrary from './library/modal-library.vue';
+import SettingLibrary from './library/setting-library.vue';
 
 export interface IMenuItem {
   /** 名称 */
@@ -139,7 +139,7 @@ const bottomMenu: Array<IMenuItem> = [
     label: '设置',
     value: 'setting-library',
     icon: SettingOutlined,
-    component: '',
+    component: SettingLibrary,
   },
 ];
 const width = ref(364);

@@ -124,9 +124,9 @@
                 <a-button type="primary" block>添加一项</a-button>
               </a-form-item>
             </template>
-            <a-form-item label="是否发送请求">
+            <!-- <a-form-item label="是否发送请求">
               <a-switch v-model:checked="createOrUpdateState.info.shouldFetch" />
-            </a-form-item>
+            </a-form-item> -->
           </template>
         </a-form>
       </div>

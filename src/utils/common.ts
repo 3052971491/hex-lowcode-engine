@@ -41,3 +41,8 @@ export function guid() {
     return v.toString(16);
   });
 }
+
+/** 是否是URL地址 */
+export function isURL(str: string) {
+  return /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/.test(str);
+}

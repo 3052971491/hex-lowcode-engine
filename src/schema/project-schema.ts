@@ -17,6 +17,7 @@ const ProjectConfig: LowCode.ProjectSchema = {
   },
   config: {
     i18n: 'zh-CN',
+    remoteUrl: '',
   },
   componentsTree: [],
   dialogComponentsTree: [],

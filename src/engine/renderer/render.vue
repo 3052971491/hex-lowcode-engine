@@ -36,6 +36,13 @@ interface Props {
   device?: LowCode.Device;
   /** 当前渲染器是否是编辑状态 */
   redactState?: boolean;
+  /** 引擎配置 */
+  config?: {
+    /** 语言 */
+    i18n?: string;
+    /** 绝对 URL */
+    remoteUrl?: string;
+  };
 }
 
 interface StateType {
@@ -45,8 +52,22 @@ const props = withDefaults(defineProps<Props>(), {
   value: undefined,
   device: 'PC',
   redactState: false,
+  config: () => {
+    return {};
+  },
 });
-const emit = defineEmits(['update:value']);
+
+const emit = defineEmits(['update:value', 'update:config']);
+
+const lowcodeOptions = computed({
+  set(val) {
+    emit('update:config', val);
+  },
+  get() {
+    return { i18n: 'zh-CN', remoteUrl: 'http://www.baodu.com', ...props.config };
+  },
+});
+
 let core: HexCoreFactory | undefined;
 let instanceCore: InstanceCoreFactory | undefined;
 const modelValue = computed({
@@ -118,6 +139,9 @@ onBeforeUnmount(() => {
 onMounted(() => {
   nextTick(() => {
     if (!props.redactState) {
+      if (modelValue.value && lowcodeOptions.value) {
+        modelValue.value.config = lowcodeOptions.value;
+      }
       runtimeDataSource(RemoteAPI).then(() => {
         pageSpinning.value = false;
       });
