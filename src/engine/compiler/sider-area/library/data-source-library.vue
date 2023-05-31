@@ -445,6 +445,7 @@ const onSave = () => {
   border-left: 1px solid rgba(31, 56, 88, 0.1);
   background-color: #fff;
   flex-direction: column;
+  box-shadow: 20px 0px 16px -10px #f0f1f2;
 
   &-title {
     z-index: 10;
