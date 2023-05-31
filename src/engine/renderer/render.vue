@@ -64,7 +64,7 @@ const lowcodeOptions = computed({
     emit('update:config', val);
   },
   get() {
-    return { i18n: 'zh-CN', remoteUrl: 'http://www.baodu.com', ...props.config };
+    return props.config;
   },
 });
 
@@ -140,7 +140,7 @@ onMounted(() => {
   nextTick(() => {
     if (!props.redactState) {
       if (modelValue.value && lowcodeOptions.value) {
-        modelValue.value.config = lowcodeOptions.value;
+        Object.assign(modelValue.value.config, lowcodeOptions.value);
       }
       runtimeDataSource(RemoteAPI).then(() => {
         pageSpinning.value = false;

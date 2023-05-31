@@ -21,7 +21,7 @@ interface IUtilsContext {
 }
 
 /** 执行数据源请求 */
-function load(dataSource: RuntimeDataSourceConfig, root: any): Promise<any> {
+function load(dataSource: RuntimeDataSourceConfig, root: any, params: Record<string, unknown> = {}): Promise<any> {
   return new Promise((resolve, reject) => {
     const config: Record<string, unknown> = {
       baseURL: isURL(dataSource.options.api || '') ? undefined : root.config.remoteUrl,
@@ -32,9 +32,9 @@ function load(dataSource: RuntimeDataSourceConfig, root: any): Promise<any> {
     // 参数
     if (dataSource.options.params) {
       if (['GET', 'DELETE'].includes(dataSource.options.method || '')) {
-        config.params = dataSource.options.params;
+        config.params = Object.assign(dataSource.options.params, params);
       } else {
-        config.data = dataSource.options.params;
+        config.data = Object.assign(dataSource.options.params, params);
       }
     }
     // 请求发送前处理函数
@@ -56,6 +56,7 @@ function load(dataSource: RuntimeDataSourceConfig, root: any): Promise<any> {
         // 请求错误处理函数
         const onError = () => {};
         onError();
+        reject(error);
       });
   });
 }
@@ -225,10 +226,10 @@ export class Context {
     });
   }
 
-  http(name: string): Promise<any> {
+  http(name: string, params: Record<string, unknown> = {}): Promise<any> {
     const index = this.dataSourceMap.findIndex((item) => item.name === name);
     if (index !== -1) {
-      return load(this.dataSourceMap[index], this.root());
+      return load(this.dataSourceMap[index], this.root(), params);
     }
     return Promise.reject(new Error(`数据源-远程 API中不存在: ${name}`));
   }

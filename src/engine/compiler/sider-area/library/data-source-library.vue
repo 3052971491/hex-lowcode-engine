@@ -189,6 +189,7 @@ const createOrUpdateState = reactive<{
     description: '',
     options: {
       api: '',
+      params: {},
     },
     initialData: '',
   },
@@ -239,6 +240,7 @@ const handleAddItemClick = (item: MenuInfo) => {
     description: '',
     options: {
       api: '',
+      params: {},
     },
     initialData: '',
   };

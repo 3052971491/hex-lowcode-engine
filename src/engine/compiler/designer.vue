@@ -51,15 +51,12 @@ const emit = defineEmits(['update:value', 'update:config']);
 const core = useHexCore();
 provide(HexCoreInjectionKey, core);
 
-const lowcodeOptions = computed<{
-  /** 当前语种 */
-  i18n: string;
-}>({
+const lowcodeOptions = computed({
   set(val) {
     emit('update:config', val);
   },
   get() {
-    return { i18n: 'zh-CN', remoteUrl: 'http://www.baodu.com', ...props.config };
+    return props.config;
   },
 });
 
@@ -80,7 +77,7 @@ core.buildHistory();
 core.buildSelectedData();
 core.loadHistoryDataStorage();
 if (modelValue.value && lowcodeOptions.value) {
-  modelValue.value.config = lowcodeOptions.value;
+  Object.assign(modelValue.value.config, lowcodeOptions.value);
 }
 </script>
 <script lang="ts">
