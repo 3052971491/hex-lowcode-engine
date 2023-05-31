@@ -380,6 +380,9 @@ const handleDeleteItemClick = (options: RuntimeDataSourceConfig, index: number) 
     core.state.projectConfig.dataSource.list = cloneDeep(state.dataSource.list);
     core.handleUpdateHistoryData();
   }
+  if (options.id === createOrUpdateState.info.id) {
+    state.isShowEngineDataPool = false;
+  }
 };
 /** 取消 */
 const onCancel = () => {
@@ -438,7 +441,6 @@ const onSave = () => {
   display: flex;
   overflow: hidden;
   width: 400px;
-  border-right: 1px solid rgba(31, 56, 88, 0.1);
   border-left: 1px solid rgba(31, 56, 88, 0.1);
   background-color: #fff;
   flex-direction: column;
