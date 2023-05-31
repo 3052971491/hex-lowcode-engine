@@ -304,7 +304,7 @@ const paramsList = computed({
       val.forEach((element: RadioGroupChildOption) => {
         obj[element.label] = element.value;
       });
-      createOrUpdateState.info.options.params = cloneDeep(val);
+      createOrUpdateState.info.options.params = cloneDeep(obj);
     }
   },
   get() {
