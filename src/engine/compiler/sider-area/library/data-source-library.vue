@@ -46,7 +46,14 @@
                 </div>
                 <div>
                   <form-outlined class="icon mr-1" @click="handleEditItemClick(element, index)" />
-                  <delete-outlined class="icon mr-1" @click="handleDeleteItemClick(element, index)" />
+                  <a-popconfirm
+                    title="确认是否删除?"
+                    ok-text="确认"
+                    cancel-text="取消"
+                    @confirm="handleDeleteItemClick(element, index)"
+                  >
+                    <delete-outlined class="icon mr-1" />
+                  </a-popconfirm>
                 </div>
               </div>
             </template>
@@ -57,7 +64,10 @@
     </a-skeleton>
     <div v-if="state.isShowEngineDataPool" class="engine-data-pool-form-wrap">
       <div class="engine-data-pool-form-wrap-title">
-        <div>{{ !createOrUpdateState.info.id ? '添加' : '编辑' }}变量</div>
+        <div>
+          {{ !createOrUpdateState.info.id ? '添加' : '编辑'
+          }}{{ createOrUpdateState.info.protocal === 'VALUE' ? '变量' : '远程' }}
+        </div>
         <a-space>
           <a-button type="primary" @click="onSave">保存</a-button>
           <a-button @click="onCancel">取消</a-button>
@@ -121,7 +131,57 @@
                 </a-radio-group>
               </a-form-item>
               <a-form-item label="请求参数">
-                <a-button type="primary" block>添加一项</a-button>
+                <div v-if="paramsList.length > 0">
+                  <hex-draggable v-model:value="paramsList" :put="false" :sort="true" :pull="false" ghost-class="">
+                    <template #item="{ element }">
+                      <div class="listitem w-full">
+                        <div class="flex-1 flex align-items">
+                          <holder-outlined class="hex-draggable-handle move" />
+                          {{ element.label }}
+                        </div>
+                        <div>
+                          <a-popconfirm
+                            placement="left"
+                            :show-cancel="false"
+                            :destroy-tooltip-on-hide="true"
+                            :arrow-point-at-center="true"
+                            @visible-change="paramsVisibleChangeCallback"
+                          >
+                            <template #icon></template>
+                            <template #okButton></template>
+                            <template #title>
+                              <a-form :model="state.createOrUpdateParams">
+                                <a-form-item label="参数名" name="label">
+                                  <a-input v-model:value="state.createOrUpdateParams.label" />
+                                </a-form-item>
+                                <div style="width: 400px; height: 300px">
+                                  <hex-monaco-editor
+                                    v-model:value="state.createOrUpdateParams.value"
+                                    title="参数值"
+                                    :theme="Theme.DEFAULT"
+                                    :language="Lang.JSON"
+                                  />
+                                </div>
+                              </a-form>
+                            </template>
+                            <form-outlined
+                              class="icon mr-1"
+                              @click="
+                                state.createOrUpdateParams = {
+                                  id: element.label,
+                                  label: element.label,
+                                  value: JSON.stringify(element.value),
+                                }
+                              "
+                            />
+                          </a-popconfirm>
+                          <delete-outlined class="icon mr-1" @click="handleDeleteParamsItemClick(element)" />
+                        </div>
+                      </div>
+                    </template>
+                  </hex-draggable>
+                </div>
+                <a-button type="primary" block @click="handleAddParamsItemClick">添加一项</a-button>
               </a-form-item>
             </template>
             <!-- <a-form-item label="是否发送请求">
@@ -146,6 +206,7 @@ import { cloneDeep } from 'lodash-es';
 import { buildUUID } from '/@/utils/common';
 import { HolderOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons-vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
+import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 
 const core = inject(HexCoreInjectionKey);
 const state = reactive<{
@@ -153,6 +214,7 @@ const state = reactive<{
   isShowEngineDataPool: boolean;
   type: string;
   dataSource: RuntimeDataSource;
+  createOrUpdateParams: RadioGroupChildOption & { id: string };
 }>({
   filterText: '',
   isShowEngineDataPool: false,
@@ -160,6 +222,11 @@ const state = reactive<{
   dataSource: {
     list: [],
     dataHandler: undefined,
+  },
+  createOrUpdateParams: {
+    id: '',
+    label: '',
+    value: '',
   },
 });
 const loading = ref(true);
@@ -229,6 +296,61 @@ const list = computed({
     return arr;
   },
 });
+/** 请求参数列表 */
+const paramsList = computed({
+  set(val: any) {
+    if (createOrUpdateState.info.options) {
+      val.forEach((element: RadioGroupChildOption) => {
+        const obj: Record<string, unknown> = {};
+        obj[element.label] = element.value;
+        if (createOrUpdateState.info?.options?.params) {
+          Object.assign(createOrUpdateState.info.options.params, obj);
+        }
+      });
+      createOrUpdateState.info.options.params = cloneDeep(val);
+    }
+  },
+  get() {
+    const res = [];
+    const params = createOrUpdateState?.info?.options?.params ?? {};
+    for (const key in params) {
+      if (Object.prototype.hasOwnProperty.call(params, key)) {
+        const element = params[key];
+        res.push({
+          label: key,
+          value: element,
+        });
+      }
+    }
+    return res;
+  },
+});
+/** 新增参数 */
+const handleAddParamsItemClick = () => {
+  if (createOrUpdateState.info.options?.params) {
+    createOrUpdateState.info.options.params[`Params_${buildUUID()}`] = '';
+  }
+};
+
+const handleDeleteParamsItemClick = (item: RadioGroupChildOption) => {
+  if (createOrUpdateState.info.options?.params) {
+    delete createOrUpdateState.info.options.params[item.label];
+  }
+};
+const paramsVisibleChangeCallback = (visible: boolean) => {
+  if (!visible) {
+    if (createOrUpdateState.info.options?.params) {
+      const { label, value, id } = state.createOrUpdateParams;
+      createOrUpdateState.info.options.params[label] = JSON.parse(value);
+      if (id !== label) {
+        delete createOrUpdateState.info.options.params[id];
+      }
+      state.createOrUpdateParams.id = '';
+      state.createOrUpdateParams.label = '';
+      state.createOrUpdateParams.value = '';
+    }
+  }
+};
 
 /** 新增 */
 const handleAddItemClick = (item: MenuInfo) => {
