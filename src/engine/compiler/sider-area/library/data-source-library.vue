@@ -300,12 +300,9 @@ const list = computed({
 const paramsList = computed({
   set(val: any) {
     if (createOrUpdateState.info.options) {
+      const obj: Record<string, unknown> = {};
       val.forEach((element: RadioGroupChildOption) => {
-        const obj: Record<string, unknown> = {};
         obj[element.label] = element.value;
-        if (createOrUpdateState.info?.options?.params) {
-          Object.assign(createOrUpdateState.info.options.params, obj);
-        }
       });
       createOrUpdateState.info.options.params = cloneDeep(val);
     }
