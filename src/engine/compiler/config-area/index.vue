@@ -11,11 +11,11 @@
           <style-setting />
         </setting-pane>
       </a-tab-pane>
-      <a-tab-pane key="3" tab="高级">
+      <!-- <a-tab-pane key="3" tab="高级">
         <setting-pane>
           <advanced-setting />
         </setting-pane>
-      </a-tab-pane>
+      </a-tab-pane> -->
     </a-tabs>
   </div>
 </template>

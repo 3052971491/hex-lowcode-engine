@@ -14,7 +14,6 @@
 <script lang="ts" setup>
 import { computed, defineComponent, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
-import { reject } from 'lodash-es';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
@@ -28,7 +27,7 @@ import {
 import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 import { Context } from '/@/utils/utils';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
-import { RuntimeDataSource, RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
+import { RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -45,9 +44,6 @@ interface Props {
   };
 }
 
-interface StateType {
-  config?: LowCode.ProjectSchema;
-}
 const props = withDefaults(defineProps<Props>(), {
   value: undefined,
   device: 'PC',
@@ -117,8 +113,6 @@ const GlobalVariables: Record<string, unknown> = {};
 const RemoteAPI: RuntimeDataSourceConfig[] = [];
 
 if (!props.redactState && core?.state) {
-  registerGlobalStyle(core?.state.__css__);
-
   core.state.projectConfig?.dataSource?.list.forEach((item) => {
     if (item.protocal === 'VALUE') {
       GlobalVariables[item.name] = item.initialData;
@@ -139,6 +133,7 @@ onBeforeUnmount(() => {
 onMounted(() => {
   nextTick(() => {
     if (!props.redactState) {
+      registerGlobalStyle(core?.state.__css__);
       if (modelValue.value && lowcodeOptions.value) {
         Object.assign(modelValue.value.config, lowcodeOptions.value);
       }
@@ -152,7 +147,7 @@ onMounted(() => {
 });
 
 function runtimeDataSource(remotes: RuntimeDataSourceConfig[]) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     core?.state?.__this__?.reloadDataSource();
     resolve(true);
   });
