@@ -3,6 +3,7 @@ import { unref } from 'vue';
 import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
 import { isURL, to } from './common';
 import http from './http';
+import { __DataHandler__, __WillFetch__, __FitHandler__, __ErrorHandler__ } from '/@/utils/shared/const';
 
 export function BuildFunction(name: string, ...args: any) {
   const code = `try {
@@ -183,12 +184,7 @@ export async function load(
       const willFetch = async () => {
         let assemblyCode = '';
         if (!dataSource.willFetch) {
-          assemblyCode = `function willFetch(vars, config) {
-          // 通过 vars 可以更改查询参数
-          // 通过 config.header 可以更改 header
-          // 通过 config.url 可以更改  url
-          // console.log(vars, config); // 可以查看还有哪些参数可以修改。
-        };`;
+          assemblyCode = __WillFetch__;
         } else {
           assemblyCode = dataSource.willFetch;
         }
@@ -214,28 +210,7 @@ export async function load(
         if (dataSource.fitHandler) {
           // 数据适配
           const fit = async () => {
-            let assemblyCode = dataSource.fitHandler
-              ? dataSource.fitHandler
-              : `function fit(response) {
-            const content = (response.result !== undefined) ? response.result : response;
-            const error = {
-              code: response.code,
-              message: response.message ||
-                (response.errors && response.errors[0] && response.errors[0].msg) ||
-                response.result || '远程数据源请求出错, success is false',
-            };
-            let success = true;
-            if (response.success === 200) {
-              success = true;
-            } else {
-              success = false;
-            };
-            return {
-              content,
-              success,
-              error,
-            };
-          };`;
+            let assemblyCode = dataSource.fitHandler ? dataSource.fitHandler : __FitHandler__;
             const re = func('response', (assemblyCode += 'response = fit(response);return response;')).call(
               context,
               result,
@@ -255,12 +230,7 @@ export async function load(
         if (dataSource.dataHandler) {
           // 请求完成回调函数
           const didFetch = async () => {
-            let assemblyCode = dataSource.dataHandler
-              ? dataSource.dataHandler
-              : `function didFetch(content) {
-            // content.b = 1; 修改返回数据结构中的 b 字段为1
-            return content; // 重要，需返回 content
-          };`;
+            let assemblyCode = dataSource.dataHandler ? dataSource.dataHandler : __DataHandler__;
             const re = func('content', (assemblyCode += 'content = didFetch(content);return content;')).call(
               context,
               result.content,
@@ -281,13 +251,8 @@ export async function load(
         if (dataSource.errorHandler) {
           // 请求错误处理函数
           const onError = async () => {
-            let assemblyCode = dataSource.errorHandler
-              ? dataSource.errorHandler
-              : `function onError(error){
-            // console.log(error);
-            // 可以在这里做弹框提示等操作
-          };`;
-            assemblyCode += 'error = didFetch(error);return error;';
+            let assemblyCode = dataSource.errorHandler ? dataSource.errorHandler : __ErrorHandler__;
+            assemblyCode += 'error = onError(error);return error;';
             return func('error', assemblyCode).call(context, error);
           };
           const [onErrorError, onErrorData] = await to(onError());

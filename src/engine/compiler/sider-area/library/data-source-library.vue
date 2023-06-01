@@ -186,16 +186,36 @@
             </template>
             <a-tabs>
               <a-tab-pane key="1" tab="请求处理">
-                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+                <hex-monaco-editor
+                  v-model:value="createOrUpdateState.info.willFetch"
+                  title=""
+                  :theme="Theme.DEFAULT"
+                  :language="Lang.JS"
+                />
               </a-tab-pane>
               <a-tab-pane key="2" tab="数据处理">
-                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+                <hex-monaco-editor
+                  v-model:value="createOrUpdateState.info.fitHandler"
+                  title=""
+                  :theme="Theme.DEFAULT"
+                  :language="Lang.JS"
+                />
               </a-tab-pane>
               <a-tab-pane key="3" tab="响应处理">
-                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+                <hex-monaco-editor
+                  v-model:value="createOrUpdateState.info.dataHandler"
+                  title=""
+                  :theme="Theme.DEFAULT"
+                  :language="Lang.JS"
+                />
               </a-tab-pane>
               <a-tab-pane key="4" tab="错误处理">
-                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+                <hex-monaco-editor
+                  v-model:value="createOrUpdateState.info.errorHandler"
+                  title=""
+                  :theme="Theme.DEFAULT"
+                  :language="Lang.JS"
+                />
               </a-tab-pane>
             </a-tabs>
             <!-- <a-form-item label="是否发送请求">
@@ -221,6 +241,7 @@ import { buildUUID } from '/@/utils/common';
 import { HolderOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons-vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
+import { __DataHandler__, __WillFetch__, __FitHandler__, __ErrorHandler__ } from '/@/utils/shared/const';
 
 const core = inject(HexCoreInjectionKey);
 const state = reactive<{
@@ -377,6 +398,14 @@ const handleAddItemClick = (item: MenuInfo) => {
     },
     initialData: '',
   };
+
+  // 默认值
+  if (createOrUpdateState.category === 'REMOTE') {
+    createOrUpdateState.info.willFetch = __WillFetch__;
+    createOrUpdateState.info.fitHandler = __FitHandler__;
+    createOrUpdateState.info.dataHandler = __DataHandler__;
+    createOrUpdateState.info.errorHandler = __ErrorHandler__;
+  }
 };
 /** 编辑 */
 const handleEditItemClick = (options: RuntimeDataSourceConfig, index: number) => {
