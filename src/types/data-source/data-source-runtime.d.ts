@@ -32,22 +32,23 @@ export interface RuntimeDataSourceConfig {
   /** 本次请求是否可以正常请求 */
   shouldFetch: (options: RuntimeOptionsConfig) => boolean;
   /** 单个数据结果请求参数处理函数 */
-  willFetch: WillFetch;
+  willFetch: string;
   /**
    * 自定义扩展的外部请求处理器
    * @description 仅 type='custom' 时生效
    */
-  requestHandler: CustomRequestHandler;
+  requestHandler: string;
   /**
    * request 成功后的回调函数
    * @description 参数：请求成功后 promise 的 value 值
    */
-  dataHandler: DataHandler;
+  dataHandler: string;
+  fitHandler: string;
   /**
    * request 失败后的回调函数
    * @description 参数：请求出错 promise 的 error 内容
    */
-  errorHandler: ErrorHandler;
+  errorHandler: string;
   /** 请求参数 */
   options: RuntimeOptionsConfig;
   [otherKey: string]: any;

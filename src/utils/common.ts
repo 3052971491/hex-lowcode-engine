@@ -46,3 +46,17 @@ export function guid() {
 export function isURL(str: string) {
   return /^(?:\w+:)?\/\/([^\s.]+\.\S{2}|localhost[:?\d]*)\S*$/.test(str);
 }
+
+/** await异步等待包装器 */
+export function to<T, U = Error>(promise: Promise<T>, errorExt?: object): Promise<[U, undefined] | [null, T]> {
+  return promise
+    .then<[null, T]>((data: T) => [null, data])
+    .catch<[U, undefined]>((err: U) => {
+      if (errorExt) {
+        const parsedError = { ...err, ...errorExt };
+        return [parsedError, undefined];
+      }
+
+      return [err, undefined];
+    });
+}

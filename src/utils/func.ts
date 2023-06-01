@@ -1,16 +1,29 @@
-import { log } from 'console';
 import { JSFunction } from '/@/types/value-type';
+import { unref } from 'vue';
+import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
+import { isURL, to } from './common';
+import http from './http';
 
 export function BuildFunction(name: string, ...args: any) {
   const code = `try {
-        ${args[args.length - 1]}
-        ${name ? `return ${name}()` : ''}
-      } catch (error) {
-        console.error(error);
-      }`;
+    ${args[args.length - 1]}
+    ${name ? `return ${name}()` : ''}
+  } catch (error) {
+    console.error(error);
+  }`;
   args[args.length - 1] = code;
   const result = new Function(...args);
   return result;
+}
+
+export function func(...args: any) {
+  const jsCode = `try {
+  ${args[args.length - 1]}
+} catch (error) {
+  console.error(error);
+}`;
+  args[args.length - 1] = jsCode;
+  return new Function(...args);
 }
 
 /**
@@ -95,12 +108,11 @@ export function run(code?: string, context: any = null): Object {
     // 去除export
     originCode = originCode.replaceAll('export', '');
     const assemblyCode = `return function () {
-  ${originCode}
-  return {
-    ${functionName.join(',')}
-  }
-}`;
-
+      ${originCode}
+      return {
+        ${functionName.join(',')}
+      }
+    }`;
     const res = BuildFunction('', assemblyCode).call(context);
     return res();
   }
@@ -133,4 +145,171 @@ export function removeGlobalStyle() {
   if (oldStyle) {
     head.removeChild(oldStyle);
   }
+}
+
+/**
+ * 执行数据源请求
+ * @param dataSource 远程 API 配置
+ * @param root 根实例
+ * @param params 请求参数
+ * @param context 全局上下文
+ * @returns
+ */
+export async function load(
+  dataSource: RuntimeDataSourceConfig,
+  root: any,
+  params: Record<string, unknown> = {},
+  context: any = {},
+): Promise<any> {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (resolve, reject) => {
+    // eslint-disable-next-line prefer-const
+    let config: Record<string, unknown> = {
+      baseURL: isURL(dataSource.options.api || '') ? undefined : root.config.remoteUrl,
+      url: dataSource.options.api,
+      method: dataSource.options.method,
+    };
+
+    // 参数
+    if (dataSource.options.params) {
+      if (['GET', 'DELETE'].includes(dataSource.options.method || '')) {
+        config.params = unref(Object.assign(dataSource.options.params, params));
+      } else {
+        config.data = unref(Object.assign(dataSource.options.params, params));
+      }
+    }
+    if (dataSource.willFetch) {
+      // 请求发送前处理函数
+      const willFetch = async () => {
+        let assemblyCode = '';
+        if (!dataSource.willFetch) {
+          assemblyCode = `function willFetch(vars, config) {
+          // 通过 vars 可以更改查询参数
+          // 通过 config.header 可以更改 header
+          // 通过 config.url 可以更改  url
+          // console.log(vars, config); // 可以查看还有哪些参数可以修改。
+        };`;
+        } else {
+          assemblyCode = dataSource.willFetch;
+        }
+        func('vars', 'config', (assemblyCode += 'willFetch(vars, config)')).call(
+          {},
+          ['GET', 'DELETE'].includes(dataSource.options.method || '') ? config.params : config.data,
+          config,
+        );
+        return config;
+      };
+      const [willFetchError, willFetchData] = await to(willFetch());
+      if (willFetchError) {
+        reject(willFetchError);
+      }
+      config = willFetchData!;
+    }
+
+    http
+      .request(config)
+      .then(async (res) => {
+        // eslint-disable-next-line prefer-const
+        let result: any = res;
+        if (dataSource.fitHandler) {
+          // 数据适配
+          const fit = async () => {
+            let assemblyCode = dataSource.fitHandler
+              ? dataSource.fitHandler
+              : `function fit(response) {
+            const content = (response.result !== undefined) ? response.result : response;
+            const error = {
+              code: response.code,
+              message: response.message ||
+                (response.errors && response.errors[0] && response.errors[0].msg) ||
+                response.result || '远程数据源请求出错, success is false',
+            };
+            let success = true;
+            if (response.success === 200) {
+              success = true;
+            } else {
+              success = false;
+            };
+            return {
+              content,
+              success,
+              error,
+            };
+          };`;
+            const re = func('response', (assemblyCode += 'response = fit(response);return response;')).call(
+              context,
+              result,
+            );
+            result = re;
+            return result;
+          };
+          const [fitError, fitData] = await to(fit());
+          if (fitError) {
+            reject(fitError);
+          }
+          result = fitData;
+        }
+        if (!result?.success) {
+          reject(result.error);
+        }
+        if (dataSource.dataHandler) {
+          // 请求完成回调函数
+          const didFetch = async () => {
+            let assemblyCode = dataSource.dataHandler
+              ? dataSource.dataHandler
+              : `function didFetch(content) {
+            // content.b = 1; 修改返回数据结构中的 b 字段为1
+            return content; // 重要，需返回 content
+          };`;
+            const re = func('content', (assemblyCode += 'content = didFetch(content);return content;')).call(
+              context,
+              result.content,
+            );
+            result = re;
+            return result;
+          };
+          const [didFetchError, didFetchData] = await to(didFetch());
+          if (didFetchError) {
+            reject(didFetchError);
+          }
+          result = didFetchData;
+        }
+
+        resolve(result.content);
+      })
+      .catch(async (error) => {
+        if (dataSource.errorHandler) {
+          // 请求错误处理函数
+          const onError = async () => {
+            let assemblyCode = dataSource.errorHandler
+              ? dataSource.errorHandler
+              : `function onError(error){
+            // console.log(error);
+            // 可以在这里做弹框提示等操作
+          };`;
+            assemblyCode += 'error = didFetch(error);return error;';
+            return func('error', assemblyCode).call(context, error);
+          };
+          const [onErrorError, onErrorData] = await to(onError());
+          if (onErrorError) {
+            reject(onErrorError);
+          }
+          reject(onErrorData);
+        }
+        reject(error);
+      });
+  });
+}
+
+/**
+ * 串行执行远程 API
+ * @param arr 远程API组
+ * @param root 根实例
+ * @param context 全局上下文
+ */
+export function iteratorPromise(arr: RuntimeDataSourceConfig[], root: any, context: any = {}) {
+  let resolve = Promise.resolve();
+  arr.forEach((element) => {
+    resolve = resolve.then(() => load(element, root, {}, context));
+  });
 }

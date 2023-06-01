@@ -6,8 +6,7 @@ import { cloneDeep, isArray, isObject } from 'lodash-es';
 import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtime';
 import { message } from 'ant-design-vue';
 import { MessageInstance } from 'ant-design-vue/lib/message';
-import http from '/@/utils/http';
-import { isURL } from './common';
+import { iteratorPromise, load } from './func';
 
 interface IUtilsContext {
   /** 组件实例集合 */
@@ -18,55 +17,6 @@ interface IUtilsContext {
   getLocale(): string;
   /** 格式化 */
   formatter(): string;
-}
-
-/** 执行数据源请求 */
-function load(dataSource: RuntimeDataSourceConfig, root: any, params: Record<string, unknown> = {}): Promise<any> {
-  return new Promise((resolve, reject) => {
-    const config: Record<string, unknown> = {
-      baseURL: isURL(dataSource.options.api || '') ? undefined : root.config.remoteUrl,
-      url: dataSource.options.api,
-      method: dataSource.options.method,
-    };
-
-    // 参数
-    if (dataSource.options.params) {
-      if (['GET', 'DELETE'].includes(dataSource.options.method || '')) {
-        config.params = Object.assign(dataSource.options.params, params);
-      } else {
-        config.data = Object.assign(dataSource.options.params, params);
-      }
-    }
-    // 请求发送前处理函数
-    const willFetch = () => {};
-    willFetch();
-    http
-      .request(config)
-      .then((res) => {
-        // 数据适配
-        const fit = () => {};
-        fit();
-
-        // 请求完成回调函数
-        const didFetch = () => {};
-        didFetch();
-        resolve(dataSource.name);
-      })
-      .catch((error) => {
-        // 请求错误处理函数
-        const onError = () => {};
-        onError();
-        reject(error);
-      });
-  });
-}
-
-/** 串行执行远程 API */
-function iteratorPromise(arr: RuntimeDataSourceConfig[], root: any) {
-  let resolve = Promise.resolve();
-  arr.forEach((element) => {
-    resolve = resolve.then(() => load(element, root));
-  });
 }
 
 export class Context {
@@ -219,9 +169,9 @@ export class Context {
     // 执行远程 API
     result.forEach((item) => {
       if (isArray(item) && item.length > 0) {
-        iteratorPromise(item, this.root());
+        iteratorPromise(item, this.root(), this);
       } else if (item) {
-        load(item, this.root());
+        load(item, this.root(), {}, this);
       }
     });
   }
@@ -229,7 +179,7 @@ export class Context {
   http(name: string, params: Record<string, unknown> = {}): Promise<any> {
     const index = this.dataSourceMap.findIndex((item) => item.name === name);
     if (index !== -1) {
-      return load(this.dataSourceMap[index], this.root(), params);
+      return load(this.dataSourceMap[index], this.root(), params, this);
     }
     return Promise.reject(new Error(`数据源-远程 API中不存在: ${name}`));
   }

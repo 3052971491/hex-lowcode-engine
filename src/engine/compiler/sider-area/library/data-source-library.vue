@@ -66,7 +66,7 @@
       <div class="engine-data-pool-form-wrap-title">
         <div>
           {{ !createOrUpdateState.info.id ? '添加' : '编辑'
-          }}{{ createOrUpdateState.info.protocal === 'VALUE' ? '变量' : '远程' }}
+          }}{{ createOrUpdateState.info.protocal === 'VALUE' ? '变量' : '远程 API' }}
         </div>
         <a-space>
           <a-button type="primary" @click="onSave">保存</a-button>
@@ -184,6 +184,20 @@
                 <a-button type="primary" block @click="handleAddParamsItemClick">添加一项</a-button>
               </a-form-item>
             </template>
+            <a-tabs>
+              <a-tab-pane key="1" tab="请求处理">
+                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+              </a-tab-pane>
+              <a-tab-pane key="2" tab="数据处理">
+                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+              </a-tab-pane>
+              <a-tab-pane key="3" tab="响应处理">
+                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+              </a-tab-pane>
+              <a-tab-pane key="4" tab="错误处理">
+                <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JS" />
+              </a-tab-pane>
+            </a-tabs>
             <!-- <a-form-item label="是否发送请求">
               <a-switch v-model:checked="createOrUpdateState.info.shouldFetch" />
             </a-form-item> -->
