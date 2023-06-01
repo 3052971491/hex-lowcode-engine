@@ -115,7 +115,7 @@ const Editor = ref();
 
 let monacoEditor: editor.IStandaloneCodeEditor | null = null;
 /** 是否启用截断功能 */
-const wordWrap = ref(true);
+const wordWrap = ref(false);
 /** 是否全屏状态 */
 const fullScreen = ref(false);
 /** 明亮或暗夜模式，true 为白天模式，false 为暗夜模式 */
