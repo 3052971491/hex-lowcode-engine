@@ -38,7 +38,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, onMounted, provide, reactive, ref, unref } from 'vue';
+import {
+  computed,
+  defineComponent,
+  inject,
+  isReactive,
+  markRaw,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+  toRaw,
+  unref,
+} from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
@@ -118,6 +130,13 @@ onMounted(() => {
     obj.resetFields = __instance__.value.resetFields;
     obj.validateFields = __instance__.value.validateFields;
     obj.scrollToField = __instance__.value.scrollToField;
+
+    obj.getValue = () => {
+      return isReactive(form.modelValue) ? toRaw(form.modelValue) : form.modelValue;
+    };
+    obj.setValue = (data: any) => {
+      form.modelValue = data;
+    };
   }
 });
 </script>

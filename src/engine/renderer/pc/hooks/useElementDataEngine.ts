@@ -40,7 +40,9 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(schema: T, da
   });
 
   onMounted(() => {
-    initDefaultValue();
+    if (schema.props?.field) {
+      initDefaultValue();
+    }
   });
   return {
     modelValue,

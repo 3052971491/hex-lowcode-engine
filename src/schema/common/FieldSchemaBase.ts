@@ -190,4 +190,8 @@ export class Scheme<T extends LowCode.NodeSchema> {
       console.error(error);
     }
   }
+
+  getValue() {}
+
+  setValue(...args: any) {}
 }

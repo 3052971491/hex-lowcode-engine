@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema.d';
-import { computed, defineComponent, inject, ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, ref, unref } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { DataEngineInjectionKey } from '/@/engine/renderer/render-inject-key';
@@ -49,6 +49,16 @@ const prop = computed(() =>
     };
   }),
 );
+
+onMounted(() => {
+  // 替换原型方法
+  unref(ectype).getValue = () => {
+    return unref(modelValue);
+  };
+  unref(ectype).setValue = (data: any) => {
+    modelValue.value = data;
+  };
+});
 </script>
 
 <script lang="ts">
