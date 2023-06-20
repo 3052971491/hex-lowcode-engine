@@ -109,7 +109,7 @@ export namespace LowCode {
     events?: {
       [key: string]: any;
     };
-    /** 是否渲染 */
+    /** 是否循环渲染 */
     condition: boolean;
     /**
      * 循环数据

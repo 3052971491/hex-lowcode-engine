@@ -19,7 +19,6 @@
           </template>
           <template v-else>
             <CollapsePanelElement
-              v-if="item.condition"
               :schema="item"
               :parent-schema="schema"
               :parent-schema-list="schema.children"

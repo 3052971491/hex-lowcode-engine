@@ -26,7 +26,6 @@
           </template>
           <template v-else>
             <ButtonElement
-              v-if="item.condition"
               :schema="item"
               :parent-schema="schema"
               :parent-schema-list="schema.children"

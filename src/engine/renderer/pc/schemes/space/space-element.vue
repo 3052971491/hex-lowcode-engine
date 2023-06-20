@@ -24,7 +24,7 @@
       </template>
       <template v-else>
         <div v-for="(item, index) in ectype.children" :key="item.id">
-          <template v-if="item?.condition">
+          <template v-if="true">
             <component
               :is="`${item.componentType}Element`"
               :schema="item"

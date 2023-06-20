@@ -20,7 +20,7 @@
             </a-tab-pane>
           </template>
           <template v-else>
-            <a-tab-pane v-if="item.condition" v-bind="ectypePaneProps(item)" :class="[item.props.className]">
+            <a-tab-pane v-bind="ectypePaneProps(item)" :class="[item.props.className]">
               <TabPaneElement
                 :schema="item"
                 :parent-schema="schema"

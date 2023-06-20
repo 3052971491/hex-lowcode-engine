@@ -56,8 +56,8 @@ export class Scheme<T extends LowCode.NodeSchema> {
     [key: string]: any;
   };
 
-  /** 是否渲染 */
-  condition: boolean = true;
+  /** 是否渲循环染 */
+  condition: boolean = false;
 
   /**
    * 循环数据

@@ -15,7 +15,7 @@
   <div class="modal-footer">
     <template v-if="footerSchema">
       <div v-for="(item, index) in footerSchema.children" :key="item.id">
-        <template v-if="item?.condition">
+        <template v-if="true">
           <component
             :is="`${item.componentType}Element`"
             :schema="item"
