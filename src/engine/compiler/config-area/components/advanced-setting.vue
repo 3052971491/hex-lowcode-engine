@@ -12,6 +12,9 @@
       <form-Item-wrapper label="是否渲染" name="condition" :option="{}">
         <a-switch v-model:checked="schema.condition"></a-switch>
       </form-Item-wrapper>
+      <form-Item-wrapper v-if="schema.props?.model" label="表名" name="model" :option="{}">
+        <a-input v-model:value="schema.props.model"></a-input>
+      </form-Item-wrapper>
       <form-Item-wrapper v-if="schema.props?.field" label="字段名" name="field" :option="{}">
         <a-input v-model:value="schema.props.field"></a-input>
       </form-Item-wrapper>
