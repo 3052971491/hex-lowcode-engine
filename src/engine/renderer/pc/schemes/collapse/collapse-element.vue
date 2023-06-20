@@ -8,14 +8,25 @@
   >
     <a-collapse ref="__instance__" v-model:activeKey="activeKey" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
-        <CollapsePanelElement
-          v-for="(item, index) in schema.children"
-          :key="item.props?.key ?? item.id"
-          :schema="item"
-          :parent-schema="schema"
-          :parent-schema-list="schema.children"
-          :index-of-parent-list="index"
-        ></CollapsePanelElement>
+        <template v-for="(item, index) in schema.children" :key="item.props?.key ?? item.id">
+          <template v-if="redactState">
+            <CollapsePanelElement
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+          <template v-else>
+            <CollapsePanelElement
+              v-if="item.condition"
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+        </template>
       </template>
     </a-collapse>
   </ElementWrapper>

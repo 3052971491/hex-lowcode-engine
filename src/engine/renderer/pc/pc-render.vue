@@ -38,13 +38,15 @@
     <!-- 预览模式 -->
     <template v-else>
       <div v-for="(item, index) in modelValue.componentsTree" :key="item.id">
-        <component
-          :is="`${item.componentType}Element`"
-          :schema="item"
-          :parent-schema="modelValue"
-          :parent-schema-list="modelValue.componentsTree"
-          :index-of-parent-list="index"
-        ></component>
+        <template v-if="item?.condition">
+          <component
+            :is="`${item.componentType}Element`"
+            :schema="item"
+            :parent-schema="modelValue"
+            :parent-schema-list="modelValue.componentsTree"
+            :index-of-parent-list="index"
+          />
+        </template>
       </div>
     </template>
   </div>

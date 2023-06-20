@@ -23,13 +23,15 @@
     </template>
     <template v-else>
       <div v-for="(item, index) in ectype.children" :key="item.id">
-        <component
-          :is="`${item.componentType}Element`"
-          :schema="item"
-          :parent-schema="ectype"
-          :parent-schema-list="ectype.children"
-          :index-of-parent-list="index"
-        />
+        <template v-if="item?.condition">
+          <component
+            :is="`${item.componentType}Element`"
+            :schema="item"
+            :parent-schema="ectype"
+            :parent-schema-list="ectype.children"
+            :index-of-parent-list="index"
+          />
+        </template>
       </div>
     </template>
   </ElementWrapper>

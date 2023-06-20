@@ -57,7 +57,7 @@ export class Scheme<T extends LowCode.NodeSchema> {
   };
 
   /** 是否渲染 */
-  condition: boolean = false;
+  condition: boolean = true;
 
   /**
    * 循环数据

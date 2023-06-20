@@ -8,14 +8,25 @@
   >
     <a-row ref="__instance__" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
-        <ColumnElement
-          v-for="(item, index) in schema.children"
-          :key="item.id"
-          :schema="item"
-          :parent-schema="schema"
-          :parent-schema-list="schema.children"
-          :index-of-parent-list="index"
-        ></ColumnElement>
+        <template v-for="(item, index) in schema.children" :key="item.id">
+          <template v-if="redactState">
+            <ColumnElement
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+          <template v-else>
+            <ColumnElement
+              v-if="item.condition"
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+        </template>
       </template>
     </a-row>
   </ElementWrapper>

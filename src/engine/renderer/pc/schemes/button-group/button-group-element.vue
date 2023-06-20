@@ -15,14 +15,25 @@
       :class="[ectype.props.className]"
     >
       <template v-if="schema?.children && schema?.children?.length > 0">
-        <ButtonElement
-          v-for="(item, index) in schema.children"
-          :key="item.id"
-          :schema="item"
-          :parent-schema="schema"
-          :parent-schema-list="schema.children"
-          :index-of-parent-list="index"
-        ></ButtonElement>
+        <template v-for="(item, index) in schema.children" :key="item.id">
+          <template v-if="redactState">
+            <ButtonElement
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+          <template v-else>
+            <ButtonElement
+              v-if="item.condition"
+              :schema="item"
+              :parent-schema="schema"
+              :parent-schema-list="schema.children"
+              :index-of-parent-list="index"
+            />
+          </template>
+        </template>
       </template>
     </div>
   </ElementWrapper>

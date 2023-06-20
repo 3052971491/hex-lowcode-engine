@@ -9,14 +9,26 @@
     <a-tabs ref="__instance__" v-model:activeKey="activeKey" v-bind="prop" :class="[ectype.props.className]">
       <template v-if="schema?.children && schema?.children?.length > 0">
         <template v-for="(item, index) in schema.children" :key="item.props?.value ?? item.id">
-          <a-tab-pane v-bind="ectypePaneProps(item)" :class="[item.props.className]">
-            <TabPaneElement
-              :schema="item"
-              :parent-schema="schema"
-              :parent-schema-list="schema.children"
-              :index-of-parent-list="index"
-            ></TabPaneElement>
-          </a-tab-pane>
+          <template v-if="redactState">
+            <a-tab-pane v-bind="ectypePaneProps(item)" :class="[item.props.className]">
+              <TabPaneElement
+                :schema="item"
+                :parent-schema="schema"
+                :parent-schema-list="schema.children"
+                :index-of-parent-list="index"
+              ></TabPaneElement>
+            </a-tab-pane>
+          </template>
+          <template v-else>
+            <a-tab-pane v-if="item.condition" v-bind="ectypePaneProps(item)" :class="[item.props.className]">
+              <TabPaneElement
+                :schema="item"
+                :parent-schema="schema"
+                :parent-schema-list="schema.children"
+                :index-of-parent-list="index"
+              ></TabPaneElement>
+            </a-tab-pane>
+          </template>
         </template>
       </template>
     </a-tabs>

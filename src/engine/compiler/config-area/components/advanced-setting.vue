@@ -12,7 +12,10 @@
       <form-Item-wrapper label="是否渲染" name="condition" :option="{}">
         <a-switch v-model:checked="schema.condition"></a-switch>
       </form-Item-wrapper>
-      <collapse-Item-wrapper label="循环" name="" :option="{}">
+      <form-Item-wrapper v-if="schema.props?.field" label="字段名" name="field" :option="{}">
+        <a-input v-model:value="schema.props.field"></a-input>
+      </form-Item-wrapper>
+      <!-- <collapse-Item-wrapper label="循环" name="" :option="{}">
         <form-Item-wrapper label="循环数据" name="loop" :option="{}">
           <a-button type="primary" block>编辑数据</a-button>
         </form-Item-wrapper>
@@ -22,7 +25,7 @@
         <form-Item-wrapper label="索引变量名" name="loopArgs.1" :option="{}">
           <a-input v-model:value="indexName" placeholder="默认为: index"></a-input>
         </form-Item-wrapper>
-      </collapse-Item-wrapper>
+      </collapse-Item-wrapper> -->
     </a-form>
   </div>
 </template>

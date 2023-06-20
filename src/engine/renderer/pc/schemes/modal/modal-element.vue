@@ -15,13 +15,15 @@
   <div class="modal-footer">
     <template v-if="footerSchema">
       <div v-for="(item, index) in footerSchema.children" :key="item.id">
-        <component
-          :is="`${item.componentType}Element`"
-          :schema="item"
-          :parent-schema="footerSchema"
-          :parent-schema-list="footerSchema.children"
-          :index-of-parent-list="index"
-        />
+        <template v-if="item?.condition">
+          <component
+            :is="`${item.componentType}Element`"
+            :schema="item"
+            :parent-schema="footerSchema"
+            :parent-schema-list="footerSchema.children"
+            :index-of-parent-list="index"
+          />
+        </template>
       </div>
     </template>
   </div>
