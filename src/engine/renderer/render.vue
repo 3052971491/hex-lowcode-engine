@@ -28,6 +28,8 @@ import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 import { Context } from '/@/utils/utils';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
+import { Modal } from '/@/schema/common/schema';
+import { PcSchema } from '/@/schema/common/interface';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -95,7 +97,7 @@ if (props.redactState) {
     // 注册模态框Schema
     if (core.state.projectConfig.dialogComponentsTree.length > 0) {
       core.state.projectConfig.dialogComponentsTree.forEach((item) => {
-        instanceCore?.setInstance(new Scheme(item));
+        instanceCore?.setInstance(new Modal(item as PcSchema.ModalSchema));
       });
     }
     // 注册当前视图实例

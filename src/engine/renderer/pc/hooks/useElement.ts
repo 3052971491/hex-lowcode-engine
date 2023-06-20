@@ -1,6 +1,7 @@
 import type { LowCode } from '/@/types/schema.d';
 import { computed, ComputedRef, Ref, onMounted, inject, unref } from 'vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
+import Material, { ComponentType } from '/@/schema/common/schema';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import { ElementInstanceInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { Fn } from '/@/types/value-type';
@@ -38,7 +39,8 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
 
   const ectype = computed((): Scheme<T> => {
     // 每次初始化将会重新实例化, 解决历史Schema与新Schema不同步问题
-    return new Scheme(props.schema);
+    const material = Material[props.schema.componentType];
+    return new material(props.schema);
   });
   registerInstance();
 

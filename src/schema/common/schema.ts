@@ -34,7 +34,7 @@ export enum ComponentType {
 export class Text extends Scheme<PcSchema.TextSchema> {
   props: PcSchema.TextSchemaProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'BASIC';
     this.componentName = '文本';
@@ -46,13 +46,19 @@ export class Text extends Scheme<PcSchema.TextSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
   props: PcSchema.ButtonGroupSchemaProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'BASIC';
     this.docUrl = 'https://www.antdv.com/components/button-cn';
@@ -64,13 +70,19 @@ export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Button extends Scheme<PcSchema.ButtonSchema> {
   props: PcSchema.ButtonSchemaProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'BASIC';
     this.docUrl = 'https://www.antdv.com/components/button-cn';
@@ -88,13 +100,19 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Divider extends Scheme<PcSchema.DividerSchema> {
   props: PcSchema.DividerSchemaProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/divider-cn';
     this.tag = 'BASIC';
@@ -110,13 +128,19 @@ export class Divider extends Scheme<PcSchema.DividerSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Input extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '单行文本';
@@ -174,13 +198,19 @@ export class Input extends Scheme<PcSchema.InputScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Textarea extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '多行文本';
@@ -238,13 +268,19 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
   props: PcSchema.InputNumberSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/input-number-cn';
     this.componentName = '数值输入';
@@ -306,13 +342,19 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Switch extends Scheme<PcSchema.SwitchScheme> {
   props: PcSchema.SwitchSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/switch-cn';
     this.componentName = '开关';
@@ -352,13 +394,19 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Radio extends Scheme<PcSchema.RadioScheme> {
   props: PcSchema.RadioSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/radio-cn';
     this.componentName = '单选框';
@@ -402,13 +450,19 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
       { label: '选项二', value: '2' },
       { label: '选项三', value: '3' },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
   props: PcSchema.CheckboxSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/checkbox-cn';
     this.componentName = '多选框';
@@ -450,13 +504,19 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
       { label: '选项二', value: '2' },
       { label: '选项三', value: '3' },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
   props: PcSchema.DatePickerSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/date-picker-cn';
     this.componentName = '日期';
@@ -502,13 +562,19 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
   props: PcSchema.RangePickerSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/date-picker-cn';
     this.componentName = '日期区间';
@@ -552,13 +618,19 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.docUrl = 'https://www.antdv.com/components/switch-cn';
     this.componentName = '评分';
@@ -597,13 +669,19 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
         message: null,
       },
     ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/grid-cn';
@@ -621,13 +699,19 @@ export class Row extends Scheme<PcSchema.RowScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Column extends Scheme<PcSchema.ColumnScheme> {
   props: PcSchema.ColumnSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/grid-cn';
@@ -653,13 +737,19 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Card extends Scheme<PcSchema.CardScheme> {
   props: PcSchema.CardSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/card-cn';
@@ -676,13 +766,19 @@ export class Card extends Scheme<PcSchema.CardScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Space extends Scheme<PcSchema.SpaceScheme> {
   props: PcSchema.SpaceSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/space-cn';
@@ -698,13 +794,19 @@ export class Space extends Scheme<PcSchema.SpaceScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Collapse extends Scheme<PcSchema.CollapseScheme> {
   props: PcSchema.CollapseSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/collapse-cn';
@@ -724,13 +826,19 @@ export class Collapse extends Scheme<PcSchema.CollapseScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
   props: PcSchema.CollapsePanelSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/collapse-cn';
@@ -748,13 +856,19 @@ export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Tabs extends Scheme<PcSchema.TabsScheme> {
   props: PcSchema.TabsSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/tabs-cn';
@@ -776,13 +890,19 @@ export class Tabs extends Scheme<PcSchema.TabsScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class TabPane extends Scheme<PcSchema.TabPaneScheme> {
   props: PcSchema.TabPaneSchemeProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/tabs-cn';
@@ -798,13 +918,19 @@ export class TabPane extends Scheme<PcSchema.TabPaneScheme> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'ADVANCED';
     this.docUrl = 'https://www.antdv.com/components/form-cn';
@@ -818,6 +944,12 @@ export class Form extends Scheme<PcSchema.FormSchema> {
       className: '',
       __style__: '',
     };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
@@ -853,7 +985,7 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
 }
 
 export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
@@ -861,11 +993,17 @@ export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
     this.componentType = ComponentType.ModalContent;
     this.children = [];
     this.internal = false;
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
 export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
-  constructor() {
+  constructor(_data?: any) {
     super();
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
@@ -873,6 +1011,12 @@ export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
     this.componentType = ComponentType.ModalFooter;
     this.children = [];
     this.internal = false;
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
   }
 }
 
@@ -903,3 +1047,31 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
 ]);
+
+export default {
+  Text,
+  ButtonGroup,
+  Button,
+  Divider,
+  Input,
+  Textarea,
+  InputNumber,
+  Switch,
+  Radio,
+  Checkbox,
+  DatePicker,
+  RangePicker,
+  Rate,
+  Row,
+  Column,
+  Card,
+  Space,
+  Collapse,
+  CollapsePanel,
+  Tabs,
+  TabPane,
+  Form,
+  Modal,
+  ModalContent,
+  ModalFooter,
+} as Record<string, any>;
