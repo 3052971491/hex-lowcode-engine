@@ -1,7 +1,7 @@
 import type { LowCode } from '/@/types/schema.d';
 import { computed, ComputedRef, Ref, onMounted, inject, unref } from 'vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
-import Material, { ComponentType } from '/@/schema/common/schema';
+import Material from '/@/schema/common/schema';
 import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore';
 import { ElementInstanceInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { Fn } from '/@/types/value-type';
@@ -90,7 +90,7 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
   }
 
   function registerInstance() {
-    elementInstance?.setInstance(ectype.value);
+    elementInstance?.setInstance(unref(ectype));
   }
   function unregisterInstance() {}
 

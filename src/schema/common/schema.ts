@@ -951,6 +951,41 @@ export class Form extends Scheme<PcSchema.FormSchema> {
       }
     }
   }
+
+  /**
+   * 触发表单验证, 同 validateFields
+   */
+  validate(...args: any) {
+    throw new Error('警告【validate】方法暂未实现');
+  }
+
+  /**
+   * 移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果
+   */
+  clearValidate(...args: any) {
+    throw new Error('警告【clearValidate】方法暂未实现');
+  }
+
+  /**
+   * 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果
+   */
+  resetFields(...args: any) {
+    throw new Error('警告【resetFields】方法暂未实现');
+  }
+
+  /**
+   * 触发表单验证
+   */
+  validateFields(...args: any) {
+    throw new Error('警告【validateFields】方法暂未实现');
+  }
+
+  /**
+   * 滚动到对应字段位置
+   */
+  scrollToField(...args: any) {
+    throw new Error('警告【scrollToField】方法暂未实现');
+  }
 }
 
 export class Modal extends Scheme<PcSchema.ModalSchema> {

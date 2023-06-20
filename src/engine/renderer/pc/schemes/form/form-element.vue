@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, provide, reactive, ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, provide, reactive, ref, unref } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
@@ -52,6 +52,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import { useForm } from './useForm';
 import { useElement } from '../../hooks/useElement';
+import { Form } from '/@/schema/common/schema';
 
 const __instance__ = ref<FormInstance>();
 
@@ -107,6 +108,18 @@ if (!redactState) {
     originData: form.modelValue,
   });
 }
+
+onMounted(() => {
+  if (__instance__.value) {
+    // 替换原型方法
+    const obj = ectype.value as Form;
+    obj.validate = __instance__.value.validate;
+    obj.clearValidate = __instance__.value.clearValidate;
+    obj.resetFields = __instance__.value.resetFields;
+    obj.validateFields = __instance__.value.validateFields;
+    obj.scrollToField = __instance__.value.scrollToField;
+  }
+});
 </script>
 
 <script lang="ts">
