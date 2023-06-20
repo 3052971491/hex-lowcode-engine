@@ -365,7 +365,7 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
       field: `Field_${buildUUID()}`,
       label: this.componentName,
       defaultValue: false,
-      size: 'middle',
+      size: 'default',
       behavior: 'normal',
       tips: '',
       rules: [],
