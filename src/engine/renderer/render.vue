@@ -26,10 +26,12 @@ import {
 } from './render-inject-key';
 import { run, registerGlobalStyle, removeGlobalStyle } from '/@/utils/func';
 import { Context } from '/@/utils/utils';
-import { Scheme } from '/@/schema/common/FieldSchemaBase';
 import { RuntimeDataSourceConfig } from '/@/types/data-source/data-source-runtime';
 import { Modal } from '/@/schema/common/schema';
 import { PcSchema } from '/@/schema/common/interface';
+import { localeContextKey } from '/@/hooks/use-loacle';
+import zhCn from '/@/locale/lang/zh-CN';
+import en from '/@/locale/lang/en';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -104,10 +106,14 @@ if (props.redactState) {
     instanceCore?.setInstance(modelValue.value);
   }
 }
+const i18n = computed(() => {
+  return modelValue.value?.config.i18n === 'zh-CN' ? zhCn : en;
+});
 
 provide(HexCoreInjectionKey, core);
 provide(DataEngineInjectionKey, null);
 provide(ElementInstanceInjectionKey, instanceCore);
+provide(localeContextKey, i18n as any);
 
 /** 全局变量 */
 const GlobalVariables: Record<string, unknown> = {};

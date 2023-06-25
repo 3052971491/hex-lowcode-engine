@@ -23,6 +23,9 @@ import ConfigArea from './config-area/index.vue';
 import { useHexCore } from '/@/engine/renderer/central/useHexCore';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { LowCode } from '/@/types/schema';
+import { localeContextKey } from '/@/hooks/use-loacle';
+import zhCn from '/@/locale/lang/zh-CN';
+import en from '/@/locale/lang/en';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -76,6 +79,12 @@ core.buildProjectConfig(modelValue.value);
 core.buildHistory();
 core.buildSelectedData();
 core.loadHistoryDataStorage();
+
+const i18n = computed(() => {
+  return modelValue.value?.config.i18n === 'zh-CN' ? zhCn : en;
+});
+provide(localeContextKey, i18n as any);
+
 if (modelValue.value && lowcodeOptions.value) {
   Object.assign(modelValue.value.config, lowcodeOptions.value);
 }

@@ -1,9 +1,5 @@
 <template>
-  <hex-form-editor
-    :config="{
-      i18n: 'en-US',
-    }"
-  ></hex-form-editor>
+  <hex-form-editor />
 </template>
 
 <script setup lang="ts">
