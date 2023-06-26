@@ -2,11 +2,16 @@
   <div class="element-library">
     <a-skeleton active :loading="loading">
       <a-space class="w-full">
-        <a-input-search v-model:value="filterText" class="w-full" placeholder="搜索" enter-button></a-input-search>
-        <a-button type="primary" @click="onAdd">添加</a-button>
+        <a-input-search
+          v-model:value="filterText"
+          class="w-full"
+          :placeholder="t('el.placeholder.search')"
+          enter-button
+        ></a-input-search>
+        <a-button type="primary" @click="onAdd">{{ t('el.control.add') }}</a-button>
       </a-space>
       <div v-if="modalList.length < 1" class="w-full p-3">
-        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
       </div>
       <template v-else>
         <a-list item-layout="vertical" :data-source="modalList" class="overflow-auto">
@@ -39,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, onMounted, reactive, ref, watch } from 'vue';
+import { computed, inject, onMounted, reactive, ref } from 'vue';
 import { Empty, message } from 'ant-design-vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { DeleteOutlined, EditOutlined, CopyOutlined } from '@ant-design/icons-vue';
@@ -48,7 +53,9 @@ import { useClipboard } from '@vueuse/core';
 import CreateOrUpdateModalInfo from './create-or-update-modal-info.vue';
 import { buildElementSchemaByType } from '/@/utils/draggable-api';
 import { PcSchema } from '/@/schema/common/interface';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const state = reactive<{
   type: string;

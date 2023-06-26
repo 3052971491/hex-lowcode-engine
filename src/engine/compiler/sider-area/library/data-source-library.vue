@@ -12,7 +12,7 @@
             <a-input-search
               v-model:value="state.filterText"
               class="w-full"
-              placeholder="搜索"
+              :placeholder="t('el.placeholder.search')"
               enter-button
             ></a-input-search>
           </a-space>
@@ -242,7 +242,9 @@ import { HolderOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons-
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 import { __DataHandler__, __WillFetch__, __FitHandler__, __ErrorHandler__ } from '/@/utils/shared/const';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const state = reactive<{
   filterText: string;

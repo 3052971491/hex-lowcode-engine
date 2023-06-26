@@ -1,9 +1,15 @@
 <template>
   <div class="element-library">
     <a-skeleton active :loading="loading">
-      <a-input-search v-model:value="filterText" placeholder="搜索组件" enter-button class="mb-2" @search="onSearch" />
+      <a-input-search
+        v-model:value="filterText"
+        :placeholder="t('el.placeholder.search')"
+        enter-button
+        class="mb-2"
+        @search="onSearch"
+      />
       <div v-for="(menu, i) in elementList" :key="i" class="w-full mb-6">
-        <div class="text-lg font-bold mb-2">{{ menu.label }}</div>
+        <div class="text-lg font-bold mb-2">{{ t(menu.key) }}</div>
         <template v-if="menu.list.length > 0">
           <hex-draggable
             v-model:value="menu.list"
@@ -15,20 +21,20 @@
           >
             <template #item="{ element }">
               <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
-                <div class="item" :class="menuTheme(menu.label)">{{ element.componentName }}</div>
+                <div class="item" :class="menuTheme(menu.label)">{{ t(`el.component.${element.componentType}`) }}</div>
               </div>
             </template>
           </hex-draggable>
         </template>
         <template v-else>
           <div class="w-full p-3">
-            <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无组件"></a-empty>
+            <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
           </div>
         </template>
       </div>
       <template v-if="elementList.length < 1">
         <div class="w-full p-3">
-          <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无组件"></a-empty>
+          <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
         </div>
       </template>
     </a-skeleton>
@@ -49,10 +55,13 @@ import {
 } from '/@/schema/pc';
 import { buildElementSchema } from '/@/utils/draggable-api';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface ElementList {
   /** 组件类型名称 */
   label: string;
+  key: string;
   /** 组件列表 */
   list: LowCode.Schema[];
 }
@@ -96,6 +105,7 @@ const onSearch = () => {
   elementList.value = [
     {
       label: '基础控件',
+      key: 'el.component.category.basic',
       list: BasicComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
@@ -109,6 +119,7 @@ const onSearch = () => {
     },
     {
       label: '表单控件',
+      key: 'el.component.category.form',
       list: FormComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
@@ -122,6 +133,7 @@ const onSearch = () => {
     },
     {
       label: '业务控件',
+      key: 'el.component.category.business',
       list: BusinessComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
@@ -135,6 +147,7 @@ const onSearch = () => {
     },
     {
       label: '布局控件',
+      key: 'el.component.category.layout',
       list: LayoutComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
@@ -148,6 +161,7 @@ const onSearch = () => {
     },
     {
       label: '高级控件',
+      key: 'el.component.category.advanced',
       list: AdvancedComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {

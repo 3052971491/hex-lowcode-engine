@@ -3,7 +3,7 @@
     <a-skeleton active :loading="loading">
       <a-input-search
         v-model:value="filterText"
-        placeholder="搜索组件(通过唯一标识)"
+        :placeholder="t('el.placeholder.search')"
         class="mb-2"
         :loading="filterTextLoading"
         enter-button
@@ -23,9 +23,9 @@
         <template #title="item">
           <div class="tree-node">
             <div class="flex items-center">
-              <span>{{ item.componentName }}</span>
+              <span>{{ t(`el.component.${item.componentType}`) }}</span>
               <a-tooltip>
-                <template #title>循环</template>
+                <template #title>{{ t('el.common.loop') }}</template>
                 <sync-outlined v-if="item.condition" class="mx-2" style="color: #67bbbb" />
               </a-tooltip>
             </div>
@@ -43,7 +43,7 @@
         </template>
       </a-tree>
       <div v-if="treeData.length < 1" class="w-full p-3">
-        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
       </div>
     </a-skeleton>
   </div>
@@ -55,7 +55,9 @@ import type { LowCode } from '/@/types/schema.d';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { EyeOutlined, EyeInvisibleOutlined, SyncOutlined } from '@ant-design/icons-vue';
 import { Empty } from 'ant-design-vue';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 
 const treeData = computed((): LowCode.Schema[] => {

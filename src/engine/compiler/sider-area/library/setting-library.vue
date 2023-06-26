@@ -2,13 +2,16 @@
   <div class="setting-library">
     <a-skeleton active :loading="loading">
       <a-form>
-        <a-form-item v-if="core?.state.projectConfig?.config.i18n" label="语言">
+        <a-form-item v-if="core?.state.projectConfig?.config.i18n" :label="t('el.globalSetting.language')">
           <a-radio-group v-model:value="core.state.projectConfig.config.i18n" @change="core?.saveCurrentHistoryData()">
             <a-radio-button value="zh-CN">中文</a-radio-button>
             <a-radio-button value="en-US">English</a-radio-button>
           </a-radio-group>
         </a-form-item>
-        <a-form-item v-if="core?.state.projectConfig?.config.hasOwnProperty('remoteUrl')" label="远程 API">
+        <a-form-item
+          v-if="core?.state.projectConfig?.config.hasOwnProperty('remoteUrl')"
+          :label="t('el.globalSetting.remoteAPI')"
+        >
           <a-textarea
             v-model:value="core.state.projectConfig.config.remoteUrl"
             :auto-size="{ minRows: 2, maxRows: 5 }"
@@ -23,7 +26,9 @@
 <script setup lang="ts">
 import { inject, onMounted, ref } from 'vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const loading = ref(true);
 onMounted(() => {
   setTimeout(() => {
