@@ -97,38 +97,38 @@ export interface IMenuItem {
 
 const topMenu: Array<IMenuItem> = [
   {
-    label: '组件层次结构树',
+    label: 'el.nav.componentHierarchyTree',
     value: 'structure-library',
     icon: PartitionOutlined,
     component: ComponentHierarchyTree,
   },
   {
-    label: '组件库',
+    label: 'el.nav.componentLibrary',
     value: 'element-library',
     icon: AppstoreOutlined,
     component: ElementLibrary,
   },
   {
-    label: '模态框',
+    label: 'el.nav.modalBox',
     value: 'modal-library',
     icon: BlockOutlined,
     component: ModalLibrary,
   },
   {
-    label: '数据源',
+    label: 'el.nav.dataSource',
     value: 'data-source-library',
     icon: ApiOutlined,
     component: DataSourceLibrary,
   },
   {
-    label: '动作面板',
+    label: 'el.nav.actionPanel',
     value: 'code-library',
     icon: CodeOutlined,
     component: ActionPaneLibrary,
     drawer: true,
   },
   {
-    label: '多语言文案管理',
+    label: 'el.nav.multilingualCopyManagement',
     value: 'i18n-library',
     icon: GlobalOutlined,
     component: I18nLibrary,
@@ -136,7 +136,7 @@ const topMenu: Array<IMenuItem> = [
 ];
 const bottomMenu: Array<IMenuItem> = [
   {
-    label: '设置',
+    label: 'el.nav.setting',
     value: 'setting-library',
     icon: SettingOutlined,
     component: SettingLibrary,

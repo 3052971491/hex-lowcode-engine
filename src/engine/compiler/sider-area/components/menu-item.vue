@@ -2,7 +2,7 @@
   <div class="menu-item w-full flex justify-center" :class="active ? 'menu-item-active' : ''">
     <a-tooltip placement="right" :destroy-tooltip-on-hide="true">
       <template #title>
-        <span>{{ config.label }}</span>
+        <span>{{ t(config.label) }}</span>
       </template>
       <component :is="config.icon" class="aside-action-icon" :class="active ? 'active-icon' : ''"></component>
     </a-tooltip>
@@ -11,6 +11,9 @@
 
 <script lang="ts" setup name="menu-item">
 import { IMenuItem } from '../index.vue';
+import { useLocale } from '/@/hooks/use-loacle';
+
+const { t } = useLocale();
 
 withDefaults(
   defineProps<{

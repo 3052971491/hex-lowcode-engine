@@ -1,17 +1,17 @@
 <template>
   <div class="w-full h-full flex flex-col overflow-hidden">
     <a-tabs v-model:activeKey="activeKey" :centered="true">
-      <a-tab-pane key="1" tab="属性">
+      <a-tab-pane key="1" :tab="t('el.common.property')">
         <setting-pane>
           <attribute-setting />
         </setting-pane>
       </a-tab-pane>
-      <a-tab-pane key="2" tab="样式">
+      <a-tab-pane key="2" :tab="t('el.common.style')">
         <setting-pane>
           <style-setting />
         </setting-pane>
       </a-tab-pane>
-      <a-tab-pane key="3" tab="高级">
+      <a-tab-pane key="3" :tab="t('el.common.advanced')">
         <setting-pane>
           <advanced-setting />
         </setting-pane>
@@ -27,7 +27,9 @@ import AttributeSetting from './components/attribute-setting.vue';
 import StyleSetting from './components/style-setting.vue';
 import AdvancedSetting from './components/advanced-setting.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const activeKey = ref('1');
 
