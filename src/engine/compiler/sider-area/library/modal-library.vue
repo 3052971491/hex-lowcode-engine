@@ -25,9 +25,14 @@
               <template #actions>
                 <CopyOutlined class="cursor-pointer" @click="handleCopy(item)" />
                 <EditOutlined class="cursor-pointer" @click="handleEdit(item)" />
-                <a-popconfirm ok-text="确认" cancel-text="取消" placement="right" @confirm="handleDelete(item)">
+                <a-popconfirm
+                  :ok-text="t('el.control.confirm')"
+                  :cancel-text="t('el.control.cancel')"
+                  placement="right"
+                  @confirm="handleDelete(item)"
+                >
                   <template #title>
-                    <div>确认是否删除该模态框?</div>
+                    <div>{{ t('el.popconfirm.isDelete') }}</div>
                   </template>
                   <DeleteOutlined class="cursor-pointer" />
                 </a-popconfirm>

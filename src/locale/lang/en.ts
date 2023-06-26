@@ -8,6 +8,9 @@ export default {
       advanced: 'Advanced',
       loop: 'Loop',
       noData: 'No Data',
+      all: 'All',
+      VALUE: 'VALUE',
+      REMOTE: 'REMOTE',
     },
     nav: {
       componentHierarchyTree: 'Component Hierarchy Tree',
@@ -65,8 +68,13 @@ export default {
     placeholder: {
       search: 'Search',
     },
+    popconfirm: {
+      isDelete: 'Confirm deletion?',
+    },
     control: {
       add: 'Add',
+      confirm: 'Confirm',
+      cancel: 'Cancel',
     },
   },
 };

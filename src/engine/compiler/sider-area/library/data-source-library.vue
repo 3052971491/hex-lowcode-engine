@@ -5,9 +5,9 @@
         <a-col :span="24">
           <a-space class="w-full">
             <a-select v-model:value="state.type" style="width: 80px">
-              <a-select-option value="">全部</a-select-option>
-              <a-select-option value="VALUE">变量</a-select-option>
-              <a-select-option value="REMOTE">远程</a-select-option>
+              <a-select-option value="">{{ t('el.common.all') }}</a-select-option>
+              <a-select-option value="VALUE">{{ t('el.common.VALUE') }}</a-select-option>
+              <a-select-option value="REMOTE">{{ t('el.common.REMOTE') }}</a-select-option>
             </a-select>
             <a-input-search
               v-model:value="state.filterText"
@@ -21,11 +21,11 @@
           <a-dropdown>
             <template #overlay>
               <a-menu @click="handleAddItemClick">
-                <a-menu-item key="VALUE"> 变量 </a-menu-item>
-                <a-menu-item key="REMOTE"> 远程 </a-menu-item>
+                <a-menu-item key="VALUE">{{ t('el.common.VALUE') }}</a-menu-item>
+                <a-menu-item key="REMOTE">{{ t('el.common.REMOTE') }}</a-menu-item>
               </a-menu>
             </template>
-            <a-button type="primary" style="width: 80px">添加</a-button>
+            <a-button type="primary" style="width: 80px">{{ t('el.control.add') }}</a-button>
           </a-dropdown>
         </a-col>
       </a-row>
@@ -40,16 +40,17 @@
                     :style="{
                       color: element.protocal === 'VALUE' ? '#66bc5c' : '#33a4ff',
                     }"
-                    >{{ element.protocal === 'VALUE' ? '变量' : '远程' }}&nbsp;&nbsp;</strong
                   >
+                    {{ element.protocal === 'VALUE' ? t('el.common.VALUE') : t('el.common.REMOTE') }}&nbsp;&nbsp;
+                  </strong>
                   {{ element.name }}
                 </div>
                 <div>
                   <form-outlined class="icon mr-1" @click="handleEditItemClick(element, index)" />
                   <a-popconfirm
-                    title="确认是否删除?"
-                    ok-text="确认"
-                    cancel-text="取消"
+                    :title="t('el.popconfirm.isDelete')"
+                    :ok-text="t('el.control.confirm')"
+                    :cancel-text="t('el.control.cancel')"
                     @confirm="handleDeleteItemClick(element, index)"
                   >
                     <delete-outlined class="icon mr-1" />

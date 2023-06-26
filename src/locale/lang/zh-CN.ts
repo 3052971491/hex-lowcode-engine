@@ -8,6 +8,9 @@ export default {
       advanced: '高级',
       loop: '循环',
       noData: '暂无',
+      all: '全部',
+      VALUE: '变量',
+      REMOTE: '远程',
     },
     nav: {
       componentHierarchyTree: '组件层次结构树',
@@ -65,8 +68,13 @@ export default {
     placeholder: {
       search: '搜索',
     },
+    popconfirm: {
+      isDelete: '确认是否删除?',
+    },
     control: {
       add: '新增',
+      confirm: '确认',
+      cancel: '取消',
     },
   },
 };
