@@ -182,7 +182,7 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'pull', label: '向左移动格数', editor: 'input-number-editor' },
   { type: 'Column', name: 'push', label: '向右移动格数', editor: 'input-number-editor' },
   { type: 'Column', name: 'span', label: '占位格数', editor: 'input-number-editor' },
-  { type: 'Column', name: 'xxxl', label: ' ≥2000px 响应式栅格', editor: 'input-number-editor' },
+  { type: 'Column', name: 'xxxl', label: '≥2000px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'xs', label: '<576px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'sm', label: '≥576px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'md', label: '≥768px 响应式栅格', editor: 'input-number-editor' },
