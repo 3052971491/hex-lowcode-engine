@@ -96,6 +96,9 @@ export default {
       cancel: 'Cancel',
       preview: 'Preview',
       save: 'Save',
+      copy: 'Copy',
+      delete: 'Delete',
+      selectParentNode: 'Select parent node',
     },
     property: {
       id: 'ID',

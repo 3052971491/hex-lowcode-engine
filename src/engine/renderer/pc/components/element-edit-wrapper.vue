@@ -10,14 +10,14 @@
         class="instance-node-selector-current"
         @click.stop="handleSelectElement(item, index)"
       >
-        {{ item?.componentName }}
+        {{ t(`el.component.${item?.componentType}`) }}
       </span>
     </div>
     <!-- 操作按钮组 -->
     <div v-if="isSelect" class="borders-actions">
       <a-tooltip placement="bottom">
         <template #title>
-          <span>选中父节点</span>
+          <span>{{ t('el.control.selectParentNode') }}</span>
         </template>
         <div class="borders-action" @click.stop="($event) => handleSelectParentElementClick($event)">
           <select-outlined />
@@ -25,7 +25,7 @@
       </a-tooltip>
       <a-tooltip placement="bottom">
         <template #title>
-          <span>复制</span>
+          <span>{{ t('el.control.copy') }}</span>
         </template>
         <div class="borders-action" @click.stop="($event) => handleCopyCurrentElementClick($event)">
           <CopyOutlined />
@@ -33,7 +33,7 @@
       </a-tooltip>
       <a-tooltip placement="bottom">
         <template #title>
-          <span>删除</span>
+          <span>{{ t('el.control.delete') }}</span>
         </template>
         <div class="borders-action" @click.stop="($event) => handleDeleteCurrentElementClick($event)">
           <DeleteOutlined />
@@ -66,7 +66,9 @@ import {
 import { CopyOutlined, DeleteOutlined, SelectOutlined } from '@ant-design/icons-vue';
 import { useFormItem } from '../hooks/useFormItem';
 import { useI18n } from '../hooks/useI18n';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   schema: LowCode.Schema;
   parentSchema: LowCode.Schema;

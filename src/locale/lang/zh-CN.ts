@@ -95,6 +95,9 @@ export default {
       cancel: '取消',
       preview: '预览',
       save: '保存',
+      copy: '复制',
+      delete: '删除',
+      selectParentNode: '选中父节点',
     },
     property: {
       id: '唯一标识',

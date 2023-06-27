@@ -4,7 +4,7 @@
       <div class="settings-navigator">
         <a-breadcrumb>
           <a-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" @click="handleSelectComponent(item)">
-            <a href="JavaScript:void(0)">{{ item.componentName }}</a>
+            <a href="JavaScript:void(0)">{{ t(`el.component.${item?.componentType}`) }}</a>
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>
@@ -14,7 +14,7 @@
     </template>
     <template v-else>
       <div class="w-full h-full p-3 flex justify-center items-center">
-        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无数据"></a-empty>
+        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
       </div>
     </template>
   </div>
@@ -25,7 +25,9 @@ import { inject, computed } from 'vue';
 import { Empty } from 'ant-design-vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { LowCode } from '/@/types/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const breadcrumbs = computed(() => {
   return (
