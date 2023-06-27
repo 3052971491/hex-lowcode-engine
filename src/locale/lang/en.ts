@@ -163,6 +163,9 @@ export default {
       showTime: 'showTime',
       showNow: 'Show now',
       showToday: 'Show today',
+      allowHalf: 'Allow half',
+      character: 'Character',
+      count: 'Count',
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',

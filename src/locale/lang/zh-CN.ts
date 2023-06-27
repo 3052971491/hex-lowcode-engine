@@ -162,6 +162,9 @@ export default {
       showTime: '时间选择',
       showNow: '是否显示“此刻”',
       showToday: '是否显示“今天”',
+      allowHalf: '是否允许半选',
+      character: '自定义字符',
+      count: 'star 总数',
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',
