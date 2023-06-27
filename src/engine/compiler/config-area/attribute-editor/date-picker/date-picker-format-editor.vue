@@ -1,5 +1,5 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t('el.showDateFormat')" :name="props.attribute" :option="option">
     <a-select v-model:value="modelValue" mode="tags" @change="handleChange">
       <a-select-option value="YYYY">YYYY</a-select-option>
       <a-select-option value="YYYY-MM">YYYY-MM</a-select-option>
@@ -16,7 +16,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;

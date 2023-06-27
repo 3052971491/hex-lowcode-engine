@@ -1,14 +1,14 @@
 <template>
-  <collapse-Item-wrapper :label="props.option.label" :name="props.attribute" :option="props.option">
-    <form-item-wrapper label="限制范围" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper :label="t('el.disabledDate')" :name="props.attribute" :option="props.option">
+    <form-item-wrapper :label="t('el.rangeOfLimits')" :name="props.attribute" :option="option">
       <a-select v-model:value="modelValue">
-        <a-select-option value="">无限制</a-select-option>
-        <a-select-option value="afterToday">可选今天之后(含今天)</a-select-option>
-        <a-select-option value="beforeToday">可选今天之前(含今天)</a-select-option>
-        <a-select-option v-if="schema.componentType !== 'RangePicker'" value="duration"
-          >不可选区间(含开始和结束)</a-select-option
-        >
-        <a-select-option value="interselectable">可选区间(含开始和结束)</a-select-option>
+        <a-select-option value="">{{ t('el.unlimited') }}</a-select-option>
+        <a-select-option value="afterToday">{{ t('el.afterToday') }}</a-select-option>
+        <a-select-option value="beforeToday">{{ t('el.beforeToday') }}</a-select-option>
+        <a-select-option v-if="schema.componentType !== 'RangePicker'" value="duration">
+          {{ t('el.duration') }}
+        </a-select-option>
+        <a-select-option value="interselectable">{{ t('el.interselectable') }}</a-select-option>
       </a-select>
     </form-item-wrapper>
     <template v-if="arr.includes(modelValue)">
@@ -40,7 +40,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;

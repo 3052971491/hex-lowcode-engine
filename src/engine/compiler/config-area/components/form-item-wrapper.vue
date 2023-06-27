@@ -45,7 +45,7 @@
             </div>
             <div v-else class="i18n-edit">
               <div class="i18n-delete-control">
-                <span @click="handleDeleteControlClick">{{ T('el.removeCopywritingLink') }}</span>
+                <span @click="handleDeleteControlClick">{{ t('el.removeCopywritingLink') }}</span>
               </div>
               <div class="i18n-search-result-item">
                 <div class="i18n-lang-item">
