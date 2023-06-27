@@ -1,14 +1,18 @@
 <template>
   <div class="create-or-update-modal-info">
     <a-form ref="form" :model="state.form">
-      <a-form-item label="名称" :name="['props', 'title']" :rules="[{ required: true, message: '该字段不能为空' }]">
-        <a-input v-model:value="state.form.props.title" placeholder="名称"></a-input>
+      <a-form-item
+        :label="t('el.label.name')"
+        :name="['props', 'title']"
+        :rules="[{ required: true, message: t('el.required.field') }]"
+      >
+        <a-input v-model:value="state.form.props.title" :placeholder="t('el.label.name')"></a-input>
       </a-form-item>
-      <a-form-item label="描述" name="description">
+      <a-form-item :label="t('el.label.description')" name="description">
         <a-textarea
           v-model:value="state.form.description"
           :auto-size="{ minRows: 2, maxRows: 5 }"
-          placeholder="描述"
+          :placeholder="t('el.label.description')"
         ></a-textarea>
       </a-form-item>
     </a-form>
@@ -20,7 +24,9 @@ import { FormInstance } from 'ant-design-vue';
 import { ref, reactive } from 'vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { cloneDeep } from 'lodash-es';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const form = ref<FormInstance>();
 
 const props = defineProps<{

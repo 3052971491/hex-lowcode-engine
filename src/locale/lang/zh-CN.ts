@@ -71,10 +71,21 @@ export default {
     popconfirm: {
       isDelete: '确认是否删除?',
     },
+    label: {
+      name: '名称',
+      description: '描述',
+    },
+    required: {
+      field: '该字段不能为空',
+    },
     control: {
       add: '新增',
       confirm: '确认',
       cancel: '取消',
+      preview: '预览',
     },
+    addModeBox: '新增模态框',
+    editModeBox: '编辑模态框',
+    copiedToSystemClipboard: '已复制到系统剪贴板',
   },
 };

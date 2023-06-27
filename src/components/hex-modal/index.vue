@@ -13,7 +13,7 @@
       <div class="hex-modal-title flex justify-between items-center">
         <div>
           <slot name="title">
-            {{ name }}
+            {{ t(name) }}
           </slot>
         </div>
         <div class="flex justify-between items-center">
@@ -27,8 +27,8 @@
     <template #footer>
       <template v-if="isFooter">
         <slot name="footer">
-          <a-button @click="handleCancelClick">取消</a-button>
-          <a-button type="primary" @click="handleOkClick">确认</a-button>
+          <a-button @click="handleCancelClick">{{ t('el.control.cancel') }}</a-button>
+          <a-button type="primary" @click="handleOkClick">{{ t('el.control.confirm') }}</a-button>
         </slot>
       </template>
     </template>
@@ -39,11 +39,13 @@
 import { Modal } from 'ant-design-vue';
 import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import { ref, watch } from 'vue';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const props = defineProps({
   name: {
     type: String,
-    default: '预览',
+    default: 'el.control.preview',
   },
   visible: {
     type: Boolean,

@@ -71,10 +71,21 @@ export default {
     popconfirm: {
       isDelete: 'Confirm deletion?',
     },
+    label: {
+      name: 'Name',
+      description: 'Description',
+    },
+    required: {
+      field: 'This field cannot be empty',
+    },
     control: {
       add: 'Add',
       confirm: 'Confirm',
       cancel: 'Cancel',
+      preview: 'Preview',
     },
+    addModeBox: 'Add Mode box',
+    editModeBox: 'Edit Mode box',
+    copiedToSystemClipboard: 'Copied to system Clipboard',
   },
 };

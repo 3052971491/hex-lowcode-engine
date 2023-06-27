@@ -98,7 +98,7 @@ function onAdd() {
     result.children.push(content, footer);
     state.info = result;
     visible.value = !visible.value;
-    modalTitle.value = '新增模态框';
+    modalTitle.value = t('el.addModeBox');
   } else {
     message.error('创建模态款失败, 请联系管理员');
   }
@@ -108,13 +108,13 @@ function onAdd() {
 function handleEdit(result: PcSchema.ModalSchema) {
   state.info = result;
   visible.value = !visible.value;
-  modalTitle.value = '编辑模态框';
+  modalTitle.value = t('el.editModeBox');
 }
 
 function handleCopy(result: PcSchema.ModalSchema) {
   const { id } = result;
   copy(id);
-  message.success(`已复制到系统剪贴板: ${id}`);
+  message.success(`${t('el.copiedToSystemClipboard')}: ${id}`);
 }
 
 function handleDelete(result: PcSchema.ModalSchema) {
