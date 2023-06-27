@@ -1,5 +1,5 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t('el.labelAlign')" :name="props.attribute" :option="option">
     <a-radio-group v-model:value="modelValue">
       <a-radio-button value="left">left</a-radio-button>
       <a-radio-button value="right">right</a-radio-button>
@@ -12,7 +12,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
