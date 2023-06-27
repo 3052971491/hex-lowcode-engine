@@ -37,7 +37,7 @@
       </a-space>
     </template>
     <template v-else>
-      <a-space class="ml-2">模态框设计</a-space>
+      <a-space class="ml-2">{{ t('el.nav.modalFrameDesign') }}</a-space>
       <a-space class="mr-2 mt-2 mb-2">
         <a-button @click="handleExitModalDesignerClick">
           <template #icon><RollbackOutlined /></template>
@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, ref } from 'vue';
+import { inject, ref } from 'vue';
 import {
   UndoOutlined,
   RedoOutlined,
@@ -87,21 +87,21 @@ const element = ref();
 
 function handlePreviewClick() {
   modalType.value = ComponentTypeEnum.RENDER_PREVIEW;
-  modalTitle.value = '预览';
+  modalTitle.value = t('el.nav.preview');
   visible.value = true;
   element.value = cloneDeep(core?.state.projectConfig);
 }
 
 function handlePreviewJsonClick() {
   modalType.value = ComponentTypeEnum.JSON_PREVIEW;
-  modalTitle.value = '查看JSON';
+  modalTitle.value = t('el.nav.JSONCode');
   visible.value = true;
   element.value = cloneDeep(core?.state.projectConfig);
 }
 
 function handleSaveClick() {
   core?.saveCurrentHistoryData();
-  message.success('存档成功');
+  message.success('el.success.archive');
 }
 function handleClearClick() {
   core?.clear();

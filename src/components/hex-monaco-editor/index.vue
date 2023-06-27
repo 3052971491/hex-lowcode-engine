@@ -12,7 +12,7 @@
         <div class="m-e-main_toolbar_left flex-1" :style="isThemeLightOrBlack ? 'color: #000' : 'color: #fff'">
           <span>
             <slot name="title">
-              {{ title }}
+              {{ t(title) }}
             </slot>
           </span>
         </div>
@@ -57,7 +57,9 @@ import monaco from './dependencies';
 import { Theme, Lang } from './useMonacoEditor';
 import 'monaco-editor/esm/vs/editor/contrib/hover/browser/hover';
 import { createDependencyProposals } from './prompt';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Prop {
   value?: any;
   /** 标题 */
@@ -71,7 +73,7 @@ interface Prop {
 }
 
 const props = withDefaults(defineProps<Prop>(), {
-  title: '在线代码编辑器',
+  title: 'el.onlineCodeEditor',
   language: Lang.JS,
   theme: Theme.DARK,
   readonly: false,

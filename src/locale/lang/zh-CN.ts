@@ -27,6 +27,7 @@ export default {
       temporaryStorage: '暂存',
       preview: '预览',
       JSONCode: 'JSON 代码',
+      modalFrameDesign: '模态框设计',
     },
     globalSetting: {
       language: '语言',
@@ -81,6 +82,9 @@ export default {
     required: {
       field: '该字段不能为空',
     },
+    success: {
+      archive: '存档成功',
+    },
     control: {
       add: '新增',
       edit: '编辑',
@@ -104,5 +108,11 @@ export default {
     responseProcessing: '响应处理',
     errorProcessing: '错误处理',
     addAnItem: '添加一项',
+    useHelp: '使用帮助',
+    errorMessage: '错误信息',
+    position: '位置',
+    syntaxCheck: '语法检查',
+    resetReferenceCount: '重置引用计数',
+    onlineCodeEditor: '在线代码编辑器',
   },
 };

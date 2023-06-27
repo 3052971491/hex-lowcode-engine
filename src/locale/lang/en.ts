@@ -27,6 +27,7 @@ export default {
       temporaryStorage: 'Temporary Storage',
       preview: 'Preview',
       JSONCode: 'JSON Code',
+      modalFrameDesign: 'Modal frame design',
     },
     globalSetting: {
       language: 'Language',
@@ -81,6 +82,9 @@ export default {
     required: {
       field: 'This field cannot be empty',
     },
+    success: {
+      archive: 'Archiving success',
+    },
     control: {
       add: 'Add',
       edit: 'Edit',
@@ -104,5 +108,11 @@ export default {
     responseProcessing: 'Response Processing',
     errorProcessing: 'Error Processing',
     addAnItem: 'Add an item',
+    useHelp: 'Use help',
+    errorMessage: 'Error Message',
+    position: 'Position',
+    syntaxCheck: 'Syntax Check',
+    resetReferenceCount: 'Reset Reference Count',
+    onlineCodeEditor: 'Online code editor',
   },
 };

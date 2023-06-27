@@ -28,7 +28,7 @@
             >
             </menu-item>
           </div>
-          <hex-modal v-model:visible="visible" name="动作面板" :is-footer="false" @ok="handleOkClick">
+          <hex-modal v-model:visible="visible" :name="t('el.nav.actionPanel')" :is-footer="false" @ok="handleOkClick">
             <library-item
               v-if="!!data.currentDrawer"
               class="modal-library-item"
@@ -81,7 +81,9 @@ import ComponentHierarchyTree from './library/component-hierarchy-tree.vue';
 import DataSourceLibrary from './library/data-source-library.vue';
 import ModalLibrary from './library/modal-library.vue';
 import SettingLibrary from './library/setting-library.vue';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 export interface IMenuItem {
   /** 名称 */
   label: string;

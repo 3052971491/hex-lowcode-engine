@@ -3,7 +3,7 @@
     <a-skeleton active :loading="loading">
       <div>
         <span>
-          <a-typography-link href="#" target="_blank"> 使用帮助 </a-typography-link>
+          <a-typography-link href="#" target="_blank"> {{ t('el.useHelp') }} </a-typography-link>
         </span>
         <a-divider type="vertical" />
         <a-popconfirm
@@ -17,11 +17,13 @@
           <template #title>
             <div class="action-pane-marker">
               <div class="action-pane-marker-list-title">
-                <div class="message">错误信息</div>
-                <div class="position">位置</div>
+                <div class="message">{{ t('el.errorMessage') }}</div>
+                <div class="position">{{ t('el.position') }}</div>
               </div>
               <div class="action-pane-marker-list">
-                <div v-if="state.markers.length < 1" class="action-pane-marker-list-item">无</div>
+                <div v-if="state.markers.length < 1" class="action-pane-marker-list-item">
+                  {{ t('el.common.noData') }}
+                </div>
                 <div v-for="(item, index) in state.markers" :key="index" class="action-pane-marker-list-item">
                   <div class="action-pane-marker-list-message">
                     <a-typography-text type="danger">{{ item.message }}</a-typography-text>
@@ -35,15 +37,15 @@
               </div>
             </div>
           </template>
-          <span class="cursor-pointer"
-            ><a-typography-text :type="state.markers.length < 1 ? 'default' : 'danger'"
-              >语法检查</a-typography-text
-            ></span
-          >
+          <span class="cursor-pointer">
+            <a-typography-text :type="state.markers.length < 1 ? 'default' : 'danger'">
+              {{ t('el.syntaxCheck') }}
+            </a-typography-text>
+          </span>
         </a-popconfirm>
 
         <a-divider type="vertical" />
-        <span class="cursor-pointer" @click="resetReferenceCount">重置引用计数</span>
+        <span class="cursor-pointer" @click="resetReferenceCount">{{ t('el.resetReferenceCount') }}</span>
       </div>
       <hex-monaco-editor
         ref="monaco"
@@ -65,7 +67,9 @@ import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { StringParsedToFunction } from '/@/utils/func';
 import { cloneDeep } from 'lodash-es';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 
 const loading = ref(true);
