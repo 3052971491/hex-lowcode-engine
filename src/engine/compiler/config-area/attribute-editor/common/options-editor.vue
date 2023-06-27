@@ -1,5 +1,5 @@
 <template>
-  <collapse-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper :label="t('el.property.options')" :name="props.attribute" :option="option">
     <hex-draggable v-model:value="modelValue" :put="false" :sort="true" :pull="false" ghost-class="">
       <template #item="{ element, index }">
         <div class="listitem w-full">
@@ -12,7 +12,7 @@
           <div>
             <a-tooltip placement="top" :destroy-tooltip-on-hide="true">
               <template #title>
-                <span>编辑</span>
+                <span>{{ t('el.control.edit') }}</span>
               </template>
               <a-popconfirm
                 placement="leftBottom"

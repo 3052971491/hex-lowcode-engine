@@ -1,8 +1,8 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t('el.buttonStyle')" :name="props.attribute" :option="option">
     <a-radio-group v-model:value="modelValue">
-      <a-radio-button value="outline">描边</a-radio-button>
-      <a-radio-button value="solid">填色</a-radio-button>
+      <a-radio-button value="outline">{{ t('el.outline') }}</a-radio-button>
+      <a-radio-button value="solid">{{ t('el.solid') }}</a-radio-button>
     </a-radio-group>
   </form-Item-wrapper>
 </template>
@@ -12,7 +12,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
