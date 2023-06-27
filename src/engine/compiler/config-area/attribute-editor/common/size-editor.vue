@@ -1,5 +1,5 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <a-radio-group v-model:value="modelValue">
       <a-radio-button v-for="(item, index) in source" :key="index" :value="item.key">
         <a-tooltip placement="top">
@@ -45,9 +45,9 @@ const modelValue = computed({
 });
 
 const source = [
-  { key: 'small', name: '小', tips: '小号尺寸' },
-  { key: 'middle', name: '中', tips: '中号尺寸' },
-  { key: 'large', name: '大', tips: '大号尺寸' },
-  { key: 'default', name: '默认', tips: '默认尺寸' },
+  { key: 'small', name: t('el.common.small'), tips: t('el.smallSize') },
+  { key: 'middle', name: t('el.common.middle'), tips: t('el.middleSize') },
+  { key: 'large', name: t('el.common.large'), tips: t('el.largeSize') },
+  { key: 'default', name: t('el.common.default'), tips: t('el.defaultSize') },
 ];
 </script>

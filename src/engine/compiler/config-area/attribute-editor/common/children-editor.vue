@@ -1,12 +1,14 @@
 <template>
-  <collapse-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <hex-draggable v-model:value="modelValue" :put="false" :sort="true" :pull="false" ghost-class="">
       <template #item="{ element, index }">
         <div class="listitem w-full">
           <div class="flex-1 flex align-items">
             <holder-outlined class="hex-draggable-handle move" />
             <a-radio-group disabled class="w-full block">
-              <a-radio :value="element.value">No {{ index + 1 }}: {{ element.componentName }}</a-radio>
+              <a-radio :value="element.value">
+                No {{ index + 1 }}: {{ t(`el.component.${element.componentType}`) }}
+              </a-radio>
             </a-radio-group>
           </div>
           <div>
@@ -15,7 +17,7 @@
         </div>
       </template>
     </hex-draggable>
-    <a-button block type="primary" @click="handleAddOptionClick">新增一项</a-button>
+    <a-button block type="primary" @click="handleAddOptionClick">{{ t('el.addAnItem') }}</a-button>
   </collapse-Item-wrapper>
 </template>
 <script lang="ts" setup name="ChildrenEditor">

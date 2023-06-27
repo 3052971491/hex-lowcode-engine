@@ -1,11 +1,11 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <a-select v-model:value="modelValue">
-      <a-select-option value="primary">主按钮</a-select-option>
-      <a-select-option value="default">次按钮</a-select-option>
-      <a-select-option value="dashed">虚线按钮</a-select-option>
-      <a-select-option value="link">链接按钮</a-select-option>
-      <a-select-option value="text">文本按钮</a-select-option>
+      <a-select-option value="primary">{{ t('el.primaryButton') }}</a-select-option>
+      <a-select-option value="default">{{ t('el.defaultButton') }}</a-select-option>
+      <a-select-option value="dashed">{{ t('el.dashedButton') }}</a-select-option>
+      <a-select-option value="link">{{ t('el.linkButton') }}</a-select-option>
+      <a-select-option value="text">{{ t('el.textButton') }}</a-select-option>
     </a-select>
   </form-Item-wrapper>
 </template>
@@ -15,7 +15,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
