@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup name="menu-item">
-import { IMenuItem } from '../index.vue';
+import { IMenuItem } from '../interface';
 import { useLocale } from '/@/hooks/use-loacle';
 
 const { t } = useLocale();
