@@ -60,18 +60,18 @@
             </template>
           </hex-draggable>
         </div>
-        <a-empty v-else :image="Empty.PRESENTED_IMAGE_SIMPLE" description="暂无"></a-empty>
+        <a-empty v-else :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
       </div>
     </a-skeleton>
     <div v-if="state.isShowEngineDataPool" class="engine-data-pool-form-wrap">
       <div class="engine-data-pool-form-wrap-title">
         <div>
-          {{ !createOrUpdateState.info.id ? '添加' : '编辑'
-          }}{{ createOrUpdateState.info.protocal === 'VALUE' ? '变量' : '远程 API' }}
+          {{ !createOrUpdateState.info.id ? t('el.control.add') : t('el.control.edit') }}
+          {{ createOrUpdateState.info.protocal === 'VALUE' ? t('el.common.VALUE') : t('el.common.REMOTE') }}
         </div>
         <a-space>
-          <a-button type="primary" @click="onSave">保存</a-button>
-          <a-button @click="onCancel">取消</a-button>
+          <a-button type="primary" @click="onSave">{{ t('el.control.save') }}</a-button>
+          <a-button @click="onCancel">{{ t('el.control.cancel') }}</a-button>
         </a-space>
       </div>
       <a-divider />
@@ -81,48 +81,56 @@
           :model="createOrUpdateState.info"
           :label-col="{
             style: {
-              width: '100px',
+              width: '120px',
             },
           }"
           label-align="left"
         >
-          <a-form-item label="名称" name="name" :rules="[{ required: true, message: '该字段不能为空' }]">
+          <a-form-item
+            :label="t('el.label.name')"
+            name="name"
+            :rules="[{ required: true, message: t('el.required.field') }]"
+          >
             <a-input v-model:value="createOrUpdateState.info.name"></a-input>
           </a-form-item>
-          <a-form-item label="描述">
+          <a-form-item :label="t('el.label.description')">
             <a-input v-model:value="createOrUpdateState.info.description" />
           </a-form-item>
           <template v-if="createOrUpdateState.category === 'VALUE'">
             <a-form-item>
               <hex-monaco-editor v-model:value="initialData" title="" :theme="Theme.DEFAULT" :language="Lang.JSON">
                 <template #title>
-                  <a-typography-title :level="5" style="margin: 0">数据</a-typography-title>
+                  <a-typography-title :level="5" style="margin: 0">{{ t('el.common.data') }}</a-typography-title>
                 </template>
               </hex-monaco-editor>
             </a-form-item>
           </template>
           <template v-else>
-            <a-form-item label="自动加载">
+            <a-form-item :label="t('el.automaticLoading')">
               <a-switch v-model:checked="createOrUpdateState.info.isInit" />
             </a-form-item>
-            <a-form-item label="加载方式" name="isSync" :rules="[{ required: true, message: '该字段不能为空' }]">
+            <a-form-item
+              :label="t('el.loadingMode')"
+              name="isSync"
+              :rules="[{ required: true, message: t('el.required.field') }]"
+            >
               <a-radio-group v-model:value="createOrUpdateState.info.isSync">
-                <a-radio-button :value="true">串行</a-radio-button>
-                <a-radio-button :value="false">并行</a-radio-button>
+                <a-radio-button :value="true">{{ t('el.serial') }}</a-radio-button>
+                <a-radio-button :value="false">{{ t('el.parallel') }}</a-radio-button>
               </a-radio-group>
             </a-form-item>
             <template v-if="createOrUpdateState.info.options">
               <a-form-item
-                label="请求地址"
+                :label="t('el.requestAddress')"
                 :name="['options', 'api']"
-                :rules="[{ required: true, message: '该字段不能为空' }]"
+                :rules="[{ required: true, message: t('el.required.field') }]"
               >
                 <a-textarea v-model:value="createOrUpdateState.info.options.api" />
               </a-form-item>
               <a-form-item
-                label="请求方法"
+                :label="t('el.requestMethod')"
                 :name="['options', 'method']"
-                :rules="[{ required: true, message: '该字段不能为空' }]"
+                :rules="[{ required: true, message: t('el.required.field') }]"
               >
                 <a-radio-group v-model:value="createOrUpdateState.info.options.method">
                   <a-radio-button value="GET">GET</a-radio-button>
@@ -131,7 +139,7 @@
                   <a-radio-button value="DELETE">DELETE</a-radio-button>
                 </a-radio-group>
               </a-form-item>
-              <a-form-item label="请求参数">
+              <a-form-item :label="t('el.requestParameter')">
                 <div v-if="paramsList.length > 0">
                   <hex-draggable v-model:value="paramsList" :put="false" :sort="true" :pull="false" ghost-class="">
                     <template #item="{ element }">
@@ -152,13 +160,13 @@
                             <template #okButton></template>
                             <template #title>
                               <a-form :model="state.createOrUpdateParams">
-                                <a-form-item label="参数名" name="label">
+                                <a-form-item :label="t('el.label.parameterName')" name="label">
                                   <a-input v-model:value="state.createOrUpdateParams.label" />
                                 </a-form-item>
                                 <div style="width: 400px; height: 300px">
                                   <hex-monaco-editor
                                     v-model:value="state.createOrUpdateParams.value"
-                                    title="参数值"
+                                    :title="t('el.label.parameterValue')"
                                     :theme="Theme.DEFAULT"
                                     :language="Lang.JSON"
                                   />
@@ -182,11 +190,11 @@
                     </template>
                   </hex-draggable>
                 </div>
-                <a-button type="primary" block @click="handleAddParamsItemClick">添加一项</a-button>
+                <a-button type="primary" block @click="handleAddParamsItemClick">{{ t('el.addAnItem') }}</a-button>
               </a-form-item>
             </template>
             <a-tabs>
-              <a-tab-pane key="1" tab="请求处理">
+              <a-tab-pane key="1" :tab="t('el.requestProcessing')">
                 <hex-monaco-editor
                   v-model:value="createOrUpdateState.info.willFetch"
                   title=""
@@ -194,7 +202,7 @@
                   :language="Lang.JS"
                 />
               </a-tab-pane>
-              <a-tab-pane key="2" tab="数据处理">
+              <a-tab-pane key="2" :tab="t('el.dataProcessing')">
                 <hex-monaco-editor
                   v-model:value="createOrUpdateState.info.fitHandler"
                   title=""
@@ -202,7 +210,7 @@
                   :language="Lang.JS"
                 />
               </a-tab-pane>
-              <a-tab-pane key="3" tab="响应处理">
+              <a-tab-pane key="3" :tab="t('el.responseProcessing')">
                 <hex-monaco-editor
                   v-model:value="createOrUpdateState.info.dataHandler"
                   title=""
@@ -210,7 +218,7 @@
                   :language="Lang.JS"
                 />
               </a-tab-pane>
-              <a-tab-pane key="4" tab="错误处理">
+              <a-tab-pane key="4" :tab="t('el.errorProcessing')">
                 <hex-monaco-editor
                   v-model:value="createOrUpdateState.info.errorHandler"
                   title=""
