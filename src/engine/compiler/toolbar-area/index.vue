@@ -101,7 +101,7 @@ function handlePreviewJsonClick() {
 
 function handleSaveClick() {
   core?.saveCurrentHistoryData();
-  message.success('el.success.archive');
+  message.success(t('el.success.archive'));
 }
 function handleClearClick() {
   core?.clear();
