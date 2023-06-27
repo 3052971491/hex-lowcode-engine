@@ -1,5 +1,5 @@
 <template>
-  <collapse-Item-wrapper :label="props.option.label" :name="props.attribute" :option="props.option">
+  <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="props.option">
     <collapse-Item-wrapper
       v-for="(item, index) in eventsMap"
       :key="index"
@@ -12,14 +12,14 @@
         <div>
           <a-tooltip placement="top">
             <template #title>
-              <span>编辑</span>
+              <span>{{ t('el.control.edit') }}</span>
             </template>
             <edit-outlined class="mr-1" @click="onEditActionClick(item.value, event)" />
           </a-tooltip>
 
           <a-tooltip placement="top">
             <template #title>
-              <span>删除</span>
+              <span>{{ t('el.control.delete') }}</span>
             </template>
             <delete-outlined @click="onDeleteActionClick(item.value, event)" />
           </a-tooltip>
@@ -32,17 +32,17 @@
           <a-menu-item v-for="item in actionOptions" :key="item">{{ item.title }}</a-menu-item>
         </a-menu>
       </template>
-      <a-button type="primary" block>新建动作</a-button>
+      <a-button type="primary" block>{{ t('el.addAction') }}</a-button>
     </a-dropdown>
 
     <hex-modal v-model:visible="visible" :name="modalTitle" @ok="handleSubmit">
       <div class="w-full overflow-hidden flex flex-col">
         <a-row>
           <a-col :span="9">
-            <a-typography-title :level="5">响应动作</a-typography-title>
+            <a-typography-title :level="5">{{ t('el.responseAction') }}</a-typography-title>
           </a-col>
           <a-col :span="15">
-            <a-typography-title v-if="!state.actionName" :level="5">动作名称</a-typography-title>
+            <a-typography-title v-if="!state.actionName" :level="5">{{ t('el.actionName') }}</a-typography-title>
           </a-col>
         </a-row>
         <a-form ref="formRef" :model="state.formModel" class="flex-1" hide-required-mark>
@@ -54,10 +54,10 @@
                     <a-form-item name="type" :rules="[{ required: true, message: '', trigger: ['change', 'blur'] }]">
                       <a-radio-group v-model:value="state.actionType" class="w-full" @change="initActionMap">
                         <li class="action-setting-li" :class="['BuiltInAction' === state.actionType ? 'active' : '']">
-                          <a-radio value="BuiltInAction">内置动作</a-radio>
+                          <a-radio value="BuiltInAction">{{ t('el.builtInAction') }}</a-radio>
                         </li>
                         <li class="action-setting-li" :class="['PageJS' === state.actionType ? 'active' : '']">
-                          <a-radio value="PageJS">页面 JS</a-radio>
+                          <a-radio value="PageJS">{{ t('el.pageJS') }}</a-radio>
                         </li>
                       </a-radio-group>
                     </a-form-item>
@@ -66,7 +66,11 @@
                 <div class="code-actions-items-container">
                   <div class="action-setting-ul">
                     <div class="mb-1">
-                      <a-input v-model:value="state.filterText" placeholder="搜索" allow-clear></a-input>
+                      <a-input
+                        v-model:value="state.filterText"
+                        :placeholder="t('el.placeholder.search')"
+                        allow-clear
+                      ></a-input>
                     </div>
                     <a-form-item name="id">
                       <a-radio-group v-model:value="state.actionName" class="w-full" @change="handleActionNameChange">
@@ -88,9 +92,9 @@
               <a-form-item
                 v-if="!state.actionName"
                 name="name"
-                :rules="[{ required: true, message: '动作名称不能为空', trigger: ['change', 'blur'] }]"
+                :rules="[{ required: true, message: t('el.required.actionName'), trigger: ['change', 'blur'] }]"
               >
-                <a-input v-model:value="state.formModel.name" placeholder="请输入动作名称"></a-input>
+                <a-input v-model:value="state.formModel.name" :placeholder="t('el.placeholder.actionName')"></a-input>
               </a-form-item>
               <a-form-item name="params">
                 <hex-monaco-editor
@@ -100,7 +104,7 @@
                   :language="Lang.JSON"
                 >
                   <template #title>
-                    <a-typography-title :level="5" style="margin: 0">参数设置</a-typography-title>
+                    <a-typography-title :level="5" style="margin: 0">{{ t('el.parameterSetting') }}</a-typography-title>
                   </template>
                 </hex-monaco-editor>
               </a-form-item>
@@ -123,7 +127,9 @@ import HexModal from '/@/components/hex-modal/index.vue';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { StringParsedToFunction } from '/@/utils/func';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
@@ -163,15 +169,15 @@ let actionOptions: {
   value: string;
 }[] = [
   {
-    title: 'onChange 值发生变化',
+    title: `onChange ${t('el.changeInValue')}`,
     value: 'onChange',
   },
   {
-    title: 'onFocus 值发生变化',
+    title: `onFocus ${t('el.changeInValue')}`,
     value: 'onFocus',
   },
   {
-    title: 'onBlur 值发生变化',
+    title: `onBlur ${t('el.changeInValue')}`,
     value: 'onBlur',
   },
 ];
@@ -179,7 +185,7 @@ let actionOptions: {
 if (unref(schema).componentType === 'Collapse' || unref(schema).componentType === 'Tabs') {
   actionOptions = [
     {
-      title: 'onChange 值发生变化',
+      title: `onChange ${t('el.changeInValue')}`,
       value: 'onChange',
     },
   ];
@@ -188,7 +194,7 @@ if (unref(schema).componentType === 'Collapse' || unref(schema).componentType ==
 if (unref(schema).componentType === 'Button' || unref(schema).componentType === 'Text') {
   actionOptions = [
     {
-      title: 'onClick 值发生变化',
+      title: `onClick ${t('el.changeInValue')}`,
       value: 'onClick',
     },
   ];
@@ -217,7 +223,7 @@ const initActionMap = () => {
   state.actionMap = [];
   // 获取自定义JS集
   if (state.actionType === 'PageJS') {
-    state.actionMap.push({ label: '添加新动作', value: '' });
+    state.actionMap.push({ label: t('el.addNewAction'), value: '' });
     for (const key in core?.state.projectConfig?.methods) {
       if (Object.prototype.hasOwnProperty.call(core?.state.projectConfig?.methods, key)) {
         state.actionMap.push({
@@ -228,9 +234,9 @@ const initActionMap = () => {
     }
   } else {
     state.actionMap = [
-      { label: '打开 URL', value: 'openUrl' },
-      { label: '打开弹框', value: 'openPopUp' },
-      { label: '关闭弹框', value: 'closePopUp' },
+      { label: t('el.openUrl'), value: 'openUrl' },
+      { label: t('el.openPopUp'), value: 'openPopUp' },
+      { label: t('el.closePopUp'), value: 'closePopUp' },
     ];
   }
 };

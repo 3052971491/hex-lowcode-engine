@@ -16,7 +16,7 @@
             <hex-monaco-editor v-model:value="styleContent" title="CSS" :theme="Theme.DEFAULT" :language="Lang.SCSS" />
           </div>
         </template>
-        <a-button class="ml-2 mt-2">源码编辑</a-button>
+        <a-button class="ml-2 mt-2">{{ t('el.sourceCodeEdit') }}</a-button>
       </a-popconfirm>
     </template>
   </div>
@@ -27,7 +27,9 @@ import { computed, inject } from 'vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;

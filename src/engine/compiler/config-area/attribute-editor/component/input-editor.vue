@@ -1,6 +1,6 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
-    <a-input v-model:value="modelValue" placeholder="请输入" />
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
+    <a-input v-model:value="modelValue" :placeholder="t('el.placeholder.enter')" />
   </form-Item-wrapper>
 </template>
 <script lang="ts" setup name="InputEditor">
@@ -10,7 +10,9 @@ import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { set, get } from '/@/utils/schema';
 import { AttributeItem } from '../../attribute-editor/interface';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;

@@ -15,7 +15,7 @@
       <!-- 高级 -->
       <collapse-Item-wrapper
         v-if="currentFieldAdvancedAttributes && currentFieldAdvancedAttributes.length > 0"
-        label="高级"
+        :label="t('el.common.advanced')"
       >
         <template v-for="(item, index) in currentFieldAdvancedAttributes" :key="'Advanced' + index">
           <component :is="getAttrEditorName(item)" :label="item.label" :attribute="item.name" :option="item" />
@@ -32,7 +32,9 @@ import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { editor } from '../attribute-editor/register-glob-comp';
 import Attributes from '../attribute-editor/index';
 import CollapseItemWrapper from './collapse-item-wrapper.vue';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 
 /**  当前选中组件的属性值集合 */

@@ -71,6 +71,9 @@ export default {
     },
     placeholder: {
       search: 'Search',
+      enter: 'Please enter',
+      select: 'Please select',
+      actionName: 'Please enter an action name',
     },
     popconfirm: {
       isDelete: 'Confirm deletion?',
@@ -85,6 +88,7 @@ export default {
     },
     required: {
       field: 'This field cannot be empty',
+      actionName: 'The action name cannot be empty',
     },
     success: {
       archive: 'Archiving success',
@@ -102,6 +106,14 @@ export default {
     },
     property: {
       id: 'ID',
+      tableName: 'Table name',
+      fieldName: 'Field name',
+      content: 'Content',
+      maxLine: 'Max line',
+      showTitle: 'Show title',
+      events: 'Events',
+      startDate: 'Start date',
+      endDate: 'End date',
     },
     addModeBox: 'Add Mode box',
     editModeBox: 'Edit Mode box',
@@ -127,5 +139,17 @@ export default {
     searchCopy: 'Search copy',
     addCopy: 'Add copy',
     clickAsssignment: 'Click asssignment',
+    addAction: 'Add action',
+    responseAction: 'Response action',
+    actionName: 'Action name',
+    builtInAction: 'Built-in action',
+    pageJS: 'Page JS',
+    parameterSetting: 'Parameter Setting',
+    addNewAction: 'Add new action',
+    openUrl: 'Open URL',
+    openPopUp: 'Open PopUp',
+    closePopUp: 'Close PopUp',
+    changeInValue: 'Change in value',
+    sourceCodeEdit: 'Source code edit',
   },
 };

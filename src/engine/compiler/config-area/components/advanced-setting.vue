@@ -9,10 +9,10 @@
         style: { width: '70px' },
       }"
     >
-      <form-Item-wrapper v-if="schema.props?.model" label="表名" name="model" :option="{}">
+      <form-Item-wrapper v-if="schema.props?.model" :label="t('el.property.tableName')" name="model" :option="{}">
         <a-input v-model:value="schema.props.model" @change="core?.saveCurrentHistoryData"></a-input>
       </form-Item-wrapper>
-      <form-Item-wrapper v-if="schema.props?.field" label="字段名" name="field" :option="{}">
+      <form-Item-wrapper v-if="schema.props?.field" :label="t('el.property.fieldName')" name="field" :option="{}">
         <a-input v-model:value="schema.props.field" @change="core?.saveCurrentHistoryData"></a-input>
       </form-Item-wrapper>
       <!-- <form-Item-wrapper label="是否循环渲染" name="condition" :option="{}">
@@ -38,7 +38,9 @@ import { computed, inject } from 'vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import FormItemWrapper from './form-item-wrapper.vue';
 import CollapseItemWrapper from './collapse-item-wrapper.vue';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;

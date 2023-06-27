@@ -86,7 +86,9 @@ import { formatConversion, fuzzyQuery } from '/@/utils/i18n';
 import { set, get } from '/@/utils/schema';
 import { buildUUID } from '/@/utils/common';
 import type { i18n } from '/@/types/i18n';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   /** 标题 */
   label: string;
@@ -109,7 +111,7 @@ const schema = computed(() => {
 });
 
 const tips = computed(() => {
-  return `属性: ${props.name}`;
+  return `${t('el.common.property')}: ${props.name}`;
 });
 
 const i18nPopconfirm = ref(false);

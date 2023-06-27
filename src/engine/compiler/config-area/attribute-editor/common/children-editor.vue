@@ -29,7 +29,9 @@ import { AttributeItem } from '../../attribute-editor/interface';
 import { set } from '/@/utils/schema';
 import { LowCode } from '/@/types/schema';
 import { buildElementSchemaByType } from '/@/utils/draggable-api';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;

@@ -71,6 +71,9 @@ export default {
     },
     placeholder: {
       search: '搜索',
+      input: '请输入',
+      select: '请选择',
+      actionName: '请输入动作名称',
     },
     popconfirm: {
       isDelete: '确认是否删除?',
@@ -84,6 +87,7 @@ export default {
     },
     required: {
       field: '该字段不能为空',
+      actionName: '动作名称不能为空',
     },
     success: {
       archive: '存档成功',
@@ -101,6 +105,14 @@ export default {
     },
     property: {
       id: '唯一标识',
+      tableName: '表名',
+      fieldName: '字段名',
+      content: '内容',
+      maxLine: '最大行数',
+      showTitle: '开启文本提示',
+      events: '动作设置',
+      startDate: '开始日期',
+      endDate: '结束日期',
     },
     addModeBox: '新增模态框',
     editModeBox: '编辑模态框',
@@ -126,5 +138,17 @@ export default {
     searchCopy: '搜索文案',
     addCopy: '新增文案',
     clickAsssignment: '点击赋值',
+    addAction: '新建动作',
+    responseAction: '响应动作',
+    actionName: '动作名称',
+    builtInAction: '内置动作',
+    pageJS: '页面 JS',
+    parameterSetting: '参数设置',
+    addNewAction: '添加新动作',
+    openUrl: '打开 URL',
+    openPopUp: '打开弹框',
+    closePopUp: '关闭弹框',
+    changeInValue: '值发生变化',
+    sourceCodeEdit: '源码编辑',
   },
 };

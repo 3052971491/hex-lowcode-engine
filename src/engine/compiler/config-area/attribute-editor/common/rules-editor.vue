@@ -61,7 +61,9 @@ import { set, get } from '/@/utils/schema';
 import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { AttributeItem } from '../../attribute-editor/interface';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
