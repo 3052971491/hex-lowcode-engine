@@ -1,8 +1,8 @@
 <template>
-  <collapse-Item-wrapper label="数据提交" :name="props.attribute" :option="props.option">
+  <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="props.option">
     <a-radio-group v-model:value="modelValue" button-style="solid" class="w-full">
-      <a-radio-button :value="false" class="w-1/2 text-center">仅显示时提交</a-radio-button>
-      <a-radio-button :value="true" class="w-1/2 text-center">始终提交</a-radio-button>
+      <a-radio-button :value="false" class="w-1/2 text-center">{{ t('el.displayCommit') }}</a-radio-button>
+      <a-radio-button :value="true" class="w-1/2 text-center">{{ t('el.alwaysCommit') }}</a-radio-button>
     </a-radio-group>
   </collapse-Item-wrapper>
 </template>

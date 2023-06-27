@@ -1,5 +1,5 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <!-- <a-button type="primary" block> 编辑描述 </a-button> -->
     <a-input v-model:value="modelValue"></a-input>
   </form-Item-wrapper>

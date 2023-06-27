@@ -23,8 +23,10 @@
         <template #title>
           <div @blur="i18nPopconfirm = !i18nPopconfirm">
             <div v-if="!I18nStatus" class="i18n-search-results">
-              <a-input v-model:value="filterText" placeholder="搜索已定义的文案"></a-input>
-              <a-button type="primary" block class="mt-2" @click="handleCreateI18nClick">创建新的多语言文案</a-button>
+              <a-input v-model:value="filterText" :placeholder="t('el.searchForDefinedText')"></a-input>
+              <a-button type="primary" block class="mt-2" @click="handleCreateI18nClick">
+                {{ t('el.createNewMultilingualCopy') }}
+              </a-button>
               <div
                 v-for="(item, index) in i18nSearchResultList"
                 :key="index"
@@ -32,28 +34,28 @@
                 @click="handleSelectI18nClick(item)"
               >
                 <div class="i18n-lang-item">
-                  <div class="i18n-item-lang-type">英 文</div>
+                  <div class="i18n-item-lang-type">English</div>
                   <div class="i18n-item-lang-content">{{ item['en-US'] }}</div>
                 </div>
                 <div class="i18n-lang-item">
-                  <div class="i18n-item-lang-type">中 文</div>
+                  <div class="i18n-item-lang-type">中文</div>
                   <div class="i18n-item-lang-content">{{ item['zh-CN'] }}</div>
                 </div>
               </div>
             </div>
             <div v-else class="i18n-edit">
               <div class="i18n-delete-control">
-                <span @click="handleDeleteControlClick">解除文案关联</span>
+                <span @click="handleDeleteControlClick">{{ T('el.removeCopywritingLink') }}</span>
               </div>
               <div class="i18n-search-result-item">
                 <div class="i18n-lang-item">
-                  <div class="i18n-item-lang-type">英 文</div>
+                  <div class="i18n-item-lang-type">English</div>
                   <div class="i18n-item-lang-content">
                     <a-input v-model:value="updateI18nByEn"></a-input>
                   </div>
                 </div>
                 <div class="i18n-lang-item">
-                  <div class="i18n-item-lang-type">中 文</div>
+                  <div class="i18n-item-lang-type">中文</div>
                   <div class="i18n-item-lang-content">
                     <a-input v-model:value="updateI18nByZh"></a-input>
                   </div>
@@ -77,7 +79,7 @@
   </a-form-item>
 </template>
 <script lang="ts" setup name="FormItemWrapper">
-import { computed, inject, ref, watch, watchEffect } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { GlobalOutlined, FontColorsOutlined } from '@ant-design/icons-vue';
 import { isNil } from 'lodash-es';
 import { AttributeItem } from '../attribute-editor/interface';

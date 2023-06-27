@@ -1,12 +1,12 @@
 <template>
-  <form-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <a-radio-group v-model:value="modelValue">
       <a-radio-button v-for="(item, index) in source" :key="index" :value="item.key">
         <a-tooltip placement="topRight">
           <template #title>
-            <span>{{ item.tips }}</span>
+            <span>{{ t(`el.tips.${item.key}`) }}</span>
           </template>
-          {{ item.name }}
+          {{ t(`el.${item.key}`) }}
         </a-tooltip>
       </a-radio-button>
     </a-radio-group>
@@ -44,13 +44,9 @@ const modelValue = computed({
 });
 
 const source = [
-  { key: 'normal', name: '普通', tips: 'NORMAL: 控件的基本功能均可操作' },
-  { key: 'disabled', name: '禁用', tips: 'DISABLED: UI呈现禁用效果的特定样式' },
-  { key: 'readonly', name: '只读', tips: 'READONLY: 仅显示控件的预置数据的内容, 控件不可编辑' },
-  {
-    key: 'hidden',
-    name: '隐藏',
-    tips: 'HIDDEN: 运行态时不显示。对应表单数据默认不会提交, 可在高级-数据提交中进行配置',
-  },
+  { key: 'normal', name: '普通' },
+  { key: 'disabled', name: '禁用' },
+  { key: 'readonly', name: '只读' },
+  { key: 'hidden', name: '隐藏' },
 ];
 </script>

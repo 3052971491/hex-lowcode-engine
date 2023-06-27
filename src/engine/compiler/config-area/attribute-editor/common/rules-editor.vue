@@ -1,12 +1,12 @@
 <template>
-  <collapse-Item-wrapper :label="props.label" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <div class="validation overflow-hidden">
       <div v-for="(item, index) in modelValue" :key="index" class="validation-rule-item">
-        <span class="rule-item-body">{{ item.label }}</span>
+        <span class="rule-item-body">{{ t(`el.ruleType.${item.type}`) }}</span>
         <div class="rule-item-actions">
           <a-tooltip placement="top" :destroy-tooltip-on-hide="true">
             <template #title>
-              <span>编辑</span>
+              <span>{{ t('el.control.edit') }}</span>
             </template>
             <a-popconfirm
               placement="leftBottom"
@@ -18,7 +18,7 @@
               <template #okButton></template>
               <template #title>
                 <a-form>
-                  <a-form-item label="启用">
+                  <a-form-item :label="t('el.control.enable')">
                     <a-switch v-model:checked="item.enable" />
                   </a-form-item>
                   <a-form-item v-if="item.type === 'custom'">
@@ -27,10 +27,10 @@
                     </div>
                   </a-form-item>
                   <template v-else-if="item.type === 'required'"></template>
-                  <a-form-item v-else :label="item.label">
+                  <a-form-item v-else :label="t(`el.ruleType.${item.type}`)">
                     <a-input-number v-model:value="item.value" style="width: 200px"></a-input-number>
                   </a-form-item>
-                  <a-form-item label="错误提示" style="margin-bottom: 0">
+                  <a-form-item :label="t('el.errorPrompt')" style="margin-bottom: 0">
                     <a-input v-model:value="item.message"></a-input>
                   </a-form-item>
                 </a-form>
@@ -40,7 +40,7 @@
           </a-tooltip>
           <a-tooltip placement="top" :destroy-tooltip-on-hide="true">
             <template #title>
-              <span>{{ item.enable ? '停用' : '启用' }}</span>
+              <span>{{ item.enable ? t('el.control.unEnable') : t('el.control.enable') }}</span>
             </template>
             <span class="ml-1">
               <a-checkbox v-model:checked="item.enable"></a-checkbox>
