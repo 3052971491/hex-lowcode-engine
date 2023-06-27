@@ -12,14 +12,16 @@ export default {
       VALUE: 'VALUE',
       REMOTE: 'REMOTE',
       data: 'Data',
+      operation: 'Operation',
+      detailedInfo: 'Detailed information',
     },
     nav: {
-      componentHierarchyTree: 'Component Hierarchy Tree',
+      componentHierarchyTree: 'Hierarchy Tree',
       componentLibrary: 'Component Library',
       modalBox: 'Modal Box',
       dataSource: 'Data Source',
       actionPanel: 'Action Panel',
-      multilingualCopyManagement: 'Multilingual Copy Management',
+      multilingualCopyManagement: 'Copywriting Management',
       setting: 'Setting',
       undo: 'Undo',
       redo: 'Redo',
@@ -72,6 +74,8 @@ export default {
     },
     popconfirm: {
       isDelete: 'Confirm deletion?',
+      isDeleteMultilingualCopywriting:
+        'This operation is not recoverable, are you sure to delete this multilingual copywriting?',
     },
     label: {
       name: 'Name',
@@ -92,6 +96,9 @@ export default {
       cancel: 'Cancel',
       preview: 'Preview',
       save: 'Save',
+    },
+    property: {
+      id: 'ID',
     },
     addModeBox: 'Add Mode box',
     editModeBox: 'Edit Mode box',
@@ -114,5 +121,8 @@ export default {
     syntaxCheck: 'Syntax Check',
     resetReferenceCount: 'Reset Reference Count',
     onlineCodeEditor: 'Online code editor',
+    searchCopy: 'Search copy',
+    addCopy: 'Add copy',
+    clickAsssignment: 'Click asssignment',
   },
 };

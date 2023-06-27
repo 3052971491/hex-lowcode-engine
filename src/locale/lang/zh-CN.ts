@@ -12,6 +12,8 @@ export default {
       VALUE: '变量',
       REMOTE: '远程',
       data: '数据',
+      operation: '操作',
+      detailedInfo: '详细信息',
     },
     nav: {
       componentHierarchyTree: '组件层次结构树',
@@ -72,6 +74,7 @@ export default {
     },
     popconfirm: {
       isDelete: '确认是否删除?',
+      isDeleteMultilingualCopywriting: '此操作不可恢复, 确认删除此条多国语言文案吗?',
     },
     label: {
       name: '名称',
@@ -92,6 +95,9 @@ export default {
       cancel: '取消',
       preview: '预览',
       save: '保存',
+    },
+    property: {
+      id: '唯一标识',
     },
     addModeBox: '新增模态框',
     editModeBox: '编辑模态框',
@@ -114,5 +120,8 @@ export default {
     syntaxCheck: '语法检查',
     resetReferenceCount: '重置引用计数',
     onlineCodeEditor: '在线代码编辑器',
+    searchCopy: '搜索文案',
+    addCopy: '新增文案',
+    clickAsssignment: '点击赋值',
   },
 };

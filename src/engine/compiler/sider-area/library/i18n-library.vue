@@ -1,10 +1,10 @@
 <template>
   <div class="i18n-library">
     <div class="mb-2">
-      <a-input-search v-model:value="filterText" placeholder="搜索文案" enter-button @search="onSearch" />
+      <a-input-search v-model:value="filterText" :placeholder="t('el.searchCopy')" enter-button @search="onSearch" />
     </div>
     <div class="mb-4">
-      <a-button @click="handleAdd">新增文案</a-button>
+      <a-button @click="handleAdd">{{ t('el.addCopy') }}</a-button>
     </div>
     <div>
       <a-table bordered :data-source="dataSource" :columns="columns" size="small" row-key="id">
@@ -21,15 +21,15 @@
           <template v-else-if="column.dataIndex === 'operation'">
             <a-tooltip placement="top">
               <template #title>
-                <span>唯一标识: {{ record.id }} (点击赋值)</span>
+                <span>{{ t('el.property.id') }}: {{ record.id }} ({{ t('el.clickAsssignment') }})</span>
               </template>
               <a-typography-paragraph :copyable="{ tooltip: false, text: record.id }" class="flex items-center mb-0" />
             </a-tooltip>
             <a-popconfirm
               v-if="dataSource.length"
-              title="此操作不可恢复, 确认删除此条多国语言文案吗?"
-              cancel-text="取消"
-              ok-text="确认"
+              :title="t('el.popconfirm.isDeleteMultilingualCopywriting')"
+              :cancel-text="t('el.control.cancel')"
+              :ok-text="t('el.control.confirm')"
               @confirm="onDelete(record.id)"
             >
               <a-typography-text type="danger" class="cursor-pointer">
@@ -39,8 +39,8 @@
           </template>
         </template>
         <template #expandedRowRender="{ record }">
-          <a-descriptions title="详细信息" :column="1">
-            <a-descriptions-item label="唯一标识">{{ record.id }}</a-descriptions-item>
+          <a-descriptions :title="t('el.common.detailedInfo')" :column="1">
+            <a-descriptions-item :label="t('el.property.id')">{{ record.id }}</a-descriptions-item>
             <a-descriptions-item label="简体中文">
               <a-textarea
                 v-model:value="record['zh-CN']"
@@ -72,7 +72,9 @@ import { DeleteOutlined } from '@ant-design/icons-vue';
 import { buildUUID } from '/@/utils/common';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { formatConversion } from '/@/utils/i18n';
+import { useLocale } from '/@/hooks/use-loacle';
 
+const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 interface i18n {
   id: string;
@@ -121,7 +123,7 @@ const columns = [
     dataIndex: 'en-US',
   },
   {
-    title: '操作',
+    title: t('el.common.operation'),
     dataIndex: 'operation',
     width: '80px',
     align: 'center',
