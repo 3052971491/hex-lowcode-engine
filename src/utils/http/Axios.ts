@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import { message, Modal } from 'ant-design-vue';
 import { h } from 'vue';
 

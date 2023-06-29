@@ -119,7 +119,7 @@
 import { inject, computed, ref, reactive, unref } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';

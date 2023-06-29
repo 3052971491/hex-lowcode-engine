@@ -5,7 +5,7 @@ import { createNpmVitePlugins } from './build/vite/plugin/index';
 function pathResolve(dir: string) {
   return path.resolve(process.cwd(), '.', dir);
 }
-
+const prefix = `monaco-editor/esm/vs`;
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: 'production',
@@ -34,13 +34,17 @@ export default defineConfig({
   // NPM打包
   build: {
     rollupOptions: {
-      external: ['vue', 'ant-design-vue', '@ant-design/icons-vue', 'monaco-editor'],
+      external: ['vue', '@ant-design/icons-vue', 'ant-design-vue', 'monaco-editor', 'axios', 'lodash-es', 'lodash'],
       output: {
         globals: {
+          globalObject: 'self',
           vue: 'Vue',
-          'ant-design-vue': 'ant-design-vue',
           '@ant-design/icons-vue': '@ant-design/icons-vue',
+          'ant-design-vue': 'ant-design-vue',
           'monaco-editor': 'monaco-editor',
+          axios: 'axios',
+          'lodash-es': 'lodash-es',
+          lodash: 'lodash',
         },
       },
     },
