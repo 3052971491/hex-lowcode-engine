@@ -16,3 +16,8 @@ export function createVitePlugins() {
   );
   return vitePlugins;
 }
+
+export function createNpmVitePlugins() {
+  const vitePlugins: (Plugin | Plugin[] | PluginOption | PluginOption[])[] = [vue(), vueJsx(), VueSetupExtend()];
+  return vitePlugins;
+}

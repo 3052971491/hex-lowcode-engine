@@ -164,10 +164,9 @@ function runtimeDataSource(remotes: RuntimeDataSourceConfig[]) {
 
 <script lang="ts">
 export default defineComponent({
-  name: 'HexFormRender',
+  name: 'HexLowcodeEngineRenderer',
 });
 </script>
-
 <style lang="less" scoped>
 @import '/@/components/hex-draggable/hex-draggable.less';
 

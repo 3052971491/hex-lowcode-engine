@@ -91,7 +91,7 @@ if (modelValue.value && lowcodeOptions.value) {
 </script>
 <script lang="ts">
 export default defineComponent({
-  name: 'HexFormEditor',
+  name: 'HexLowcodeEngineCompiler',
 });
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <hex-form-editor />
+  <HexLowcodeEngineCompiler />
 </template>
 
 <script setup lang="ts">

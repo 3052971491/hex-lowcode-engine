@@ -33,6 +33,7 @@ export default defineConfig({
       },
     },
   },
+  // 预览打包
   build: {
     terserOptions: {
       compress: {
@@ -54,24 +55,6 @@ export default defineConfig({
       },
     },
   },
-  // build: {
-  //   rollupOptions: {
-  //     external: ['vue', 'ant-design-vue'],
-  //     output: {
-  //       globals: {
-  //         vue: 'Vue',
-  //         'ant-design-vue': 'ant-design-vue',
-  //       },
-  //     },
-  //   },
-  //   lib: {
-  //     entry: path.resolve(`${pathResolve('src')}/engine`, 'index.ts'),
-  //     name: 'hex-lowcode-engine',
-  //     fileName: 'hex-lowcode-engine',
-  //     formats: ['es', 'umd'],
-  //   },
-  //   outDir: 'lib',
-  // },
   // 强制预构建插件包
   optimizeDeps: {
     include: [],

@@ -1,7 +1,7 @@
 {
   "name": "hex-lowcode-engine",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.1",
   "author": {
     "name": "junjieyuan",
     "email": "3052971491@qq.com"
@@ -23,6 +23,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "lib": "vite build --config vite.config.npm.ts",
     "preview": "vite preview",
     "prepare": "husky install",
     "lint:eslint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
