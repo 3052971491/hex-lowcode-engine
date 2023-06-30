@@ -9,7 +9,7 @@ const prefix = `monaco-editor/esm/vs`;
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: 'production',
-  // publicDir: false,
+  publicDir: false,
   plugins: createNpmVitePlugins(),
   resolve: {
     dedupe: ['vue'],
@@ -28,6 +28,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        additionalData: `@import "${pathResolve('src')}/styles/common.less";`,
       },
     },
   },
