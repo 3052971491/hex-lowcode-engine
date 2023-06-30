@@ -364,6 +364,9 @@ const handleSubmit = () => {
 </script>
 
 <style lang="less" scoped>
+.mr-1 {
+  margin-right: 0.25rem;
+}
 .action-setting-selector-inner {
   display: flex;
   overflow: hidden;

@@ -2,17 +2,17 @@
   <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <hex-draggable v-model:value="modelValue" :put="false" :sort="true" :pull="false" ghost-class="">
       <template #item="{ element, index }">
-        <div class="listitem w-full">
-          <div class="flex-1 flex align-items">
+        <div class="listitem">
+          <div class="listitem-content">
             <holder-outlined class="hex-draggable-handle move" />
-            <a-radio-group disabled class="w-full block">
+            <a-radio-group disabled class="info">
               <a-radio :value="element.value">
                 No {{ index + 1 }}: {{ t(`el.component.${element.componentType}`) }}
               </a-radio>
             </a-radio-group>
           </div>
           <div>
-            <delete-outlined class="icon ml-1" @click="handleDeleteClick(element, index)" />
+            <delete-outlined class="icon" @click="handleDeleteClick(element, index)" />
           </div>
         </div>
       </template>
@@ -99,11 +99,22 @@ const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
   align-items: stretch;
   margin-bottom: 8px;
   padding: 4px;
+  width: 100%;
   border: 1px solid rgba(31, 56, 88, 0.2);
   border-radius: 3px;
   color: #00000073;
   background: #fff;
   outline: none;
+
+  .listitem-content {
+    flex: 1 1 0%;
+    display: flex;
+
+    .info {
+      display: block;
+      width: 100%;
+    }
+  }
 
   &:hover {
     background: transparent;
@@ -116,6 +127,7 @@ const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
   }
 
   .icon {
+    margin-left: 0.25rem;
     cursor: pointer;
   }
   .hex-draggable-handle {
