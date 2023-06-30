@@ -1,10 +1,10 @@
 <template>
   <a-config-provider>
-    <a-layout class="hex-editor w-full h-full">
+    <a-layout class="hex-lowcode-engine-compiler">
       <sider-area></sider-area>
       <a-layout>
-        <a-layout-content class="m-2 flex flex-col">
-          <toolbar-area class="mb-2"></toolbar-area>
+        <a-layout-content class="hex-lowcode-engine-compiler-content">
+          <toolbar-area class="toolbar"></toolbar-area>
           <main-area></main-area>
         </a-layout-content>
       </a-layout>
@@ -15,7 +15,7 @@
   </a-config-provider>
 </template>
 <script lang="ts" setup>
-import { computed, defineComponent, onMounted, provide } from 'vue';
+import { computed, defineComponent, provide } from 'vue';
 import SiderArea from './sider-area/index.vue';
 import MainArea from './main-area/index.vue';
 import ToolbarArea from './toolbar-area/index.vue';
@@ -95,6 +95,19 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less">
-@import '/@/styles/hex-lowcode-engine.less';
+<style lang="less" scoped>
+.hex-lowcode-engine-compiler {
+  width: 100%;
+  height: 100%;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+
+    .toolbar {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
 </style>

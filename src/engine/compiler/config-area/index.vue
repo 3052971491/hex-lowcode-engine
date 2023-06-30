@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col overflow-hidden">
+  <div class="config-area">
     <a-tabs v-model:activeKey="activeKey" :centered="true">
       <a-tab-pane key="1" :tab="t('el.common.property')">
         <setting-pane>
@@ -63,5 +63,13 @@ watch(currentId, (val) => {
       padding: 0 0.5rem;
     }
   }
+}
+
+.config-area {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
 }
 </style>

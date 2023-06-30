@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="advanced-setting">
     <a-form
       v-if="schema"
       layout="horizontal"
@@ -80,4 +80,9 @@ const indexName = computed({
 });
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.advanced-setting {
+  width: 100%;
+  height: 100%;
+}
+</style>

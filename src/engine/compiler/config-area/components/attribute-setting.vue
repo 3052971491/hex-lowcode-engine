@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="attribute-setting">
     <a-form
       layout="horizontal"
       label-align="left"
@@ -75,4 +75,9 @@ export default defineComponent({
   components: { ...editor },
 });
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.advanced-setting {
+  width: 100%;
+  height: 100%;
+}
+</style>
