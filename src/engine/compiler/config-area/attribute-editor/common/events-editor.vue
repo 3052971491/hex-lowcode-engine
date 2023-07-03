@@ -321,7 +321,6 @@ const handleSubmit = () => {
           const idx = element.events.findIndex((item: any) => {
             return item.uuid === state.formModel.uuid;
           });
-
           if (key === state.formModel.id) {
             flag = true;
             if (idx === -1) {
@@ -341,8 +340,7 @@ const handleSubmit = () => {
         obj.events.push(cloneDeep(state.formModel));
         schema.value.events[state.formModel.id] = obj;
       }
-
-      if (core?.state.projectConfig?.originCode) {
+      if (core?.state.projectConfig?.originCode && !core.state.projectConfig.methods[state.formModel.name]) {
         core.state.projectConfig.originCode += `\nexport function ${state.formModel.name}() {}`;
         const val = core?.state.projectConfig?.originCode ?? '';
         const obj = StringParsedToFunction(val, null);
