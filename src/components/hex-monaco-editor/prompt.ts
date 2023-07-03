@@ -107,6 +107,22 @@ export function createDependencyProposals(range: any) {
       detail: 'Form: 滚动到对应字段位置',
       range,
     },
+    {
+      label: 'success()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `success();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: 'Modal: 保存',
+      range,
+    },
+    {
+      label: 'close()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `close();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: 'Modal: 取消',
+      range,
+    },
     ...jsonArr,
   ] as any[];
 }
