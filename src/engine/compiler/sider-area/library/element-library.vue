@@ -1,6 +1,7 @@
 <template>
   <div class="element-library">
     <a-skeleton active :loading="loading">
+      <HexIconPicker></HexIconPicker>
       <a-input-search
         v-model:value="filterText"
         :placeholder="t('el.placeholder.search')"
@@ -56,6 +57,7 @@ import {
 import { buildElementSchema } from '/@/utils/draggable-api';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useLocale } from '/@/hooks/use-loacle';
+import { HexIconPicker } from '/@/components/hex-icon-picker';
 
 const { t } = useLocale();
 interface ElementList {
