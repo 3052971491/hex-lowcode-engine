@@ -1,7 +1,6 @@
 <template>
   <div class="element-library">
     <a-skeleton active :loading="loading">
-      <HexIconPicker></HexIconPicker>
       <a-input-search
         v-model:value="filterText"
         :placeholder="t('el.placeholder.search')"
@@ -185,6 +184,8 @@ onMounted(() => {
     loading.value = false;
   }, 180);
 });
+
+const aaa = ref('');
 </script>
 
 <style lang="less" scoped>

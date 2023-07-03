@@ -3,7 +3,6 @@ import AntDesignVue from 'ant-design-vue';
 import App from './App.vue';
 import './style.less';
 import 'ant-design-vue/dist/antd.css';
-
 import HexEngine from '/@/utils/build';
 
 async function bootstrap() {

@@ -2,7 +2,6 @@
   <div class="hex-icon-picker">
     <a-popover ref="popover" v-model:visible="visible" trigger="click" placement="bottomRight">
       <template #content>
-        <!-- <a @click="hide">Close</a> -->
         <a-tabs>
           <a-tab-pane v-for="(item, index) in data" :key="index + 1" :tab="item.label">
             <div class="icon-container">
@@ -10,8 +9,8 @@
                 <a-divider orientation="left" orientation-margin="0">{{ i.label }}</a-divider>
                 <div class="icon_list">
                   <div v-for="(icon, _idx) in i.children" :key="_idx">
-                    <i @click="setIcon(item)">
-                      <component :is="icon.value" @click="show"></component>
+                    <i @click="setIcon(icon)">
+                      <component :is="antIcons[icon as any]" @click="show"></component>
                     </i>
                   </div>
                 </div>
@@ -21,59 +20,50 @@
         </a-tabs>
       </template>
       <div ref="triggerWrapper" class="trigger-wrapper">
-        <slot name="default">
-          <a-input
-            ref="input"
-            v-model:value="innerValue"
-            :placeholder="placeholder"
-            :clearable="clearable"
-            :disabled="disabled"
-            :readonly="readonly"
-            @click.stop="hide"
-            @input="handleChange"
-            @clear="updateIcon(false)"
-          >
-            <template #addonAfter>
-              <slot name="prepend" :icon="state.prefixIcon">
-                <component :is="state.prefixIcon" @click="show"></component>
-              </slot>
-            </template>
-          </a-input>
-        </slot>
+        <a-input
+          ref="input"
+          v-model:value="innerValue"
+          :placeholder="placeholder"
+          :readonly="true"
+          @change="handleChange"
+          @clear="updateIcon('')"
+        >
+          <template #addonAfter>
+            <slot name="prepend" :icon="state.prefixIcon">
+              <component :is="antIcons[state.prefixIcon]" @click="show"></component>
+            </slot>
+          </template>
+        </a-input>
       </div>
     </a-popover>
   </div>
 </template>
 
 <script lang="ts" setup name="HexIconPicker">
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
+import * as antIcons from '@ant-design/icons-vue';
 import { data } from './const';
 
 const props = withDefaults(
   defineProps<{
     value: string;
-    /** 是否禁用 */
-    disabled?: boolean;
-    /** 是否只读 */
-    readonly?: boolean;
-    /** 是否显示清空按钮 */
-    clearable?: boolean;
     placeholder?: string;
+    defaultIcon?: string;
   }>(),
   {
-    disabled: false,
-    readonly: false,
-    clearable: false,
     placeholder: '请选择图标',
+    defaultIcon: '',
   },
 );
+
+const emit = defineEmits(['update:value', 'change']);
 
 const visible = ref<boolean>(false);
 
 const innerValue = ref('');
 
 const state = reactive({
-  prefixIcon: 'search-outlined',
+  prefixIcon: 'setting-outlined',
 });
 
 const show = () => {
@@ -83,17 +73,28 @@ const hide = () => {
   visible.value = false;
 };
 
-const handleChange = (val: string) => {};
+const updateIcon = (val: string) => {
+  setIcon(val);
+};
 
-const updateIcon = (val: boolean) => {};
+const setIcon = (item) => {
+  const result = item || props.defaultIcon;
+  state.prefixIcon = result;
+  emit('update:value', result);
+  emit('change', result);
+  hide();
+};
 
-const setIcon = (item) => {};
+const handleChange = () => {};
 
-function getKebabCase(str: string) {
-  return str.replace(/[A-Z]/g, (item: string) => {
-    return `-${item.toLowerCase()}`;
-  });
-}
+watch(
+  () => props.value,
+  (val) => {
+    innerValue.value = val || props.defaultIcon;
+    state.prefixIcon = innerValue.value ? innerValue.value : props.defaultIcon;
+  },
+  { deep: true, immediate: true },
+);
 </script>
 
 <style lang="less">
@@ -101,6 +102,9 @@ function getKebabCase(str: string) {
   overflow-y: auto;
   width: 100%;
   max-height: 320px;
+}
+.trigger-wrapper {
+  cursor: pointer;
 }
 .icon_list {
   display: grid;
