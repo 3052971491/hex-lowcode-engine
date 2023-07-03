@@ -119,6 +119,19 @@ import {
   RadiusSettingOutlined,
   ColumnWidthOutlined,
   ColumnHeightOutlined,
+  AreaChartOutlined,
+  PieChartFilled,
+  BarChartOutlined,
+  DotChartOutlined,
+  LineChartOutlined,
+  RadarChartOutlined,
+  HeartOutlined,
+  FallOutlined,
+  RiseOutlined,
+  StockOutlined,
+  BoxPlotOutlined,
+  FundOutlined,
+  SlidersOutlined,
 } from '@ant-design/icons-vue/lib/icons';
 
 export const data = [
@@ -509,6 +522,171 @@ export const data = [
           {
             label: 'SnippetsOutlined',
             value: SnippetsOutlined,
+          },
+          {
+            label: 'DiffOutlined',
+            value: DiffOutlined,
+          },
+          {
+            label: 'HighlightOutlined',
+            value: HighlightOutlined,
+          },
+          {
+            label: 'AlignCenterOutlined',
+            value: AlignCenterOutlined,
+          },
+          {
+            label: 'AlignLeftOutlined',
+            value: AlignLeftOutlined,
+          },
+          {
+            label: 'AlignRightOutlined',
+            value: AlignRightOutlined,
+          },
+          {
+            label: 'BgColorsOutlined',
+            value: BgColorsOutlined,
+          },
+          {
+            label: 'BoldOutlined',
+            value: BoldOutlined,
+          },
+          {
+            label: 'ItalicOutlined',
+            value: ItalicOutlined,
+          },
+          {
+            label: 'UnderlineOutlined',
+            value: UnderlineOutlined,
+          },
+          {
+            label: 'StrikethroughOutlined',
+            value: StrikethroughOutlined,
+          },
+          {
+            label: 'RedoOutlined',
+            value: RedoOutlined,
+          },
+          {
+            label: 'UndoOutlined',
+            value: UndoOutlined,
+          },
+          {
+            label: 'ZoomInOutlined',
+            value: ZoomInOutlined,
+          },
+          {
+            label: 'ZoomOutOutlined',
+            value: ZoomOutOutlined,
+          },
+          {
+            label: 'FontColorsOutlined',
+            value: FontColorsOutlined,
+          },
+          {
+            label: 'FontSizeOutlined',
+            value: FontSizeOutlined,
+          },
+          {
+            label: 'LineHeightOutlined',
+            value: LineHeightOutlined,
+          },
+          {
+            label: 'DashOutlined',
+            value: DashOutlined,
+          },
+          {
+            label: 'SmallDashOutlined',
+            value: SmallDashOutlined,
+          },
+          {
+            label: 'SortAscendingOutlined',
+            value: SortAscendingOutlined,
+          },
+          {
+            label: 'SortDescendingOutlined',
+            value: SortDescendingOutlined,
+          },
+          {
+            label: 'DragOutlined',
+            value: DragOutlined,
+          },
+          {
+            label: 'OrderedListOutlined',
+            value: OrderedListOutlined,
+          },
+          {
+            label: 'UnorderedListOutlined',
+            value: UnorderedListOutlined,
+          },
+          {
+            label: 'RadiusSettingOutlined',
+            value: RadiusSettingOutlined,
+          },
+          {
+            label: 'ColumnWidthOutlined',
+            value: ColumnWidthOutlined,
+          },
+          {
+            label: 'ColumnHeightOutlined',
+            value: ColumnHeightOutlined,
+          },
+        ],
+      },
+      {
+        label: '数据类图标',
+        children: [
+          {
+            label: 'AreaChartOutlined',
+            value: AreaChartOutlined,
+          },
+          {
+            label: 'PieChartFilled',
+            value: PieChartFilled,
+          },
+          {
+            label: 'BarChartOutlined',
+            value: BarChartOutlined,
+          },
+          {
+            label: 'DotChartOutlined',
+            value: DotChartOutlined,
+          },
+          {
+            label: 'LineChartOutlined',
+            value: LineChartOutlined,
+          },
+          {
+            label: 'RadarChartOutlined',
+            value: RadarChartOutlined,
+          },
+          {
+            label: 'HeartOutlined',
+            value: HeartOutlined,
+          },
+          {
+            label: 'FallOutlined',
+            value: FallOutlined,
+          },
+          {
+            label: 'RiseOutlined',
+            value: RiseOutlined,
+          },
+          {
+            label: 'StockOutlined',
+            value: StockOutlined,
+          },
+          {
+            label: 'BoxPlotOutlined',
+            value: BoxPlotOutlined,
+          },
+          {
+            label: 'FundOutlined',
+            value: FundOutlined,
+          },
+          {
+            label: 'SlidersOutlined',
+            value: SlidersOutlined,
           },
         ],
       },

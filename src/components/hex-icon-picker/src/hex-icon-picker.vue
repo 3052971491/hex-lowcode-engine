@@ -1,6 +1,6 @@
 <template>
   <div class="hex-icon-picker">
-    <a-popover ref="popover" v-model:visible="visible" trigger="click">
+    <a-popover ref="popover" v-model:visible="visible" trigger="click" placement="bottomRight">
       <template #content>
         <!-- <a @click="hide">Close</a> -->
         <a-tabs>
