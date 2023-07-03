@@ -117,7 +117,6 @@ function getKebabCase(str: string) {
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     text-align: center;
-    color: #000000;
     cursor: pointer;
     line-height: 45px;
 
