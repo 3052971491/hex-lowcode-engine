@@ -76,7 +76,7 @@ const menuTheme = computed(() => (index: string) => {
     return 'basic-theme';
   }
   if (index === '表单控件') {
-    return 'basic-theme';
+    return 'form-theme';
   }
   if (index === '业务控件') {
     return 'basic-theme';
@@ -205,10 +205,17 @@ const aaa = ref('');
     user-select: none;
   }
 
-  .basic-theme {
+  .advanced-theme {
+    background-color: rgba(255, 69, 0, 0.08);
+    &:hover {
+      background-color: rgba(255, 69, 0, 0.125);
+    }
+  }
+
+  .form-theme {
     background-color: rgba(0, 102, 255, 0.08);
     &:hover {
-      background-color: rgba(0, 45, 113, 0.125);
+      background-color: rgba(0, 102, 255, 0.08);
     }
   }
 
@@ -220,7 +227,7 @@ const aaa = ref('');
     }
   }
 
-  .advanced-theme {
+  .basic-theme {
     background-color: #fffaf2;
 
     &:hover {

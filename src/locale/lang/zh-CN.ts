@@ -45,7 +45,7 @@ export default {
         form: '表单控件',
         business: '业务控件',
         layout: '布局控件',
-        advanced: '布局控件',
+        advanced: '高级控件',
       },
       Text: '文本',
       ButtonGroup: '按钮',
