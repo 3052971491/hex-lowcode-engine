@@ -18,6 +18,16 @@ const DIVIDER_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Divider', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const ALERT_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Alert', name: 'type', label: '警告提示的样式', editor: 'type-editor', merge: true },
+  { type: 'Alert', name: 'message', label: '提示内容', editor: 'input-editor', i18n: true },
+  { type: 'Alert', name: 'description', label: '辅助性文字', editor: 'input-editor', i18n: true },
+  { type: 'Alert', name: 'showIcon', label: '是否显示辅助图标', editor: 'switch-editor' },
+  { type: 'Alert', name: 'closable', label: '默认不显示关闭按钮', editor: 'switch-editor' },
+  { type: 'Alert', name: 'banner', label: '是否用作顶部公告', editor: 'switch-editor' },
+  { type: 'Alert', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 /** 单行文本, 多行文本属性配置 */
 const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
@@ -310,6 +320,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
   Button: BUTTON_ATTRIBUTE,
   Divider: DIVIDER_ATTRIBUTE,
+  Alert: ALERT_ATTRIBUTE,
   Input: INPUT_ATTRIBUTES,
   Textarea: INPUT_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,

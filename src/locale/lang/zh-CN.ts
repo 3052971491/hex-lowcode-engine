@@ -51,6 +51,7 @@ export default {
       ButtonGroup: '按钮',
       Button: '子按钮',
       Divider: '分割线',
+      Alert: '警告提示',
       Input: '单行文本',
       Textarea: '多行文本',
       InputNumber: '数值输入',
@@ -195,6 +196,13 @@ export default {
       tab: '标题',
       value: '值',
       hideRequiredMark: '隐藏必选标记',
+      Alert: {
+        message: '警告提示内容',
+        description: '辅助性文字介绍',
+        showIcon: '是否显示辅助图标',
+        closable: '默认不显示关闭按钮',
+        banner: '是否用作顶部公告',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',

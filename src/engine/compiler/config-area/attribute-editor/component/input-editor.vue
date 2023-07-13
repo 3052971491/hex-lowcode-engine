@@ -1,5 +1,9 @@
 <template>
-  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
+  <form-Item-wrapper
+    :label="t(`el.property.${props.option.type}.${props.attribute}`) || t(`el.property.${props.attribute}`)"
+    :name="props.attribute"
+    :option="option"
+  >
     <a-input v-model:value="modelValue" :placeholder="t('el.placeholder.enter')" />
   </form-Item-wrapper>
 </template>

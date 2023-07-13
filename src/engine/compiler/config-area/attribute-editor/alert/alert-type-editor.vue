@@ -1,18 +1,19 @@
 <template>
-  <form-Item-wrapper
-    :label="t(`el.property.${props.option.type}.${props.attribute}`) || t(`el.property.${props.attribute}`)"
-    :name="props.attribute"
-    :option="option"
-  >
-    <a-switch v-model:checked="modelValue"></a-switch>
+  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
+    <a-select v-model:value="modelValue">
+      <a-select-option value="success">success</a-select-option>
+      <a-select-option value="info">info</a-select-option>
+      <a-select-option value="warning">warning</a-select-option>
+      <a-select-option value="error">error</a-select-option>
+    </a-select>
   </form-Item-wrapper>
 </template>
-<script lang="ts" setup name="SwitchEditor">
+<script lang="ts" setup name="AlertTypeEditor">
 import { inject, computed } from 'vue';
 import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { AttributeItem } from '../interface';
 import { set, get } from '/@/utils/schema';
-import { AttributeItem } from '../../attribute-editor/interface';
 import { useLocale } from '/@/hooks/use-loacle';
 
 const { t } = useLocale();
@@ -30,9 +31,8 @@ const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-
 const modelValue = computed({
-  set(val) {
+  set(val: string) {
     set(props.attribute, val, schema.value, core?.state.projectConfig);
   },
   get() {

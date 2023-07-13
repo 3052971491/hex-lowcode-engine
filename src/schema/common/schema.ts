@@ -8,6 +8,7 @@ export enum ComponentType {
   'ButtonGroup' = 'ButtonGroup',
   'Button' = 'Button',
   'Divider' = 'Divider',
+  'Alert' = 'Alert',
   'Input' = 'Input',
   'Textarea' = 'Textarea',
   'InputNumber' = 'InputNumber',
@@ -125,6 +126,33 @@ export class Divider extends Scheme<PcSchema.DividerSchema> {
       orientation: 'left',
       plain: false,
       orientationMargin: 0,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class Alert extends Scheme<PcSchema.AlertSchema> {
+  props: PcSchema.AlertSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'BASIC';
+    this.componentName = '警告提示';
+    this.componentType = ComponentType.Alert;
+    this.props = {
+      type: 'success',
+      message: 'Success Text',
+      description: 'Success Description Success Description Success Description',
+      showIcon: false,
+      closable: false,
+      banner: false,
       className: '',
       __style__: '',
     };
@@ -1060,6 +1088,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
   [ComponentType.Button, new Button() as any],
   [ComponentType.Divider, new Divider() as any],
+  [ComponentType.Alert, new Alert() as any],
   [ComponentType.Input, new Input() as any],
   [ComponentType.Textarea, new Textarea() as any],
   [ComponentType.InputNumber, new InputNumber() as any],
@@ -1088,6 +1117,7 @@ export default {
   ButtonGroup,
   Button,
   Divider,
+  Alert,
   Input,
   Textarea,
   InputNumber,

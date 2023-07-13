@@ -65,6 +65,25 @@ export namespace PcSchema {
     props: DividerSchemaProps;
   }
 
+  export interface AlertSchemaProps extends LowCode.NodeSchemaProps {
+    /** 指定警告提示的样式 */
+    type: 'success' | 'info' | 'warning' | 'error';
+    /** 警告提示内容 */
+    message: I18n;
+    /** 警告提示的辅助性文字介绍 */
+    description: I18n;
+    /** 是否显示辅助图标 */
+    showIcon: boolean;
+    /** 默认不显示关闭按钮 */
+    closable: boolean;
+    /** 是否用作顶部公告 */
+    banner: boolean;
+  }
+
+  export interface AlertSchema extends LowCode.NodeSchema {
+    props: AlertSchemaProps;
+  }
+
   export interface InputSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;

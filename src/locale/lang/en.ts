@@ -51,6 +51,7 @@ export default {
       ButtonGroup: 'Button Group',
       Button: 'Button',
       Divider: 'Divider',
+      Alert: 'Alert',
       Input: 'Input',
       Textarea: 'Textarea',
       InputNumber: 'Input Number',
@@ -196,6 +197,13 @@ export default {
       tab: 'Tab',
       value: 'Value',
       hideRequiredMark: 'Hide required mark',
+      Alert: {
+        message: 'Warning Contents',
+        description: 'Supplementary text introduction',
+        showIcon: 'Helper Icon',
+        closable: 'Close button ',
+        banner: 'Top Announcement',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',
