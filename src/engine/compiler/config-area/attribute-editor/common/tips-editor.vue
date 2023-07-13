@@ -1,7 +1,7 @@
 <template>
   <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
     <!-- <a-button type="primary" block> 编辑描述 </a-button> -->
-    <a-input v-model:value="modelValue"></a-input>
+    <a-input v-model:value="modelValue" :placeholder="t('el.placeholder.enter')"></a-input>
   </form-Item-wrapper>
 </template>
 <script lang="ts" setup name="TipsEditor">

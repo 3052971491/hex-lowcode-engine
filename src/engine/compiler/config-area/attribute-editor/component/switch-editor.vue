@@ -1,9 +1,5 @@
 <template>
-  <form-Item-wrapper
-    :label="t(`el.property.${props.option.type}.${props.attribute}`) || t(`el.property.${props.attribute}`)"
-    :name="props.attribute"
-    :option="option"
-  >
+  <form-Item-wrapper :label="formatLabel" :name="props.attribute" :option="option">
     <a-switch v-model:checked="modelValue"></a-switch>
   </form-Item-wrapper>
 </template>
@@ -38,5 +34,12 @@ const modelValue = computed({
   get() {
     return get(props.attribute, schema.value);
   },
+});
+
+const formatLabel = computed(() => {
+  return t(`el.property.${props.option.type}.${props.attribute}`) !==
+    `el.property.${props.option.type}.${props.attribute}`
+    ? t(`el.property.${props.option.type}.${props.attribute}`)
+    : t(`el.property.${props.attribute}`);
 });
 </script>

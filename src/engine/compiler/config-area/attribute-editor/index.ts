@@ -21,7 +21,7 @@ const DIVIDER_ATTRIBUTE: Array<AttributeItem> = [
 const ALERT_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Alert', name: 'type', label: '警告提示的样式', editor: 'type-editor', merge: true },
   { type: 'Alert', name: 'message', label: '提示内容', editor: 'input-editor', i18n: true },
-  { type: 'Alert', name: 'description', label: '辅助性文字', editor: 'input-editor', i18n: true },
+  { type: 'Alert', name: 'description', label: '辅助性文字', editor: 'textarea-editor', i18n: true },
   { type: 'Alert', name: 'showIcon', label: '是否显示辅助图标', editor: 'switch-editor' },
   { type: 'Alert', name: 'closable', label: '默认不显示关闭按钮', editor: 'switch-editor' },
   { type: 'Alert', name: 'banner', label: '是否用作顶部公告', editor: 'switch-editor' },

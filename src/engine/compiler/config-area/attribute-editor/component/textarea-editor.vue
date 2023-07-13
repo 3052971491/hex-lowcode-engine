@@ -1,5 +1,5 @@
 <template>
-  <form-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
+  <form-Item-wrapper :label="formatLabel" :name="props.attribute" :option="option">
     <a-textarea
       v-model:value="modelValue"
       :placeholder="t('el.placeholder.enter')"
@@ -67,5 +67,11 @@ const modelValue = computed({
     }
     return val;
   },
+});
+const formatLabel = computed(() => {
+  return t(`el.property.${props.option.type}.${props.attribute}`) !==
+    `el.property.${props.option.type}.${props.attribute}`
+    ? t(`el.property.${props.option.type}.${props.attribute}`)
+    : t(`el.property.${props.attribute}`);
 });
 </script>

@@ -77,6 +77,7 @@ export default {
     placeholder: {
       search: '搜索',
       input: '请输入',
+      enter: '请输入',
       select: '请选择',
       actionName: '请输入动作名称',
     },
