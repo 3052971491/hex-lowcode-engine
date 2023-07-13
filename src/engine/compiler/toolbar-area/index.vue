@@ -29,11 +29,11 @@
             <template #icon><play-circle-outlined /></template>
           </a-button>
         </a-tooltip>
-        <a-tooltip :title="t('el.nav.JSONCode')">
+        <!-- <a-tooltip :title="t('el.nav.JSONCode')">
           <a-button @click="handlePreviewJsonClick">
             <template #icon><project-outlined /></template>
           </a-button>
-        </a-tooltip>
+        </a-tooltip> -->
       </a-space>
     </template>
     <template v-else>
