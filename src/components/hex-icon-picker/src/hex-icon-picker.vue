@@ -10,7 +10,7 @@
                 <div class="icon_list">
                   <div v-for="(icon, _idx) in i.children" :key="_idx">
                     <i @click="setIcon(icon)">
-                      <component :is="antIcons[icon as any]" @click="show"></component>
+                      <component :is="(antIcons as any)[icon]" @click="show"></component>
                     </i>
                   </div>
                 </div>
@@ -30,7 +30,7 @@
         >
           <template #addonAfter>
             <slot name="prepend" :icon="state.prefixIcon">
-              <component :is="antIcons[state.prefixIcon]" @click="show"></component>
+              <component :is="(antIcons as any)[state.prefixIcon]" @click="show"></component>
             </slot>
           </template>
         </a-input>
@@ -77,7 +77,7 @@ const updateIcon = (val: string) => {
   setIcon(val);
 };
 
-const setIcon = (item) => {
+const setIcon = (item: any) => {
   const result = item || props.defaultIcon;
   state.prefixIcon = result;
   emit('update:value', result);
