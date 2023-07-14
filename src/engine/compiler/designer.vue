@@ -15,7 +15,7 @@
   </a-config-provider>
 </template>
 <script lang="ts" setup>
-import { computed, defineComponent, provide } from 'vue';
+import { computed, defineComponent, onMounted, provide } from 'vue';
 import SiderArea from './sider-area/index.vue';
 import MainArea from './main-area/index.vue';
 import ToolbarArea from './toolbar-area/index.vue';
@@ -26,6 +26,7 @@ import { LowCode } from '/@/types/schema';
 import { localeContextKey } from '/@/hooks/use-loacle';
 import zhCn from '/@/locale/lang/zh-CN';
 import en from '/@/locale/lang/en';
+import { useKeyboard } from '/@/hooks/use-keyboard';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -88,6 +89,12 @@ provide(localeContextKey, i18n as any);
 if (modelValue.value && lowcodeOptions.value) {
   Object.assign(modelValue.value.config, lowcodeOptions.value);
 }
+
+const { registerKeyboard } = useKeyboard(core, i18n);
+
+onMounted(() => {
+  registerKeyboard();
+});
 </script>
 <script lang="ts">
 export default defineComponent({
@@ -111,3 +118,4 @@ export default defineComponent({
   }
 }
 </style>
+../../hooks/use-locale
