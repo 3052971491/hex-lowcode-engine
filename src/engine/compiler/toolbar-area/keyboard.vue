@@ -2,11 +2,11 @@
   <div class="shortcuts-control">
     <div class="shortcuts-control-content-item">
       <div class="item-title">
-        <div class="item-title-wrap">常规操作</div>
+        <div class="item-title-wrap">{{ t('el.regularOperation') }}</div>
       </div>
       <div class="item-content">
         <div v-for="(item, index) in regularOperation" :key="index" class="item-li">
-          <div class="item-li-left">{{ item.label }}</div>
+          <div class="item-li-left">{{ t(item.label) }}</div>
           <div class="item-li-right">
             <div v-for="i in item.value" :key="i" class="li-btn">{{ i }}</div>
           </div>
@@ -15,11 +15,11 @@
     </div>
     <div class="shortcuts-control-content-item">
       <div class="item-title">
-        <div class="item-title-wrap">组件选择和移动</div>
+        <div class="item-title-wrap">{{ t('el.componentOperation') }}</div>
       </div>
       <div class="item-content">
         <div v-for="(item, index) in componentOperation" :key="index" class="item-li">
-          <div class="item-li-left">{{ item.label }}</div>
+          <div class="item-li-left">{{ t(item.label) }}</div>
           <div class="item-li-right">
             <div v-for="i in item.value" :key="i" class="li-btn">{{ i }}</div>
           </div>
@@ -30,9 +30,12 @@
 </template>
 
 <script setup lang="ts">
+import { useLocale } from '/@/hooks/use-loacle';
+
+const { t } = useLocale();
 const regularOperation = [
   {
-    label: '保存',
+    label: 'el.control.save',
     value: ['Ctrl', 'S'],
   },
   //   {
@@ -40,11 +43,11 @@ const regularOperation = [
   //     value: ['Ctrl', 'P'],
   //   },
   {
-    label: '复制组件',
+    label: 'el.copyComponent',
     value: ['Ctrl', 'C'],
   },
   {
-    label: '粘贴组件',
+    label: 'el.pasteComponent',
     value: ['Ctrl', 'V'],
   },
   //   {
@@ -52,25 +55,25 @@ const regularOperation = [
   //     value: ['Ctrl', 'X'],
   //   },
   {
-    label: '删除组件',
+    label: 'el.deleteComponent',
     value: ['Delete'],
   },
 ];
 const componentOperation = [
   {
-    label: '选择父节点',
+    label: 'el.selectParentNode',
     value: ['↑'],
   },
   {
-    label: '选择子节点',
+    label: 'el.selectChildrenNode',
     value: ['↓'],
   },
   {
-    label: '向右选择兄弟节点',
+    label: 'el.selectSiblingNodeToRight',
     value: ['→'],
   },
   {
-    label: '向左选择兄弟节点',
+    label: 'el.selectSiblingNodeToLeft',
     value: ['←'],
   },
 ];
