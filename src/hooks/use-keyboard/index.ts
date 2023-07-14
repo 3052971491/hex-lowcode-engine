@@ -1,10 +1,12 @@
-import { onKeyStroke } from '@vueuse/core';
+import { onKeyStroke, useMagicKeys } from '@vueuse/core';
 import { HexCoreFactory } from '/@/engine/renderer/central/useHexCore';
 import { useLocale } from '/@/hooks/use-loacle';
 import { message } from 'ant-design-vue';
 import { copyElementSchema } from '/@/utils/draggable-api';
+import { watch } from 'vue';
 
 export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
+  const keys = useMagicKeys();
   /**
    * 删除组件
    * @description "Delete"
@@ -47,12 +49,12 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
 
   /**
    * 保存当前进度
-   * @description "Ctrl" "s"
+   * @description "Control" "s"
    */
   function __Save__() {
     const { t } = useLocale(i18n);
-    onKeyStroke(['Ctrl', 's'], (e) => {
-      e.preventDefault();
+    watch(keys['Control+s'], (e) => {
+      if (!e) return;
       core?.saveCurrentHistoryData();
       message.success(t('el.success.archive'));
     });
@@ -60,11 +62,11 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
 
   /**
    * 复制组件
-   * @description "Ctrl" "c"
+   * @description "Control" "c"
    */
   function __Copy__() {
-    onKeyStroke(['Ctrl', 'c'], (e) => {
-      e.preventDefault();
+    watch(keys['Control+c'], (e) => {
+      if (!e) return;
       const { selectedId, ...opt } = core.state.selectedData!;
       if (!selectedId) return;
       core.state.__schemaCopy__ = !core.state.__isModalDesigner__ ? opt.selectedScheme : opt.selectedModalScheme;
@@ -73,11 +75,11 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
 
   /**
    * 粘贴组件
-   * @description "Ctrl" "v"
+   * @description "Control" "v"
    */
   function __Paste__() {
-    onKeyStroke(['Ctrl', 'v'], (e) => {
-      e.preventDefault();
+    watch(keys['Control+v'], (e) => {
+      if (!e) return;
       if (core.state.__schemaCopy__) {
         const { breadcrumbs } = core.state.selectedData!;
         if (!core.state.__isModalDesigner__) {
