@@ -72,111 +72,41 @@ export const SetupApi = {
 
 /** 选项Api模板 */
 export const sfcTemplateCode: string = `<template>
-    <div class="hex-code-view">
-      <h1>{{ formatName }}</h1>
-      <a-button @click="useChangeFlag">
-        {{ flag ? '查看' : '隐藏' }}
-        我的爱好
-      </a-button>
-    
-      <template v-if="list.length > 0">
-        <div v-for="(item, index) in list" :key="index">{{ item }}</div>
-      </template>
-    </div>
-  </template>
-  
-  <script>
-    export default {
-      data() {
-        return {
-          flag: true,
-          name: '蔡徐坤',
-          list: [],
-        }
-      },
-      computed: {
-        formatName() {
-          return "我是" + this.name;
-        }
-      },
-      mounted() {
-        console.log('onMounted!!')
-      },
-      methods: {
-        useChangeFlag() {
-          this.flag = !this.flag;
-          this.list = this.flag ? [] : ['唱', '跳', 'rap', '篮球']
-        }
-      }
-    };
-  </script>
-  
-  <style lang="less">
-  .hex-code-view {
-    
-    h1 {
-      color: pink;
-      font-size: 20px;
-    }
-  }
-  </style>`;
+  <div class="hex-code-view">Hello, Vue</div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {}
+    },
+    computed: {},
+    mounted() {},
+    methods: {}
+  };
+</script>
+
+<style lang="less">
+.hex-code-view {}
+</style>`;
 
 /** 组合是API模板 */
 export const sfcSetupTemplateCode: string = `<template>
-    <div class="hex-code-view">
-      <h1>{{ formatName }}</h1>
-      <a-button @click="useChangeFlag">
-        {{ flag ? '查看' : '隐藏' }}
-        我的爱好
-      </a-button>
+  <div class="hex-code-view">Hello, Vue</div>
+</template>
   
-      <template v-if="data.list.length > 0">
-        <div v-for="(item, index) in data.list" :key="index">{{ item }}</div>
-      </template>
-    </div>
-  </template>
-  
-  <script>
-    export default {
-      props: {},
-      emits: [],
-      setup(props, context) {
-        onMounted(()=> {
-          console.log('onMounted!!')
-        })
-  
-        const flag = ref(true);
-        const name = "蔡徐坤";
-  
-        const data = reactive({
-          list: []
-        })
-        const useChangeFlag = () => {
-          flag.value = !flag.value;
-          data.list = flag.value ? [] : ['唱', '跳', 'rap', '篮球']
-        }
-        const formatName = computed(() => {
-          return "我是" + name;
-        })
-        return {
-          data,
-          flag,
-          useChangeFlag,
-          formatName
-        }
-      },
-    };
-  </script>
-  
-  <style lang="less">
-  .hex-code-view {
-    
-    h1 {
-      color: pink;
-      font-size: 20px;
-    }
-  }
-  </style>`;
+<script>
+  export default {
+    setup(props, context) {
+      onMounted(()=> {})
+      return {}
+    },
+  };
+</script>
+
+<style lang="less">
+.hex-code-view {}
+</style>`;
 
 export function BuiltSetupFunction(code: string) {
   let componentScript = {};

@@ -71,6 +71,7 @@ export default {
       Tabs: 'Tabs',
       TabPane: 'Tab Pane',
       Form: 'Form',
+      Vue: 'Vue',
       Modal: 'Modal',
       ModalContent: 'Modal Content',
       ModalFooter: 'Modal Footer',
@@ -321,5 +322,6 @@ export default {
     selectChildrenNode: 'Selecting child node',
     selectSiblingNodeToRight: 'Select the sibling node to the right',
     selectSiblingNodeToLeft: 'Select the sibling node to the left',
+    VueCode: 'Vue Code',
   },
 };

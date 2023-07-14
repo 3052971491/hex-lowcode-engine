@@ -298,6 +298,10 @@ const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const VUE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Vue', name: 'render', label: 'render', editor: 'render-editor', merge: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
@@ -339,6 +343,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Tabs: TABS,
   TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
+  Vue: VUE_ATTRIBUTE,
 };
 
 export default obj;

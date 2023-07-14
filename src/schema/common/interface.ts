@@ -557,6 +557,15 @@ export namespace PcSchema {
     labelAlign: 'left' | 'right';
   }
 
+  export interface VueSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: VueSchemaProps;
+  }
+
+  export interface VueSchemaProps extends LowCode.NodeSchemaProps {
+    render: string;
+  }
+
   export interface ModalSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
     props: ModalSchemaProps;

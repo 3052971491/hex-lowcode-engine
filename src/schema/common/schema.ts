@@ -2,6 +2,7 @@
 import type { PcSchema } from './interface';
 import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
+import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
 
 export enum ComponentType {
   'Text' = 'Text',
@@ -27,6 +28,7 @@ export enum ComponentType {
   'Tabs' = 'Tabs',
   'TabPane' = 'TabPane',
   'Form' = 'Form',
+  'Vue' = 'Vue',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -1015,6 +1017,30 @@ export class Form extends Scheme<PcSchema.FormSchema> {
     throw new Error('警告【scrollToField】方法暂未实现');
   }
 }
+export class Vue extends Scheme<PcSchema.VueSchema> {
+  props: PcSchema.VueSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = 'Vue';
+    this.componentType = ComponentType.Vue;
+    this.children = [];
+    this.formItemFlag = false;
+    this.props = {
+      render: sfcTemplateCode,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
 
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
@@ -1107,6 +1133,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Tabs, new Tabs() as any],
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
+  [ComponentType.Vue, new Vue() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1136,6 +1163,7 @@ export default {
   Tabs,
   TabPane,
   Form,
+  Vue,
   Modal,
   ModalContent,
   ModalFooter,

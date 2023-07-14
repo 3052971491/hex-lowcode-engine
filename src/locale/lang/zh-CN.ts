@@ -71,6 +71,7 @@ export default {
       Tabs: '标签页',
       TabPane: '子标签页',
       Form: '表单',
+      Vue: 'Vue',
       Modal: '模态框',
       ModalContent: '模态框-内容区',
       ModalFooter: '模态框-操作区',
@@ -320,5 +321,6 @@ export default {
     selectChildrenNode: '选择子节点',
     selectSiblingNodeToRight: '向右选择兄弟节点',
     selectSiblingNodeToLeft: '向左选择兄弟节点',
+    VueCode: 'Vue 代码',
   },
 };
