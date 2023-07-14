@@ -38,6 +38,11 @@ interface StateType {
   __this__: Context | undefined;
   /** 是否是模态框设计器 */
   __isModalDesigner__: boolean;
+  /**
+   * 组件节点描述副本
+   * @description 用于快捷键复制粘贴
+   */
+  __schemaCopy__?: LowCode.Schema | null;
 }
 
 export interface HexCoreFactory {
@@ -107,6 +112,7 @@ export function useHexCore(): HexCoreFactory {
     __css__: '',
     __this__: undefined,
     __isModalDesigner__: false,
+    __schemaCopy__: null,
   });
 
   buildProjectConfig();

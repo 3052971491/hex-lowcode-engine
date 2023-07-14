@@ -33,6 +33,7 @@ export default {
       temporaryStorage: '暂存',
       preview: '预览',
       JSONCode: 'JSON 代码',
+      keyboard: '快捷键',
       modalFrameDesign: '模态框设计',
     },
     globalSetting: {

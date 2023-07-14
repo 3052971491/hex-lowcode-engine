@@ -33,6 +33,7 @@ export default {
       temporaryStorage: 'Temporary Storage',
       preview: 'Preview',
       JSONCode: 'JSON Code',
+      keyboard: 'Keyboard',
       modalFrameDesign: 'Modal frame design',
     },
     globalSetting: {

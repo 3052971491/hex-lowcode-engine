@@ -4,7 +4,7 @@
       <sider-area></sider-area>
       <a-layout>
         <a-layout-content class="hex-lowcode-engine-compiler-content">
-          <toolbar-area class="toolbar"></toolbar-area>
+          <toolbar-area ref="toolbar" class="toolbar"></toolbar-area>
           <main-area></main-area>
         </a-layout-content>
       </a-layout>

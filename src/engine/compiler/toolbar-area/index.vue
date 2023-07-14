@@ -34,6 +34,11 @@
             <template #icon><project-outlined /></template>
           </a-button>
         </a-tooltip> -->
+        <a-tooltip :title="t('el.nav.keyboard')">
+          <a-button @click="handleKeyboardClick">
+            <template #icon><ant-design-outlined /></template>
+          </a-button>
+        </a-tooltip>
       </a-space>
     </template>
     <template v-else>
@@ -47,6 +52,7 @@
     <hex-modal v-model:visible="visible" :name="modalTitle" :is-footer="false">
       <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
       <hex-json-pretty v-else-if="modalType === ComponentTypeEnum.JSON_PREVIEW" v-model:value="element" />
+      <keyboard v-else-if="modalType === ComponentTypeEnum.KEYBOARD"></keyboard>
     </hex-modal>
   </div>
 </template>
@@ -61,6 +67,7 @@ import {
   PlayCircleOutlined,
   ProjectOutlined,
   RollbackOutlined,
+  AntDesignOutlined,
 } from '@ant-design/icons-vue';
 import HexModal from '/@/components/hex-modal/index.vue';
 import Render from '/@/engine/renderer/render.vue';
@@ -69,6 +76,7 @@ import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { cloneDeep } from 'lodash-es';
 import { message } from 'ant-design-vue';
 import { useLocale } from '/@/hooks/use-loacle';
+import keyboard from './keyboard.vue';
 
 const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
@@ -78,6 +86,8 @@ enum ComponentTypeEnum {
   RENDER_PREVIEW = 'render-preview',
   /** JSON预览 */
   JSON_PREVIEW = 'json-preview',
+  /** 快捷键 */
+  KEYBOARD = 'keyboard',
 }
 const modalType = ref('');
 const modalTitle = ref('');
@@ -113,6 +123,12 @@ function handleExitModalDesignerClick() {
     core.state.__isModalDesigner__ = false;
     core.handleResetSelectData();
   }
+}
+
+function handleKeyboardClick() {
+  modalType.value = ComponentTypeEnum.KEYBOARD;
+  modalTitle.value = t('el.nav.keyboard');
+  visible.value = true;
 }
 </script>
 
