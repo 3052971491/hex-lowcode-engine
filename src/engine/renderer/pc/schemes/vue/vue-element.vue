@@ -7,7 +7,7 @@
   >
     <div v-if="redactState" ref="__instance__" class="hex-code-view-compiler">（预览时渲染）Vue 组件</div>
     <div v-else class="hex-code-view-renderer">
-      <hex-code-view v-bind="prop" />
+      <hex-code-view v-bind="prop" :context="core?.state.__this__" />
     </div>
   </ElementWrapper>
 </template>
@@ -18,7 +18,7 @@ import { defineComponent, ref, computed, inject } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
-import { RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
 import HexCodeView from '/@/components/hex-code-view/hex-code-view';
 
 interface Props {
@@ -39,6 +39,7 @@ const prop = computed(() =>
     };
   }),
 );
+const core = inject(HexCoreInjectionKey);
 </script>
 
 <script lang="ts">

@@ -24,9 +24,13 @@ export default defineComponent({
       required: true,
       default: '',
     },
+    context: {
+      type: Object,
+      default: () => {},
+    },
   },
   setup(props) {
-    const { value } = toRefs(props);
+    const { value, context } = toRefs(props);
     const state = reactive<StateType>({
       sfcCode: ``,
       sfcDescriptor: null,
@@ -89,7 +93,7 @@ export default defineComponent({
       if (!isNil(scriptCode)) {
         let componentScript = {};
         scriptCode = scriptCode.replace(/export\s+default/, 'componentScript =');
-        componentScript = BuiltSetupFunction(scriptCode);
+        componentScript = BuiltSetupFunction(scriptCode, context.value);
         assign(_generateComponent, componentScript);
       }
 

@@ -108,7 +108,7 @@ export const sfcSetupTemplateCode: string = `<template>
 .hex-code-view {}
 </style>`;
 
-export function BuiltSetupFunction(code: string) {
+export function BuiltSetupFunction(code: string, context: any) {
   let componentScript = {};
   const scriptCode = `try {
     /////////////////////////////////// 内置模块 vue api 开始 ///////////////////////////////////
@@ -152,7 +152,11 @@ export function BuiltSetupFunction(code: string) {
   } catch (error) {
     console.error(error)
   }`;
-
-  componentScript = new Function('componentScript', 'vue', scriptCode).call(null, componentScript, SetupApi);
+  componentScript = new Function('app', 'componentScript', 'vue', scriptCode).call(
+    null,
+    context,
+    componentScript,
+    SetupApi,
+  );
   return componentScript;
 }
