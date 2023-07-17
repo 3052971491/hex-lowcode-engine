@@ -4,7 +4,7 @@ import { HexCoreFactory } from '/@/engine/renderer/central/useHexCore';
 import { useLocale } from '/@/hooks/use-loacle';
 import { message } from 'ant-design-vue';
 import { copyElementSchema } from '/@/utils/draggable-api';
-import { computed, watch } from 'vue';
+import { computed, onUnmounted, watch } from 'vue';
 
 export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
   const keys = useMagicKeys();
@@ -59,7 +59,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    */
   function __Save__() {
     const { t } = useLocale(i18n);
-    whenever(logicAnd(keys['Control+s'], notUsingInput), () => {
+    whenever(logicAnd(keys['Control+s'], notUsingInput), (e) => {
       core?.saveCurrentHistoryData();
       message.success(t('el.success.archive'));
     });
@@ -194,7 +194,22 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
     __SelectChildrenNode__();
     __SelectSiblingNodeToRight__();
     __SelectSiblingNodeTolEFT__();
+
+    registerKeyDown();
   }
+
+  function registerKeyDown() {
+    document.onkeydown = (event) => {
+      // 禁止ctrl+s
+      if (event.ctrlKey && (window.event as any)?.keyCode === 83) {
+        return false;
+      }
+    };
+  }
+
+  onUnmounted(() => {
+    document.onkeydown = null;
+  });
 
   return {
     registerKeyboard,
