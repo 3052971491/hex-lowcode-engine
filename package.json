@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
+    "@vueuse/math": "^10.2.1",
     "ant-design-vue": "^3.2.13",
     "axios": "^1.4.0",
     "commitizen": "^4.2.5",

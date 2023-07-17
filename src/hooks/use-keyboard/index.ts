@@ -1,12 +1,18 @@
-import { onKeyStroke, useMagicKeys } from '@vueuse/core';
+import { onKeyStroke, useActiveElement, useMagicKeys, whenever } from '@vueuse/core';
+import { logicAnd } from '@vueuse/math';
 import { HexCoreFactory } from '/@/engine/renderer/central/useHexCore';
 import { useLocale } from '/@/hooks/use-loacle';
 import { message } from 'ant-design-vue';
 import { copyElementSchema } from '/@/utils/draggable-api';
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 
 export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
   const keys = useMagicKeys();
+
+  const activeElement = useActiveElement();
+  const notUsingInput = computed(
+    () => activeElement.value?.tagName !== 'INPUT' && activeElement.value?.tagName !== 'TEXTAREA',
+  );
   /**
    * 删除组件
    * @description "Delete"
@@ -53,8 +59,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    */
   function __Save__() {
     const { t } = useLocale(i18n);
-    watch(keys['Control+s'], (e) => {
-      if (!e) return;
+    whenever(logicAnd(keys['Control+s'], notUsingInput), () => {
       core?.saveCurrentHistoryData();
       message.success(t('el.success.archive'));
     });
@@ -65,8 +70,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "Control" "c"
    */
   function __Copy__() {
-    watch(keys['Control+c'], (e) => {
-      if (!e) return;
+    whenever(logicAnd(keys['Control+c'], notUsingInput), () => {
       const { selectedId, ...opt } = core.state.selectedData!;
       if (!selectedId) return;
       core.state.__schemaCopy__ = !core.state.__isModalDesigner__ ? opt.selectedScheme : opt.selectedModalScheme;
@@ -78,8 +82,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "Control" "v"
    */
   function __Paste__() {
-    watch(keys['Control+v'], (e) => {
-      if (!e) return;
+    whenever(logicAnd(keys['Control+v'], notUsingInput), () => {
       if (core.state.__schemaCopy__) {
         const { breadcrumbs } = core.state.selectedData!;
         if (!core.state.__isModalDesigner__) {
