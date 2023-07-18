@@ -1,6 +1,6 @@
 <template>
   <div class="hex-icon-picker">
-    <a-popover ref="popover" v-model:visible="visible" trigger="click" placement="bottomRight">
+    <a-popover ref="popover" v-model:open="visible" trigger="click" placement="bottomRight">
       <template #content>
         <a-tabs>
           <a-tab-pane v-for="(item, index) in data" :key="index + 1" :tab="item.label">

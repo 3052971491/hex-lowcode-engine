@@ -8,7 +8,7 @@
           <main-area></main-area>
         </a-layout-content>
       </a-layout>
-      <a-layout-sider width="332" theme="light">
+      <a-layout-sider width="360" theme="light">
         <config-area></config-area>
       </a-layout-sider>
     </a-layout>

@@ -13,7 +13,7 @@
       <slot></slot>
 
       <a-popconfirm
-        placement="bottom"
+        placement="bottomRight"
         :show-cancel="false"
         :destroy-tooltip-on-hide="true"
         :arrow-point-at-center="true"

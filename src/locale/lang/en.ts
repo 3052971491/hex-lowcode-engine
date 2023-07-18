@@ -177,7 +177,6 @@ export default {
       pull: 'Pull',
       push: 'Push',
       span: 'Span',
-      xxxl: '≥2000px Responsive grids',
       xs: '<576px Responsive grids',
       sm: '≥576px Responsive grids',
       md: '≥768px Responsive grids',

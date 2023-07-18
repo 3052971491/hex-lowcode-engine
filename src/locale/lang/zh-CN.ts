@@ -177,7 +177,6 @@ export default {
       pull: '向左移动格数',
       push: '向右移动格数',
       span: '占位格数',
-      xxxl: '≥2000px 响应式栅格',
       xs: '<576px 响应式栅格',
       sm: '≥576px 响应式栅格',
       md: '≥768px 响应式栅格',

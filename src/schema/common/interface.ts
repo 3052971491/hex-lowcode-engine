@@ -413,8 +413,6 @@ export namespace PcSchema {
     push: number;
     /** 栅格占位格数，为 0 时相当于 display: none */
     span: number | null;
-    /** ≥2000px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xxxl: number | object | null;
     /** <576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
     xs: number | object | null;
     /** ≥576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */

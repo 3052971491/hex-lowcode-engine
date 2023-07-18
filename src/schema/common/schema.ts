@@ -757,7 +757,6 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
       pull: 0,
       push: 0,
       span: 12,
-      xxxl: null,
       xs: null,
       sm: null,
       md: null,
