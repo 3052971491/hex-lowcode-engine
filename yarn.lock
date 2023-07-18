@@ -1030,7 +1030,7 @@ ansi-styles@^6.0.0:
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-6.2.1.tgz"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-ant-design-vue@4.x:
+ant-design-vue@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/ant-design-vue/-/ant-design-vue-4.0.0.tgz#82ea182d44530d7663c999d9b4d594206524b21a"
   integrity sha512-6V8DxHPv3HJYDdv48W/KFOUjeZDsYJhFlk13HFSKCJSR2MQs4YnPIAC+rWie9vYcVEKbO+cQDqiOM3cBoHMNUQ==

@@ -34,7 +34,7 @@
   "dependencies": {
     "@vueuse/core": "^10.1.2",
     "@vueuse/math": "^10.2.1",
-    "ant-design-vue": "4.x",
+    "ant-design-vue": "^4.0.0",
     "axios": "^1.4.0",
     "commitizen": "^4.2.5",
     "lodash-es": "^4.17.21",
