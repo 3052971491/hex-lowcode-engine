@@ -15,6 +15,30 @@ export namespace PcSchema {
     /** 最大行数 */
     maxLine: number;
   }
+  export interface ImageSchema extends LowCode.NodeSchema {
+    props: ImageSchemaProps;
+  }
+
+  export interface ImageSchemaProps extends LowCode.NodeSchemaProps {
+    /** 图片地址 */
+    src: string;
+    /** 宽度 */
+    width: number;
+    /** 自适应宽度 */
+    autoWidth: boolean;
+    /** 高度 */
+    height: number;
+    /** 自适应高度 */
+    autoHeight: boolean;
+    /** 摆放方式 */
+    fit: string;
+    /** title */
+    title: string;
+    /** 图像描述 */
+    alt: string;
+    /** 开启图片预览 */
+    preview: boolean;
+  }
   export interface ButtonGroupSchema extends LowCode.NodeSchema {
     children: ButtonSchema[];
     props: ButtonGroupSchemaProps;

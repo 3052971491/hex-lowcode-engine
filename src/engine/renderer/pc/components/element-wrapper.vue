@@ -96,3 +96,7 @@ onMounted(() => {
   }
 });
 </script>
+<style lang="less" scoped>
+.element-wrapper {
+}
+</style>

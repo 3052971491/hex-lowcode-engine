@@ -49,6 +49,7 @@ export default {
         advanced: '高级控件',
       },
       Text: '文本',
+      Image: '图片',
       ButtonGroup: '按钮',
       Button: '子按钮',
       Divider: '分割线',
@@ -205,6 +206,16 @@ export default {
         closable: '默认不显示关闭按钮',
         banner: '是否用作顶部公告',
       },
+      Image: {
+        src: '图片地址',
+        width: '宽度',
+        autoWidth: '宽度自适应',
+        height: '高度',
+        autoHeight: '高度自适应',
+        fit: '摆放方式',
+        alt: '图像描述',
+        preview: '开启图片预览',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',
@@ -321,5 +332,8 @@ export default {
     selectSiblingNodeToRight: '向右选择兄弟节点',
     selectSiblingNodeToLeft: '向左选择兄弟节点',
     VueCode: 'Vue 代码',
+    spreadOver: '铺满 Cover',
+    contain: '适合 Contain',
+    stretch: '拉伸 Fit',
   },
 };

@@ -8,6 +8,18 @@ const TEXT_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Text', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const IMAGE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Image', name: 'src', label: '图片地址', editor: 'input-editor' },
+  { type: 'Image', name: 'width', label: '宽度', editor: 'input-number-editor' },
+  { type: 'Image', name: 'autoWidth', label: '宽度自适应', editor: 'switch-editor' },
+  { type: 'Image', name: 'height', label: '高度', editor: 'input-number-editor' },
+  { type: 'Image', name: 'autoHeight', label: '高度自适应', editor: 'switch-editor' },
+  { type: 'Image', name: 'fit', label: '摆放方式', editor: 'fit-editor', merge: true },
+  { type: 'Image', name: 'alt', label: '图像描述', editor: 'input-editor' },
+  { type: 'Image', name: 'preview', label: '开启图片预览', editor: 'switch-editor' },
+  { type: 'Image', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const DIVIDER_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Divider', name: 'content', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Divider', name: 'type', label: '方向', editor: 'type-editor', merge: true },
@@ -320,6 +332,7 @@ const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
 
 const obj: { [key: string]: Array<AttributeItem> } = {
   Text: TEXT_ATTRIBUTE,
+  Image: IMAGE_ATTRIBUTE,
   ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
   Button: BUTTON_ATTRIBUTE,
   Divider: DIVIDER_ATTRIBUTE,

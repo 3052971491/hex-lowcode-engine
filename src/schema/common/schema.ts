@@ -6,6 +6,7 @@ import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
 
 export enum ComponentType {
   'Text' = 'Text',
+  'Image' = 'Image',
   'ButtonGroup' = 'ButtonGroup',
   'Button' = 'Button',
   'Divider' = 'Divider',
@@ -46,6 +47,36 @@ export class Text extends Scheme<PcSchema.TextSchema> {
       content: '文本',
       showTitle: false,
       maxLine: 0,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class Image extends Scheme<PcSchema.ImageSchema> {
+  props: PcSchema.ImageSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'BASIC';
+    this.componentName = '图片';
+    this.componentType = ComponentType.Image;
+    this.props = {
+      src: '',
+      width: 350,
+      autoWidth: false,
+      height: 200,
+      autoHeight: false,
+      fit: 'cover',
+      title: '',
+      alt: 'Image 404',
+      preview: true,
       className: '',
       __style__: '',
     };
@@ -1110,6 +1141,7 @@ export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
 
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Text, new Text() as any],
+  [ComponentType.Image, new Image() as any],
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
   [ComponentType.Button, new Button() as any],
   [ComponentType.Divider, new Divider() as any],
@@ -1140,6 +1172,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
 
 export default {
   Text,
+  Image,
   ButtonGroup,
   Button,
   Divider,

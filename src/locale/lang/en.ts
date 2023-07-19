@@ -49,6 +49,7 @@ export default {
         advanced: 'Advanced control',
       },
       Text: 'Text',
+      Image: 'Image',
       ButtonGroup: 'Button Group',
       Button: 'Button',
       Divider: 'Divider',
@@ -205,6 +206,16 @@ export default {
         closable: 'Close button ',
         banner: 'Top Announcement',
       },
+      Image: {
+        src: 'Image address',
+        width: 'width',
+        autoWidth: 'Auto width',
+        height: 'height',
+        autoHeight: 'Auto height',
+        fit: 'Way of placing',
+        alt: 'Image caption',
+        preview: 'Enable image preview',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',
@@ -322,5 +333,8 @@ export default {
     selectSiblingNodeToRight: 'Select the sibling node to the right',
     selectSiblingNodeToLeft: 'Select the sibling node to the left',
     VueCode: 'Vue Code',
+    spreadOver: 'Cover',
+    contain: 'Contain',
+    stretch: 'Fit',
   },
 };
