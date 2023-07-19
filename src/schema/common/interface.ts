@@ -304,6 +304,36 @@ export namespace PcSchema {
     /** 子元素集合 */
     options: RadioGroupChildOption[];
   }
+  export interface MultiSelectScheme extends LowCode.NodeSchema {
+    props: MultiSelectSchemeProps;
+  }
+
+  export interface MultiSelectSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n | I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 子元素集合 */
+    options: RadioGroupChildOption[];
+  }
   export interface CheckboxScheme extends LowCode.NodeSchema {
     props: CheckboxSchemeProps;
   }
