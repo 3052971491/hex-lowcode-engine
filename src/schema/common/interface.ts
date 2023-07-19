@@ -436,7 +436,7 @@ export namespace PcSchema {
     /** 占位提示 */
     placeholder: I18n[];
     /** 默认值 */
-    defaultValue: I18n[];
+    defaultValue: I18n | I18n[];
     /** 尺寸 */
     size: LowCode.Size;
     /** 状态 */
@@ -455,6 +455,14 @@ export namespace PcSchema {
     valueFormat: string;
     /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
     showNow: boolean;
+    /** 使用 12 小时制，为 true 时 format 默认为 h:mm:ss a */
+    use12Hours: boolean;
+    /** 小时选项间隔 */
+    hourStep: number;
+    /** 分钟选项间隔 */
+    minuteStep: number;
+    /** 秒选项间隔 */
+    secondStep: number;
     /** 自动获取焦点 */
     autofocus: boolean;
   }
@@ -470,7 +478,7 @@ export namespace PcSchema {
     /** 占位提示 */
     placeholder: I18n[];
     /** 默认值 */
-    defaultValue: I18n;
+    defaultValue: I18n | I18n[];
     /** 尺寸 */
     size: LowCode.Size;
     /** 状态 */

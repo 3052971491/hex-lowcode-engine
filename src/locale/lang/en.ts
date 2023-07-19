@@ -207,6 +207,8 @@ export default {
       hourStep: 'Hour step',
       minuteStep: 'Minute step',
       secondStep: 'Second step',
+      startTime: 'Start time',
+      endTime: 'End time',
       Alert: {
         message: 'Warning Contents',
         description: 'Supplementary text introduction',

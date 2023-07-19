@@ -866,6 +866,64 @@ export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
   }
 }
 
+export class TimeRangePicker extends Scheme<PcSchema.TimeRangePickerScheme> {
+  props: PcSchema.TimeRangePickerSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
+    this.componentName = '时间区间';
+    this.componentType = ComponentType.TimeRangePicker;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: ['开始时间', '结束时间'],
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      allowClear: true,
+      bordered: true,
+      format: 'HH:mm:ss',
+      valueFormat: 'HH:mm:ss',
+      showNow: false,
+      use12Hours: false,
+      hourStep: 1,
+      minuteStep: 1,
+      secondStep: 1,
+      autofocus: false,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
@@ -1335,6 +1393,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.DatePicker, new DatePicker() as any],
   [ComponentType.RangePicker, new RangePicker() as any],
   [ComponentType.TimePicker, new TimePicker() as any],
+  [ComponentType.TimeRangePicker, new TimeRangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
@@ -1369,6 +1428,7 @@ export default {
   DatePicker,
   RangePicker,
   TimePicker,
+  TimeRangePicker,
   Rate,
   Row,
   Column,

@@ -207,6 +207,8 @@ export default {
       hourStep: '小时选项间隔',
       minuteStep: '分钟选项间隔',
       secondStep: '秒选项间隔',
+      startTime: '开始时间',
+      endTime: '结束时间',
       Alert: {
         message: '警告提示内容',
         description: '辅助性文字介绍',
