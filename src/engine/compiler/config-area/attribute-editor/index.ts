@@ -187,9 +187,30 @@ const DATE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'DatePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const TIME_PICKER_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'TimePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'TimePicker', name: 'defaultValue', label: '默认值', editor: 'time-picker-editor' },
+  { type: 'TimePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'TimePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'TimePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'TimePicker', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'TimePicker', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'format', label: '显示时间格式', editor: 'format-editor', merge: true },
+  { type: 'TimePicker', name: 'valueFormat', label: '绑定值的格式', editor: 'value-format-editor', merge: true },
+  { type: 'TimePicker', name: 'showNow', label: '是否显示“此刻”', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'use12Hours', label: '开启12小时制', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'hourStep', label: '小时选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'minuteStep', label: '分钟选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'secondStep', label: '秒选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'TimePicker', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'TimePicker', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'TimePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const Range_PICKER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'RangePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
-  { type: 'RangePicker', name: 'defaultValue', label: '默认值', editor: 'range-picker-editor' },
+  { type: 'RangePicker', name: 'defaultValue', label: '默认值', editor: 'time-picker-editor' },
   { type: 'RangePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
   { type: 'RangePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'RangePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
@@ -381,6 +402,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   MultiSelect: MULTI_SELECT_ATTRIBUTES,
   DatePicker: DATE_PICKER_ATTRIBUTES,
   RangePicker: Range_PICKER_ATTRIBUTES,
+  TimePicker: TIME_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,

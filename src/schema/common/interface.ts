@@ -386,6 +386,82 @@ export namespace PcSchema {
     props: DatePickerSchemeProps;
   }
 
+  export interface TimePickerSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 日期格式 */
+    format: string;
+    /** 绑定值的格式 */
+    valueFormat: string;
+    /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
+    showNow: boolean;
+    /** 使用 12 小时制，为 true 时 format 默认为 h:mm:ss a */
+    use12Hours: boolean;
+    /** 小时选项间隔 */
+    hourStep: number;
+    /** 分钟选项间隔 */
+    minuteStep: number;
+    /** 秒选项间隔 */
+    secondStep: number;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+  }
+  export interface TimePickerScheme extends LowCode.NodeSchema {
+    props: TimePickerSchemeProps;
+  }
+
+  export interface TimeRangePickerSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n[];
+    /** 默认值 */
+    defaultValue: I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 日期格式 */
+    format: string;
+    /** 绑定值的格式 */
+    valueFormat: string;
+    /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
+    showNow: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+  }
+  export interface TimeRangePickerScheme extends LowCode.NodeSchema {
+    props: TimeRangePickerSchemeProps;
+  }
+
   export interface RangePickerSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;

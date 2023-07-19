@@ -21,6 +21,8 @@ export enum ComponentType {
   'MultiSelect' = 'MultiSelect',
   'DatePicker' = 'DatePicker',
   'RangePicker' = 'RangePicker',
+  'TimePicker' = 'TimePicker',
+  'TimeRangePicker' = 'TimeRangePicker',
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
@@ -806,6 +808,64 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
   }
 }
 
+export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
+  props: PcSchema.TimePickerSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
+    this.componentName = '时间';
+    this.componentType = ComponentType.TimePicker;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请选择',
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      allowClear: true,
+      bordered: true,
+      format: 'HH:mm:ss',
+      valueFormat: 'HH:mm:ss',
+      showNow: false,
+      use12Hours: false,
+      hourStep: 1,
+      minuteStep: 1,
+      secondStep: 1,
+      autofocus: false,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
@@ -1274,6 +1334,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.MultiSelect, new MultiSelect() as any],
   [ComponentType.DatePicker, new DatePicker() as any],
   [ComponentType.RangePicker, new RangePicker() as any],
+  [ComponentType.TimePicker, new TimePicker() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
@@ -1307,6 +1368,7 @@ export default {
   MultiSelect,
   DatePicker,
   RangePicker,
+  TimePicker,
   Rate,
   Row,
   Column,
