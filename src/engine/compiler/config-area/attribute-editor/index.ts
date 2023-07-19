@@ -132,6 +132,23 @@ const CHECKBOX_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Checkbox', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const SELECT_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Select', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Select', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Select', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'Select', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Select', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Select', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Select', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'Select', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Select', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'Select', name: 'options', label: '选项', editor: 'options-editor' },
+  { type: 'Select', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Select', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Select', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Select', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const DATE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'DatePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'DatePicker', name: 'defaultValue', label: '默认值', editor: 'date-picker-editor' },
@@ -343,6 +360,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Switch: SWITCH_ATTRIBUTES,
   Radio: RADIO_ATTRIBUTES,
   Checkbox: CHECKBOX_ATTRIBUTES,
+  Select: SELECT_ATTRIBUTES,
   DatePicker: DATE_PICKER_ATTRIBUTES,
   RangePicker: Range_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,

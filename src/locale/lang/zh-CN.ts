@@ -60,6 +60,8 @@ export default {
       Switch: '开关',
       Radio: '单选框',
       Checkbox: '多选框',
+      Select: '下拉选择',
+      MultiSelect: '下拉多选',
       DatePicker: '日期',
       RangePicker: '日期区间',
       Rate: '评分',

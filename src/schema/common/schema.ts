@@ -17,6 +17,7 @@ export enum ComponentType {
   'Switch' = 'Switch',
   'Radio' = 'Radio',
   'Checkbox' = 'Checkbox',
+  'Select' = 'Select',
   'DatePicker' = 'DatePicker',
   'RangePicker' = 'RangePicker',
   'Rate' = 'Rate',
@@ -537,6 +538,64 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
       size: 'default',
       behavior: 'normal',
       tips: '',
+      rules: [],
+      options: [],
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    this.props.options = [
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+      { label: '选项三', value: '3' },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class Select extends Scheme<PcSchema.SelectScheme> {
+  props: PcSchema.SelectSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/select-cn';
+    this.componentName = '下拉选择';
+    this.componentType = ComponentType.Select;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请输入',
+      defaultValue: '',
+      size: 'default',
+      behavior: 'normal',
+      tips: '',
+      bordered: true,
+      allowClear: false,
+      autofocus: false,
       rules: [],
       options: [],
       className: '',
@@ -1152,6 +1211,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Switch, new Switch() as any],
   [ComponentType.Radio, new Radio() as any],
   [ComponentType.Checkbox, new Checkbox() as any],
+  [ComponentType.Select, new Select() as any],
   [ComponentType.DatePicker, new DatePicker() as any],
   [ComponentType.RangePicker, new RangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
@@ -1183,6 +1243,7 @@ export default {
   Switch,
   Radio,
   Checkbox,
+  Select,
   DatePicker,
   RangePicker,
   Rate,

@@ -60,6 +60,8 @@ export default {
       Switch: 'Switch',
       Radio: 'Radio',
       Checkbox: 'Checkbox',
+      Select: 'Select',
+      MultiSelect: 'Multi Select',
       DatePicker: 'Date Picker',
       RangePicker: 'Range Picker',
       Rate: 'Rate',
