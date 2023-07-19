@@ -219,7 +219,7 @@ const aaa = ref('');
   .form-theme {
     background-color: rgba(0, 102, 255, 0.08);
     &:hover {
-      background-color: rgba(0, 102, 255, 0.08);
+      background-color: rgba(0, 102, 255, 0.125);
     }
   }
 
