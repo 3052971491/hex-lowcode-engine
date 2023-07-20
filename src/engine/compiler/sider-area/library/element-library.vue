@@ -242,7 +242,7 @@ const aaa = ref('');
 
 .hex-draggable {
   :deep(.draggable-item) {
-    width: 100%;
+    width: auto;
 
     &:nth-child(2n) {
       margin-left: 4px;
