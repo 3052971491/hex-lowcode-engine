@@ -1,6 +1,6 @@
 <template>
   <form-Item-wrapper
-    v-if="!schema.props.progressive"
+    v-if="!schema.props || !schema.props.progressive"
     :label="t('el.property.Progress.status')"
     :name="props.attribute"
     :option="option"

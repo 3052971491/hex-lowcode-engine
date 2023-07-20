@@ -1,4 +1,4 @@
-import AModal, { destroyFns } from 'ant-design-vue/lib/modal/Modal';
+import AModal from 'ant-design-vue/lib/modal/Modal';
 import { App, ComponentOptions, h, ref, render } from 'vue';
 import ModalTitle from './modal-title.vue';
 
@@ -28,7 +28,7 @@ export class ModalService {
         document.body.appendChild(container);
 
         // eslint-disable-next-line no-unused-expressions
-        destroyFns;
+        AModal.destroyAll();
 
         const modalRef = {
           instance: null,
