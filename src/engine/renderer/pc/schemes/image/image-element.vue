@@ -13,6 +13,7 @@
         width: ectype.props.autoWidth ? 'auto' : false,
         height: ectype.props.autoHeight ? 'auto' : false,
       }"
+      :class="[ectype.props.className]"
     />
   </ElementWrapper>
 </template>

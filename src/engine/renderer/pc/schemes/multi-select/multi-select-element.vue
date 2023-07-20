@@ -10,10 +10,10 @@
       v-model:value="modelValue"
       mode="multiple"
       v-bind="prop"
-      :class="[ectype.props.className]"
       show-search
-      :options="ectype.props.options"
       option-filter-prop="label"
+      :options="ectype.props.options"
+      :class="[ectype.props.className]"
     >
     </a-select>
   </ElementWrapper>

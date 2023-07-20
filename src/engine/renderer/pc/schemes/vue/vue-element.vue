@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
   >
     <div v-if="redactState" ref="__instance__" class="hex-code-view-compiler">（预览时渲染）Vue 组件</div>
-    <div v-else class="hex-code-view-renderer">
+    <div v-else class="hex-code-view-renderer" :class="[ectype.props.className]">
       <hex-code-view v-bind="prop" :context="core?.state.__this__" />
     </div>
   </ElementWrapper>
@@ -30,7 +30,7 @@ interface Props {
 const redactState = inject(RedactStateInjectionKey);
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
-const { ectypeProps } = useElement<PcSchema.VueSchema>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.VueSchema>(props, __instance__);
 
 const prop = computed(() =>
   ectypeProps((obj: PcSchema.VueSchemaProps) => {
