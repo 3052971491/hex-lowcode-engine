@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-render w-full h-full overflow-hidden">
+  <div class="pc-render w-full h-full overflow-auto">
     <!-- 编辑模式 -->
     <template v-if="redactState">
       <template v-if="!core?.state.__isModalDesigner__">
