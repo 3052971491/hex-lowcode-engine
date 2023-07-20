@@ -46,10 +46,8 @@ const activeKey = ref(['1']);
 }
 :deep(.ant-collapse-item-disabled) {
   > .ant-collapse-header {
-    > .arrow {
-      color: rgba(0, 0, 0, 0.88);
-      cursor: default;
-    }
+    color: rgba(0, 0, 0, 0.88);
+    cursor: default;
   }
 }
 </style>
