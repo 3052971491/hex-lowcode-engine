@@ -39,6 +39,7 @@ export default {
     globalSetting: {
       language: '语言',
       remoteAPI: '远程 API',
+      watermark: '水印',
     },
     component: {
       category: {
@@ -354,5 +355,15 @@ export default {
     stretch: '拉伸 Fit',
     circle: '圆型',
     line: '线型',
+    watermarkConfig: {
+      content: '文字内容',
+      fontSize: '字体大小',
+      zIndex: '水印元素的 z-index',
+      rotate: '旋转角度',
+      rowGutter: '水印行间距',
+      columnGutter: '水印列间距',
+    },
+    moreSetting: '更多设置',
+    watermarkSetting: '水印设置',
   },
 };

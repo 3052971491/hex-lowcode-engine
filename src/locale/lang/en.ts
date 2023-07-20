@@ -39,6 +39,7 @@ export default {
     globalSetting: {
       language: 'Language',
       remoteAPI: 'Remote API',
+      watermark: 'Watermark',
     },
     component: {
       category: {
@@ -355,5 +356,15 @@ export default {
     stretch: 'Fit',
     circle: 'Circle',
     line: 'Line',
+    watermarkConfig: {
+      content: 'Content',
+      fontSize: 'Font size',
+      zIndex: 'z-index',
+      rotate: 'Rotate',
+      rowGutter: 'Row gutter',
+      columnGutter: 'Column gutter',
+    },
+    moreSetting: 'More Settings',
+    watermarkSetting: 'Watermark setting',
   },
 };
