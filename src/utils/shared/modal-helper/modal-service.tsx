@@ -28,7 +28,7 @@ export class ModalService {
         document.body.appendChild(container);
 
         // eslint-disable-next-line no-unused-expressions
-        AModal.destroyAll();
+        // AModal.destroyAll();
 
         const modalRef = {
           instance: null,
