@@ -387,6 +387,7 @@ const FROM_ATTRIBUTE: Array<AttributeItem> = [
 
 const VUE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Vue', name: 'render', label: 'render', editor: 'render-editor', merge: true },
+  { type: 'Vue', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
