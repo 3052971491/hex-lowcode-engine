@@ -390,6 +390,15 @@ const VUE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Vue', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const PROGRESS_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Progress', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Progress', name: 'type', label: '形态', editor: 'type-editor', merge: true },
+  { type: 'Progress', name: 'percent', label: '百分比', editor: 'input-number-editor' },
+  { type: 'Progress', name: 'status', label: '状态', editor: 'status-editor', merge: true },
+  { type: 'Progress', name: 'progressive', label: '色彩阶段变化模式', editor: 'progressive-editor', merge: true },
+  { type: 'Progress', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
@@ -437,6 +446,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
   Vue: VUE_ATTRIBUTE,
+  Progress: PROGRESS_ATTRIBUTE,
 };
 
 export default obj;

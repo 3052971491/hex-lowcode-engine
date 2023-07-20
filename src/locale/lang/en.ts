@@ -77,6 +77,7 @@ export default {
       TabPane: 'Tab Pane',
       Form: 'Form',
       Vue: 'Vue',
+      Progress: 'Progress',
       Modal: 'Modal',
       ModalContent: 'Modal Content',
       ModalFooter: 'Modal Footer',
@@ -226,6 +227,12 @@ export default {
         alt: 'Image caption',
         preview: 'Enable image preview',
       },
+      Progress: {
+        type: 'Type',
+        percent: 'Percent',
+        status: 'Status',
+        progressive: 'Color phase change mode',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',
@@ -346,5 +353,7 @@ export default {
     spreadOver: 'Cover',
     contain: 'Contain',
     stretch: 'Fit',
+    circle: 'Circle',
+    line: 'Line',
   },
 };

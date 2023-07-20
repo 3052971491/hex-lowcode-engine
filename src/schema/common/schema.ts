@@ -34,6 +34,7 @@ export enum ComponentType {
   'TabPane' = 'TabPane',
   'Form' = 'Form',
   'Vue' = 'Vue',
+  'Progress' = 'Progress',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -1308,6 +1309,35 @@ export class Vue extends Scheme<PcSchema.VueSchema> {
   }
 }
 
+export class Progress extends Scheme<PcSchema.ProgressSchema> {
+  props: PcSchema.ProgressSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = 'Progress';
+    this.componentType = ComponentType.Progress;
+    this.children = [];
+    this.formItemFlag = false;
+    this.props = {
+      size: 'default',
+      type: 'line',
+      percent: 0,
+      status: 'normal',
+      progressive: false,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
@@ -1405,6 +1435,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
   [ComponentType.Vue, new Vue() as any],
+  [ComponentType.Progress, new Progress() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1440,6 +1471,7 @@ export default {
   TabPane,
   Form,
   Vue,
+  Progress,
   Modal,
   ModalContent,
   ModalFooter,

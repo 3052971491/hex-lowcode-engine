@@ -732,6 +732,24 @@ export namespace PcSchema {
     render: string;
   }
 
+  export interface ProgressSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: ProgressSchemaProps;
+  }
+
+  export interface ProgressSchemaProps extends LowCode.NodeSchemaProps {
+    /** 大小，提供 large default 和 small 三种大小 */
+    size: LowCode.Size;
+    /** 形态 */
+    type: string;
+    /** 百分比 */
+    percent: number;
+    /** 状态，可选：success exception normal */
+    status: string;
+    /** 色彩阶段变化模式 */
+    progressive: boolean;
+  }
+
   export interface ModalSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
     props: ModalSchemaProps;

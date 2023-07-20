@@ -77,6 +77,7 @@ export default {
       TabPane: '子标签页',
       Form: '表单',
       Vue: 'Vue',
+      Progress: '进度条',
       Modal: '模态框',
       ModalContent: '模态框-内容区',
       ModalFooter: '模态框-操作区',
@@ -226,6 +227,12 @@ export default {
         alt: '图像描述',
         preview: '开启图片预览',
       },
+      Progress: {
+        type: '形态',
+        percent: '百分比',
+        status: '状态',
+        progressive: '色彩阶段变化模式',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',
@@ -345,5 +352,7 @@ export default {
     spreadOver: '铺满 Cover',
     contain: '适合 Contain',
     stretch: '拉伸 Fit',
+    circle: '圆型',
+    line: '线型',
   },
 };
