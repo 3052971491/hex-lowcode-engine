@@ -1,10 +1,5 @@
 <template>
-  <form-Item-wrapper
-    v-if="status"
-    :label="t(`el.property.${props.attribute}`)"
-    :name="props.attribute"
-    :option="option"
-  >
+  <form-Item-wrapper v-if="status" :label="formatLabel" :name="props.attribute" :option="option">
     <a-input-number v-model:value="modelValue" :placeholder="t('el.placeholder.enter')" style="width: 100%" />
   </form-Item-wrapper>
 </template>
@@ -49,5 +44,12 @@ const status = computed<boolean>(() => {
     default:
       return true;
   }
+});
+
+const formatLabel = computed(() => {
+  return t(`el.property.${props.option.type}.${props.attribute}`) !==
+    `el.property.${props.option.type}.${props.attribute}`
+    ? t(`el.property.${props.option.type}.${props.attribute}`)
+    : t(`el.property.${props.attribute}`);
 });
 </script>

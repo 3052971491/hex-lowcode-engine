@@ -33,7 +33,7 @@ const { ectype, ectypeProps } = useElement<PcSchema.InputScheme>(props, __instan
 const { modelValue } = useElementDataEngine<PcSchema.InputScheme>(props.schema, dataEngine);
 
 const prop = computed(() =>
-  ectypeProps((obj) => {
+  ectypeProps((obj: PcSchema.InputSchemeProps) => {
     return {
       allowClear: obj.allowClear,
       bordered: obj.bordered,

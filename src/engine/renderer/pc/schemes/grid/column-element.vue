@@ -82,7 +82,6 @@ const ectypeProps = computed(() => {
     pull: obj.pull,
     push: obj.push,
     span: obj.span,
-    xxxl: obj.xxxl,
     xs: obj.xs,
     sm: obj.sm,
     md: obj.md,

@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-render w-full h-full">
+  <div class="pc-render w-full h-full overflow-auto">
     <!-- 编辑模式 -->
     <template v-if="redactState">
       <template v-if="!core?.state.__isModalDesigner__">
@@ -37,7 +37,7 @@
     </template>
     <!-- 预览模式 -->
     <template v-else>
-      <div v-for="(item, index) in modelValue.componentsTree" :key="item.id">
+      <template v-for="(item, index) in modelValue.componentsTree" :key="item.id">
         <template v-if="true">
           <component
             :is="`${item.componentType}Element`"
@@ -47,7 +47,7 @@
             :index-of-parent-list="index"
           />
         </template>
-      </div>
+      </template>
     </template>
   </div>
 </template>

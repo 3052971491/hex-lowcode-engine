@@ -22,7 +22,7 @@
       </hex-draggable>
     </template>
     <template v-else>
-      <div v-for="(item, index) in ectype.children" :key="item.id">
+      <div v-for="(item, index) in ectype.children" :key="item.id" :class="[ectype.props.className]">
         <template v-if="true">
           <component
             :is="`${item.componentType}Element`"

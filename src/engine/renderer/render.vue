@@ -1,12 +1,26 @@
 <template>
   <a-spin wrapper-class-name="engine-render" :spinning="pageSpinning">
-    <!-- PC 渲染器 -->
-    <template v-if="device === 'PC'">
-      <pc-render v-model:value="modelValue" :redact-state="redactState" />
+    <template v-if="watermarkModel">
+      <a-watermark v-bind="watermarkModel">
+        <!-- PC 渲染器 -->
+        <template v-if="device === 'PC'">
+          <pc-render v-model:value="modelValue" :redact-state="redactState" />
+        </template>
+        <!-- Mobile 渲染器 -->
+        <template v-else>
+          <mobile-render />
+        </template>
+      </a-watermark>
     </template>
-    <!-- Mobile 渲染器 -->
     <template v-else>
-      <mobile-render />
+      <!-- PC 渲染器 -->
+      <template v-if="device === 'PC'">
+        <pc-render v-model:value="modelValue" :redact-state="redactState" />
+      </template>
+      <!-- Mobile 渲染器 -->
+      <template v-else>
+        <mobile-render />
+      </template>
     </template>
   </a-spin>
 </template>
@@ -32,6 +46,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import { localeContextKey } from '/@/hooks/use-loacle';
 import zhCn from '/@/locale/lang/zh-CN';
 import en from '/@/locale/lang/en';
+import { useWatermark } from '/@/hooks/use-watermark';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -160,6 +175,8 @@ function runtimeDataSource(remotes: RuntimeDataSourceConfig[]) {
     resolve(true);
   });
 }
+
+const { watermarkModel } = useWatermark(core, props.redactState);
 </script>
 
 <script lang="ts">

@@ -17,7 +17,7 @@ export function set(
   const { i18n, config } = projectSchema!;
   if (isProps) {
     if (schema.props?.hasOwnProperty(attribute)) {
-      if (schema.props[attribute].type && schema.props[attribute].type === 'i18n') {
+      if (schema.props[attribute]?.type && schema.props[attribute].type === 'i18n') {
         schema.props[attribute][config.i18n] = value;
         if (i18n) {
           i18n[config.i18n][schema.props[attribute].key] = value;
@@ -29,7 +29,7 @@ export function set(
     return;
   }
   if (schema.hasOwnProperty(attribute)) {
-    if (schema[attribute].type && schema[attribute].type === 'i18n') {
+    if (schema[attribute]?.type && schema[attribute].type === 'i18n') {
       schema[attribute][config.i18n] = value;
     } else {
       schema[attribute] = value;

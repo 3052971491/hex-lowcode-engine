@@ -5,7 +5,7 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <a-alert ref="__instance__" v-bind="prop" />
+    <a-alert ref="__instance__" v-bind="prop" :class="[ectype.props.className]" />
   </ElementWrapper>
 </template>
 
@@ -25,7 +25,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
 
-const { ectypeProps } = useElement<PcSchema.AlertSchema>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.AlertSchema>(props, __instance__);
 
 const prop = computed(() =>
   ectypeProps((obj: PcSchema.AlertSchemaProps) => {

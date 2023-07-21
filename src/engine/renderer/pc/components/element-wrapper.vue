@@ -1,5 +1,5 @@
 <template>
-  <div class="element-wrapper" :class="[!redactState ? schema.props?.className : '']">
+  <div class="element-wrapper">
     <template v-if="isPreview">
       <ElementEditWrapper
         v-if="schema?.tag !== 'LAYOUT' && schema.componentType !== 'Form'"
@@ -96,3 +96,7 @@ onMounted(() => {
   }
 });
 </script>
+<style lang="less" scoped>
+.element-wrapper {
+}
+</style>

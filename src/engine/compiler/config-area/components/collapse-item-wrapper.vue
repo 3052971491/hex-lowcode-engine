@@ -44,4 +44,10 @@ const activeKey = ref(['1']);
 :deep(.ant-collapse-content) {
   background-color: #fff !important;
 }
+:deep(.ant-collapse-item-disabled) {
+  > .ant-collapse-header {
+    color: rgba(0, 0, 0, 0.88);
+    cursor: default;
+  }
+}
 </style>

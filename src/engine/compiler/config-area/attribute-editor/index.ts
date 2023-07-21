@@ -8,6 +8,18 @@ const TEXT_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Text', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const IMAGE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Image', name: 'src', label: '图片地址', editor: 'input-editor' },
+  { type: 'Image', name: 'width', label: '宽度', editor: 'input-number-editor' },
+  { type: 'Image', name: 'autoWidth', label: '宽度自适应', editor: 'switch-editor' },
+  { type: 'Image', name: 'height', label: '高度', editor: 'input-number-editor' },
+  { type: 'Image', name: 'autoHeight', label: '高度自适应', editor: 'switch-editor' },
+  { type: 'Image', name: 'fit', label: '摆放方式', editor: 'fit-editor', merge: true },
+  { type: 'Image', name: 'alt', label: '图像描述', editor: 'input-editor' },
+  { type: 'Image', name: 'preview', label: '开启图片预览', editor: 'switch-editor' },
+  { type: 'Image', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const DIVIDER_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Divider', name: 'content', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Divider', name: 'type', label: '方向', editor: 'type-editor', merge: true },
@@ -120,10 +132,44 @@ const CHECKBOX_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Checkbox', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const SELECT_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Select', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Select', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Select', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'Select', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Select', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Select', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Select', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'Select', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Select', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'Select', name: 'options', label: '选项', editor: 'options-editor' },
+  { type: 'Select', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Select', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Select', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Select', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const MULTI_SELECT_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'MultiSelect', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  // { type: 'MultiSelect', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'MultiSelect', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'MultiSelect', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'MultiSelect', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'MultiSelect', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'MultiSelect', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'MultiSelect', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'MultiSelect', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'MultiSelect', name: 'options', label: '选项', editor: 'options-editor' },
+  { type: 'MultiSelect', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'MultiSelect', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'MultiSelect', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'MultiSelect', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const DATE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'DatePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'DatePicker', name: 'defaultValue', label: '默认值', editor: 'date-picker-editor' },
-  { type: 'DatePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  // { type: 'DatePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
   { type: 'DatePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'DatePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
   { type: 'DatePicker', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
@@ -139,6 +185,48 @@ const DATE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'DatePicker', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'DatePicker', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
   { type: 'DatePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const TIME_PICKER_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'TimePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'TimePicker', name: 'defaultValue', label: '默认值', editor: 'time-picker-editor' },
+  { type: 'TimePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'TimePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'TimePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'TimePicker', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'TimePicker', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'format', label: '显示时间格式', editor: 'format-editor', merge: true },
+  { type: 'TimePicker', name: 'valueFormat', label: '绑定值的格式', editor: 'value-format-editor', merge: true },
+  { type: 'TimePicker', name: 'showNow', label: '是否显示“此刻”', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'use12Hours', label: '开启12小时制', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'hourStep', label: '小时选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'minuteStep', label: '分钟选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'secondStep', label: '秒选项间隔', editor: 'input-number-editor' },
+  { type: 'TimePicker', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'TimePicker', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'TimePicker', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'TimePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const TIME_RANGE_PICKER_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'TimeRangePicker', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'TimeRangePicker', name: 'defaultValue', label: '默认值', editor: 'time-range-picker-editor' },
+  // { type: 'TimeRangePicker', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'TimeRangePicker', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'TimeRangePicker', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'TimeRangePicker', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'TimeRangePicker', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'TimePicker', name: 'format', label: '显示时间格式', editor: 'format-editor', merge: true },
+  { type: 'TimePicker', name: 'valueFormat', label: '绑定值的格式', editor: 'value-format-editor', merge: true },
+  { type: 'TimeRangePicker', name: 'showNow', label: '是否显示“此刻”', editor: 'switch-editor' },
+  { type: 'TimeRangePicker', name: 'use12Hours', label: '开启12小时制', editor: 'switch-editor' },
+  { type: 'TimeRangePicker', name: 'hourStep', label: '小时选项间隔', editor: 'input-number-editor' },
+  { type: 'TimeRangePicker', name: 'minuteStep', label: '分钟选项间隔', editor: 'input-number-editor' },
+  { type: 'TimeRangePicker', name: 'secondStep', label: '秒选项间隔', editor: 'input-number-editor' },
+  { type: 'TimeRangePicker', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'TimeRangePicker', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'TimeRangePicker', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'TimeRangePicker', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
 const Range_PICKER_ATTRIBUTES: Array<AttributeItem> = [
@@ -192,7 +280,6 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'pull', label: '向左移动格数', editor: 'input-number-editor' },
   { type: 'Column', name: 'push', label: '向右移动格数', editor: 'input-number-editor' },
   { type: 'Column', name: 'span', label: '占位格数', editor: 'input-number-editor' },
-  { type: 'Column', name: 'xxxl', label: '≥2000px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'xs', label: '<576px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'sm', label: '≥576px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'md', label: '≥768px 响应式栅格', editor: 'input-number-editor' },
@@ -300,6 +387,16 @@ const FROM_ATTRIBUTE: Array<AttributeItem> = [
 
 const VUE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Vue', name: 'render', label: 'render', editor: 'render-editor', merge: true },
+  { type: 'Vue', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
+const PROGRESS_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Progress', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Progress', name: 'type', label: '形态', editor: 'type-editor', merge: true },
+  { type: 'Progress', name: 'percent', label: '百分比', editor: 'input-number-editor' },
+  { type: 'Progress', name: 'status', label: '状态', editor: 'status-editor', merge: true },
+  { type: 'Progress', name: 'progressive', label: '色彩阶段变化模式', editor: 'progressive-editor', merge: true },
+  { type: 'Progress', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
@@ -321,6 +418,7 @@ const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
 
 const obj: { [key: string]: Array<AttributeItem> } = {
   Text: TEXT_ATTRIBUTE,
+  Image: IMAGE_ATTRIBUTE,
   ButtonGroup: BUTTON_GROUP_ATTRIBUTE,
   Button: BUTTON_ATTRIBUTE,
   Divider: DIVIDER_ATTRIBUTE,
@@ -331,8 +429,12 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Switch: SWITCH_ATTRIBUTES,
   Radio: RADIO_ATTRIBUTES,
   Checkbox: CHECKBOX_ATTRIBUTES,
+  Select: SELECT_ATTRIBUTES,
+  MultiSelect: MULTI_SELECT_ATTRIBUTES,
   DatePicker: DATE_PICKER_ATTRIBUTES,
   RangePicker: Range_PICKER_ATTRIBUTES,
+  TimePicker: TIME_PICKER_ATTRIBUTES,
+  TimeRangePicker: TIME_RANGE_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
@@ -344,6 +446,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   TabPane: TAB_PANE_ATTRIBUTE,
   Form: FROM_ATTRIBUTE,
   Vue: VUE_ATTRIBUTE,
+  Progress: PROGRESS_ATTRIBUTE,
 };
 
 export default obj;

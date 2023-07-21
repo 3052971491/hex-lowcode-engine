@@ -13,9 +13,16 @@ interface Props<T> {
 export function useElementDataEngine<T extends LowCode.NodeSchema>(schema: T, dataEngine?: IDataEngine | null) {
   /** 初始化默认值 */
   function initDefaultValue() {
+    if (!schema.props?.defaultValue) {
+      modelValue.value = undefined;
+      return;
+    }
     // 去掉头尾字符串
-    modelValue.value =
-      schema.props?.trim && schema.props?.defaultValue ? schema.props?.defaultValue.trim() : schema.props?.defaultValue;
+    if (schema.props.hasOwnProperty('trim')) {
+      modelValue.value = schema.props.defaultValue.trim();
+    } else {
+      modelValue.value = schema.props.defaultValue;
+    }
   }
   const modelValue = computed({
     set(val: any) {
