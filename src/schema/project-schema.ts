@@ -18,6 +18,14 @@ const ProjectConfig: LowCode.ProjectSchema = {
   config: {
     i18n: 'zh-CN',
     remoteUrl: '',
+    watermark: {
+      content: '',
+      fontSize: 16,
+      zIndex: 9,
+      rotate: -22,
+      rowGutter: 100,
+      columnGutter: 100,
+    },
   },
   componentsTree: [],
   dialogComponentsTree: [],

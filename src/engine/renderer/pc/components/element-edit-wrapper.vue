@@ -221,12 +221,14 @@ const handleCopyCurrentElementClick = (event: Event) => {
     .instance-node-selector-current {
       display: none;
       margin-bottom: 4px;
-      padding: 2px 4px;
+      padding: 0px 4px;
       width: max-content;
+      height: 26px;
       font-size: 14px;
       border-radius: 4px;
       color: #fff;
       background-color: #1890ff;
+      line-height: 26px;
       cursor: pointer;
 
       &:first-child {

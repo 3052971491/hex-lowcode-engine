@@ -1,6 +1,7 @@
 <template>
   <modal
     v-bind="$props"
+    :open="visible"
     :mask-closable="maskClosable"
     :destroy-on-close="true"
     :width="fullscreen ? '100%' : width"

@@ -29,12 +29,27 @@
     padding: 0;
     line-height: 1.5715;
 
+    .ant-modal-header {
+      margin-bottom: 0;
+      padding: 20px;
+    }
+
     .ant-modal-body {
       padding: 0;
     }
 
+    .ant-modal-close {
+      top: 22px;
+      right: 74px;
+
+      &:hover {
+        color: rgb(0 0 0 / 45%);
+        background-color: transparent;
+      }
+    }
+
     .ant-modal-close-x {
-      padding: 0 24px;
+      padding: 0 20px;
       width: 100px;
       cursor: default;
 
@@ -90,6 +105,11 @@
       line-height: 1.5715;
       flex-direction: column;
 
+      .ant-modal-header {
+        margin-bottom: 0;
+        padding: 20px;
+      }
+
       .ant-modal-body {
         display: flex;
         flex-direction: column;
@@ -97,8 +117,18 @@
         flex: 1;
       }
 
+      .ant-modal-close {
+        top: 22px;
+        right: 74px;
+
+        &:hover {
+          color: rgb(0 0 0 / 45%);
+          background-color: transparent;
+        }
+      }
+
       .ant-modal-close-x {
-        padding: 0 24px;
+        padding: 0 20px;
         width: 100px;
         cursor: default;
 

@@ -15,6 +15,30 @@ export namespace PcSchema {
     /** 最大行数 */
     maxLine: number;
   }
+  export interface ImageSchema extends LowCode.NodeSchema {
+    props: ImageSchemaProps;
+  }
+
+  export interface ImageSchemaProps extends LowCode.NodeSchemaProps {
+    /** 图片地址 */
+    src: string;
+    /** 宽度 */
+    width: number;
+    /** 自适应宽度 */
+    autoWidth: boolean;
+    /** 高度 */
+    height: number;
+    /** 自适应高度 */
+    autoHeight: boolean;
+    /** 摆放方式 */
+    fit: string;
+    /** title */
+    title: string;
+    /** 图像描述 */
+    alt: string;
+    /** 开启图片预览 */
+    preview: boolean;
+  }
   export interface ButtonGroupSchema extends LowCode.NodeSchema {
     children: ButtonSchema[];
     props: ButtonGroupSchemaProps;
@@ -250,6 +274,66 @@ export namespace PcSchema {
     /** 子元素集合 */
     options: RadioGroupChildOption[];
   }
+  export interface SelectScheme extends LowCode.NodeSchema {
+    props: SelectSchemeProps;
+  }
+
+  export interface SelectSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n | I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 子元素集合 */
+    options: RadioGroupChildOption[];
+  }
+  export interface MultiSelectScheme extends LowCode.NodeSchema {
+    props: MultiSelectSchemeProps;
+  }
+
+  export interface MultiSelectSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n | I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+    /** 子元素集合 */
+    options: RadioGroupChildOption[];
+  }
   export interface CheckboxScheme extends LowCode.NodeSchema {
     props: CheckboxSchemeProps;
   }
@@ -302,6 +386,90 @@ export namespace PcSchema {
     props: DatePickerSchemeProps;
   }
 
+  export interface TimePickerSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n;
+    /** 默认值 */
+    defaultValue: I18n;
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 日期格式 */
+    format: string;
+    /** 绑定值的格式 */
+    valueFormat: string;
+    /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
+    showNow: boolean;
+    /** 使用 12 小时制，为 true 时 format 默认为 h:mm:ss a */
+    use12Hours: boolean;
+    /** 小时选项间隔 */
+    hourStep: number;
+    /** 分钟选项间隔 */
+    minuteStep: number;
+    /** 秒选项间隔 */
+    secondStep: number;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+  }
+  export interface TimePickerScheme extends LowCode.NodeSchema {
+    props: TimePickerSchemeProps;
+  }
+
+  export interface TimeRangePickerSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 占位提示 */
+    placeholder: I18n[];
+    /** 默认值 */
+    defaultValue: I18n | I18n[];
+    /** 尺寸 */
+    size: LowCode.Size;
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 是否显示清除按钮 */
+    allowClear: boolean;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 日期格式 */
+    format: string;
+    /** 绑定值的格式 */
+    valueFormat: string;
+    /** 当设定了 showTime 的时候，面板是否显示“此刻”按钮 */
+    showNow: boolean;
+    /** 使用 12 小时制，为 true 时 format 默认为 h:mm:ss a */
+    use12Hours: boolean;
+    /** 小时选项间隔 */
+    hourStep: number;
+    /** 分钟选项间隔 */
+    minuteStep: number;
+    /** 秒选项间隔 */
+    secondStep: number;
+    /** 自动获取焦点 */
+    autofocus: boolean;
+  }
+  export interface TimeRangePickerScheme extends LowCode.NodeSchema {
+    props: TimeRangePickerSchemeProps;
+  }
+
   export interface RangePickerSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;
@@ -310,7 +478,7 @@ export namespace PcSchema {
     /** 占位提示 */
     placeholder: I18n[];
     /** 默认值 */
-    defaultValue: I18n;
+    defaultValue: I18n | I18n[];
     /** 尺寸 */
     size: LowCode.Size;
     /** 状态 */
@@ -413,8 +581,6 @@ export namespace PcSchema {
     push: number;
     /** 栅格占位格数，为 0 时相当于 display: none */
     span: number | null;
-    /** ≥2000px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
-    xxxl: number | object | null;
     /** <576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
     xs: number | object | null;
     /** ≥576px 响应式栅格，可为栅格数或一个包含其他属性的对象 */
@@ -564,6 +730,24 @@ export namespace PcSchema {
 
   export interface VueSchemaProps extends LowCode.NodeSchemaProps {
     render: string;
+  }
+
+  export interface ProgressSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: ProgressSchemaProps;
+  }
+
+  export interface ProgressSchemaProps extends LowCode.NodeSchemaProps {
+    /** 大小，提供 large default 和 small 三种大小 */
+    size: LowCode.Size;
+    /** 形态 */
+    type: string;
+    /** 百分比 */
+    percent: number;
+    /** 状态，可选：success exception normal */
+    status: string;
+    /** 色彩阶段变化模式 */
+    progressive: boolean;
   }
 
   export interface ModalSchema extends LowCode.NodeSchema {

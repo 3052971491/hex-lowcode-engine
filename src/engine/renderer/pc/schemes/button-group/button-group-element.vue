@@ -75,6 +75,6 @@ export default defineComponent({
 <style lang="less" scoped>
 .button-group {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 </style>

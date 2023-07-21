@@ -53,6 +53,7 @@ watch(currentId, (val) => {
     height: 100%;
     .ant-tabs-tabpane {
       overflow: auto;
+      height: 100%;
       // padding: 0.5rem;
     }
   }

@@ -1,10 +1,10 @@
-import { onKeyStroke, useActiveElement, useMagicKeys, whenever } from '@vueuse/core';
+import { useActiveElement, useMagicKeys, whenever } from '@vueuse/core';
 import { logicAnd } from '@vueuse/math';
 import { HexCoreFactory } from '/@/engine/renderer/central/useHexCore';
 import { useLocale } from '/@/hooks/use-loacle';
 import { message } from 'ant-design-vue';
 import { copyElementSchema } from '/@/utils/draggable-api';
-import { computed, onUnmounted, watch } from 'vue';
+import { computed, onUnmounted } from 'vue';
 
 export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
   const keys = useMagicKeys();
@@ -18,8 +18,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "Delete"
    */
   function __Delete__() {
-    onKeyStroke(['Delete'], (e) => {
-      e.preventDefault();
+    whenever(logicAnd(keys.Delete, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       if (!selectedId) return;
       // 当组件节点面包屑长度 <= 1时，代表当前节点位于根节点
@@ -114,8 +113,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "↑"
    */
   function __SelectParentNode__(): void {
-    onKeyStroke(['ArrowUp'], (e) => {
-      e.preventDefault();
+    whenever(logicAnd(keys.ArrowUp, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       if (!selectedId) return;
       if (breadcrumbs.length === 1) {
@@ -132,8 +130,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "↓"
    */
   function __SelectChildrenNode__(): void {
-    onKeyStroke(['ArrowDown'], (e) => {
-      e.preventDefault();
+    whenever(logicAnd(keys.ArrowDown, notUsingInput), () => {
       const { selectedId, selectedScheme } = core.state.selectedData!;
       if (!selectedId) {
         const node = core.state.projectConfig?.componentsTree[0];
@@ -150,8 +147,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "→"
    */
   function __SelectSiblingNodeToRight__() {
-    onKeyStroke(['ArrowRight'], (e) => {
-      e.preventDefault();
+    whenever(logicAnd(keys.ArrowRight, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       const parentChildren =
         breadcrumbs.length === 1 ? core.state.projectConfig?.componentsTree : breadcrumbs[1].children;
@@ -170,8 +166,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
    * @description "←"
    */
   function __SelectSiblingNodeTolEFT__() {
-    onKeyStroke(['ArrowLeft'], (e) => {
-      e.preventDefault();
+    whenever(logicAnd(keys.ArrowLeft, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       const parentChildren =
         breadcrumbs.length === 1 ? core.state.projectConfig?.componentsTree : breadcrumbs[1].children;

@@ -6,6 +6,7 @@ import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
 
 export enum ComponentType {
   'Text' = 'Text',
+  'Image' = 'Image',
   'ButtonGroup' = 'ButtonGroup',
   'Button' = 'Button',
   'Divider' = 'Divider',
@@ -16,8 +17,12 @@ export enum ComponentType {
   'Switch' = 'Switch',
   'Radio' = 'Radio',
   'Checkbox' = 'Checkbox',
+  'Select' = 'Select',
+  'MultiSelect' = 'MultiSelect',
   'DatePicker' = 'DatePicker',
   'RangePicker' = 'RangePicker',
+  'TimePicker' = 'TimePicker',
+  'TimeRangePicker' = 'TimeRangePicker',
   'Rate' = 'Rate',
   'Row' = 'Row',
   'Column' = 'Column',
@@ -29,6 +34,7 @@ export enum ComponentType {
   'TabPane' = 'TabPane',
   'Form' = 'Form',
   'Vue' = 'Vue',
+  'Progress' = 'Progress',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -46,6 +52,36 @@ export class Text extends Scheme<PcSchema.TextSchema> {
       content: '文本',
       showTitle: false,
       maxLine: 0,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class Image extends Scheme<PcSchema.ImageSchema> {
+  props: PcSchema.ImageSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'BASIC';
+    this.componentName = '图片';
+    this.componentType = ComponentType.Image;
+    this.props = {
+      src: '',
+      width: 350,
+      autoWidth: false,
+      height: 200,
+      autoHeight: false,
+      fit: 'cover',
+      title: '',
+      alt: 'Image 404',
+      preview: true,
       className: '',
       __style__: '',
     };
@@ -543,6 +579,122 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
   }
 }
 
+export class Select extends Scheme<PcSchema.SelectScheme> {
+  props: PcSchema.SelectSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/select-cn';
+    this.componentName = '下拉选择';
+    this.componentType = ComponentType.Select;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请输入',
+      defaultValue: '',
+      size: 'default',
+      behavior: 'normal',
+      tips: '',
+      bordered: true,
+      allowClear: false,
+      autofocus: false,
+      rules: [],
+      options: [],
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    this.props.options = [
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+      { label: '选项三', value: '3' },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class MultiSelect extends Scheme<PcSchema.MultiSelectScheme> {
+  props: PcSchema.MultiSelectSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/select-cn';
+    this.componentName = '下拉多择';
+    this.componentType = ComponentType.MultiSelect;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请输入',
+      defaultValue: [],
+      size: 'default',
+      behavior: 'normal',
+      tips: '',
+      bordered: true,
+      allowClear: false,
+      autofocus: false,
+      rules: [],
+      options: [],
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    this.props.options = [
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+      { label: '选项三', value: '3' },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
   props: PcSchema.DatePickerSchemeProps;
 
@@ -627,6 +779,122 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
       disabledDate: '',
       picker: 'date',
       showTime: false,
+      autofocus: false,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
+  props: PcSchema.TimePickerSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
+    this.componentName = '时间';
+    this.componentType = ComponentType.TimePicker;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: '请选择',
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      allowClear: true,
+      bordered: true,
+      format: 'HH:mm:ss',
+      valueFormat: 'HH:mm:ss',
+      showNow: false,
+      use12Hours: false,
+      hourStep: 1,
+      minuteStep: 1,
+      secondStep: 1,
+      autofocus: false,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class TimeRangePicker extends Scheme<PcSchema.TimeRangePickerScheme> {
+  props: PcSchema.TimeRangePickerSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
+    this.componentName = '时间区间';
+    this.componentType = ComponentType.TimeRangePicker;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      placeholder: ['开始时间', '结束时间'],
+      defaultValue: null,
+      size: 'middle',
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      allowClear: true,
+      bordered: true,
+      format: 'HH:mm:ss',
+      valueFormat: 'HH:mm:ss',
+      showNow: false,
+      use12Hours: false,
+      hourStep: 1,
+      minuteStep: 1,
+      secondStep: 1,
       autofocus: false,
       className: '',
       __style__: '',
@@ -757,7 +1025,6 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
       pull: 0,
       push: 0,
       span: 12,
-      xxxl: null,
       xs: null,
       sm: null,
       md: null,
@@ -1042,6 +1309,35 @@ export class Vue extends Scheme<PcSchema.VueSchema> {
   }
 }
 
+export class Progress extends Scheme<PcSchema.ProgressSchema> {
+  props: PcSchema.ProgressSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = 'Progress';
+    this.componentType = ComponentType.Progress;
+    this.children = [];
+    this.formItemFlag = false;
+    this.props = {
+      size: 'default',
+      type: 'line',
+      percent: 0,
+      status: 'normal',
+      progressive: false,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
@@ -1111,6 +1407,7 @@ export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
 
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Text, new Text() as any],
+  [ComponentType.Image, new Image() as any],
   [ComponentType.ButtonGroup, new ButtonGroup() as any],
   [ComponentType.Button, new Button() as any],
   [ComponentType.Divider, new Divider() as any],
@@ -1121,8 +1418,12 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Switch, new Switch() as any],
   [ComponentType.Radio, new Radio() as any],
   [ComponentType.Checkbox, new Checkbox() as any],
+  [ComponentType.Select, new Select() as any],
+  [ComponentType.MultiSelect, new MultiSelect() as any],
   [ComponentType.DatePicker, new DatePicker() as any],
   [ComponentType.RangePicker, new RangePicker() as any],
+  [ComponentType.TimePicker, new TimePicker() as any],
+  [ComponentType.TimeRangePicker, new TimeRangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
@@ -1134,6 +1435,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
   [ComponentType.Vue, new Vue() as any],
+  [ComponentType.Progress, new Progress() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1141,6 +1443,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
 
 export default {
   Text,
+  Image,
   ButtonGroup,
   Button,
   Divider,
@@ -1151,8 +1454,12 @@ export default {
   Switch,
   Radio,
   Checkbox,
+  Select,
+  MultiSelect,
   DatePicker,
   RangePicker,
+  TimePicker,
+  TimeRangePicker,
   Rate,
   Row,
   Column,
@@ -1164,6 +1471,7 @@ export default {
   TabPane,
   Form,
   Vue,
+  Progress,
   Modal,
   ModalContent,
   ModalFooter,

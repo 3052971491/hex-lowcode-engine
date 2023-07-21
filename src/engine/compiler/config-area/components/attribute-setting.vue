@@ -5,7 +5,7 @@
       label-align="left"
       :label-wrap="true"
       :label-col="{
-        style: { width: '70px' },
+        style: { width: '86px' },
       }"
     >
       <!-- 基础 -->

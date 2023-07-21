@@ -114,14 +114,12 @@ const classMap = computed(() => {
 });
 
 const form = useForm({ schema: ectype.value, formRef: __instance__.value });
-if (!redactState) {
-  provide(DataEngineInjectionKey, {
-    id: props.schema.id,
-    model: '',
-    schema: props.schema,
-    originData: form.modelValue,
-  });
-}
+provide(DataEngineInjectionKey, {
+  id: props.schema.id,
+  model: '',
+  schema: props.schema,
+  originData: form.modelValue || {},
+});
 
 onMounted(() => {
   if (__instance__.value) {

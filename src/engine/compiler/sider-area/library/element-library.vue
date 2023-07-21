@@ -1,5 +1,5 @@
 <template>
-  <div class="element-library">
+  <div class="element-library flex flex-col overflow-hidden">
     <a-skeleton active :loading="loading">
       <a-input-search
         v-model:value="filterText"
@@ -8,29 +8,33 @@
         class="mb-2"
         @search="onSearch"
       />
-      <div v-for="(menu, i) in elementList" :key="i" class="w-full mb-6">
-        <div class="text-lg font-bold mb-2">{{ t(menu.key) }}</div>
-        <template v-if="menu.list.length > 0">
-          <hex-draggable
-            v-model:value="menu.list"
-            pull="clone"
-            :put="false"
-            :sort="false"
-            ghost-class=""
-            :clone="onClone"
-          >
-            <template #item="{ element }">
-              <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
-                <div class="item" :class="menuTheme(menu.label)">{{ t(`el.component.${element.componentType}`) }}</div>
-              </div>
-            </template>
-          </hex-draggable>
-        </template>
-        <template v-else>
-          <div class="w-full p-3">
-            <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
-          </div>
-        </template>
+      <div class="flex-1 overflow-y-auto overflow-x-hidden">
+        <div v-for="(menu, i) in elementList" :key="i" class="w-full mb-6">
+          <div class="text-lg font-bold mb-2">{{ t(menu.key) }}</div>
+          <template v-if="menu.list.length > 0">
+            <hex-draggable
+              v-model:value="menu.list"
+              pull="clone"
+              :put="false"
+              :sort="false"
+              ghost-class=""
+              :clone="onClone"
+            >
+              <template #item="{ element }">
+                <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
+                  <div class="item" :class="menuTheme(menu.label)">
+                    {{ t(`el.component.${element.componentType}`) }}
+                  </div>
+                </div>
+              </template>
+            </hex-draggable>
+          </template>
+          <template v-else>
+            <div class="w-full p-3">
+              <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
+            </div>
+          </template>
+        </div>
       </div>
       <template v-if="elementList.length < 1">
         <div class="w-full p-3">
@@ -197,7 +201,7 @@ const aaa = ref('');
     padding: 0px 10px;
     height: 36px;
     border: 1px solid #f1faff;
-    border-radius: 2px;
+    border-radius: 6px;
     color: #314666;
     background-color: rgba(9, 96, 189, 0.1);
     transition: background-color 0.2s ease;
@@ -215,7 +219,7 @@ const aaa = ref('');
   .form-theme {
     background-color: rgba(0, 102, 255, 0.08);
     &:hover {
-      background-color: rgba(0, 102, 255, 0.08);
+      background-color: rgba(0, 102, 255, 0.125);
     }
   }
 
@@ -238,7 +242,7 @@ const aaa = ref('');
 
 .hex-draggable {
   :deep(.draggable-item) {
-    width: 100%;
+    width: auto;
 
     &:nth-child(2n) {
       margin-left: 4px;
