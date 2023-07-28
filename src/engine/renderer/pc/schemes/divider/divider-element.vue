@@ -30,7 +30,7 @@ const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.DividerSchema>(props, __instance__);
 
 const prop = computed(() =>
-  ectypeProps((obj) => {
+  ectypeProps((obj: PcSchema.DividerSchemaProps) => {
     return {
       type: obj.type,
       dashed: obj.dashed,
