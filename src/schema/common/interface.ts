@@ -1,6 +1,8 @@
 import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
+import { BasicColumn } from '/@/components/hex-table';
+import { TableRowSelection } from 'ant-design-vue/es/table/interface';
 
 export namespace PcSchema {
   export interface TextSchema extends LowCode.NodeSchema {
@@ -748,6 +750,27 @@ export namespace PcSchema {
     status: string;
     /** 色彩阶段变化模式 */
     progressive: boolean;
+  }
+
+  export interface TableSchema extends LowCode.NodeSchema {
+    props: TableSchemaProps;
+  }
+
+  export interface TableSchemaProps extends LowCode.NodeSchemaProps {
+    /** 表格标题 */
+    title: string;
+    /** 请求接口对象 */
+    api: string;
+    /** 唯一行标识 */
+    rowKey: string;
+    /** 是否显示表格边框 */
+    bordered: boolean;
+    /** 列配置 */
+    columns: BasicColumn[];
+    /** 操作栏配置 */
+    actionColumn: BasicColumn;
+    /** 行选择配置 */
+    rowSelection: TableRowSelection;
   }
 
   export interface ModalSchema extends LowCode.NodeSchema {

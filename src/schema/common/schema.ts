@@ -35,6 +35,7 @@ export enum ComponentType {
   'Form' = 'Form',
   'Vue' = 'Vue',
   'Progress' = 'Progress',
+  'Table' = 'Table',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -1338,6 +1339,45 @@ export class Progress extends Scheme<PcSchema.ProgressSchema> {
   }
 }
 
+export class Table extends Scheme<PcSchema.TableSchema> {
+  props: PcSchema.TableSchemaProps;
+
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = 'Table';
+    this.componentType = ComponentType.Table;
+    this.children = [];
+    this.formItemFlag = false;
+    this.props = {
+      title: '',
+      api: '',
+      rowKey: 'id',
+      bordered: true,
+      columns: [],
+      actionColumn: {
+        width: 160,
+        title: '操作栏',
+        fixed: 'right',
+        align: 'center',
+        dataIndex: 'action',
+      },
+      rowSelection: {
+        type: 'checkbox',
+      },
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
@@ -1436,6 +1476,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Form, new Form() as any],
   [ComponentType.Vue, new Vue() as any],
   [ComponentType.Progress, new Progress() as any],
+  [ComponentType.Table, new Table() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1472,6 +1513,7 @@ export default {
   Form,
   Vue,
   Progress,
+  Table,
   Modal,
   ModalContent,
   ModalFooter,

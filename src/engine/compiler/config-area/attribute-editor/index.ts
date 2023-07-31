@@ -399,6 +399,11 @@ const PROGRESS_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Progress', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const TABLE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Table', name: 'title', label: '表格标题', editor: 'input-editor', i18n: true },
+  { type: 'Table', name: 'api', label: '请求接口对象', editor: 'api-editor', merge: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
@@ -447,6 +452,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Form: FROM_ATTRIBUTE,
   Vue: VUE_ATTRIBUTE,
   Progress: PROGRESS_ATTRIBUTE,
+  Table: TABLE_ATTRIBUTE,
 };
 
 export default obj;

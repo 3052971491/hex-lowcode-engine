@@ -79,6 +79,7 @@ export default {
       Form: 'Form',
       Vue: 'Vue',
       Progress: 'Progress',
+      Table: 'Table',
       Modal: 'Modal',
       ModalContent: 'Modal Content',
       ModalFooter: 'Modal Footer',
@@ -233,6 +234,9 @@ export default {
         percent: 'Percent',
         status: 'Status',
         progressive: 'Color phase change mode',
+      },
+      Table: {
+        api: 'API',
       },
     },
     tips: {

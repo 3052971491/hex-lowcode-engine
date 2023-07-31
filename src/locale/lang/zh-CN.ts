@@ -79,6 +79,7 @@ export default {
       Form: '表单',
       Vue: 'Vue',
       Progress: '进度条',
+      Table: '表格',
       Modal: '模态框',
       ModalContent: '模态框-内容区',
       ModalFooter: '模态框-操作区',
@@ -233,6 +234,9 @@ export default {
         percent: '百分比',
         status: '状态',
         progressive: '色彩阶段变化模式',
+      },
+      Table: {
+        api: '接口',
       },
     },
     tips: {
