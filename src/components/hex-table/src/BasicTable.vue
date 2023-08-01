@@ -4,7 +4,9 @@
       <div ref="table" class="basic-table">
         <div class="basic-table-container">
           <div class="basic-table-header">
-            <div v-if="getProps.title" class="title">{{ getProps.title }}</div>
+            <div class="title">
+              <span>{{ getProps.title || '' }}</span>
+            </div>
             <template v-if="getProps.showTableSetting">
               <TableSettings :setting="getProps.tableSetting"></TableSettings>
             </template>
