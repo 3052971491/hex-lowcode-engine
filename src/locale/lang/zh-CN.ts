@@ -236,7 +236,10 @@ export default {
         progressive: '色彩阶段变化模式',
       },
       Table: {
+        title: '表格标题',
         api: '接口',
+        rowKey: '表格行 key',
+        columns: '列配置',
       },
     },
     tips: {
@@ -369,5 +372,6 @@ export default {
     },
     moreSetting: '更多设置',
     watermarkSetting: '水印设置',
+    addAnField: '添加字段',
   },
 };

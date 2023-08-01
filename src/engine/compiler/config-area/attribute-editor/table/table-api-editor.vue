@@ -1,6 +1,8 @@
 <template>
   <form-Item-wrapper :label="t('el.property.Table.api')" :name="props.attribute" :option="option">
-    <a-select v-model:value="modelValue"> </a-select>
+    <a-select v-model:value="modelValue" allow-clear>
+      <a-select-option v-for="item in options" :key="item.id" :value="item.id">{{ item.name }}</a-select-option>
+    </a-select>
   </form-Item-wrapper>
 </template>
 <script lang="ts" setup name="TableApiEditor">
@@ -33,5 +35,9 @@ const modelValue = computed({
   get() {
     return get(props.attribute, schema.value);
   },
+});
+
+const options = computed(() => {
+  return core?.state.projectConfig?.dataSource?.list.filter((item) => item.protocal === 'REMOTE') ?? [];
 });
 </script>

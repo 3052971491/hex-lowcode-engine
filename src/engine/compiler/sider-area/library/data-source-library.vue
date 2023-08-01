@@ -532,7 +532,7 @@ const onSave = () => {
   display: flex;
   align-items: stretch;
   margin-bottom: 8px;
-  padding: 4px 0;
+  padding: 8px 0;
   border: 1px solid rgba(31, 56, 88, 0.2);
   border-radius: 3px;
   color: #00000073;

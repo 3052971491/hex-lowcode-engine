@@ -1,6 +1,9 @@
 <template>
   <a-collapse v-model:activeKey="activeKey" :bordered="false" expand-icon-position="right">
     <a-collapse-panel key="1" :header="label" :show-arrow="props.showArrow" :collapsible="props.collapsible">
+      <template #extra>
+        <slot name="extra"></slot>
+      </template>
       <slot></slot>
     </a-collapse-panel>
   </a-collapse>

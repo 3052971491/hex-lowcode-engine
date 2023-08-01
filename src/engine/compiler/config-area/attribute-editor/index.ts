@@ -402,6 +402,9 @@ const PROGRESS_ATTRIBUTE: Array<AttributeItem> = [
 const TABLE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Table', name: 'title', label: '表格标题', editor: 'input-editor', i18n: true },
   { type: 'Table', name: 'api', label: '请求接口对象', editor: 'api-editor', merge: true },
+  { type: 'Table', name: 'rowKey', label: '表格行 key', editor: 'input-editor' },
+  { type: 'Table', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Table', name: 'columns', label: '列配置', editor: 'columns-editor', merge: true },
 ];
 
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [

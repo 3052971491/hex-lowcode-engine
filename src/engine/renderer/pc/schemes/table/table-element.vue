@@ -41,33 +41,54 @@
 
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema';
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, unref, watch } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
 
 import { isBoolean } from '/@/utils/is';
-import { HexTable, TableAction } from '/@/components/hex-table';
+import { BasicTableProps, HexTable, TableAction } from '/@/components/hex-table';
 import useTable from '/@/components/hex-table/src/hooks/useTable';
 
 interface Props {
-  schema: PcSchema.ProgressSchema;
+  schema: PcSchema.TableSchema;
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
 }
 const props = withDefaults(defineProps<Props>(), {});
 const __instance__ = ref<any>();
-const { ectype, ectypeProps } = useElement<PcSchema.ProgressSchema>(props, __instance__);
+const { ectype, ectypeProps } = useElement<PcSchema.TableSchema>(props, __instance__);
 
-const prop = computed(() =>
-  ectypeProps((obj: PcSchema.ProgressSchemaProps) => {
-    return {};
-  }),
+const prop = computed(
+  () =>
+    ectypeProps((obj: PcSchema.TableSchemaProps) => {
+      return {
+        title: obj.title,
+        api: obj.api,
+        rowKey: obj.rowKey,
+        bordered: obj.bordered,
+      };
+    }) as PcSchema.TableSchemaProps,
 );
 
+// 此处监听属性变化, 并比较第一层差异进行赋值
+watch(prop, (newVal, oldVal) => {
+  const result: any = {};
+  for (const newKey in newVal) {
+    if (Object.prototype.hasOwnProperty.call(newVal, newKey)) {
+      const element = newVal[newKey];
+      if (element !== oldVal[newKey]) {
+        result[newKey] = element;
+      }
+    }
+  }
+  console.log(result);
+  methods.setProps(result as unknown as Partial<BasicTableProps>);
+});
+
 const [register, methods] = useTable({
-  title: '用户列表',
+  title: unref(prop).title,
   api: (params) => {
     const arr = [];
     const total = 100;

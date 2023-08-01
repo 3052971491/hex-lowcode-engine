@@ -1378,6 +1378,34 @@ export class Table extends Scheme<PcSchema.TableSchema> {
   }
 }
 
+export class BasicColumnDto {
+  title: string = '';
+
+  dataIndex: string = '';
+
+  fixed: boolean = false;
+
+  width: number = 195;
+
+  align: string = 'center';
+
+  ellipsis: boolean = true;
+
+  constructor(_data?: any) {
+    if (_data) {
+      for (const property in _data) {
+        if (Object.prototype.hasOwnProperty.call(_data, property)) {
+          (<any>this)[property] = (<any>_data)[property];
+        }
+      }
+    } else {
+      const field = `Field_${buildUUID()}`;
+      this.title = field;
+      this.dataIndex = field;
+    }
+  }
+}
+
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 

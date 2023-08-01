@@ -91,6 +91,7 @@ export interface BasicColumn extends TableColumnType {
    * 业务控制是否显示
    */
   ifShow?: boolean | ((column: BasicColumn) => boolean);
+  [key: string]: any;
 }
 
 export interface GetColumnsParams {

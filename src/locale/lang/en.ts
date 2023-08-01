@@ -236,7 +236,10 @@ export default {
         progressive: 'Color phase change mode',
       },
       Table: {
+        title: 'Title',
         api: 'API',
+        rowKey: 'rowKey',
+        columns: 'Columns',
       },
     },
     tips: {
@@ -370,5 +373,6 @@ export default {
     },
     moreSetting: 'More Settings',
     watermarkSetting: 'Watermark setting',
+    addAnField: 'Add field',
   },
 };

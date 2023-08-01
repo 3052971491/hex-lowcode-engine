@@ -771,6 +771,7 @@ export namespace PcSchema {
     actionColumn: BasicColumn;
     /** 行选择配置 */
     rowSelection: TableRowSelection;
+    [key: string]: any;
   }
 
   export interface ModalSchema extends LowCode.NodeSchema {
