@@ -176,8 +176,15 @@ export class Context {
     });
   }
 
-  http(name: string, params: Record<string, unknown> = {}): Promise<any> {
-    const index = this.dataSourceMap.findIndex((item) => item.name === name);
+  /**
+   * 加载数据源
+   * @param name Api过滤标识
+   * @param params 请求参数
+   * @param idProperty 属性名: 获取Api过滤标识
+   * @returns
+   */
+  http(name: string, params: Record<string, unknown> = {}, idProperty: any = 'name'): Promise<any> {
+    const index = this.dataSourceMap.findIndex((item) => item[idProperty] === name);
     if (index !== -1) {
       return load(this.dataSourceMap[index], this.root(), params, this);
     }
