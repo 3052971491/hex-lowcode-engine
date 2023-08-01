@@ -240,6 +240,9 @@ export default {
         api: 'API',
         rowKey: 'rowKey',
         columns: 'Columns',
+        isOpenRowSelection: 'Enable row selection',
+        rowSelection: 'Row Selection',
+        checkboxOrRadio: 'Checkbox/Radio',
       },
     },
     tips: {

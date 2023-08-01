@@ -265,7 +265,7 @@ export interface BasicTableProps {
   // rowClassName?: (record: TableCustomRecord<T>, index: number) => string;
 
   /** 行选择配置 */
-  rowSelection?: TableRowSelection;
+  rowSelection?: TableRowSelection | null;
 
   /**
    * Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area.

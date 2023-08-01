@@ -117,7 +117,6 @@ const getBindValues = computed(() => {
     loading: unref(getLoading),
     columns: toRaw(unref(getViewColumns)),
     pagination: toRaw(unref(getPaginationInfo)),
-    rowSelection: unref(getRowSelectionRef),
     dataSource,
     rowKey: unref(getRowKey),
     scroll: {
@@ -129,8 +128,9 @@ const getBindValues = computed(() => {
 });
 
 const getBindRowSelectionValues = computed(() => {
+  if (!unref(getRowSelectionRef)) return null;
   return {
-    selectedRowKeys: unref(getSelectRowKeys()),
+    ...unref(getRowSelectionRef),
     onChange: handleTableRowClick,
   };
 });

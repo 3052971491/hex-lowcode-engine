@@ -413,6 +413,7 @@ const TABLE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Table', name: 'rowKey', label: '表格行 key', editor: 'input-editor' },
   { type: 'Table', name: 'bordered', label: '边框', editor: 'switch-editor' },
   { type: 'Table', name: 'columns', label: '列配置', editor: 'columns-editor', merge: true },
+  { type: 'Table', name: 'rowSelection', label: '选择功能配置', editor: 'row-selection-editor', merge: true },
   { type: 'Table', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 

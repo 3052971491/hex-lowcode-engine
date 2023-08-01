@@ -72,6 +72,7 @@ export default function useRowSelection(
     }
 
     return {
+      ...rowSelection,
       selectedRowKeys: unref(selectedRowKeysRef),
     };
   });

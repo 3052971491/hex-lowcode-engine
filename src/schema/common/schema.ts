@@ -1363,9 +1363,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
         align: 'center',
         dataIndex: 'action',
       },
-      rowSelection: {
-        type: 'checkbox',
-      },
+      rowSelection: null,
       className: '',
       __style__: '',
     };

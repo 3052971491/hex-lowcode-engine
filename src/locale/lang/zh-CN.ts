@@ -240,6 +240,9 @@ export default {
         api: '接口',
         rowKey: '表格行 key',
         columns: '列配置',
+        isOpenRowSelection: '启用选择功能配置',
+        rowSelection: '选择功能配置',
+        checkboxOrRadio: '多选/单选',
       },
     },
     tips: {

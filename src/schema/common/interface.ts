@@ -770,7 +770,7 @@ export namespace PcSchema {
     /** 操作栏配置 */
     actionColumn: BasicColumn;
     /** 行选择配置 */
-    rowSelection: TableRowSelection;
+    rowSelection: TableRowSelection | null;
     [key: string]: any;
   }
 
