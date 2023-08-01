@@ -6,76 +6,81 @@
       </div>
     </template>
     <div class="transition-container">
-      <Transition name="slide-up">
-        <div v-if="!isColumnEditMode" style="width: 100%; height: 100%">
-          <hex-draggable v-model:value="modelValue" :put="false" :sort="true" :pull="false" ghost-class="">
-            <template #item="{ element, index }">
-              <div class="listitem">
-                <div class="listitem-content">
-                  <holder-outlined class="hex-draggable-handle move" />
-                  <a-radio-group disabled class="info" @click="handleEnableColumnEditClick(element)">
-                    <a-radio :value="element.value">{{ element.title }} : {{ element.dataIndex }} </a-radio>
-                  </a-radio-group>
-                </div>
-                <div>
-                  <EditOutlined class="icon" @click="handleEnableColumnEditClick(element)"></EditOutlined>
-                  <delete-outlined class="icon" @click="handleDeleteClick(element, index)" />
-                </div>
-              </div>
-            </template>
-          </hex-draggable>
-          <a-button block type="primary" @click="handleAddOptionClick">{{ t('el.addAnField') }}</a-button>
-        </div>
-        <a-form
-          v-else
-          style="width: 100%; height: 100%"
-          layout="horizontal"
-          label-align="left"
-          :label-wrap="true"
-          :label-col="{
-            style: { width: '86px' },
-          }"
-          :model="columnEditInfo"
+      <div v-if="!isColumnEditMode" style="width: 100%; height: 100%">
+        <hex-draggable
+          v-model:value="modelValue"
+          :put="false"
+          :sort="true"
+          :pull="false"
+          ghost-class=""
+          style="overflow: auto; max-height: 400px"
         >
-          <template v-if="columnEditInfo">
-            <!-- 列编辑 -->
-            <!-- 标题 -->
-            <a-form-item label="标题" name="title">
-              <a-input v-model:value="columnEditInfo.title"></a-input>
-            </a-form-item>
-            <!-- 字段名 -->
-            <a-form-item label="字段名" name="dataIndex">
-              <a-input v-model:value="columnEditInfo.dataIndex"></a-input>
-            </a-form-item>
-            <!-- 列是否固定 -->
-            <a-form-item label="是否固定列" name="fixed">
-              <a-radio-group v-model:value="columnEditInfo.fixed">
-                <a-radio-button value="left">left</a-radio-button>
-                <a-radio-button value="right">right</a-radio-button>
-                <a-radio-button :value="false">none</a-radio-button>
-              </a-radio-group>
-            </a-form-item>
-            <!-- 列宽度 -->
-            <a-form-item label="字段宽度" name="width">
-              <a-radio-group v-model:value="columnEditInfo.width">
-                <a-radio-button :value="103">微</a-radio-button>
-                <a-radio-button :value="135">小</a-radio-button>
-                <a-radio-button :value="195">中</a-radio-button>
-                <a-radio-button :value="375">大</a-radio-button>
-                <a-radio-button :value="730">超大</a-radio-button>
-              </a-radio-group>
-              <a-form-item-rest>
-                <a-input-number v-model:value="columnEditInfo.width" class="mt-2" addon-after="Px"></a-input-number>
-              </a-form-item-rest>
-            </a-form-item>
-            <!-- 超过宽度将自动省略 -->
-            <a-form-item label="超过宽度将自动省略" name="ellipsis">
-              <a-switch v-model:checked="columnEditInfo.ellipsis"></a-switch>
-            </a-form-item>
+          <template #item="{ element, index }">
+            <div class="listitem">
+              <div class="listitem-content">
+                <holder-outlined class="hex-draggable-handle move" />
+                <a-radio-group disabled class="info" @click="handleEnableColumnEditClick(element)">
+                  <a-radio :value="element.value">{{ element.title }} : {{ element.dataIndex }} </a-radio>
+                </a-radio-group>
+              </div>
+              <div>
+                <EditOutlined class="icon" @click="handleEnableColumnEditClick(element)"></EditOutlined>
+                <delete-outlined class="icon" @click="handleDeleteClick(element, index)" />
+              </div>
+            </div>
           </template>
-          <a-button block type="primary" @click="handleSaveColumnEditInfoClick">{{ t('el.control.save') }}</a-button>
-        </a-form>
-      </Transition>
+        </hex-draggable>
+        <a-button block type="primary" @click="handleAddOptionClick">{{ t('el.addAnField') }}</a-button>
+      </div>
+      <a-form
+        v-else
+        style="width: 100%; height: 100%"
+        layout="horizontal"
+        label-align="left"
+        :label-wrap="true"
+        :label-col="{
+          style: { width: '86px' },
+        }"
+        :model="columnEditInfo"
+      >
+        <template v-if="columnEditInfo">
+          <!-- 列编辑 -->
+          <!-- 标题 -->
+          <a-form-item label="标题" name="title">
+            <a-input v-model:value="columnEditInfo.title"></a-input>
+          </a-form-item>
+          <!-- 字段名 -->
+          <a-form-item label="字段名" name="dataIndex">
+            <a-input v-model:value="columnEditInfo.dataIndex"></a-input>
+          </a-form-item>
+          <!-- 列是否固定 -->
+          <a-form-item label="是否固定列" name="fixed">
+            <a-radio-group v-model:value="columnEditInfo.fixed">
+              <a-radio-button value="left">left</a-radio-button>
+              <a-radio-button value="right">right</a-radio-button>
+              <a-radio-button :value="false">none</a-radio-button>
+            </a-radio-group>
+          </a-form-item>
+          <!-- 列宽度 -->
+          <a-form-item label="字段宽度" name="width">
+            <a-radio-group v-model:value="columnEditInfo.width">
+              <a-radio-button :value="103">微</a-radio-button>
+              <a-radio-button :value="135">小</a-radio-button>
+              <a-radio-button :value="195">中</a-radio-button>
+              <a-radio-button :value="375">大</a-radio-button>
+              <a-radio-button :value="730">超大</a-radio-button>
+            </a-radio-group>
+            <a-form-item-rest>
+              <a-input-number v-model:value="columnEditInfo.width" class="mt-2" addon-after="Px"></a-input-number>
+            </a-form-item-rest>
+          </a-form-item>
+          <!-- 超过宽度将自动省略 -->
+          <a-form-item label="超过宽度将自动省略" name="ellipsis">
+            <a-switch v-model:checked="columnEditInfo.ellipsis"></a-switch>
+          </a-form-item>
+        </template>
+        <a-button block type="primary" @click="handleSaveColumnEditInfoClick">{{ t('el.control.save') }}</a-button>
+      </a-form>
     </div>
   </collapse-Item-wrapper>
 </template>
@@ -201,31 +206,6 @@ const handleSaveColumnEditInfoClick = () => {
   .hex-draggable-handle {
     display: flex;
     align-items: center;
-  }
-}
-
-.transition-container {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  width: 100%;
-
-  .slide-up-enter-active,
-  .slide-up-leave-active {
-    width: 100%;
-    transition: all 0.25s ease-out;
-  }
-
-  .slide-up-enter-from {
-    width: 100%;
-    opacity: 0;
-    transform: translateX(400px);
-  }
-
-  .slide-up-leave-to {
-    width: 100%;
-    opacity: 0;
-    transform: translateX(-400px);
   }
 }
 </style>
