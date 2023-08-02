@@ -30,7 +30,16 @@
             </div>
           </template>
         </hex-draggable>
-        <a-button block type="primary" @click="handleAddOptionClick">{{ t('el.addAnField') }}</a-button>
+
+        <a-dropdown>
+          <template #overlay>
+            <a-menu @click="handleMenuClick">
+              <a-menu-item key="field">{{ t('el.field') }}</a-menu-item>
+              <a-menu-item key="action">{{ t('el.property.Table.actionColumn') }}</a-menu-item>
+            </a-menu>
+          </template>
+          <a-button block type="primary">{{ t('el.addAnField') }}</a-button>
+        </a-dropdown>
       </div>
       <a-form
         v-else
@@ -85,17 +94,14 @@
   </collapse-Item-wrapper>
 </template>
 <script lang="ts" setup name="TableColumnsEditor">
-import { inject, computed, unref, ref } from 'vue';
+import { inject, computed, ref } from 'vue';
 import { HolderOutlined, DeleteOutlined, EditOutlined, RollbackOutlined } from '@ant-design/icons-vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
-import { cloneDeep } from 'lodash-es';
+import { MenuProps } from 'ant-design-vue/es/menu';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
-import { set } from '/@/utils/schema';
-import { LowCode } from '/@/types/schema';
-import { buildElementSchemaByType } from '/@/utils/draggable-api';
 import { useLocale } from '/@/hooks/use-loacle';
 import { BasicColumn } from '/@/components/hex-table';
 import { BasicColumnDto } from '/@/schema/common/schema';
@@ -127,16 +133,22 @@ const modelValue = computed<BasicColumn[]>({
   },
 });
 
-const handleAddOptionClick = () => {
-  const element = new BasicColumnDto() as BasicColumn;
-  modelValue.value.push(element);
-  core?.handleUpdateHistoryData();
+const handleMenuClick: MenuProps['onClick'] = (e) => {
+  if (e.key === 'action') {
+    // 操作栏
+    const element = new BasicColumnDto({ title: '操作栏', fixed: 'right', dataIndex: e.key }) as BasicColumn;
+    modelValue.value.push(element);
+    core?.handleUpdateHistoryData();
+  } else if (e.key === 'field') {
+    // 普通字段
+    const element = new BasicColumnDto() as BasicColumn;
+    modelValue.value.push(element);
+    core?.handleUpdateHistoryData();
+  }
 };
 
 const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
-  if (modelValue.value) {
-    modelValue.value.splice(index, 1);
-  }
+  modelValue.value.splice(index, 1);
 };
 
 /** 是否列编辑模式 */

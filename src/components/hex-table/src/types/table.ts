@@ -155,7 +155,7 @@ export interface BasicTableProps {
   // 序号列配置
   // indexColumnProps?: BasicColumn;
   /** 操作列配置 */
-  actionColumn?: BasicColumn;
+  actionColumn?: BasicColumn | null;
   // 文本超过宽度是否显示。。。
   // ellipsis?: boolean;
   // 是否可以自适应高度

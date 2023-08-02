@@ -7,30 +7,32 @@
   >
     <HexTable @register="register">
       <template #bodyCell="{ column, record, index }">
-        <template v-if="column.dataIndex === 'action'">
-          <TableAction
-            :actions="[
-              {
-                label: '编辑',
-                onClick: () => handleEdit(record),
-              },
-              {
-                label: '删除',
-                onClick: () => handleDelete(record),
-              },
-            ]"
-          />
-        </template>
-        <template v-else-if="column.dataIndex === 'no'">
-          <template v-if="isBoolean(methods.getPaginationRef())">
-            {{ index + 1 }}
+        <template v-if="column">
+          <template v-if="column.dataIndex === 'action'">
+            <TableAction
+              :actions="[
+                {
+                  label: '编辑',
+                  onClick: () => handleEdit(record),
+                },
+                {
+                  label: '删除',
+                  onClick: () => handleDelete(record),
+                },
+              ]"
+            />
           </template>
-          <template v-else>
-            {{
-              ((methods.getPaginationRef() as any).current - 1) * (methods.getPaginationRef() as any).pageSize +
-              index +
-              1
-            }}
+          <template v-else-if="column.dataIndex === 'no'">
+            <template v-if="isBoolean(methods.getPaginationRef())">
+              {{ index + 1 }}
+            </template>
+            <template v-else>
+              {{
+                ((methods.getPaginationRef() as any).current - 1) * (methods.getPaginationRef() as any).pageSize +
+                index +
+                1
+              }}
+            </template>
           </template>
         </template>
       </template>
@@ -117,13 +119,6 @@ const [register, methods] = useTable({
   rowKey: unref(prop).rowKey,
   bordered: unref(prop).bordered,
   columns: unref(prop).columns,
-  actionColumn: {
-    width: 160,
-    title: '操作栏',
-    fixed: 'right',
-    align: 'center',
-    dataIndex: 'action',
-  },
   rowSelection: unref(prop).rowSelection,
 });
 const handleDelete = ({ record }: any) => {

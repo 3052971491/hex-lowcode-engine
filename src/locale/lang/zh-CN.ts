@@ -243,6 +243,7 @@ export default {
         isOpenRowSelection: '启用选择功能配置',
         rowSelection: '选择功能配置',
         checkboxOrRadio: '多选/单选',
+        actionColumn: '操作列',
       },
     },
     tips: {
@@ -376,5 +377,6 @@ export default {
     moreSetting: '更多设置',
     watermarkSetting: '水印设置',
     addAnField: '添加字段',
+    field: '字段',
   },
 };

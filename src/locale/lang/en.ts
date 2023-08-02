@@ -243,6 +243,7 @@ export default {
         isOpenRowSelection: 'Enable row selection',
         rowSelection: 'Row Selection',
         checkboxOrRadio: 'Checkbox/Radio',
+        actionColumn: 'Action column',
       },
     },
     tips: {
@@ -377,5 +378,6 @@ export default {
     moreSetting: 'More Settings',
     watermarkSetting: 'Watermark setting',
     addAnField: 'Add field',
+    field: 'Field',
   },
 };
