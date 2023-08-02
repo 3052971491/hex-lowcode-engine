@@ -86,25 +86,8 @@ watch(
 const [register, methods] = useTable({
   title: unref(prop).title,
   api: (params = {}) => {
-    console.log(params);
-
-    const arr = [];
-    const total = 100;
-    for (let index = 0; index < total; index++) {
-      arr.push({
-        id: `${index}`,
-        userName: '好想看樱花',
-        name: '俊杰',
-        surname: '袁',
-        emailAddress: '3052971491@qq.com',
-      });
-    }
-    return Promise.resolve({
-      content: arr,
-      totalPages: total,
-    });
-    // if (!core?.state.__this__) return Promise.reject(new Error(`内部错误: 未检测到全局上下文`));
-    // return core?.state.__this__?.http(unref(prop).api, params, 'id');
+    if (!core?.state.__this__) return Promise.reject(new Error(`内部错误: 未检测到全局上下文`));
+    return core?.state.__this__?.http(unref(prop).api, params, 'id');
   },
   rowKey: unref(prop).rowKey,
   bordered: unref(prop).bordered,
