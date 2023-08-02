@@ -1,6 +1,6 @@
 <template>
   <form-Item-wrapper :label="t('el.property.Table.api')" :name="props.attribute" :option="option">
-    <a-select v-model:value="modelValue" allow-clear>
+    <a-select v-model:value="modelValue" allow-clear :placeholder="t('el.placeholder.select')">
       <a-select-option v-for="item in options" :key="item.id" :value="item.id">{{ item.name }}</a-select-option>
     </a-select>
   </form-Item-wrapper>
@@ -33,7 +33,7 @@ const modelValue = computed({
     set(props.attribute, val, schema.value, core?.state.projectConfig);
   },
   get() {
-    return get(props.attribute, schema.value);
+    return get(props.attribute, schema.value) || null;
   },
 });
 
