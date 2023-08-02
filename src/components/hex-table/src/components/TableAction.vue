@@ -45,10 +45,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, toRaw, unref } from 'vue';
+import { Ref, computed, ref, toRaw, unref } from 'vue';
 // eslint-disable-next-line import/no-cycle
 import { ActionItem, TableActionType } from '/@/components/hex-table';
 import { isBoolean, isFunction } from '/@/utils/is';
+import { cloneDeep, isArray } from 'lodash-es';
 import { ACTION_COLUMN_FLAG } from '../../const';
 
 interface Prop {
@@ -66,6 +67,8 @@ const props = withDefaults(defineProps<Prop>(), {
   stopButtonPropagation: false,
 });
 const table: Partial<TableActionType> = {};
+
+const actionsRef = ref(unref(props).actions) as unknown as Ref<ActionItem[]>;
 
 /** 是否显示 */
 function isIfShow(action: ActionItem): boolean {
@@ -86,13 +89,14 @@ const hasPermission = computed(() => {
   return true;
 });
 const getActions = computed(() => {
-  return (toRaw(props.actions) || [])
+  return (actionsRef.value || [])
     .filter((action) => {
       return hasPermission.value && isIfShow(action);
     })
     .map((action) => {
       const { popConfirm } = action;
       return {
+        onClick: () => {},
         getPopupContainer: () => unref((table as any)?.wrapRef.value) ?? document.body,
         type: 'text',
         size: 'small',
@@ -146,6 +150,19 @@ function onCellClick(e: MouseEvent) {
     e.stopPropagation();
   }
 }
+
+function setActions(actions: ActionItem[]) {
+  const columns = cloneDeep(actions);
+  if (!isArray(columns)) return;
+
+  if (columns.length <= 0) {
+    actionsRef.value = [];
+  }
+
+  actionsRef.value = columns;
+}
+
+defineExpose({ setActions });
 </script>
 
 <style lang="less">

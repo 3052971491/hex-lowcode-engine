@@ -128,21 +128,49 @@ import HexMonacoEditor from '/@/components/hex-monaco-editor/index.vue';
 import { Theme, Lang } from '/@/components/hex-monaco-editor/useMonacoEditor';
 import { StringParsedToFunction } from '/@/utils/func';
 import { useLocale } from '/@/hooks/use-loacle';
+import { useConst } from './const';
 
 const { t } = useLocale();
 interface Props {
   label: string;
   attribute: string;
   option: AttributeItem;
+  /**
+   * 是否使用内置变量
+   * @description 为true时默认使用选中节点Schema;为false时使用外部变量(需提供value)
+   */
+  builtIn?: boolean;
+  /**
+   * 外部变量
+   * @description builtIn为false时使用
+   */
+  value?: any;
 }
 const props = withDefaults(defineProps<Props>(), {
   label: '',
   attribute: '',
+  builtIn: true,
+  value: {},
 });
 
+const emit = defineEmits(['update:value']);
+
 const core = inject(HexCoreInjectionKey);
-const schema = computed(() => {
-  return core?.state.selectedData?.selectedScheme!;
+const schema = computed({
+  set(val: any) {
+    if (props.builtIn && core?.state.selectedData?.selectedScheme) {
+      core.state.selectedData.selectedScheme = val;
+    } else {
+      emit('update:value', val);
+    }
+  },
+
+  get() {
+    if (props.builtIn) {
+      return core?.state.selectedData?.selectedScheme!;
+    }
+    return props.value;
+  },
 });
 
 const eventsMap = computed(() => {
@@ -163,42 +191,8 @@ const eventsMap = computed(() => {
   }
   return arr;
 });
-
-let actionOptions: {
-  title: string;
-  value: string;
-}[] = [
-  {
-    title: `onChange ${t('el.changeInValue')}`,
-    value: 'onChange',
-  },
-  {
-    title: `onFocus ${t('el.changeInValue')}`,
-    value: 'onFocus',
-  },
-  {
-    title: `onBlur ${t('el.changeInValue')}`,
-    value: 'onBlur',
-  },
-];
-
-if (unref(schema).componentType === 'Collapse' || unref(schema).componentType === 'Tabs') {
-  actionOptions = [
-    {
-      title: `onChange ${t('el.changeInValue')}`,
-      value: 'onChange',
-    },
-  ];
-}
-
-if (unref(schema).componentType === 'Button' || unref(schema).componentType === 'Text') {
-  actionOptions = [
-    {
-      title: `onClick ${t('el.changeInValue')}`,
-      value: 'onClick',
-    },
-  ];
-}
+const [buildOptions] = useConst(t);
+let actionOptions = buildOptions.value(unref(schema)?.componentType || '');
 
 const modalTitle = ref('');
 const formRef = ref<FormInstance>();

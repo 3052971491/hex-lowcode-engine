@@ -1,7 +1,7 @@
 import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
-import { BasicColumn } from '/@/components/hex-table';
+import { ActionItem, BasicColumn } from '/@/components/hex-table';
 import { TableRowSelection } from 'ant-design-vue/es/table/interface';
 
 export namespace PcSchema {
@@ -768,9 +768,14 @@ export namespace PcSchema {
     /** 列配置 */
     columns: BasicColumn[];
     /** 操作栏配置 */
-    actionColumn: BasicColumn;
+    actionColumn: BasicColumn | null;
     /** 行选择配置 */
     rowSelection: TableRowSelection | null;
+    actionItem: (ActionItem & {
+      events?: {
+        [key: string]: any;
+      };
+    })[];
     [key: string]: any;
   }
 

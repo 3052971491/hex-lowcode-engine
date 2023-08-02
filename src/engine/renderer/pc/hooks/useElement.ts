@@ -55,9 +55,9 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
         if (Object.prototype.hasOwnProperty.call(unref(ectype).events, key)) {
           const element = ectype.value.events[key];
           if (element.events.length > 0) {
-            element.events.forEach(({ name }: { name: string }) => {
-              if (core?.state.__js__[name]) {
-                opt[key] = core.state.__js__[name].bind(core.context());
+            element.events.forEach((i: any) => {
+              if (core?.state.__js__[i.name]) {
+                opt[key] = core.state.__js__[i.name].bind({ ...core.context(), params: JSON.parse(i.params) });
               }
             });
           }

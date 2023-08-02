@@ -18,6 +18,7 @@ export default {
       middle: 'Middle',
       large: 'Large',
       default: 'Default',
+      custom: 'Custom',
     },
     nav: {
       componentHierarchyTree: 'Hierarchy Tree',
@@ -243,7 +244,7 @@ export default {
         isOpenRowSelection: 'Enable row selection',
         rowSelection: 'Row Selection',
         checkboxOrRadio: 'Checkbox/Radio',
-        actionColumn: 'Action column',
+        actionItem: 'Action column',
       },
     },
     tips: {
@@ -378,6 +379,7 @@ export default {
     moreSetting: 'More Settings',
     watermarkSetting: 'Watermark setting',
     addAnField: 'Add field',
+    addAnButton: 'Add button',
     field: 'Field',
   },
 };

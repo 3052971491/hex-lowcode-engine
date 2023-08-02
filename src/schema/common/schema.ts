@@ -1356,14 +1356,9 @@ export class Table extends Scheme<PcSchema.TableSchema> {
       rowKey: 'id',
       bordered: true,
       columns: [],
-      actionColumn: {
-        width: 160,
-        title: '操作栏',
-        fixed: 'right',
-        align: 'center',
-        dataIndex: 'action',
-      },
+      actionColumn: null,
       rowSelection: null,
+      actionItem: [],
       className: '',
       __style__: '',
     };
@@ -1385,7 +1380,7 @@ export class BasicColumnDto {
 
   width: number = 195;
 
-  align: string = 'center';
+  align: string = 'left';
 
   ellipsis: boolean = true;
 
@@ -1400,6 +1395,26 @@ export class BasicColumnDto {
       const field = `Field_${buildUUID()}`;
       this.title = field;
       this.dataIndex = field;
+    }
+  }
+}
+
+export class ActionItemDto {
+  label: string = '';
+
+  events: {
+    [x: string]: any;
+  } = {};
+
+  constructor(_data?: any) {
+    if (_data) {
+      for (const property in _data) {
+        if (Object.prototype.hasOwnProperty.call(_data, property)) {
+          (<any>this)[property] = (<any>_data)[property];
+        }
+      }
+    } else {
+      //
     }
   }
 }

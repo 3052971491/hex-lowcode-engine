@@ -9,18 +9,7 @@
       <template #bodyCell="{ column, record, index }">
         <template v-if="column">
           <template v-if="column.dataIndex === 'action'">
-            <TableAction
-              :actions="[
-                {
-                  label: '编辑',
-                  onClick: () => handleEdit(record),
-                },
-                {
-                  label: '删除',
-                  onClick: () => handleDelete(record),
-                },
-              ]"
-            />
+            <TableAction :actions="tableAction(column, record, index)" />
           </template>
           <template v-else-if="column.dataIndex === 'no'">
             <template v-if="isBoolean(methods.getPaginationRef())">
@@ -50,7 +39,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
 
 import { isBoolean } from '/@/utils/is';
-import { BasicTableProps, HexTable, TableAction } from '/@/components/hex-table';
+import { ActionItem, BasicColumn, BasicTableProps, HexTable, TableAction } from '/@/components/hex-table';
 import useTable from '/@/components/hex-table/src/hooks/useTable';
 
 interface Props {
@@ -76,6 +65,7 @@ const prop = computed(
         bordered: obj.bordered,
         columns: obj.columns,
         rowSelection: obj.rowSelection,
+        actionItem: obj.actionItem,
       };
     }) as PcSchema.TableSchemaProps,
 );
@@ -121,12 +111,37 @@ const [register, methods] = useTable({
   columns: unref(prop).columns,
   rowSelection: unref(prop).rowSelection,
 });
-const handleDelete = ({ record }: any) => {
-  console.log(record);
-};
-const handleEdit = ({ record }: any) => {
-  console.log(record);
-};
+
+/** 操作列配置 */
+const tableAction = computed(() => (column: BasicColumn, record: any, index: number) => {
+  return prop.value.actionItem.map((item) => {
+    const { events, ...option } = item;
+    const result: ActionItem = { ...option };
+    // 动作
+    const opt: any = {};
+    if (events && core) {
+      for (const key in events) {
+        if (Object.prototype.hasOwnProperty.call(events, key)) {
+          const element = events[key];
+          if (element.events.length > 0) {
+            element.events.forEach((i: any) => {
+              if (core?.state.__js__[i.name]) {
+                opt[key] = core.state.__js__[i.name].bind(
+                  { ...core.context(), params: JSON.parse(i.params) },
+                  { column, record, index },
+                );
+              }
+            });
+          }
+        }
+      }
+    }
+    return {
+      ...result,
+      ...opt,
+    };
+  });
+});
 </script>
 
 <script lang="ts">

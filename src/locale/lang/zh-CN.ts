@@ -18,6 +18,7 @@ export default {
       middle: '中',
       large: '大',
       default: '默认',
+      custom: '自定义',
     },
     nav: {
       componentHierarchyTree: '组件层次结构树',
@@ -243,7 +244,7 @@ export default {
         isOpenRowSelection: '启用选择功能配置',
         rowSelection: '选择功能配置',
         checkboxOrRadio: '多选/单选',
-        actionColumn: '操作列',
+        actionItem: '操作列配置',
       },
     },
     tips: {
@@ -377,6 +378,7 @@ export default {
     moreSetting: '更多设置',
     watermarkSetting: '水印设置',
     addAnField: '添加字段',
+    addAnButton: '添加按钮',
     field: '字段',
   },
 };

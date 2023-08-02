@@ -1,12 +1,17 @@
 <template>
-  <collapse-Item-wrapper :label="t(`el.property.Table.${props.attribute}`)" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper
+    v-show="hasActionColumn"
+    :label="t(`el.property.Table.${props.attribute}`)"
+    :name="props.attribute"
+    :option="option"
+  >
     <template #extra>
-      <div v-if="isColumnEditMode" @click.stop="handleExitDetailEditClick">
+      <div v-if="isEditMode" @click.stop="handleExitDetailEditClick">
         <rollback-outlined />
       </div>
     </template>
     <div class="transition-container">
-      <div v-if="!isColumnEditMode" style="width: 100%; height: 100%">
+      <div v-if="!isEditMode" style="width: 100%; height: 100%">
         <hex-draggable
           v-model:value="modelValue"
           :put="false"
@@ -20,7 +25,7 @@
               <div class="listitem-content">
                 <holder-outlined class="hex-draggable-handle move" />
                 <a-radio-group disabled class="info" @click="handleEnableColumnEditClick(element)">
-                  <a-radio :value="element.value">{{ element.title }} : {{ element.dataIndex }} </a-radio>
+                  <a-radio :value="element.value">{{ element.label }}</a-radio>
                 </a-radio-group>
               </div>
               <div>
@@ -34,13 +39,12 @@
         <a-dropdown>
           <template #overlay>
             <a-menu @click="handleMenuClick">
-              <a-menu-item key="action" :disabled="!!modelValue.find((item) => item.dataIndex === 'action')">
-                {{ t('el.property.Table.actionItem') }}
-              </a-menu-item>
-              <a-menu-item key="field">{{ t('el.common.custom') }}</a-menu-item>
+              <a-menu-item key="编辑">{{ t('el.control.edit') }}</a-menu-item>
+              <a-menu-item key="删除">{{ t('el.control.delete') }}</a-menu-item>
+              <a-menu-item key="自定义">{{ t('el.common.custom') }}</a-menu-item>
             </a-menu>
           </template>
-          <a-button block type="primary">{{ t('el.addAnField') }}</a-button>
+          <a-button block type="primary">{{ t('el.addAnButton') }}</a-button>
         </a-dropdown>
       </div>
       <a-form
@@ -52,58 +56,34 @@
         :label-col="{
           style: { width: '86px' },
         }"
-        :model="columnEditInfo"
+        :model="actionItemInfo"
       >
-        <template v-if="columnEditInfo">
+        <template v-if="actionItemInfo">
           <!-- 列编辑 -->
           <!-- 标题 -->
-          <a-form-item label="标题" name="title">
-            <a-input v-model:value="columnEditInfo.title"></a-input>
+          <a-form-item label="标题" name="label">
+            <a-input v-model:value="actionItemInfo.label"></a-input>
           </a-form-item>
-          <!-- 字段名 -->
-          <a-form-item label="字段名" name="dataIndex">
-            <a-input v-model:value="columnEditInfo.dataIndex"></a-input>
-          </a-form-item>
-          <!-- 列是否固定 -->
-          <a-form-item label="是否固定列" name="fixed">
-            <a-radio-group v-model:value="columnEditInfo.fixed">
-              <a-radio-button value="left">left</a-radio-button>
-              <a-radio-button value="right">right</a-radio-button>
-              <a-radio-button :value="false">none</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-          <!-- 列宽度 -->
-          <a-form-item label="字段宽度" name="width">
-            <a-radio-group v-model:value="columnEditInfo.width">
-              <a-radio-button :value="103">微</a-radio-button>
-              <a-radio-button :value="135">小</a-radio-button>
-              <a-radio-button :value="195">中</a-radio-button>
-              <a-radio-button :value="375">大</a-radio-button>
-              <a-radio-button :value="730">超大</a-radio-button>
-            </a-radio-group>
-            <a-form-item-rest>
-              <a-input-number v-model:value="columnEditInfo.width" class="mt-2" addon-after="Px"></a-input-number>
-            </a-form-item-rest>
-          </a-form-item>
-          <!-- 对齐方式 -->
-          <a-form-item label="对齐方式" name="align">
-            <a-radio-group v-model:value="columnEditInfo.align">
-              <a-radio-button value="left">Left</a-radio-button>
-              <a-radio-button value="center">Center</a-radio-button>
-              <a-radio-button value="right">Right</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-          <!-- 超过宽度将自动省略 -->
-          <a-form-item label="超过宽度将自动省略" name="ellipsis">
-            <a-switch v-model:checked="columnEditInfo.ellipsis"></a-switch>
-          </a-form-item>
+          <events-editor
+            v-model:value="actionItemInfo"
+            label="动作设置"
+            attribute="events"
+            :option="{
+              type: 'TableAction',
+              name: 'events',
+              label: '动作设置',
+              editor: 'events-editor',
+              advanced: true,
+            }"
+            :built-in="false"
+          />
         </template>
         <a-button block type="primary" @click="handleSaveColumnEditInfoClick">{{ t('el.control.save') }}</a-button>
       </a-form>
     </div>
   </collapse-Item-wrapper>
 </template>
-<script lang="ts" setup name="TableColumnsEditor">
+<script lang="ts" setup name="TableActionItemEditor">
 import { inject, computed, ref } from 'vue';
 import { HolderOutlined, DeleteOutlined, EditOutlined, RollbackOutlined } from '@ant-design/icons-vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
@@ -114,8 +94,9 @@ import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
 import { useLocale } from '/@/hooks/use-loacle';
-import { BasicColumn } from '/@/components/hex-table';
-import { BasicColumnDto } from '/@/schema/common/schema';
+import { ActionItem, BasicColumn } from '/@/components/hex-table';
+import { ActionItemDto } from '/@/schema/common/schema';
+import EventsEditor from '../common/events-editor.vue';
 
 const { t } = useLocale();
 interface Props {
@@ -132,7 +113,7 @@ const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-const modelValue = computed<BasicColumn[]>({
+const modelValue = computed<ActionItem[]>({
   set(val) {
     if (schema.value.props) {
       schema.value.props[props.attribute] = val;
@@ -140,27 +121,21 @@ const modelValue = computed<BasicColumn[]>({
   },
   get() {
     if (!schema.value.props) return [];
-    return schema.value.props[props.attribute] ?? [];
+    return schema.value.props[props.attribute] || [];
   },
 });
 
+/** 是否有操作列 */
+const hasActionColumn = computed(() => {
+  return !!schema.value?.props?.columns.find((item: BasicColumn) => item.dataIndex === 'action');
+});
+
 const handleMenuClick: MenuProps['onClick'] = (e) => {
-  if (e.key === 'action') {
-    // 操作栏
-    const element = new BasicColumnDto({
-      title: '操作栏',
-      fixed: 'right',
-      dataIndex: e.key,
-      align: 'center',
-    }) as BasicColumn;
-    modelValue.value.push(element);
-    core?.handleUpdateHistoryData();
-  } else if (e.key === 'field') {
-    // 普通字段
-    const element = new BasicColumnDto() as BasicColumn;
-    modelValue.value.push(element);
-    core?.handleUpdateHistoryData();
-  }
+  const element = new ActionItemDto({
+    label: e.key,
+  }) as ActionItem;
+  modelValue.value.push(element);
+  core?.handleUpdateHistoryData();
 };
 
 const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
@@ -168,22 +143,23 @@ const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
 };
 
 /** 是否列编辑模式 */
-const isColumnEditMode = ref(false);
-const columnEditInfo = ref<BasicColumnDto>();
-const __column__ = ref<BasicColumn>({});
+const isEditMode = ref(false);
+const actionItemInfo = ref<ActionItemDto>();
+const __item__ = ref<ActionItem>({});
 /** 进入列编辑模式 */
-const handleEnableColumnEditClick = (element: BasicColumn) => {
-  isColumnEditMode.value = true;
-  columnEditInfo.value = new BasicColumnDto(cloneDeep(element));
-  __column__.value = element;
+const handleEnableColumnEditClick = (element: ActionItem) => {
+  isEditMode.value = true;
+  actionItemInfo.value = new ActionItemDto(cloneDeep(element));
+  __item__.value = element;
 };
 /** 退出列编辑模式 */
 const handleExitDetailEditClick = () => {
-  isColumnEditMode.value = false;
-  __column__.value = {};
+  isEditMode.value = false;
+  __item__.value = {};
+  actionItemInfo.value = undefined;
 };
 const handleSaveColumnEditInfoClick = () => {
-  Object.assign(__column__.value, columnEditInfo.value);
+  Object.assign(__item__.value, actionItemInfo.value);
   core?.handleUpdateHistoryData();
   handleExitDetailEditClick();
 };
