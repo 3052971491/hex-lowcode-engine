@@ -34,8 +34,10 @@
         <a-dropdown>
           <template #overlay>
             <a-menu @click="handleMenuClick">
-              <a-menu-item key="field">{{ t('el.field') }}</a-menu-item>
-              <a-menu-item key="action">{{ t('el.property.Table.actionColumn') }}</a-menu-item>
+              <a-menu-item key="action" :disabled="!!modelValue.find((item) => item.dataIndex === 'action')">
+                {{ t('el.property.Table.actionItem') }}
+              </a-menu-item>
+              <a-menu-item key="field">{{ t('el.common.custom') }}</a-menu-item>
             </a-menu>
           </template>
           <a-button block type="primary">{{ t('el.addAnField') }}</a-button>
