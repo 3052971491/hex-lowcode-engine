@@ -29,11 +29,11 @@
             <template #icon><play-circle-outlined /></template>
           </a-button>
         </a-tooltip>
-        <a-tooltip :title="t('el.nav.JSONCode')">
+        <!-- <a-tooltip :title="t('el.nav.JSONCode')">
           <a-button @click="handlePreviewJsonClick">
             <template #icon><project-outlined /></template>
           </a-button>
-        </a-tooltip>
+        </a-tooltip> -->
         <a-tooltip :title="t('el.nav.keyboard')">
           <a-button @click="handleKeyboardClick">
             <template #icon><ant-design-outlined /></template>
@@ -115,7 +115,7 @@ function handleSaveClick() {
 }
 function handleClearClick() {
   core?.clear();
-  // core?.handleUpdateHistoryData();
+  core?.handleUpdateHistoryData();
 }
 
 function handleExitModalDesignerClick() {
