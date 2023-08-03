@@ -415,6 +415,7 @@ const TABLE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Table', name: 'columns', label: '列配置', editor: 'columns-editor', merge: true },
   { type: 'Table', name: 'actionItem', label: '操作列配置', editor: 'action-item-editor', merge: true },
   { type: 'Table', name: 'rowSelection', label: '选择功能配置', editor: 'row-selection-editor', merge: true },
+  { type: 'Table', name: 'noPadding', label: '隐藏边距', editor: 'switch-editor' },
   { type: 'Table', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 

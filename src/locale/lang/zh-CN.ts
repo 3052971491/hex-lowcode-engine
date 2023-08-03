@@ -245,6 +245,7 @@ export default {
         rowSelection: '选择功能配置',
         checkboxOrRadio: '多选/单选',
         actionItem: '操作列配置',
+        noPadding: '隐藏边距',
       },
     },
     tips: {

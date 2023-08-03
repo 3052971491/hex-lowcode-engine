@@ -1361,6 +1361,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
       actionColumn: null,
       rowSelection: null,
       actionItem: [],
+      noPadding: true,
       className: '',
       __style__: '',
     };

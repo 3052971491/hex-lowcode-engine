@@ -776,6 +776,7 @@ export namespace PcSchema {
         [key: string]: any;
       };
     })[];
+    noPadding: boolean;
     [key: string]: any;
   }
 

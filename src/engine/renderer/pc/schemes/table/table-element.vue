@@ -67,6 +67,7 @@ const prop = computed(
         columns: obj.columns,
         rowSelection: obj.rowSelection,
         actionItem: obj.actionItem,
+        noPadding: obj.noPadding,
       };
     }) as PcSchema.TableSchemaProps,
 );
@@ -94,6 +95,7 @@ const [register, methods] = useTable({
   bordered: unref(prop).bordered,
   columns: unref(prop).columns,
   rowSelection: unref(prop).rowSelection,
+  noPadding: unref(prop).noPadding,
 });
 
 /** 操作列配置 */
@@ -153,5 +155,3 @@ export default defineComponent({
   name: 'TableElement',
 });
 </script>
-
-<style lang="less" scoped></style>

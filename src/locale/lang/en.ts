@@ -245,6 +245,7 @@ export default {
         rowSelection: 'Row Selection',
         checkboxOrRadio: 'Checkbox/Radio',
         actionItem: 'Action column',
+        noPadding: 'No padding',
       },
     },
     tips: {

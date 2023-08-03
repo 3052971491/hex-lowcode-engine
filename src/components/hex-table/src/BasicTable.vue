@@ -135,6 +135,10 @@ const getBindRowSelectionValues = computed(() => {
   };
 });
 
+const noPaddingStyle = computed(() => {
+  return unref(getProps).noPadding ? '0px' : `8px 0px`;
+});
+
 /** 点击行选择器时触发 */
 function handleTableSelect(rowKeys: (string | number)[]) {
   setSelectedRowKeys(rowKeys);
@@ -264,7 +268,7 @@ onMounted(() => {
       // padding: 0 8px;
 
       .basic-table-container {
-        padding: 8px;
+        padding: v-bind(noPaddingStyle);
         width: 100%;
         height: auto;
         background-color: var(--color-bg-2);

@@ -179,6 +179,8 @@ export interface BasicTableProps {
   pagination?: PaginationProps | boolean;
   /** loading加载 */
   loading?: boolean;
+  /** 是否隐藏上下边距，通常用于外部容器提供了边距 */
+  noPadding?: boolean;
 
   // /**
   //  * The column contains children to display
