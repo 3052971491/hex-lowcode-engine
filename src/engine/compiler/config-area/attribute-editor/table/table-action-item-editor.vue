@@ -11,7 +11,7 @@
       </div>
     </template>
     <div class="transition-container">
-      <div v-if="!isEditMode" style="width: 100%; height: 100%">
+      <div style="width: 100%; height: 100%">
         <hex-draggable
           v-model:value="modelValue"
           :put="false"
@@ -47,39 +47,53 @@
           <a-button block type="primary">{{ t('el.addAnButton') }}</a-button>
         </a-dropdown>
       </div>
-      <a-form
-        v-else
-        style="width: 100%; height: 100%"
-        layout="horizontal"
-        label-align="left"
-        :label-wrap="true"
-        :label-col="{
-          style: { width: '86px' },
-        }"
-        :model="actionItemInfo"
+
+      <a-drawer
+        :title="`操作列: ${actionItemInfo?.label}`"
+        placement="right"
+        :open="isEditMode"
+        width="360"
+        :mask="false"
+        :closable="false"
+        :header-style="{ padding: '8px' }"
+        :body-style="{ padding: '8px' }"
+        @close="handleExitDetailEditClick"
       >
-        <template v-if="actionItemInfo">
-          <!-- 列编辑 -->
-          <!-- 标题 -->
-          <a-form-item label="标题" name="label">
-            <a-input v-model:value="actionItemInfo.label"></a-input>
-          </a-form-item>
-          <events-editor
-            v-model:value="actionItemInfo"
-            label="动作设置"
-            attribute="events"
-            :option="{
-              type: 'TableAction',
-              name: 'events',
-              label: '动作设置',
-              editor: 'events-editor',
-              advanced: true,
-            }"
-            :built-in="false"
-          />
+        <a-form
+          layout="horizontal"
+          label-align="left"
+          :label-wrap="true"
+          :label-col="{
+            style: { width: '86px' },
+          }"
+          :model="actionItemInfo"
+        >
+          <template v-if="actionItemInfo">
+            <!-- 列编辑 -->
+            <!-- 标题 -->
+            <a-form-item label="标题" name="label">
+              <a-input v-model:value="actionItemInfo.label"></a-input>
+            </a-form-item>
+            <events-editor
+              v-model:value="actionItemInfo"
+              label="动作设置"
+              attribute="events"
+              :option="{
+                type: 'TableAction',
+                name: 'events',
+                label: '动作设置',
+                editor: 'events-editor',
+                advanced: true,
+              }"
+              :built-in="false"
+            />
+          </template>
+        </a-form>
+        <template #extra>
+          <a-button style="margin-right: 8px" @click="handleExitDetailEditClick">{{ t('el.control.cancel') }}</a-button>
+          <a-button type="primary" @click="handleSaveColumnEditInfoClick">{{ t('el.control.save') }}</a-button>
         </template>
-        <a-button block type="primary" @click="handleSaveColumnEditInfoClick">{{ t('el.control.save') }}</a-button>
-      </a-form>
+      </a-drawer>
     </div>
   </collapse-Item-wrapper>
 </template>
@@ -148,15 +162,15 @@ const actionItemInfo = ref<ActionItemDto>();
 const __item__ = ref<ActionItem>({});
 /** 进入列编辑模式 */
 const handleEnableColumnEditClick = (element: ActionItem) => {
-  isEditMode.value = true;
   actionItemInfo.value = new ActionItemDto(cloneDeep(element));
   __item__.value = element;
+  isEditMode.value = true;
 };
 /** 退出列编辑模式 */
 const handleExitDetailEditClick = () => {
-  isEditMode.value = false;
   __item__.value = {};
   actionItemInfo.value = undefined;
+  isEditMode.value = false;
 };
 const handleSaveColumnEditInfoClick = () => {
   Object.assign(__item__.value, actionItemInfo.value);
