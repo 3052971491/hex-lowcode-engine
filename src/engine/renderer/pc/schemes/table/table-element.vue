@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import type { LowCode } from '/@/types/schema';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
-import { defineComponent, ref, computed, unref, watch, inject } from 'vue';
+import { defineComponent, ref, computed, unref, watch, inject, onMounted } from 'vue';
 import ElementWrapper from '/@/engine/renderer/pc/components/element-wrapper.vue';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElement } from '../../hooks/useElement';
@@ -41,6 +41,7 @@ import { useElement } from '../../hooks/useElement';
 import { isBoolean } from '/@/utils/is';
 import { ActionItem, BasicColumn, BasicTableProps, HexTable, TableAction } from '/@/components/hex-table';
 import useTable from '/@/components/hex-table/src/hooks/useTable';
+import { Table } from '/@/schema/common/schema';
 
 interface Props {
   schema: PcSchema.TableSchema;
@@ -109,10 +110,8 @@ const tableAction = computed(() => (column: BasicColumn, record: any, index: num
           if (element.events.length > 0) {
             element.events.forEach((i: any) => {
               if (core?.state.__js__[i.name]) {
-                opt[key] = core.state.__js__[i.name].bind(
-                  { ...core.context(), params: JSON.parse(i.params) },
-                  { column, record, index },
-                );
+                core.context()!.params = JSON.parse(i.params);
+                opt[key] = core.state.__js__[i.name].bind(core.context(), { column, record, index });
               }
             });
           }
@@ -124,6 +123,28 @@ const tableAction = computed(() => (column: BasicColumn, record: any, index: num
       ...opt,
     };
   });
+});
+
+onMounted(() => {
+  if (methods) {
+    // 替换原型方法
+    const obj = ectype.value as Table;
+    obj.reload = methods.reload;
+    obj.setProps = methods.setProps;
+    obj.setLoading = methods.setLoading;
+    obj.getColumns = methods.getColumns;
+    obj.setColumns = methods.setColumns;
+    obj.setPagination = methods.setPagination;
+    obj.deleteSelectRowByKey = methods.deleteSelectRowByKey;
+    obj.getSelectRowKeys = methods.getSelectRowKeys;
+    obj.getSelectRows = methods.getSelectRows;
+    obj.clearSelectedRowKeys = methods.clearSelectedRowKeys;
+    obj.setSelectedRowKeys = methods.setSelectedRowKeys;
+    obj.getPaginationRef = methods.getPaginationRef;
+    obj.getRowSelection = methods.getRowSelection;
+    obj.setShowPagination = methods.setShowPagination;
+    obj.getShowPagination = methods.getShowPagination;
+  }
 });
 </script>
 

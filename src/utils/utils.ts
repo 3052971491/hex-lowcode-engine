@@ -26,6 +26,8 @@ export class Context {
 
   public dataSourceMap: RuntimeDataSourceConfig[];
 
+  public params: any = {};
+
   constructor(
     instanceContext: InstanceCoreFactory,
     _state_: Record<string, unknown> = {},

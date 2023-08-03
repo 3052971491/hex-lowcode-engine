@@ -1,8 +1,10 @@
 // eslint-disable-next-line max-classes-per-file
+import { PaginationProps } from 'ant-design-vue';
 import type { PcSchema } from './interface';
 import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
 import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
+import { BasicColumn, BasicTableProps } from '/@/components/hex-table';
 
 export enum ComponentType {
   'Text' = 'Text',
@@ -1368,6 +1370,81 @@ export class Table extends Scheme<PcSchema.TableSchema> {
         if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
       }
     }
+  }
+
+  /** 刷新表格 */
+  reload() {
+    throw new Error('警告【reload】方法暂未实现');
+  }
+
+  /** 用于设置表格参数 */
+  setProps(props: Partial<BasicTableProps>) {
+    throw new Error('警告【setProps】方法暂未实现');
+  }
+
+  /** 设置表格 loading 状态 */
+  setLoading(loading: boolean) {
+    throw new Error('警告【setLoading】方法暂未实现');
+  }
+
+  /** 获取表格列数据 */
+  getColumns({ ignoreIndex = false }: { ignoreIndex?: boolean } = {}) {
+    throw new Error('警告【getColumns】方法暂未实现');
+  }
+
+  /** 设置表格列数据 */
+  setColumns(columns: BasicColumn[]) {
+    throw new Error('警告【setColumns】方法暂未实现');
+  }
+
+  /** 设置分页信息 */
+  setPagination(info: Partial<PaginationProps>) {
+    throw new Error('警告【setPagination】方法暂未实现');
+  }
+
+  /** 根据 key 删除取消选中行 */
+  deleteSelectRowByKey(key: string) {
+    throw new Error('警告【deleteSelectRowByKey】方法暂未实现');
+  }
+
+  /** 获取选中行的 keys */
+  getSelectRowKeys() {
+    throw new Error('警告【getSelectRowKeys】方法暂未实现');
+  }
+
+  /** 获取选中行的 rows */
+  getSelectRows() {
+    throw new Error('警告【getSelectRows】方法暂未实现');
+  }
+
+  /** 清空选中行 */
+  clearSelectedRowKeys() {
+    throw new Error('警告【clearSelectedRowKeys】方法暂未实现');
+  }
+
+  /** 设置选中行 */
+  setSelectedRowKeys(keys: (string | number)[]) {
+    throw new Error('警告【setSelectedRowKeys】方法暂未实现');
+  }
+
+  /** 获取当前分页信息 */
+  getPaginationRef() {
+    throw new Error('警告【getPaginationRef】方法暂未实现');
+  }
+
+  /** 获取勾选框信息 */
+  getRowSelection() {
+    throw new Error('警告【getRowSelection】方法暂未实现');
+  }
+
+  /** 设置当前是否显示分页 */
+  setShowPagination(show: boolean) {
+    throw new Error('警告【setShowPagination】方法暂未实现');
+  }
+
+  /** 获取当前是否显示分页 */
+  getShowPagination() {
+    throw new Error('警告【getShowPagination】方法暂未实现');
   }
 }
 

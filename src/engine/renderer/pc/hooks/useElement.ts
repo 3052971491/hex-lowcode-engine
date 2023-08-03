@@ -57,7 +57,8 @@ export function useElement<T extends LowCode.NodeSchema>(props: Props<T>, __inst
           if (element.events.length > 0) {
             element.events.forEach((i: any) => {
               if (core?.state.__js__[i.name]) {
-                opt[key] = core.state.__js__[i.name].bind({ ...core.context(), params: JSON.parse(i.params) });
+                core.context()!.params = JSON.parse(i.params);
+                opt[key] = core.state.__js__[i.name].bind(core.context());
               }
             });
           }
