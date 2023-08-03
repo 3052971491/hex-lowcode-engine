@@ -4,6 +4,7 @@
     :label="t(`el.property.Table.${props.attribute}`)"
     :name="props.attribute"
     :option="option"
+    active-key="0"
   >
     <template #extra>
       <div v-if="isEditMode" @click.stop="handleExitDetailEditClick">

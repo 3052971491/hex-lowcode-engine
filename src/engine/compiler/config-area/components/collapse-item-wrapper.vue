@@ -23,6 +23,7 @@ interface Props {
   showArrow?: boolean;
   /** 是否可折叠或指定可折叠触发区域 */
   collapsible?: 'disabled' | 'header' | '';
+  activeKey?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   label: '',
@@ -30,9 +31,10 @@ const props = withDefaults(defineProps<Props>(), {
   option: undefined,
   showArrow: true,
   collapsible: '',
+  activeKey: '1',
 });
 
-const activeKey = ref(['1']);
+const activeKey = ref([props.activeKey]);
 </script>
 
 <style lang="less" scoped>

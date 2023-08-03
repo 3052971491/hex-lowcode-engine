@@ -238,8 +238,8 @@ export default {
       },
       Table: {
         title: '表格标题',
-        api: '接口',
-        rowKey: '表格行 key',
+        api: '数据源',
+        rowKey: '数据主键',
         columns: '列配置',
         isOpenRowSelection: '启用选择功能配置',
         rowSelection: '选择功能配置',

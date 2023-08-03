@@ -238,7 +238,7 @@ export default {
       },
       Table: {
         title: 'Title',
-        api: 'API',
+        api: 'Data source',
         rowKey: 'rowKey',
         columns: 'Columns',
         isOpenRowSelection: 'Enable row selection',

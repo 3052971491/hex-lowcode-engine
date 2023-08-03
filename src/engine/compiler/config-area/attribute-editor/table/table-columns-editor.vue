@@ -1,5 +1,10 @@
 <template>
-  <collapse-Item-wrapper :label="t(`el.property.Table.${props.attribute}`)" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper
+    :label="t(`el.property.Table.${props.attribute}`)"
+    :name="props.attribute"
+    :option="option"
+    active-key="0"
+  >
     <template #extra>
       <div v-if="isColumnEditMode" @click.stop="handleExitDetailEditClick">
         <rollback-outlined />

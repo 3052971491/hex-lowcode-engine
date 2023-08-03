@@ -1,5 +1,10 @@
 <template>
-  <collapse-Item-wrapper :label="t(`el.property.Table.${props.attribute}`)" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper
+    :label="t(`el.property.Table.${props.attribute}`)"
+    :name="props.attribute"
+    :option="option"
+    active-key="0"
+  >
     <div class="transition-container">
       <a-form
         style="width: 100%; height: 100%"
