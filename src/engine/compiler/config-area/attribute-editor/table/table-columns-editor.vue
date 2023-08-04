@@ -70,15 +70,15 @@
           <template v-if="columnEditInfo">
             <!-- 列编辑 -->
             <!-- 标题 -->
-            <a-form-item label="标题" name="title">
+            <a-form-item :label="t('el.property.label')" name="title">
               <a-input v-model:value="columnEditInfo.title"></a-input>
             </a-form-item>
             <!-- 字段名 -->
-            <a-form-item label="字段名" name="dataIndex">
+            <a-form-item :label="t('el.property.fieldName')" name="dataIndex">
               <a-input v-model:value="columnEditInfo.dataIndex"></a-input>
             </a-form-item>
             <!-- 列是否固定 -->
-            <a-form-item label="是否固定列" name="fixed">
+            <a-form-item :label="t('el.property.Table.isFixedColumn')" name="fixed">
               <a-radio-group v-model:value="columnEditInfo.fixed">
                 <a-radio-button value="left">left</a-radio-button>
                 <a-radio-button value="right">right</a-radio-button>
@@ -86,14 +86,14 @@
               </a-radio-group>
             </a-form-item>
             <!-- 列宽度 -->
-            <a-form-item label="字段宽度" name="width">
+            <a-form-item :label="t('el.property.Table.fieldWidth')" name="width">
               <div class="flex flex-col">
                 <a-radio-group v-model:value="columnEditInfo.width">
-                  <a-radio-button :value="103">微</a-radio-button>
-                  <a-radio-button :value="135">小</a-radio-button>
-                  <a-radio-button :value="195">中</a-radio-button>
-                  <a-radio-button :value="375">大</a-radio-button>
-                  <a-radio-button :value="730">超大</a-radio-button>
+                  <a-radio-button :value="103">{{ t('el.property.Table.micro') }}</a-radio-button>
+                  <a-radio-button :value="135">{{ t('el.common.small') }}</a-radio-button>
+                  <a-radio-button :value="195">{{ t('el.common.Table.middle') }}</a-radio-button>
+                  <a-radio-button :value="375">{{ t('el.common.Table.large') }}</a-radio-button>
+                  <a-radio-button :value="730">{{ t('el.common.Table.superLarge') }}</a-radio-button>
                 </a-radio-group>
                 <a-form-item-rest>
                   <a-input-number v-model:value="columnEditInfo.width" class="mt-2" addon-after="Px"></a-input-number>
@@ -101,7 +101,7 @@
               </div>
             </a-form-item>
             <!-- 对齐方式 -->
-            <a-form-item label="对齐方式" name="align">
+            <a-form-item :label="t('el.property.align')" name="align">
               <a-radio-group v-model:value="columnEditInfo.align">
                 <a-radio-button value="left">Left</a-radio-button>
                 <a-radio-button value="center">Center</a-radio-button>
@@ -109,7 +109,7 @@
               </a-radio-group>
             </a-form-item>
             <!-- 超过宽度将自动省略 -->
-            <a-form-item label="超过宽度将自动省略" name="ellipsis">
+            <a-form-item :label="t('el.property.Table.ellipsis')" name="ellipsis">
               <a-switch v-model:checked="columnEditInfo.ellipsis"></a-switch>
             </a-form-item>
           </template>

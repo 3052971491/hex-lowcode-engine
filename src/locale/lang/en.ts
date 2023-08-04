@@ -19,6 +19,7 @@ export default {
       large: 'Large',
       default: 'Default',
       custom: 'Custom',
+      superLarge: 'Super large',
     },
     nav: {
       componentHierarchyTree: 'Hierarchy Tree',
@@ -246,7 +247,12 @@ export default {
         rowSelection: 'Row Selection',
         checkboxOrRadio: 'Checkbox/Radio',
         actionItem: 'Action column',
+        actionColumn: 'Action column',
         noPadding: 'No padding',
+        isFixedColumn: 'Fixed column',
+        fieldWidth: 'Field width',
+        ellipsis: 'Ellipsis',
+        micro: 'Micro',
       },
       QRcode: {
         content: 'Content',

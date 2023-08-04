@@ -19,6 +19,7 @@ export default {
       large: '大',
       default: '默认',
       custom: '自定义',
+      superLarge: '超大',
     },
     nav: {
       componentHierarchyTree: '组件层次结构树',
@@ -246,7 +247,12 @@ export default {
         rowSelection: '选择功能配置',
         checkboxOrRadio: '多选/单选',
         actionItem: '操作列配置',
+        actionColumn: '操作列',
         noPadding: '隐藏边距',
+        isFixedColumn: '是否固定列',
+        fieldWidth: '字段宽度',
+        ellipsis: '超过宽度自动省略',
+        micro: '微',
       },
       QRcode: {
         content: '内容',

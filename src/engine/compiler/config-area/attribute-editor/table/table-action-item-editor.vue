@@ -50,7 +50,7 @@
       </div>
 
       <a-drawer
-        :title="`操作列: ${actionItemInfo?.label}`"
+        :title="`${t('el.property.Table.actionColumn')}: ${actionItemInfo?.label}`"
         placement="right"
         :open="isEditMode"
         width="360"
@@ -72,7 +72,7 @@
           <template v-if="actionItemInfo">
             <!-- 列编辑 -->
             <!-- 标题 -->
-            <a-form-item label="标题" name="label">
+            <a-form-item :label="t('el.property.label')" name="label">
               <a-input v-model:value="actionItemInfo.label"></a-input>
             </a-form-item>
             <events-editor
