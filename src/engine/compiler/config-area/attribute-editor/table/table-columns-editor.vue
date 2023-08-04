@@ -91,9 +91,9 @@
                 <a-radio-group v-model:value="columnEditInfo.width">
                   <a-radio-button :value="103">{{ t('el.property.Table.micro') }}</a-radio-button>
                   <a-radio-button :value="135">{{ t('el.common.small') }}</a-radio-button>
-                  <a-radio-button :value="195">{{ t('el.common.Table.middle') }}</a-radio-button>
-                  <a-radio-button :value="375">{{ t('el.common.Table.large') }}</a-radio-button>
-                  <a-radio-button :value="730">{{ t('el.common.Table.superLarge') }}</a-radio-button>
+                  <a-radio-button :value="195">{{ t('el.common.middle') }}</a-radio-button>
+                  <a-radio-button :value="375">{{ t('el.common.large') }}</a-radio-button>
+                  <a-radio-button :value="730">{{ t('el.common.superLarge') }}</a-radio-button>
                 </a-radio-group>
                 <a-form-item-rest>
                   <a-input-number v-model:value="columnEditInfo.width" class="mt-2" addon-after="Px"></a-input-number>
