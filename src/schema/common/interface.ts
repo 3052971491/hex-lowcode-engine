@@ -801,4 +801,31 @@ export namespace PcSchema {
   export interface ModalFooterSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
   }
+
+  export interface QRcodeSchema extends LowCode.NodeSchema {
+    props: QRcodeSchemaProps;
+  }
+
+  export interface QRcodeSchemaProps extends LowCode.NodeSchemaProps {
+    /** 扫描后的地址 */
+    content: string;
+    /** 渲染类型 */
+    type: string;
+    /** 二维码中图片的地址（目前只支持图片地址） */
+    icon: string;
+    /** 二维码大小 */
+    size: number;
+    /** 二维码中图片的大小 */
+    iconSize: number;
+    /** 二维码颜色 #000 */
+    color: string;
+    /** 二维码背景颜色 transparent */
+    bgColor: string;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 二维码纠错等级 'L' | 'M' | 'Q' | 'H' */
+    errorLevel: string;
+    /** 二维码状态 active | expired | loading */
+    status: string;
+  }
 }

@@ -41,6 +41,7 @@ export enum ComponentType {
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
+  'QRcode' = 'QRcode',
 }
 
 export class Text extends Scheme<PcSchema.TextSchema> {
@@ -1564,6 +1565,36 @@ export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
   }
 }
 
+export class QRcode extends Scheme<PcSchema.QRcodeSchema> {
+  constructor(_data?: any) {
+    super();
+    this.tag = 'BUSINESS';
+    this.docUrl = 'https://www.antdv.com/components/qrcode-cn';
+    this.componentName = '二维码';
+    this.componentType = ComponentType.QRcode;
+    this.props = {
+      content: '',
+      type: 'canvas',
+      icon: '',
+      size: 160,
+      iconSize: 40,
+      color: '#000',
+      bgColor: 'transparent',
+      bordered: true,
+      errorLevel: 'M',
+      status: 'active',
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Text, new Text() as any],
   [ComponentType.Image, new Image() as any],
@@ -1599,6 +1630,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
+  [ComponentType.QRcode, new QRcode() as any],
 ]);
 
 export default {
@@ -1636,4 +1668,5 @@ export default {
   Modal,
   ModalContent,
   ModalFooter,
+  QRcode,
 } as Record<string, any>;

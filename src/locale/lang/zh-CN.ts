@@ -84,6 +84,7 @@ export default {
       Modal: '模态框',
       ModalContent: '模态框-内容区',
       ModalFooter: '模态框-操作区',
+      QRcode: '二维码',
     },
     placeholder: {
       search: '搜索',
@@ -246,6 +247,12 @@ export default {
         checkboxOrRadio: '多选/单选',
         actionItem: '操作列配置',
         noPadding: '隐藏边距',
+      },
+      QRcode: {
+        content: '内容',
+        type: '渲染类型',
+        errorLevel: '纠错等级',
+        status: '状态',
       },
     },
     tips: {

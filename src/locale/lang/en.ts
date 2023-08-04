@@ -84,6 +84,7 @@ export default {
       Modal: 'Modal',
       ModalContent: 'Modal Content',
       ModalFooter: 'Modal Footer',
+      QRcode: 'QRcode',
     },
     placeholder: {
       search: 'Search',
@@ -246,6 +247,12 @@ export default {
         checkboxOrRadio: 'Checkbox/Radio',
         actionItem: 'Action column',
         noPadding: 'No padding',
+      },
+      QRcode: {
+        content: 'Content',
+        type: 'Type',
+        errorLevel: 'Error level',
+        status: 'Status',
       },
     },
     tips: {

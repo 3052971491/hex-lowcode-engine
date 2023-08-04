@@ -437,6 +437,16 @@ const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Button', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const QR_CODE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'QRcode', name: 'content', label: '扫描后的地址', editor: 'input-editor' },
+  { type: 'QRcode', name: 'type', label: '渲染类型', editor: 'type-editor', merge: true },
+  { type: 'QRcode', name: 'size', label: '大小', editor: 'input-number-editor' },
+  { type: 'QRcode', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'QRcode', name: 'errorLevel', label: '纠错等级', editor: 'error-level-editor', merge: true },
+  { type: 'QRcode', name: 'status', label: '状态', editor: 'status-editor', merge: true },
+  { type: 'QRcode', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const obj: { [key: string]: Array<AttributeItem> } = {
   Text: TEXT_ATTRIBUTE,
   Image: IMAGE_ATTRIBUTE,
@@ -469,6 +479,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Vue: VUE_ATTRIBUTE,
   Progress: PROGRESS_ATTRIBUTE,
   Table: TABLE_ATTRIBUTE,
+  QRcode: QR_CODE_ATTRIBUTE,
 };
 
 export default obj;
