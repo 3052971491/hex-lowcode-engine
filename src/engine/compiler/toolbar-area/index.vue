@@ -115,7 +115,7 @@ function handleSaveClick() {
 }
 function handleClearClick() {
   core?.clear();
-  // core?.handleUpdateHistoryData();
+  core?.handleUpdateHistoryData();
 }
 
 function handleExitModalDesignerClick() {

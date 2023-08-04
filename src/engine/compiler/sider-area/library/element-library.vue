@@ -83,7 +83,7 @@ const menuTheme = computed(() => (index: string) => {
     return 'form-theme';
   }
   if (index === '业务控件') {
-    return 'basic-theme';
+    return 'business-theme';
   }
   if (index === '布局控件') {
     return 'container-theme';
@@ -136,20 +136,7 @@ const onSearch = () => {
         return flag;
       }),
     },
-    {
-      label: '业务控件',
-      key: 'el.component.category.business',
-      list: BusinessComponents.filter((item) => {
-        let flag = false;
-        if (!filterText.value || item.componentName.includes(filterText.value)) {
-          flag = true;
-        }
-        if (item.hasOwnProperty('internal') && !item.internal) {
-          flag = !!item.internal;
-        }
-        return flag;
-      }),
-    },
+
     {
       label: '布局控件',
       key: 'el.component.category.layout',
@@ -168,6 +155,20 @@ const onSearch = () => {
       label: '高级控件',
       key: 'el.component.category.advanced',
       list: AdvancedComponents.filter((item) => {
+        let flag = false;
+        if (!filterText.value || item.componentName.includes(filterText.value)) {
+          flag = true;
+        }
+        if (item.hasOwnProperty('internal') && !item.internal) {
+          flag = !!item.internal;
+        }
+        return flag;
+      }),
+    },
+    {
+      label: '业务控件',
+      key: 'el.component.category.business',
+      list: BusinessComponents.filter((item) => {
         let flag = false;
         if (!filterText.value || item.componentName.includes(filterText.value)) {
           flag = true;
@@ -236,6 +237,13 @@ const aaa = ref('');
 
     &:hover {
       background-color: #f2eee6;
+    }
+  }
+
+  .business-theme {
+    background-color: rgba(213, 126, 235, 0.08);
+    &:hover {
+      background-color: rgba(213, 126, 235, 0.125);
     }
   }
 }

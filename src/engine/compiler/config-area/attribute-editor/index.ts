@@ -271,6 +271,7 @@ const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'justify', label: '水平排列方式', editor: 'justify-editor', merge: true },
   { type: 'Row', name: 'wrap', label: '自动换行', editor: 'switch-editor' },
   { type: 'Row', name: 'children', label: '子集', editor: 'children-editor' },
+  { type: 'Row', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
@@ -286,6 +287,7 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'lg', label: '≥992px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'xl', label: '≥1200px 响应式栅格', editor: 'input-number-editor' },
   { type: 'Column', name: 'xxl', label: '≥1600px 响应式栅格', editor: 'input-number-editor' },
+  { type: 'Column', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const CARD_ATTRIBUTES: Array<AttributeItem> = [
@@ -293,12 +295,14 @@ const CARD_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Card', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Card', name: 'bordered', label: '边框', editor: 'switch-editor' },
   { type: 'Card', name: 'hoverable', label: '鼠标移过时可浮起', editor: 'switch-editor' },
+  { type: 'Card', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const SPACE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Space', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Space', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'Space', name: 'direction', label: '间距方向', editor: 'direction-editor', merge: true },
+  { type: 'Space', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const COLLAPSE_ATTRIBUTE: Array<AttributeItem> = [
@@ -327,6 +331,7 @@ const COLLAPSE_ATTRIBUTE: Array<AttributeItem> = [
   },
   { type: 'Collapse', name: 'ghost', label: '幽灵模式', editor: 'switch-editor' },
   { type: 'Collapse', name: 'children', label: '子集', editor: 'children-editor' },
+  { type: 'Collapse', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'Collapse', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
@@ -347,6 +352,7 @@ const COLLAPSE_PANEL_ATTRIBUTE: Array<AttributeItem> = [
     merge: true,
   },
   { type: 'CollapsePanel', name: 'showArrow', label: '是否展示箭头', editor: 'switch-editor' },
+  { type: 'CollapsePanel', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const TABS: Array<AttributeItem> = [
@@ -365,6 +371,7 @@ const TABS: Array<AttributeItem> = [
   { type: 'Tabs', name: 'tabBarGutter', label: '间隙', editor: 'input-number-editor' },
   { type: 'Tabs', name: 'tabPosition', label: '页签位置', editor: 'tab-position-editor', merge: true },
   { type: 'Tabs', name: 'children', label: '子集', editor: 'children-editor' },
+  { type: 'Tabs', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'Tabs', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
@@ -377,6 +384,7 @@ const TAB_PANE_ATTRIBUTE: Array<AttributeItem> = [
     label: '隐藏时是否渲染DOM',
     editor: 'switch-editor',
   },
+  { type: 'TabPane', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
@@ -399,9 +407,22 @@ const PROGRESS_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Progress', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const TABLE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Table', name: 'title', label: '表格标题', editor: 'input-editor', i18n: true },
+  { type: 'Table', name: 'api', label: '请求接口对象', editor: 'api-editor', merge: true },
+  { type: 'Table', name: 'rowKey', label: '表格行 key', editor: 'input-editor' },
+  { type: 'Table', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Table', name: 'columns', label: '列配置', editor: 'columns-editor', merge: true },
+  { type: 'Table', name: 'actionItem', label: '操作列配置', editor: 'action-item-editor', merge: true },
+  { type: 'Table', name: 'rowSelection', label: '选择功能配置', editor: 'row-selection-editor', merge: true },
+  { type: 'Table', name: 'noPadding', label: '隐藏边距', editor: 'switch-editor' },
+  { type: 'Table', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
+  { type: 'ButtonGroup', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
@@ -414,6 +435,16 @@ const BUTTON_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Button', name: 'block', label: '宽度占满', editor: 'switch-editor' },
   { type: 'Button', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'Button', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const QR_CODE_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'QRcode', name: 'content', label: '扫描后的地址', editor: 'input-editor' },
+  { type: 'QRcode', name: 'type', label: '渲染类型', editor: 'type-editor', merge: true },
+  { type: 'QRcode', name: 'size', label: '大小', editor: 'input-number-editor' },
+  { type: 'QRcode', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'QRcode', name: 'errorLevel', label: '纠错等级', editor: 'error-level-editor', merge: true },
+  { type: 'QRcode', name: 'status', label: '状态', editor: 'status-editor', merge: true },
+  { type: 'QRcode', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
 const obj: { [key: string]: Array<AttributeItem> } = {
@@ -447,6 +478,8 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Form: FROM_ATTRIBUTE,
   Vue: VUE_ATTRIBUTE,
   Progress: PROGRESS_ATTRIBUTE,
+  Table: TABLE_ATTRIBUTE,
+  QRcode: QR_CODE_ATTRIBUTE,
 };
 
 export default obj;
