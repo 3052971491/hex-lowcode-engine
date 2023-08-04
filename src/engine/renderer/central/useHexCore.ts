@@ -125,10 +125,8 @@ export function useHexCore(): HexCoreFactory {
     buildSelectedData();
   }
   function clear() {
-    if (state.projectConfig?.componentsTree) {
-      state.projectConfig.componentsTree = [];
-      buildSelectedData();
-    }
+    buildProjectConfig();
+    buildSelectedData();
   }
 
   function buildProjectConfig(project?: LowCode.ProjectSchema) {

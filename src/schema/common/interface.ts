@@ -1,6 +1,8 @@
 import type { LowCode } from '/@/types/schema.d';
 import type { I18n } from '/@/types/i18n.d';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
+import { ActionItem, BasicColumn } from '/@/components/hex-table';
+import { TableRowSelection } from 'ant-design-vue/es/table/interface';
 
 export namespace PcSchema {
   export interface TextSchema extends LowCode.NodeSchema {
@@ -750,6 +752,34 @@ export namespace PcSchema {
     progressive: boolean;
   }
 
+  export interface TableSchema extends LowCode.NodeSchema {
+    props: TableSchemaProps;
+  }
+
+  export interface TableSchemaProps extends LowCode.NodeSchemaProps {
+    /** 表格标题 */
+    title: string;
+    /** 请求接口对象 */
+    api: string;
+    /** 唯一行标识 */
+    rowKey: string;
+    /** 是否显示表格边框 */
+    bordered: boolean;
+    /** 列配置 */
+    columns: BasicColumn[];
+    /** 操作栏配置 */
+    actionColumn: BasicColumn | null;
+    /** 行选择配置 */
+    rowSelection: TableRowSelection | null;
+    actionItem: (ActionItem & {
+      events?: {
+        [key: string]: any;
+      };
+    })[];
+    noPadding: boolean;
+    [key: string]: any;
+  }
+
   export interface ModalSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
     props: ModalSchemaProps;
@@ -770,5 +800,32 @@ export namespace PcSchema {
 
   export interface ModalFooterSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
+  }
+
+  export interface QRcodeSchema extends LowCode.NodeSchema {
+    props: QRcodeSchemaProps;
+  }
+
+  export interface QRcodeSchemaProps extends LowCode.NodeSchemaProps {
+    /** 扫描后的地址 */
+    content: string;
+    /** 渲染类型 */
+    type: string;
+    /** 二维码中图片的地址（目前只支持图片地址） */
+    icon: string;
+    /** 二维码大小 */
+    size: number;
+    /** 二维码中图片的大小 */
+    iconSize: number;
+    /** 二维码颜色 #000 */
+    color: string;
+    /** 二维码背景颜色 transparent */
+    bgColor: string;
+    /** 是否有边框 */
+    bordered: boolean;
+    /** 二维码纠错等级 'L' | 'M' | 'Q' | 'H' */
+    errorLevel: string;
+    /** 二维码状态 active | expired | loading */
+    status: string;
   }
 }
