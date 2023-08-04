@@ -1455,7 +1455,7 @@ export class BasicColumnDto {
 
   dataIndex: string = '';
 
-  fixed: boolean = false;
+  fixed: boolean | string = false;
 
   width: number = 195;
 
