@@ -44,6 +44,22 @@ export function createDependencyProposals(range: any) {
       range,
     },
     {
+      label: 'getValue()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `getValue();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '获取组件输入值',
+      range,
+    },
+    {
+      label: 'setValue()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `setValue();`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '设置组件输入值',
+      range,
+    },
+    {
       label: 'setState()',
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setState({});`,
