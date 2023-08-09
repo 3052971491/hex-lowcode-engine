@@ -250,21 +250,22 @@ const aaa = ref('');
 
 .hex-draggable {
   :deep(.draggable-item) {
+    margin-bottom: 3px;
     width: auto;
 
     &:nth-child(2n) {
-      margin-left: 4px;
+      margin-left: 3px;
     }
 
     &:nth-child(2n + 1) {
-      margin-right: 4px;
+      margin-right: 3px;
     }
   }
   :deep(.draggable) {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr;
-    row-gap: 4px;
+    row-gap: 3px;
   }
 }
 </style>
