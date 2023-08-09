@@ -13,7 +13,7 @@ interface Props<T> {
 interface IElement<T extends LowCode.NodeSchema> {
   /** 组件副本 */
   ectype: ComputedRef<Scheme<T>>;
-  ectypeProps(fn: Fn): { [key: string]: any };
+  ectypeProps(fn: Fn): Record<string, unknown>;
   /** 注册监听事件 */
   registerEvent(): void;
   /** 注册生命周期OnMounted */

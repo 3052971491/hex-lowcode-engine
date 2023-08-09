@@ -263,6 +263,22 @@ const RATE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Rate', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const UPLOAD_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Upload', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Upload', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Upload', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Upload', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Table', name: 'api', label: '请求接口对象', editor: 'api-editor', merge: true },
+  { type: 'Upload', name: 'listType', label: '上传类型', editor: 'list-type-editor', merge: true },
+  { type: 'Upload', name: 'maxCount', label: '最大上传数量', editor: 'input-number-editor' },
+  { type: 'Upload', name: 'maxFileSize', label: '单文件上传大小(M)', editor: 'input-number-editor' },
+  { type: 'Upload', name: 'accept', label: '上传文件类型', editor: 'accept-editor', merge: true },
+  { type: 'Upload', name: 'multiple', label: '多选', editor: 'switch-editor' },
+  { type: 'Upload', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Upload', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  // { type: 'Upload', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 /** 栅格-行 */
 const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'rowGutter', label: '列间距', editor: 'input-number-editor' },
@@ -467,6 +483,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   TimePicker: TIME_PICKER_ATTRIBUTES,
   TimeRangePicker: TIME_RANGE_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
+  Upload: UPLOAD_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,

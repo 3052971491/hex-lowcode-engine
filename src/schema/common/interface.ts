@@ -547,6 +547,38 @@ export namespace PcSchema {
     // tooltips: string[];
   }
 
+  export interface UploadScheme extends LowCode.NodeSchema {
+    props: UploadSchemeProps;
+  }
+
+  export interface UploadSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n[];
+    /** 状态 */
+    behavior: LowCode.Behavior;
+    /** 描述信息 */
+    tips: I18n;
+    /** 校验规则 */
+    rules: LowCode.RuleMap;
+    /** 请求接口对象 */
+    api: string;
+    /** 限制上传数量。当为 1 时，始终用最新上传的文件代替当前文件 */
+    maxCount: number;
+    /** 上传文件类型 */
+    accept: string[];
+    /** 单文件上传大小 */
+    maxFileSize: number;
+    /** 上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card */
+    listType: string;
+    /** 是否开启多选 */
+    multiple: boolean;
+    [key: string]: any;
+  }
+
   export interface RowSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局下的垂直对齐方式 */
     align: 'top' | 'middle' | 'bottom';

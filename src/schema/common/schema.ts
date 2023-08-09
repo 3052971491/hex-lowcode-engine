@@ -26,6 +26,7 @@ export enum ComponentType {
   'TimePicker' = 'TimePicker',
   'TimeRangePicker' = 'TimeRangePicker',
   'Rate' = 'Rate',
+  'Upload' = 'Upload',
   'Row' = 'Row',
   'Column' = 'Column',
   'Card' = 'Card',
@@ -980,6 +981,58 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
   }
 }
 
+export class Upload extends Scheme<PcSchema.UploadScheme> {
+  props: PcSchema.UploadSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/upload-cn';
+    this.componentName = '上传';
+    this.componentType = ComponentType.Upload;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: `Field_${buildUUID()}`,
+      label: this.componentName,
+      defaultValue: [],
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      api: '',
+      maxCount: 1,
+      accept: ['*'],
+      maxFileSize: 5,
+      listType: 'text',
+      multiple: false,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
@@ -1615,6 +1668,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TimePicker, new TimePicker() as any],
   [ComponentType.TimeRangePicker, new TimeRangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
+  [ComponentType.Upload, new Upload() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Card, new Card() as any],
@@ -1653,6 +1707,7 @@ export default {
   TimePicker,
   TimeRangePicker,
   Rate,
+  Upload,
   Row,
   Column,
   Card,
