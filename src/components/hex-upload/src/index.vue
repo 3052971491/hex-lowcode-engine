@@ -17,10 +17,10 @@
         >
           <template v-if="getProps.listType === 'picture-card'">
             <div class="item">
-              <a-button block :disabled="getBindValues.disabled"> 选择文件 </a-button>
+              <a-button block> 选择文件 </a-button>
             </div>
             <div class="item">
-              <a-button :disabled="getBindValues.disabled" block @click.stop="handleStartUpload()">
+              <a-button :disabled="!getIsSelectFile" block @click.stop="handleStartUpload()">
                 <upload-outlined />
                 上传
               </a-button>
@@ -28,11 +28,11 @@
           </template>
           <template v-else>
             <a-space>
-              <a-button :disabled="getBindValues.disabled">
+              <a-button>
                 <upload-outlined />
                 选择文件
               </a-button>
-              <a-button :disabled="getBindValues.disabled" @click.stop="handleStartUpload()">
+              <a-button :disabled="!getIsSelectFile" @click.stop="handleStartUpload()">
                 <upload-outlined />
                 上传
               </a-button>
@@ -88,7 +88,7 @@ const getBindValues = computed(() => {
 });
 
 const { getStringAccept } = useUploadType(getProps);
-const { fileListRef, isUploadingRef, reload } = useDataSource(getProps);
+const { fileListRef, isUploadingRef, reload, getIsSelectFile } = useDataSource(getProps);
 
 const modelValue = computed<any[]>({
   set(val) {
@@ -139,7 +139,7 @@ const beforeUpload: UploadProps['beforeUpload'] = (file, fileList) => {
     name,
     percent: 0,
     type: name.split('.').pop(),
-    state: UploadResultStatus.UPLOADING,
+    status: UploadResultStatus.UPLOADING,
   };
 
   // 修改最后一个文件信息
