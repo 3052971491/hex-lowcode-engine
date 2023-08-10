@@ -812,6 +812,16 @@ export namespace PcSchema {
     [key: string]: any;
   }
 
+  export interface FilterSchema extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: FilterSchemaProps;
+  }
+
+  export interface FilterSchemaProps extends LowCode.NodeSchemaProps {
+    /** 数据模型, 即对应后端的表 */
+    model: string;
+  }
+
   export interface ModalSchema extends LowCode.NodeSchema {
     children: LowCode.Schema[];
     props: ModalSchemaProps;

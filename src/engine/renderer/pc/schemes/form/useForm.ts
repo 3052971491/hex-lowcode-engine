@@ -1,12 +1,11 @@
 import { PcSchema } from '/@/schema/common/interface';
 import { FormInstance } from 'ant-design-vue';
 import { NamePath } from 'ant-design-vue/lib/form/interface';
-import { reject } from 'lodash-es';
 import { reactive } from 'vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
 interface Props {
-  schema: Scheme<PcSchema.FormSchema>;
+  schema: Scheme<PcSchema.FormSchema | PcSchema.FilterSchema>;
   formRef: FormInstance | undefined;
 }
 

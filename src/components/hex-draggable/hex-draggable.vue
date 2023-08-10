@@ -4,6 +4,7 @@
       v-bind="option"
       v-model="modelValue"
       class="draggable h-full"
+      :class="draggableClass"
       @start="start"
       @add="add"
       @remove="remove"
@@ -14,7 +15,7 @@
       @unchoose="unchoose"
     >
       <template #item="{ element, index }">
-        <div class="draggable-item w-full">
+        <div class="draggable-item w-full" :class="element.componentType">
           <slot :key="element[props.itemKey]" name="item" :element="element" :index="index"></slot>
         </div>
       </template>
@@ -52,6 +53,9 @@ interface Props {
   move?: Function;
   /** 从一个数组拖拽到另外一个数组时触发的事件和add不同，clone是复制了数组元素 */
   clone?: Function;
+  filter?: string;
+  /** draggable额外class, 用于禁止拖入 */
+  draggableClass?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -71,6 +75,8 @@ const props = withDefaults(defineProps<Props>(), {
   clone: (original: any) => {
     return original;
   },
+  filter: '',
+  draggableClass: '',
 });
 
 const emit = defineEmits([
@@ -104,6 +110,7 @@ const option = reactive<HexDraggable.Options>({
   sort: props.sort,
   move: props.move,
   clone: props.clone,
+  filter: props.filter,
 });
 
 const modelValue = computed({

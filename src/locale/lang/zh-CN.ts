@@ -83,6 +83,7 @@ export default {
       Vue: 'Vue',
       Progress: '进度条',
       Table: '表格',
+      Filter: '查询',
       Modal: '模态框',
       ModalContent: '模态框-内容区',
       ModalFooter: '模态框-操作区',
@@ -124,6 +125,10 @@ export default {
       selectParentNode: '选中父节点',
       enable: '启用',
       unEnable: '停用',
+      search: '查询',
+      reset: '重置',
+      fold: '折叠',
+      expand: '展开',
     },
     property: {
       id: '唯一标识',

@@ -83,6 +83,7 @@ export default {
       Vue: 'Vue',
       Progress: 'Progress',
       Table: 'Table',
+      Filter: 'Filter',
       Modal: 'Modal',
       ModalContent: 'Modal Content',
       ModalFooter: 'Modal Footer',
@@ -124,6 +125,10 @@ export default {
       selectParentNode: 'Select parent node',
       enable: 'Enable',
       unEnable: 'unEnable',
+      search: 'Search',
+      reset: 'Reset',
+      fold: 'Fold',
+      expand: 'Expand',
     },
     property: {
       id: 'ID',

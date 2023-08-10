@@ -435,6 +435,10 @@ const TABLE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Table', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const FILTER_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Filter', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
@@ -496,6 +500,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Vue: VUE_ATTRIBUTE,
   Progress: PROGRESS_ATTRIBUTE,
   Table: TABLE_ATTRIBUTE,
+  Filter: FILTER_ATTRIBUTE,
   QRcode: QR_CODE_ATTRIBUTE,
 };
 

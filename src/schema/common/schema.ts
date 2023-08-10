@@ -39,6 +39,7 @@ export enum ComponentType {
   'Vue' = 'Vue',
   'Progress' = 'Progress',
   'Table' = 'Table',
+  'Filter' = 'Filter',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -1551,6 +1552,49 @@ export class ActionItemDto {
   }
 }
 
+export class Filter extends Scheme<PcSchema.FilterSchema> {
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = '查询';
+    this.componentType = ComponentType.Filter;
+    this.children = [];
+    this.props = {
+      model: `Model_${buildUUID()}`,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+
+  /**
+   * 触发表单验证, 同 validateFields
+   */
+  validate(...args: any) {
+    throw new Error('警告【validate】方法暂未实现');
+  }
+
+  /**
+   * 移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果
+   */
+  clearValidate(...args: any) {
+    throw new Error('警告【clearValidate】方法暂未实现');
+  }
+
+  /**
+   * 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果
+   */
+  resetFields(...args: any) {
+    throw new Error('警告【resetFields】方法暂未实现');
+  }
+}
+
 export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
@@ -1681,6 +1725,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.Vue, new Vue() as any],
   [ComponentType.Progress, new Progress() as any],
   [ComponentType.Table, new Table() as any],
+  [ComponentType.Filter, new Filter() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1720,6 +1765,7 @@ export default {
   Vue,
   Progress,
   Table,
+  Filter,
   Modal,
   ModalContent,
   ModalFooter,

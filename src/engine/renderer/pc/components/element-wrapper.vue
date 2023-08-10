@@ -2,7 +2,7 @@
   <div class="element-wrapper">
     <template v-if="isPreview">
       <ElementEditWrapper
-        v-if="schema?.tag !== 'LAYOUT' && schema.componentType !== 'Form'"
+        v-if="schema?.tag !== 'LAYOUT' && !['Form', 'Filter'].includes(schema.componentType)"
         :schema="schema"
         :parent-schema="parentSchema"
         :parent-schema-list="parentSchemaList"
