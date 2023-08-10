@@ -42,20 +42,19 @@
       </template>
       <a-row>
         <a-col :span="24" style="text-align: right">
-          <a-button type="primary" @click="() => __instance__?.validate()">{{ t('el.control.search') }}</a-button>
-          <a-button style="margin: 0 8px" @click="() => __instance__?.resetFields()">
+          <a-button type="primary" :icon="h(SearchOutlined)" @click="() => __instance__?.validate()">{{
+            t('el.control.search')
+          }}</a-button>
+          <a-button style="margin-left: 8px" @click="() => __instance__?.resetFields()">
             {{ t('el.control.reset') }}
           </a-button>
-          <a style="font-size: 12px" @click="advancedFilter = !advancedFilter">
-            <template v-if="advancedFilter">
-              <UpOutlined />
-              {{ t('el.control.fold') }}
+          <a-button type="link" @click="advancedFilter = !advancedFilter">
+            <template #icon>
+              <UpOutlined v-if="advancedFilter" />
+              <DownOutlined v-else />
             </template>
-            <template v-else>
-              <DownOutlined />
-              {{ t('el.control.expand') }}
-            </template>
-          </a>
+            {{ advancedFilter ? t('el.control.fold') : t('el.control.expand') }}
+          </a-button>
         </a-col>
       </a-row>
     </a-form>
@@ -63,10 +62,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw } from 'vue';
+import { h, computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
-import { UpOutlined, DownOutlined } from '@ant-design/icons-vue';
+import { UpOutlined, DownOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import { LowCode } from '/@/types/schema.d';
 import {
