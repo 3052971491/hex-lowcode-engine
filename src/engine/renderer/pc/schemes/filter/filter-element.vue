@@ -6,54 +6,68 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-form ref="__instance__" :model="form.modelValue" :layout="prop.layout" :class="[ectype.props.className]">
+    <a-form
+      ref="__instance__"
+      :model="form.modelValue"
+      :layout="prop.layout"
+      class="overflow-hidden"
+      :class="[ectype.props.className]"
+    >
       <template v-if="isPreview">
-        <hex-draggable
-          v-model:value="state.schema.children"
-          :draggable-class="state.schema.componentType"
-          @add="onAdd"
-          @update="onUpdate"
-        >
-          <template #item="{ element, index }">
-            <div class="item hex-draggable-handle">
-              <component
-                :is="`${element.componentType}Element`"
-                :schema="element"
-                :parent-schema="state.schema"
-                :parent-schema-list="state.schema.children"
-                :index-of-parent-list="index"
-              ></component>
-            </div>
-          </template>
-        </hex-draggable>
+        <a-row :gutter="[12, 12]">
+          <hex-draggable
+            v-model:value="state.schema.children"
+            :draggable-class="state.schema.componentType"
+            @add="onAdd"
+            @update="onUpdate"
+          >
+            <template #item="{ element, index }">
+              <a-col :span="24 / (ectype.props.columnNumber || 24)">
+                <div class="item hex-draggable-handle">
+                  <component
+                    :is="`${element.componentType}Element`"
+                    :schema="element"
+                    :parent-schema="state.schema"
+                    :parent-schema-list="state.schema.children"
+                    :index-of-parent-list="index"
+                  />
+                </div>
+              </a-col>
+            </template>
+          </hex-draggable>
+        </a-row>
       </template>
       <template v-else>
-        <div v-for="(item, index) in ectype.children" :key="item.id">
-          <template v-if="true">
-            <component
-              :is="`${item.componentType}Element`"
-              :schema="item"
-              :parent-schema="ectype"
-              :parent-schema-list="ectype.children"
-              :index-of-parent-list="index"
-            />
+        <a-row :gutter="[12, 12]">
+          <template v-for="(item, index) in ectype.children" :key="item.id">
+            <a-col v-show="!(!advancedFilter && filterInfo(item))" :span="24 / (ectype.props.columnNumber || 24)">
+              <template v-if="true">
+                <component
+                  :is="`${item.componentType}Element`"
+                  :schema="item"
+                  :parent-schema="ectype"
+                  :parent-schema-list="ectype.children"
+                  :index-of-parent-list="index"
+                />
+              </template>
+            </a-col>
           </template>
-        </div>
+        </a-row>
       </template>
-      <a-row>
+      <a-row :gutter="[12, 12]">
         <a-col :span="24" style="text-align: right">
-          <a-button type="primary" :icon="h(SearchOutlined)" @click="() => __instance__?.validate()">{{
-            t('el.control.search')
-          }}</a-button>
-          <a-button style="margin-left: 8px" @click="() => __instance__?.resetFields()">
-            {{ t('el.control.reset') }}
-          </a-button>
-          <a-button type="link" @click="advancedFilter = !advancedFilter">
+          <a-button v-show="isShowAdvancedFilter" type="link" @click="advancedFilter = !advancedFilter">
             <template #icon>
               <UpOutlined v-if="advancedFilter" />
               <DownOutlined v-else />
             </template>
             {{ advancedFilter ? t('el.control.fold') : t('el.control.expand') }}
+          </a-button>
+          <a-button type="primary" :icon="h(SearchOutlined)" @click="handleSearchClick">
+            {{ t('el.control.search') }}
+          </a-button>
+          <a-button style="margin-left: 8px" @click="() => __instance__?.resetFields()">
+            {{ t('el.control.reset') }}
           </a-button>
         </a-col>
       </a-row>
@@ -62,7 +76,7 @@
 </template>
 
 <script lang="ts" setup>
-import { h, computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw } from 'vue';
+import { h, computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw, unref } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import { UpOutlined, DownOutlined, SearchOutlined } from '@ant-design/icons-vue';
@@ -144,6 +158,19 @@ provide(DataEngineInjectionKey, {
 
 const advancedFilter = ref(false);
 
+const filterInfo = computed(() => (i: LowCode.NodeSchema) => {
+  return unref(ectype).props?.config?.find((item) => item.componentId === i.id)?.isAdvanced;
+});
+
+const isShowAdvancedFilter = computed(() => {
+  return !!unref(ectype).props?.config.find((item) => item.isAdvanced);
+});
+
+const handleSearchClick = () => {
+  __instance__.value?.validate().then((res) => {
+    console.log(res);
+  });
+};
 onMounted(() => {
   if (__instance__.value) {
     // 替换原型方法

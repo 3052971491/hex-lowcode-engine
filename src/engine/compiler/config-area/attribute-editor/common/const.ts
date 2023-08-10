@@ -44,6 +44,19 @@ export const useConst = (t: any) => {
           ];
         }
 
+        if (['Filter'].includes(componentType)) {
+          return [
+            {
+              title: `onSearch`,
+              value: 'onSearch',
+            },
+            {
+              title: `onReset`,
+              value: 'onReset',
+            },
+          ];
+        }
+
         return formOptions;
       },
   );

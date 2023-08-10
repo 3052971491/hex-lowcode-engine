@@ -1,5 +1,5 @@
 <template>
-  <collapse-Item-wrapper :label="t(`el.property.Filter.${props.attribute}`)" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper :label="t(`el.property.Filter.config`)" :name="props.attribute" :option="option">
     <template #extra>
       <div v-if="isEditMode" @click.stop="handleExitDetailEditClick">
         <rollback-outlined />
@@ -20,7 +20,7 @@
               <div class="listitem-content">
                 <holder-outlined class="hex-draggable-handle move" />
                 <a-radio-group disabled class="info" @click="handleEnableColumnEditClick(element)">
-                  <a-radio :value="element.value">{{ filterItemConfig(element)?.props?.label }}</a-radio>
+                  <a-radio :value="element.value">{{ element.props.label }}</a-radio>
                 </a-radio-group>
               </div>
               <div>
@@ -76,7 +76,6 @@ import { HolderOutlined, DeleteOutlined, EditOutlined, RollbackOutlined } from '
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { RadioGroupChildOption } from 'ant-design-vue/lib/radio/Group';
 import { Empty } from 'ant-design-vue';
-import { cloneDeep } from 'lodash-es';
 import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
@@ -97,35 +96,36 @@ const props = withDefaults(defineProps<Props>(), {
 
 const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
-  return core?.state.selectedData?.selectedScheme!;
+  return core?.state.selectedData?.selectedScheme! as PcSchema.FilterSchema;
 });
 const modelValue = computed<PcSchema.FilterConfigItem[]>({
   set(val) {
-    if (schema.value.props) {
-      schema.value.props[props.attribute] = val;
+    if (schema.value) {
+      schema.value[props.attribute] = val;
     }
   },
   get() {
-    if (!schema.value.props) return [];
-    return schema.value.props[props.attribute] || [];
+    if (!schema.value) return [];
+    return schema.value[props.attribute] || [];
   },
 });
 
 const handleDeleteClick = (options: RadioGroupChildOption, index: number) => {
   modelValue.value.splice(index, 1);
 };
-const filterItemConfig = (element: PcSchema.FilterConfigItem) => {
-  return unref(schema).children?.find((item) => item.id === element.componentId);
-};
+const filterItemConfig = computed(() => (element: PcSchema.FilterSchema) => {
+  return unref(schema).props?.config?.find((item) => item.componentId === element.id);
+});
 
 /** 是否列编辑模式 */
 const isEditMode = ref(false);
 const actionItemInfo = ref<FilterConfigItemDto>();
 const __item__ = ref<PcSchema.FilterConfigItem>();
 /** 进入列编辑模式 */
-const handleEnableColumnEditClick = (element: PcSchema.FilterConfigItem) => {
-  actionItemInfo.value = new FilterConfigItemDto(cloneDeep(element));
-  __item__.value = element;
+const handleEnableColumnEditClick = (element: PcSchema.FilterSchema) => {
+  const result = new FilterConfigItemDto(filterItemConfig.value(element));
+  actionItemInfo.value = new FilterConfigItemDto(result);
+  __item__.value = result;
   isEditMode.value = true;
 };
 /** 退出列编辑模式 */
@@ -135,7 +135,10 @@ const handleExitDetailEditClick = () => {
   isEditMode.value = false;
 };
 const handleSaveColumnEditInfoClick = () => {
-  Object.assign(__item__.value || {}, actionItemInfo.value);
+  const idx = unref(schema).props?.config?.findIndex((item) => item.componentId === actionItemInfo.value?.componentId);
+  if (idx !== -1 && unref(schema)?.props?.config) {
+    unref(schema).props.config[idx] = actionItemInfo.value!;
+  }
   core?.handleUpdateHistoryData();
   handleExitDetailEditClick();
 };
