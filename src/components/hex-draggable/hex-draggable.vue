@@ -15,9 +15,14 @@
       @unchoose="unchoose"
     >
       <template #item="{ element, index }">
-        <div class="draggable-item w-full" :class="element.componentType">
+        <component
+          :is="props.slotTag"
+          v-bind="props.slotProperty"
+          class="draggable-item w-full"
+          :class="element.componentType"
+        >
           <slot :key="element[props.itemKey]" name="item" :element="element" :index="index"></slot>
-        </div>
+        </component>
       </template>
     </draggable>
   </div>
@@ -56,6 +61,10 @@ interface Props {
   filter?: string;
   /** draggable额外class, 用于禁止拖入 */
   draggableClass?: string;
+  /** 默认插槽children标签 */
+  slotTag?: string;
+  /** 默认插槽children标签的属性 */
+  slotProperty?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -77,6 +86,8 @@ const props = withDefaults(defineProps<Props>(), {
   },
   filter: '',
   draggableClass: '',
+  slotTag: 'div',
+  slotProperty: () => {},
 });
 
 const emit = defineEmits([

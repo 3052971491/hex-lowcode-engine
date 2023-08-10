@@ -14,28 +14,30 @@
       :class="[ectype.props.className]"
     >
       <template v-if="isPreview">
-        <a-row :gutter="[12, 12]">
-          <hex-draggable
-            v-model:value="state.schema.children"
-            :draggable-class="state.schema.componentType"
-            @add="onAdd"
-            @update="onUpdate"
-          >
-            <template #item="{ element, index }">
-              <a-col :span="24 / (ectype.props.columnNumber || 24)">
-                <div class="item hex-draggable-handle">
-                  <component
-                    :is="`${element.componentType}Element`"
-                    :schema="element"
-                    :parent-schema="state.schema"
-                    :parent-schema-list="state.schema.children"
-                    :index-of-parent-list="index"
-                  />
-                </div>
-              </a-col>
-            </template>
-          </hex-draggable>
-        </a-row>
+        <hex-draggable
+          v-model:value="state.schema.children"
+          :draggable-class="state.schema.componentType"
+          tag="a-row"
+          slot-tag="a-col"
+          :slot-property="{
+            span: 24 / (ectype.props.columnNumber || 24),
+          }"
+          @add="onAdd"
+          @update="onUpdate"
+        >
+          <template #item="{ element, index }">
+            <div class="item hex-draggable-handle">
+              <component
+                :is="`${element.componentType}Element`"
+                :schema="element"
+                :parent-schema="state.schema"
+                :parent-schema-list="state.schema.children"
+                :index-of-parent-list="index"
+                style="padding: 6px"
+              />
+            </div>
+          </template>
+        </hex-draggable>
       </template>
       <template v-else>
         <a-row :gutter="[12, 12]">
@@ -66,7 +68,7 @@
           <a-button type="primary" :icon="h(SearchOutlined)" @click="handleSearchClick">
             {{ t('el.control.search') }}
           </a-button>
-          <a-button style="margin-left: 8px" @click="() => __instance__?.resetFields()">
+          <a-button style="margin-left: 8px" @click="handleResetClick()">
             {{ t('el.control.reset') }}
           </a-button>
         </a-col>
@@ -168,8 +170,53 @@ const isShowAdvancedFilter = computed(() => {
 
 const handleSearchClick = () => {
   __instance__.value?.validate().then((res) => {
-    console.log(res);
+    const { events } = unref(ectype);
+    // 动作
+    const opt: any = {};
+    if (events && core) {
+      for (const key in events) {
+        if (Object.prototype.hasOwnProperty.call(events, key)) {
+          const element = events[key];
+          if (element.events.length > 0) {
+            element.events.forEach((i: any) => {
+              if (core?.state.__js__[i.name]) {
+                core.context()!.params = JSON.parse(i.params);
+                opt[key] = core.state.__js__[i.name].bind(core.context(), { data: res });
+              }
+            });
+          }
+        }
+      }
+    }
+    if (opt.onSearch) {
+      opt.onSearch();
+    }
   });
+};
+
+const handleResetClick = () => {
+  __instance__.value?.resetFields();
+  const { events } = unref(ectype);
+  // 动作
+  const opt: any = {};
+  if (events && core) {
+    for (const key in events) {
+      if (Object.prototype.hasOwnProperty.call(events, key)) {
+        const element = events[key];
+        if (element.events.length > 0) {
+          element.events.forEach((i: any) => {
+            if (core?.state.__js__[i.name]) {
+              core.context()!.params = JSON.parse(i.params);
+              opt[key] = core.state.__js__[i.name].bind(core.context());
+            }
+          });
+        }
+      }
+    }
+  }
+  if (opt.onReset) {
+    opt.onReset();
+  }
 };
 onMounted(() => {
   if (__instance__.value) {
@@ -201,7 +248,6 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 :deep(.draggable) {
-  padding-bottom: 12px;
   min-height: 68px;
 }
 
