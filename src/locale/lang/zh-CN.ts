@@ -277,7 +277,10 @@ export default {
         multiple: '多选',
       },
       Filter: {
+        layout: '标题位置',
         columnNumber: '每列数量',
+        horizontal: '左',
+        vertical: '上',
       },
     },
     tips: {

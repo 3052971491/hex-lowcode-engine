@@ -277,7 +277,10 @@ export default {
         multiple: 'Multiple',
       },
       Filter: {
+        layout: 'Title position',
         columnNumber: 'Column number',
+        horizontal: 'Left',
+        vertical: 'top',
       },
     },
     tips: {
