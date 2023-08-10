@@ -220,7 +220,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -290,7 +290,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -360,7 +360,7 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: null,
@@ -434,7 +434,7 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: false,
       size: 'default',
@@ -486,7 +486,7 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: null,
       size: 'default',
@@ -542,7 +542,7 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: [],
       size: 'default',
@@ -596,7 +596,7 @@ export class Select extends Scheme<PcSchema.SelectScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -654,7 +654,7 @@ export class MultiSelect extends Scheme<PcSchema.MultiSelectScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: [],
@@ -712,7 +712,7 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请选择',
       defaultValue: null,
@@ -770,7 +770,7 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: ['开始日期', '结束日期'],
       defaultValue: null,
@@ -826,7 +826,7 @@ export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请选择',
       defaultValue: null,
@@ -884,7 +884,7 @@ export class TimeRangePicker extends Scheme<PcSchema.TimeRangePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: ['开始时间', '结束时间'],
       defaultValue: null,
@@ -942,7 +942,7 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: 0,
       behavior: 'normal',
@@ -993,7 +993,7 @@ export class Upload extends Scheme<PcSchema.UploadScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: [],
       behavior: 'normal',
@@ -1293,7 +1293,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
     this.componentType = ComponentType.Form;
     this.children = [];
     this.props = {
-      model: `Model_${buildUUID()}`,
+      model: '',
       hideRequiredMark: false,
       labelAlign: 'left',
       className: '',
@@ -1525,7 +1525,7 @@ export class BasicColumnDto {
         }
       }
     } else {
-      const field = `Field_${buildUUID()}`;
+      const field = '';
       this.title = field;
       this.dataIndex = field;
     }
@@ -1561,7 +1561,7 @@ export class Filter extends Scheme<PcSchema.FilterSchema> {
     this.componentType = ComponentType.Filter;
     this.children = [];
     this.props = {
-      model: `Model_${buildUUID()}`,
+      model: '',
       layout: 'horizontal',
       columnNumber: 3,
       tableComponentId: '',
