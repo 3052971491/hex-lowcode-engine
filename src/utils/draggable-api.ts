@@ -9,6 +9,14 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
   if (newSchema.props) {
     newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
+
+    if (newSchema.props?.field) {
+      newSchema.props.field = `Field_${buildUUID()}`;
+    }
+
+    if (newSchema.props?.model) {
+      newSchema.props.model = `Model_${buildUUID()}`;
+    }
   }
 
   if (newSchema.tag === 'LAYOUT') {
