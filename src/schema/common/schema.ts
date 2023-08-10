@@ -4,7 +4,7 @@ import type { PcSchema } from './interface';
 import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
 import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
-import { BasicColumn, BasicTableProps } from '/@/components/hex-table';
+import { BasicColumn, BasicTableProps, FetchParams } from '/@/components/hex-table';
 
 export enum ComponentType {
   'Text' = 'Text',
@@ -1416,7 +1416,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
       actionColumn: null,
       rowSelection: null,
       actionItem: [],
-      noPadding: true,
+      noPadding: false,
       className: '',
       __style__: '',
     };
@@ -1429,7 +1429,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
   }
 
   /** 刷新表格 */
-  reload() {
+  reload(opt?: FetchParams) {
     throw new Error('警告【reload】方法暂未实现');
   }
 
@@ -1564,6 +1564,7 @@ export class Filter extends Scheme<PcSchema.FilterSchema> {
       model: `Model_${buildUUID()}`,
       layout: 'horizontal',
       columnNumber: 3,
+      tableComponentId: '',
       config: [],
       className: '',
       __style__: '',

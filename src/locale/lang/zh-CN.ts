@@ -284,6 +284,7 @@ export default {
         config: '筛选项配置',
         span: '跨列数量',
         isAdvanced: '是否高级查询',
+        tableComponentId: '表格组件',
       },
     },
     tips: {

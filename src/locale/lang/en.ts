@@ -284,6 +284,7 @@ export default {
         config: 'Filter config',
         span: 'Number of columns across',
         isAdvanced: 'Advanced query',
+        tableComponentId: 'Table component',
       },
     },
     tips: {

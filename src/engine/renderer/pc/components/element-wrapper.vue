@@ -80,7 +80,7 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
+const { isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
   props.schema,
   selectedScheme.value,
   redactState,

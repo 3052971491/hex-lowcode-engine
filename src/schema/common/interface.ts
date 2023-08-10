@@ -820,6 +820,8 @@ export namespace PcSchema {
   export interface FilterSchemaProps extends LowCode.NodeSchemaProps {
     /** 数据模型, 即对应后端的表 */
     model: string;
+    /** 查询组件ID */
+    tableComponentId: string;
     /** 标题位置 'horizontal'|'vertical' */
     layout: string;
     /** 每列数量 */

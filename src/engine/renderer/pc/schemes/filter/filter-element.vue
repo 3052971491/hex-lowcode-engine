@@ -93,7 +93,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import { useForm } from '../form/useForm';
 import { useElement } from '../../hooks/useElement';
-import { Filter, FilterConfigItemDto } from '/@/schema/common/schema';
+import { Filter, FilterConfigItemDto, Table } from '/@/schema/common/schema';
 import { useLocale } from '/@/hooks/use-loacle';
 
 const { t } = useLocale();
@@ -168,9 +168,18 @@ const isShowAdvancedFilter = computed(() => {
   return !!unref(ectype).props?.config.find((item) => item.isAdvanced);
 });
 
+function reloadTableApi() {
+  if (redactState) return;
+  const { props } = unref(ectype);
+  if (props.tableComponentId && core?.state.__this__) {
+    const table = core?.state.__this__.$(props.tableComponentId) as Table;
+    table?.reload({ filterInfo: ectype.value.getValue() as any });
+  }
+}
 const handleSearchClick = () => {
+  if (redactState) return;
   __instance__.value?.validate().then((res) => {
-    const { events } = unref(ectype);
+    const { events, props } = unref(ectype);
     // 动作
     const opt: any = {};
     if (events && core) {
@@ -191,12 +200,14 @@ const handleSearchClick = () => {
     if (opt.onSearch) {
       opt.onSearch();
     }
+    reloadTableApi();
   });
 };
 
 const handleResetClick = () => {
+  if (redactState) return;
   __instance__.value?.resetFields();
-  const { events } = unref(ectype);
+  const { events, props } = unref(ectype);
   // 动作
   const opt: any = {};
   if (events && core) {
@@ -217,7 +228,9 @@ const handleResetClick = () => {
   if (opt.onReset) {
     opt.onReset();
   }
+  reloadTableApi();
 };
+
 onMounted(() => {
   if (__instance__.value) {
     // 替换原型方法
