@@ -117,8 +117,7 @@ const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, reda
 const prop = computed(() =>
   ectypeProps((obj) => {
     return {
-      hideRequiredMark: obj.hideRequiredMark,
-      labelAlign: obj.labelAlign,
+      columnNumber: obj.columnNumber,
     };
   }),
 );

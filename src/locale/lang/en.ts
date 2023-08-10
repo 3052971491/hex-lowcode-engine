@@ -276,6 +276,9 @@ export default {
         picture: 'Picture',
         multiple: 'Multiple',
       },
+      Filter: {
+        columnNumber: 'Column number',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',

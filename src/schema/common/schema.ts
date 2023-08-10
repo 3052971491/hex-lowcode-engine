@@ -1562,6 +1562,7 @@ export class Filter extends Scheme<PcSchema.FilterSchema> {
     this.children = [];
     this.props = {
       model: `Model_${buildUUID()}`,
+      columnNumber: 3,
       className: '',
       __style__: '',
     };

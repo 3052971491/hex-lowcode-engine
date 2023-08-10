@@ -820,6 +820,7 @@ export namespace PcSchema {
   export interface FilterSchemaProps extends LowCode.NodeSchemaProps {
     /** 数据模型, 即对应后端的表 */
     model: string;
+    columnNumber: number;
   }
 
   export interface ModalSchema extends LowCode.NodeSchema {

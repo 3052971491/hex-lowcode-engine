@@ -276,6 +276,9 @@ export default {
         picture: '拖拽',
         multiple: '多选',
       },
+      Filter: {
+        columnNumber: '每列数量',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',
