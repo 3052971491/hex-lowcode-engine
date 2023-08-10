@@ -281,6 +281,9 @@ export default {
         columnNumber: '每列数量',
         horizontal: '左',
         vertical: '上',
+        config: '筛选项配置',
+        span: '跨列数量',
+        isAdvanced: '是否高级查询',
       },
     },
     tips: {

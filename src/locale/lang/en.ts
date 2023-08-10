@@ -281,6 +281,9 @@ export default {
         columnNumber: 'Column number',
         horizontal: 'Left',
         vertical: 'top',
+        config: 'Filter config',
+        span: 'Number of columns across',
+        isAdvanced: 'Advanced query',
       },
     },
     tips: {

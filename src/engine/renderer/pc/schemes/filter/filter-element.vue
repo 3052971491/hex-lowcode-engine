@@ -6,7 +6,7 @@
     :index-of-parent-list="indexOfParentList"
     :class="classMap"
   >
-    <a-form ref="__instance__" :model="form.modelValue" v-bind="prop" :class="[ectype.props.className]">
+    <a-form ref="__instance__" :model="form.modelValue" :layout="prop.layout" :class="[ectype.props.className]">
       <template v-if="isPreview">
         <hex-draggable
           v-model:value="state.schema.children"
@@ -77,7 +77,7 @@ import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import { useForm } from '../form/useForm';
 import { useElement } from '../../hooks/useElement';
-import { Filter } from '/@/schema/common/schema';
+import { Filter, FilterConfigItemDto } from '/@/schema/common/schema';
 import { useLocale } from '/@/hooks/use-loacle';
 
 const { t } = useLocale();
@@ -102,7 +102,13 @@ const selectedScheme = computed(() => {
 });
 const onAdd = ({ newIndex }: { newIndex: number }) => {
   if (props.schema?.children && props.schema?.children[newIndex]) {
-    core?.handleUpdateSelectData(props.schema.children[newIndex]);
+    const addSchema = props.schema?.children[newIndex];
+    // 当拖拽【表单控件】进入【查询组件】, 新增筛选项配置
+    if (state.schema.props) {
+      const item = new FilterConfigItemDto({ componentId: addSchema.id });
+      state.schema.props.config.push(item);
+    }
+    core?.handleUpdateSelectData(addSchema);
     core?.handleUpdateHistoryData();
   }
 };
@@ -114,9 +120,11 @@ const onUpdate = () => {
 const { ectype, ectypeProps } = useElement<PcSchema.FilterSchema>(props, __instance__);
 const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, redactState);
 const prop = computed(() =>
-  ectypeProps((obj) => {
+  ectypeProps((obj: PcSchema.FilterSchemaProps) => {
     return {
       columnNumber: obj.columnNumber,
+      layout: obj.layout,
+      config: obj.config,
     };
   }),
 );

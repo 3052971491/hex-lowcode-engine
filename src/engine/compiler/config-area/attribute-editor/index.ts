@@ -438,6 +438,7 @@ const TABLE_ATTRIBUTE: Array<AttributeItem> = [
 const FILTER_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Filter', name: 'layout', label: '标题位置', editor: 'layout-editor', merge: true },
   { type: 'Filter', name: 'columnNumber', label: '每列数量', editor: 'column-number-editor', merge: true },
+  { type: 'Filter', name: 'config', label: '筛选项配置', editor: 'config-editor', merge: true },
   { type: 'Filter', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 

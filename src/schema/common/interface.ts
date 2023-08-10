@@ -824,6 +824,19 @@ export namespace PcSchema {
     layout: string;
     /** 每列数量 */
     columnNumber: number;
+    /** 筛选项配置 */
+    config: FilterConfigItem[];
+  }
+
+  export interface FilterConfigItem {
+    /** 唯一标识 */
+    id: string;
+    /** 对应的组件唯一标识 */
+    componentId: string;
+    /** 跨列数量 */
+    span: number;
+    /** 是否高级搜索 */
+    isAdvanced: boolean;
   }
 
   export interface ModalSchema extends LowCode.NodeSchema {

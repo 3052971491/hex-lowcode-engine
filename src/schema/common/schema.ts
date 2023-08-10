@@ -1564,6 +1564,7 @@ export class Filter extends Scheme<PcSchema.FilterSchema> {
       model: `Model_${buildUUID()}`,
       layout: 'horizontal',
       columnNumber: 3,
+      config: [],
       className: '',
       __style__: '',
     };
@@ -1594,6 +1595,28 @@ export class Filter extends Scheme<PcSchema.FilterSchema> {
    */
   resetFields(...args: any) {
     throw new Error('警告【resetFields】方法暂未实现');
+  }
+}
+
+export class FilterConfigItemDto implements PcSchema.FilterConfigItem {
+  id: string = '';
+
+  componentId: string = '';
+
+  span: number = 3;
+
+  isAdvanced: boolean = false;
+
+  constructor(_data?: any) {
+    if (_data) {
+      for (const property in _data) {
+        if (Object.prototype.hasOwnProperty.call(_data, property)) {
+          (<any>this)[property] = (<any>_data)[property];
+        }
+      }
+    } else {
+      this.id = `Node_${buildUUID()}`;
+    }
   }
 }
 
