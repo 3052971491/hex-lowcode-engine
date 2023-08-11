@@ -50,10 +50,22 @@
       </a-space>
     </template>
     <hex-modal v-model:open="visible" :name="modalTitle" :is-footer="false">
-      <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
-      <hex-json-pretty v-else-if="modalType === ComponentTypeEnum.JSON_PREVIEW" v-model:value="element" />
+      <hex-json-pretty v-if="modalType === ComponentTypeEnum.JSON_PREVIEW" v-model:value="element" />
       <keyboard v-else-if="modalType === ComponentTypeEnum.KEYBOARD"></keyboard>
     </hex-modal>
+    <a-drawer
+      :title="modalTitle"
+      placement="bottom"
+      :open="drawerVisible"
+      height="94%"
+      :closable="false"
+      @close="onCloseDrawer"
+    >
+      <template #extra>
+        <a-button style="margin-right: 8px" @click="onCloseDrawer">{{ t('el.control.close') }}</a-button>
+      </template>
+      <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
+    </a-drawer>
   </div>
 </template>
 
@@ -92,14 +104,21 @@ enum ComponentTypeEnum {
 const modalType = ref('');
 const modalTitle = ref('');
 
+/** 是否显示模态框 */
 const visible = ref(false);
+/** 是否显示抽屉 */
+const drawerVisible = ref(false);
 const element = ref();
 
 function handlePreviewClick() {
   modalType.value = ComponentTypeEnum.RENDER_PREVIEW;
   modalTitle.value = t('el.nav.preview');
-  visible.value = true;
+  drawerVisible.value = true;
   element.value = cloneDeep(core?.state.projectConfig);
+}
+
+function onCloseDrawer() {
+  drawerVisible.value = false;
 }
 
 function handlePreviewJsonClick() {

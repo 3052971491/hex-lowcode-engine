@@ -129,6 +129,7 @@ export default {
       reset: '重置',
       fold: '折叠',
       expand: '展开',
+      close: '关闭',
     },
     property: {
       id: '唯一标识',

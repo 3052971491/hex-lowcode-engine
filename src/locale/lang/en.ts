@@ -129,6 +129,7 @@ export default {
       reset: 'Reset',
       fold: 'Fold',
       expand: 'Expand',
+      close: 'Close',
     },
     property: {
       id: 'ID',
