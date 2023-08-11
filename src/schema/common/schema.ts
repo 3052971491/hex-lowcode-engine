@@ -1609,14 +1609,13 @@ export class FilterConfigItemDto implements PcSchema.FilterConfigItem {
   isAdvanced: boolean = false;
 
   constructor(_data?: any) {
+    this.id = `Node_${buildUUID()}`;
     if (_data) {
       for (const property in _data) {
         if (Object.prototype.hasOwnProperty.call(_data, property)) {
           (<any>this)[property] = (<any>_data)[property];
         }
       }
-    } else {
-      this.id = `Node_${buildUUID()}`;
     }
   }
 }
