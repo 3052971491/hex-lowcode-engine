@@ -10,11 +10,11 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   if (newSchema.props) {
     newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
 
-    if (newSchema.props?.field) {
+    if (newSchema.props.hasOwnProperty('field')) {
       newSchema.props.field = `Field_${buildUUID()}`;
     }
 
-    if (newSchema.props?.model) {
+    if (newSchema.props.hasOwnProperty('model')) {
       newSchema.props.model = `Model_${buildUUID()}`;
     }
   }
