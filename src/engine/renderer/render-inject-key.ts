@@ -30,7 +30,7 @@ export interface IDataEngine {
   /** 表单 模型 */
   model: string;
   /** 组件节点描述 */
-  schema: PcSchema.FormSchema;
+  schema: PcSchema.FormSchema | PcSchema.FilterSchema;
   /** 源树 */
   originData: any;
 }

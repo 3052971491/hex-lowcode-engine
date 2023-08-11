@@ -154,7 +154,7 @@
                             :show-cancel="false"
                             :destroy-tooltip-on-hide="true"
                             :arrow-point-at-center="true"
-                            @visible-change="paramsVisibleChangeCallback"
+                            @open-change="paramsVisibleChangeCallback"
                           >
                             <template #icon></template>
                             <template #okButton></template>

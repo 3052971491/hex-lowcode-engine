@@ -1,7 +1,7 @@
 <template>
   <modal
     v-bind="$props"
-    :open="visible"
+    :open="open"
     :mask-closable="maskClosable"
     :destroy-on-close="true"
     :width="fullscreen ? '100%' : width"
@@ -48,7 +48,7 @@ const props = defineProps({
     type: String,
     default: 'el.control.preview',
   },
-  visible: {
+  open: {
     type: Boolean,
     default: false,
   },
@@ -67,10 +67,10 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['ok', 'cancel', 'update:visible']);
+const emit = defineEmits(['ok', 'cancel', 'update:open']);
 const fullscreen = ref(false);
 watch(
-  () => props.visible,
+  () => props.open,
   (val) => {
     if (val) {
       fullscreen.value = false;
@@ -93,7 +93,7 @@ function handleOkClick() {
 /** 取消回调 */
 function handleCancelClick() {
   emit('cancel');
-  emit('update:visible', false);
+  emit('update:open', false);
 }
 </script>
 <style lang="less">

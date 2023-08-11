@@ -40,6 +40,7 @@ export namespace HexDraggable {
     move: Function;
     /** 从一个数组拖拽到另外一个数组时触发的事件和add不同，clone是复制了数组元素 */
     clone: Function;
+    filter: String;
   }
 
   /** 方法 */

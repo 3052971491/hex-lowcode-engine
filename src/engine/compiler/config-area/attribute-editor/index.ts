@@ -263,6 +263,22 @@ const RATE_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Rate', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const UPLOAD_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Upload', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Upload', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Upload', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Upload', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Table', name: 'api', label: '请求接口对象', editor: 'api-editor', merge: true },
+  { type: 'Upload', name: 'listType', label: '上传类型', editor: 'list-type-editor', merge: true },
+  { type: 'Upload', name: 'maxCount', label: '最大上传数量', editor: 'input-number-editor' },
+  { type: 'Upload', name: 'maxFileSize', label: '单文件上传大小(M)', editor: 'input-number-editor' },
+  { type: 'Upload', name: 'accept', label: '上传文件类型', editor: 'accept-editor', merge: true },
+  { type: 'Upload', name: 'multiple', label: '多选', editor: 'switch-editor' },
+  { type: 'Upload', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Upload', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  // { type: 'Upload', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 /** 栅格-行 */
 const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'rowGutter', label: '列间距', editor: 'input-number-editor' },
@@ -419,6 +435,15 @@ const TABLE_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Table', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+const FILTER_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Filter', name: 'tableComponentId', label: '查询组件', editor: 'table-component-id-editor', merge: true },
+  { type: 'Filter', name: 'layout', label: '标题位置', editor: 'layout-editor', merge: true },
+  { type: 'Filter', name: 'columnNumber', label: '每列数量', editor: 'column-number-editor', merge: true },
+  { type: 'Filter', name: 'children', label: '筛选项配置', editor: 'config-editor', merge: true },
+  { type: 'Filter', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Filter', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
 const BUTTON_GROUP_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'ButtonGroup', name: 'align', label: '对齐方式', editor: 'align-editor', merge: true },
   { type: 'ButtonGroup', name: 'children', label: '子集', editor: 'children-editor' },
@@ -467,6 +492,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   TimePicker: TIME_PICKER_ATTRIBUTES,
   TimeRangePicker: TIME_RANGE_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
+  Upload: UPLOAD_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,
@@ -479,6 +505,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Vue: VUE_ATTRIBUTE,
   Progress: PROGRESS_ATTRIBUTE,
   Table: TABLE_ATTRIBUTE,
+  Filter: FILTER_ATTRIBUTE,
   QRcode: QR_CODE_ATTRIBUTE,
 };
 

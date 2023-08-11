@@ -1,18 +1,19 @@
 import { PcSchema } from '/@/schema/common/interface';
 import { FormInstance } from 'ant-design-vue';
 import { NamePath } from 'ant-design-vue/lib/form/interface';
-import { reject } from 'lodash-es';
 import { reactive } from 'vue';
 import { Scheme } from '/@/schema/common/FieldSchemaBase';
 
 interface Props {
-  schema: Scheme<PcSchema.FormSchema>;
+  schema: Scheme<PcSchema.FormSchema | PcSchema.FilterSchema>;
   formRef: FormInstance | undefined;
 }
 
 interface IForm {
   /** 表单数据对象 */
-  modelValue: any;
+  state: {
+    modelValue: Record<string, unknown>;
+  };
   /**
    * 移除表单项的校验结果
    * @param nameList
@@ -46,7 +47,9 @@ interface IForm {
  * @param props
  */
 export function useForm(props: Props): IForm {
-  const modelValue = reactive({});
+  const state = reactive({
+    modelValue: {},
+  });
   function clearValidate(nameList?: NamePath) {
     props.formRef?.clearValidate(nameList);
   }
@@ -75,7 +78,7 @@ export function useForm(props: Props): IForm {
   }
 
   return {
-    modelValue,
+    state,
     clearValidate,
     resetFields,
     validate,

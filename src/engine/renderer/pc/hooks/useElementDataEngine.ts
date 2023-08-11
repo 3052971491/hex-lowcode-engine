@@ -46,11 +46,10 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(schema: T, da
     return value;
   });
 
-  onMounted(() => {
-    if (schema.props?.field) {
-      initDefaultValue();
-    }
-  });
+  // 初始化默认值, 立即执行
+  if (schema.props?.field) {
+    initDefaultValue();
+  }
   return {
     modelValue,
     getReadonlyData,

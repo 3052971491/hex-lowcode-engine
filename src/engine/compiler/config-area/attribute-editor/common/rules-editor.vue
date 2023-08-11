@@ -1,5 +1,10 @@
 <template>
-  <collapse-Item-wrapper :label="t(`el.property.${props.attribute}`)" :name="props.attribute" :option="option">
+  <collapse-Item-wrapper
+    :label="t(`el.property.${props.attribute}`)"
+    :name="props.attribute"
+    :option="option"
+    active-key="0"
+  >
     <div class="validation overflow-hidden">
       <div v-for="(item, index) in modelValue" :key="index" class="validation-rule-item">
         <span class="rule-item-body">{{ t(`el.ruleType.${item.type}`) }}</span>

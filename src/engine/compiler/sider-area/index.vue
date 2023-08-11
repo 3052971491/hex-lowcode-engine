@@ -28,7 +28,7 @@
             >
             </menu-item>
           </div>
-          <hex-modal v-model:visible="visible" :name="t('el.nav.actionPanel')" :is-footer="false" @ok="handleOkClick">
+          <hex-modal v-model:open="visible" :name="t('el.nav.actionPanel')" :is-footer="false" @ok="handleOkClick">
             <library-item
               v-if="!!data.currentDrawer"
               class="modal-library-item"
