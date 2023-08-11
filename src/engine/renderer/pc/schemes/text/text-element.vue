@@ -36,7 +36,7 @@ const __instance__ = ref<any>();
 const { ectype, ectypeProps } = useElement<PcSchema.TextSchema>(props, __instance__);
 
 const prop = computed(() =>
-  ectypeProps((obj) => {
+  ectypeProps((obj: PcSchema.TextSchemaProps) => {
     return {
       content: obj?.content ?? '',
       showTitle: obj.showTitle,
