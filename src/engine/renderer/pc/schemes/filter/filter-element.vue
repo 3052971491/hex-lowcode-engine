@@ -78,7 +78,20 @@
 </template>
 
 <script lang="ts" setup>
-import { h, computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw, unref } from 'vue';
+import {
+  h,
+  computed,
+  defineComponent,
+  inject,
+  isReactive,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+  toRaw,
+  unref,
+  watch,
+} from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import { UpOutlined, DownOutlined, SearchOutlined } from '@ant-design/icons-vue';
@@ -160,14 +173,35 @@ provide(DataEngineInjectionKey, {
 
 const advancedFilter = ref(false);
 
+/**
+ * 单个筛选项对应配置
+ * @param i 表单控件
+ */
 const filterInfo = computed(() => (i: LowCode.NodeSchema) => {
   return unref(ectype).props?.config?.find((item) => item.componentId === i.id)?.isAdvanced;
 });
 
+/** 是否显示高级搜索按钮 */
 const isShowAdvancedFilter = computed(() => {
+  // todo 筛选项数量有查询组件子集数量不一致
   return !!unref(ectype).props?.config.find((item) => item.isAdvanced);
 });
 
+// 所有的子属性修改都会出发
+watch(state.schema, (val) => {
+  /** 移除多余的筛选项配置 */
+  if (val.props.config.length > val.children?.length) {
+    const componentIds = val.children.map((item) => item.id);
+    state.schema.props.config = val.props.config.filter((item) => {
+      return componentIds.includes(item.componentId);
+    });
+  }
+});
+
+/**
+ * 刷新表格数据
+ * @description 当【查询组件】有绑定【表格组件】时生效
+ */
 function reloadTableApi() {
   if (redactState) return;
   const { props } = unref(ectype);
@@ -176,6 +210,7 @@ function reloadTableApi() {
     table?.reload({ filterInfo: ectype.value.getValue() as any });
   }
 }
+/** 查询 */
 const handleSearchClick = () => {
   if (redactState) return;
   __instance__.value?.validate().then((res) => {
@@ -203,7 +238,7 @@ const handleSearchClick = () => {
     reloadTableApi();
   });
 };
-
+/** 重置 */
 const handleResetClick = () => {
   if (redactState) return;
   __instance__.value?.resetFields();
