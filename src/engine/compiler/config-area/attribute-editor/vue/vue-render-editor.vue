@@ -9,7 +9,7 @@
     >
       {{ t('el.control.edit') }} {{ t('el.VueCode') }}
     </a-button>
-    <hex-modal v-model:visible="visible" :name="t('el.VueCode')" @ok="handleOkClick">
+    <hex-modal v-model:open="visible" :name="t('el.VueCode')" @ok="handleOkClick">
       <render v-model:value="str"></render>
     </hex-modal>
   </collapse-Item-wrapper>

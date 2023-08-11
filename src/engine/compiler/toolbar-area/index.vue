@@ -49,7 +49,7 @@
         </a-button>
       </a-space>
     </template>
-    <hex-modal v-model:visible="visible" :name="modalTitle" :is-footer="false">
+    <hex-modal v-model:open="visible" :name="modalTitle" :is-footer="false">
       <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
       <hex-json-pretty v-else-if="modalType === ComponentTypeEnum.JSON_PREVIEW" v-model:value="element" />
       <keyboard v-else-if="modalType === ComponentTypeEnum.KEYBOARD"></keyboard>

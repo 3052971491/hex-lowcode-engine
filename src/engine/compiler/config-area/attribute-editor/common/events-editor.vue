@@ -35,7 +35,7 @@
       <a-button type="primary" block>{{ t('el.addAction') }}</a-button>
     </a-dropdown>
 
-    <hex-modal v-model:visible="visible" :name="modalTitle" @ok="handleSubmit">
+    <hex-modal v-model:open="visible" :name="modalTitle" @ok="handleSubmit">
       <div class="w-full overflow-hidden flex flex-col">
         <a-row>
           <a-col :span="9">

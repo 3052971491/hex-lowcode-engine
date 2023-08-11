@@ -42,7 +42,7 @@
         </a-list>
       </template>
     </a-skeleton>
-    <hex-modal v-model:visible="visible" :name="modalTitle" @ok="handleOk">
+    <hex-modal v-model:open="visible" :name="modalTitle" @ok="handleOk">
       <CreateOrUpdateModalInfo ref="modalInfo" :data="state.info"></CreateOrUpdateModalInfo>
     </hex-modal>
   </div>
