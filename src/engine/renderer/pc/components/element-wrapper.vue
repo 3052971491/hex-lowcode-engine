@@ -2,7 +2,7 @@
   <div class="element-wrapper">
     <template v-if="isPreview">
       <ElementEditWrapper
-        v-if="schema?.tag !== 'LAYOUT' && schema.componentType !== 'Form'"
+        v-if="schema?.tag !== 'LAYOUT' && !['Form', 'Filter'].includes(schema.componentType)"
         :schema="schema"
         :parent-schema="parentSchema"
         :parent-schema-list="parentSchemaList"
@@ -80,7 +80,7 @@ const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
 
-const { isSelect, isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
+const { isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
   props.schema,
   selectedScheme.value,
   redactState,

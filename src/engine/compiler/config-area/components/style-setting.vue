@@ -7,7 +7,7 @@
         :show-cancel="false"
         :destroy-tooltip-on-hide="true"
         :arrow-point-at-center="true"
-        @visible-change="visibleChange"
+        @open-change="visibleChange"
       >
         <template #icon></template>
         <template #okButton></template>

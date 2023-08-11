@@ -4,7 +4,7 @@ import type { PcSchema } from './interface';
 import { Scheme } from './FieldSchemaBase';
 import { buildUUID } from '/@/utils/common';
 import { sfcTemplateCode } from '/@/components/hex-code-view/helper';
-import { BasicColumn, BasicTableProps } from '/@/components/hex-table';
+import { BasicColumn, BasicTableProps, FetchParams } from '/@/components/hex-table';
 
 export enum ComponentType {
   'Text' = 'Text',
@@ -26,6 +26,7 @@ export enum ComponentType {
   'TimePicker' = 'TimePicker',
   'TimeRangePicker' = 'TimeRangePicker',
   'Rate' = 'Rate',
+  'Upload' = 'Upload',
   'Row' = 'Row',
   'Column' = 'Column',
   'Card' = 'Card',
@@ -38,6 +39,7 @@ export enum ComponentType {
   'Vue' = 'Vue',
   'Progress' = 'Progress',
   'Table' = 'Table',
+  'Filter' = 'Filter',
   'Modal' = 'Modal',
   'ModalContent' = 'ModalContent',
   'ModalFooter' = 'ModalFooter',
@@ -218,7 +220,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -288,7 +290,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -358,7 +360,7 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: null,
@@ -432,7 +434,7 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: false,
       size: 'default',
@@ -484,7 +486,7 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: null,
       size: 'default',
@@ -540,7 +542,7 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: [],
       size: 'default',
@@ -594,7 +596,7 @@ export class Select extends Scheme<PcSchema.SelectScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: '',
@@ -652,7 +654,7 @@ export class MultiSelect extends Scheme<PcSchema.MultiSelectScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请输入',
       defaultValue: [],
@@ -710,7 +712,7 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请选择',
       defaultValue: null,
@@ -768,7 +770,7 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: ['开始日期', '结束日期'],
       defaultValue: null,
@@ -824,7 +826,7 @@ export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: '请选择',
       defaultValue: null,
@@ -882,7 +884,7 @@ export class TimeRangePicker extends Scheme<PcSchema.TimeRangePickerScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       placeholder: ['开始时间', '结束时间'],
       defaultValue: null,
@@ -940,7 +942,7 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
     this.formItemFlag = true;
     this.alwaysCommit = false;
     this.props = {
-      field: `Field_${buildUUID()}`,
+      field: '',
       label: this.componentName,
       defaultValue: 0,
       behavior: 'normal',
@@ -951,6 +953,58 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
       allowHalf: false,
       character: null,
       count: 5,
+      className: '',
+      __style__: '',
+    };
+
+    this.props.rules = [
+      {
+        enable: false,
+        type: 'required',
+        label: '必填',
+        value: null,
+        message: '该字段不能为空',
+      },
+      {
+        enable: false,
+        type: 'custom',
+        label: '自定义函数',
+        value: 'function validateRule(value) { }',
+        message: null,
+      },
+    ];
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
+export class Upload extends Scheme<PcSchema.UploadScheme> {
+  props: PcSchema.UploadSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = 'https://www.antdv.com/components/upload-cn';
+    this.componentName = '上传';
+    this.componentType = ComponentType.Upload;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: '',
+      label: this.componentName,
+      defaultValue: [],
+      behavior: 'normal',
+      tips: '',
+      rules: [],
+      api: '',
+      maxCount: 1,
+      accept: ['*'],
+      maxFileSize: 5,
+      listType: 'text',
+      multiple: false,
       className: '',
       __style__: '',
     };
@@ -1239,7 +1293,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
     this.componentType = ComponentType.Form;
     this.children = [];
     this.props = {
-      model: `Model_${buildUUID()}`,
+      model: '',
       hideRequiredMark: false,
       labelAlign: 'left',
       className: '',
@@ -1362,7 +1416,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
       actionColumn: null,
       rowSelection: null,
       actionItem: [],
-      noPadding: true,
+      noPadding: false,
       className: '',
       __style__: '',
     };
@@ -1375,7 +1429,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
   }
 
   /** 刷新表格 */
-  reload() {
+  reload(opt?: FetchParams) {
     throw new Error('警告【reload】方法暂未实现');
   }
 
@@ -1455,7 +1509,7 @@ export class BasicColumnDto {
 
   dataIndex: string = '';
 
-  fixed: boolean = false;
+  fixed: boolean | string = false;
 
   width: number = 195;
 
@@ -1471,7 +1525,7 @@ export class BasicColumnDto {
         }
       }
     } else {
-      const field = `Field_${buildUUID()}`;
+      const field = '';
       this.title = field;
       this.dataIndex = field;
     }
@@ -1494,6 +1548,74 @@ export class ActionItemDto {
       }
     } else {
       //
+    }
+  }
+}
+
+export class Filter extends Scheme<PcSchema.FilterSchema> {
+  constructor(_data?: any) {
+    super();
+    this.tag = 'ADVANCED';
+    this.docUrl = '';
+    this.componentName = '查询';
+    this.componentType = ComponentType.Filter;
+    this.children = [];
+    this.props = {
+      model: '',
+      layout: 'horizontal',
+      columnNumber: 3,
+      tableComponentId: '',
+      config: [],
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+
+  /**
+   * 触发表单验证, 同 validateFields
+   */
+  validate(...args: any) {
+    throw new Error('警告【validate】方法暂未实现');
+  }
+
+  /**
+   * 移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果
+   */
+  clearValidate(...args: any) {
+    throw new Error('警告【clearValidate】方法暂未实现');
+  }
+
+  /**
+   * 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果
+   */
+  resetFields(...args: any) {
+    throw new Error('警告【resetFields】方法暂未实现');
+  }
+}
+
+export class FilterConfigItemDto implements PcSchema.FilterConfigItem {
+  id: string = '';
+
+  componentId: string = '';
+
+  span: number = 3;
+
+  isAdvanced: boolean = false;
+
+  constructor(_data?: any) {
+    this.id = `Node_${buildUUID()}`;
+    if (_data) {
+      for (const property in _data) {
+        if (Object.prototype.hasOwnProperty.call(_data, property)) {
+          (<any>this)[property] = (<any>_data)[property];
+        }
+      }
     }
   }
 }
@@ -1615,6 +1737,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TimePicker, new TimePicker() as any],
   [ComponentType.TimeRangePicker, new TimeRangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
+  [ComponentType.Upload, new Upload() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Card, new Card() as any],
@@ -1625,8 +1748,9 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TabPane, new TabPane() as any],
   [ComponentType.Form, new Form() as any],
   [ComponentType.Vue, new Vue() as any],
-  [ComponentType.Progress, new Progress() as any],
+  [ComponentType.Filter, new Filter() as any],
   [ComponentType.Table, new Table() as any],
+  [ComponentType.Progress, new Progress() as any],
   [ComponentType.Modal, new Modal() as any],
   [ComponentType.ModalContent, new ModalContent() as any],
   [ComponentType.ModalFooter, new ModalFooter() as any],
@@ -1653,6 +1777,7 @@ export default {
   TimePicker,
   TimeRangePicker,
   Rate,
+  Upload,
   Row,
   Column,
   Card,
@@ -1665,6 +1790,7 @@ export default {
   Vue,
   Progress,
   Table,
+  Filter,
   Modal,
   ModalContent,
   ModalFooter,

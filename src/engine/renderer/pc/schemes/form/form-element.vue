@@ -40,19 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed,
-  defineComponent,
-  inject,
-  isReactive,
-  markRaw,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-  toRaw,
-  unref,
-} from 'vue';
+import { computed, defineComponent, inject, isReactive, onMounted, provide, reactive, ref, toRaw } from 'vue';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import { FormInstance } from 'ant-design-vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
@@ -113,7 +101,7 @@ const classMap = computed(() => {
   return [];
 });
 
-const form = useForm({ schema: ectype.value, formRef: __instance__.value });
+const { state: form } = useForm({ schema: ectype.value, formRef: __instance__.value });
 provide(DataEngineInjectionKey, {
   id: props.schema.id,
   model: '',
@@ -130,12 +118,17 @@ onMounted(() => {
     obj.resetFields = __instance__.value.resetFields;
     obj.validateFields = __instance__.value.validateFields;
     obj.scrollToField = __instance__.value.scrollToField;
-
     obj.getValue = () => {
       return isReactive(form.modelValue) ? toRaw(form.modelValue) : form.modelValue;
     };
-    obj.setValue = (data: any) => {
-      form.modelValue = data;
+    obj.setValue = (data: Record<string, unknown>) => {
+      // 循环删除表单所有数据, 这样不会丢失响应式
+      for (const key in form.modelValue) {
+        if (Object.prototype.hasOwnProperty.call(form.modelValue, key)) {
+          delete form.modelValue[key];
+        }
+      }
+      Object.assign(form.modelValue, data);
     };
   }
 });

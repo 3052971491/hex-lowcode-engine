@@ -19,6 +19,7 @@
               :sort="false"
               ghost-class=""
               :clone="onClone"
+              :move="onMove"
             >
               <template #item="{ element }">
                 <div class="hex-draggable-handle" @dblclick="handleAddElementDbClick(element)">
@@ -60,7 +61,6 @@ import {
 import { buildElementSchema } from '/@/utils/draggable-api';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { useLocale } from '/@/hooks/use-loacle';
-import { HexIconPicker } from '/@/components/hex-icon-picker';
 
 const { t } = useLocale();
 interface ElementList {
@@ -98,6 +98,22 @@ const loading = ref(true);
 
 const onClone = (e: LowCode.Schema) => {
   return buildElementSchema(e);
+};
+
+const onMove = (evt: any) => {
+  // 当有从组件库拖拽组件时
+  const element = evt?.draggedContext?.element || false;
+  if (!!evt.draggedContext && !!element) {
+    // 目标元素
+    const { classList } = evt.to;
+    if (evt.to) {
+      // 当目标组件的类型是【查询(Filter)组件】且【拖拽组件非表单控件】时, 不允许拖入
+      if (classList.contains('Filter') && element.tag !== 'FORM') {
+        return false;
+      }
+    }
+  }
+  return true;
 };
 
 const handleAddElementDbClick = (e: LowCode.Schema) => {
@@ -250,21 +266,22 @@ const aaa = ref('');
 
 .hex-draggable {
   :deep(.draggable-item) {
+    margin-bottom: 3px;
     width: auto;
 
     &:nth-child(2n) {
-      margin-left: 4px;
+      margin-left: 3px;
     }
 
     &:nth-child(2n + 1) {
-      margin-right: 4px;
+      margin-right: 3px;
     }
   }
   :deep(.draggable) {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr;
-    row-gap: 4px;
+    row-gap: 3px;
   }
 }
 </style>

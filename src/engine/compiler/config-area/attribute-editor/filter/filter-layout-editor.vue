@@ -1,28 +1,18 @@
 <template>
-  <collapse-Item-wrapper label="render" :name="props.attribute" :option="props.option">
-    <a-button
-      block
-      @click="
-        visible = true;
-        str = modelValue;
-      "
-    >
-      {{ t('el.control.edit') }} {{ t('el.VueCode') }}
-    </a-button>
-    <hex-modal v-model:open="visible" :name="t('el.VueCode')" @ok="handleOkClick">
-      <render v-model:value="str"></render>
-    </hex-modal>
-  </collapse-Item-wrapper>
+  <form-Item-wrapper :label="t('el.property.Filter.layout')" :name="props.attribute" :option="option">
+    <a-radio-group v-model:value="modelValue">
+      <a-radio-button value="horizontal">{{ t('el.property.Filter.horizontal') }}</a-radio-button>
+      <a-radio-button value="vertical">{{ t('el.property.Filter.vertical') }}</a-radio-button>
+    </a-radio-group>
+  </form-Item-wrapper>
 </template>
-<script lang="ts" setup name="VueRenderEditor">
+<script lang="ts" setup name="FilterLayoutEditor">
 import { inject, computed, ref } from 'vue';
-import CollapseItemWrapper from '../../components/collapse-item-wrapper.vue';
+import FormItemWrapper from '../../components/form-item-wrapper.vue';
 import { HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { AttributeItem } from '../../attribute-editor/interface';
 import { set, get } from '/@/utils/schema';
 import { useLocale } from '/@/hooks/use-loacle';
-import HexModal from '/@/components/hex-modal/index.vue';
-import render from './render.vue';
 
 const { t } = useLocale();
 interface Props {
@@ -39,7 +29,6 @@ const core = inject(HexCoreInjectionKey);
 const schema = computed(() => {
   return core?.state.selectedData?.selectedScheme!;
 });
-
 const modelValue = computed({
   set(val: string) {
     set(props.attribute, val, schema.value, core?.state.projectConfig);
@@ -48,14 +37,4 @@ const modelValue = computed({
     return get(props.attribute, schema.value);
   },
 });
-
-const str = ref('');
-
-const visible = ref(false);
-
-const handleOkClick = () => {
-  modelValue.value = str.value;
-  visible.value = false;
-  str.value = '';
-};
 </script>
