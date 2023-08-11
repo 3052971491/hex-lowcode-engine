@@ -42,7 +42,10 @@
       <template v-else>
         <a-row :gutter="[12, 12]">
           <template v-for="(item, index) in ectype.children" :key="item.id">
-            <a-col v-show="!(!advancedFilter && filterInfo(item))" :span="24 / (ectype.props.columnNumber || 24)">
+            <a-col
+              v-show="!(!advancedFilter && !!filterInfo(item)?.isAdvanced)"
+              :span="(24 / (ectype.props.columnNumber || 24)) * (filterInfo(item)?.span || 1)"
+            >
               <template v-if="true">
                 <component
                   :is="`${item.componentType}Element`"
@@ -178,7 +181,7 @@ const advancedFilter = ref(false);
  * @param i 表单控件
  */
 const filterInfo = computed(() => (i: LowCode.NodeSchema) => {
-  return unref(ectype).props?.config?.find((item) => item.componentId === i.id)?.isAdvanced;
+  return unref(ectype).props?.config?.find((item) => item.componentId === i.id);
 });
 
 /** 是否显示高级搜索按钮 */

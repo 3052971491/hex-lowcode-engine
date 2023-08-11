@@ -1604,7 +1604,7 @@ export class FilterConfigItemDto implements PcSchema.FilterConfigItem {
 
   componentId: string = '';
 
-  span: number = 3;
+  span: number = 1;
 
   isAdvanced: boolean = false;
 

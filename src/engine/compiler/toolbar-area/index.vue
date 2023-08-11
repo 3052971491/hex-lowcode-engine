@@ -58,13 +58,14 @@
       placement="bottom"
       :open="drawerVisible"
       height="94%"
+      :destroy-on-close="true"
       :closable="false"
       @close="onCloseDrawer"
     >
       <template #extra>
         <a-button style="margin-right: 8px" @click="onCloseDrawer">{{ t('el.control.close') }}</a-button>
       </template>
-      <render v-if="modalType === ComponentTypeEnum.RENDER_PREVIEW" v-model:value="element" />
+      <render v-model:value="element" />
     </a-drawer>
   </div>
 </template>
@@ -77,7 +78,6 @@ import {
   CloudUploadOutlined,
   DeleteOutlined,
   PlayCircleOutlined,
-  ProjectOutlined,
   RollbackOutlined,
   AntDesignOutlined,
 } from '@ant-design/icons-vue';
@@ -113,8 +113,8 @@ const element = ref();
 function handlePreviewClick() {
   modalType.value = ComponentTypeEnum.RENDER_PREVIEW;
   modalTitle.value = t('el.nav.preview');
-  drawerVisible.value = true;
   element.value = cloneDeep(core?.state.projectConfig);
+  drawerVisible.value = true;
 }
 
 function onCloseDrawer() {
