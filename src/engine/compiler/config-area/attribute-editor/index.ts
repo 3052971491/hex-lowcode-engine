@@ -280,8 +280,13 @@ const UPLOAD_ATTRIBUTES: Array<AttributeItem> = [
 ];
 
 const SUB_FORM_ATTRIBUTES: Array<AttributeItem> = [
-  { type: 'SubForm', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'SubForm', name: 'title', label: '表格标题', editor: 'input-editor', i18n: true },
   { type: 'SubForm', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Table', name: 'rowKey', label: '表格行 key', editor: 'input-editor' },
+  { type: 'SubForm', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'SubForm', name: 'children', label: '列配置', editor: 'children-editor', merge: true },
+  { type: 'SubForm', name: 'actionItem', label: '操作列配置', editor: 'action-item-editor', merge: true },
+  { type: 'Table', name: 'noPadding', label: '隐藏边距', editor: 'switch-editor' },
   { type: 'SubForm', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'SubForm', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
 ];

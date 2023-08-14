@@ -288,6 +288,9 @@ export default {
         isAdvanced: 'Advanced query',
         tableComponentId: 'Table component',
       },
+      SubForm: {
+        children: 'Column config',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',

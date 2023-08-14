@@ -2,7 +2,16 @@ import { cloneDeep } from 'lodash-es';
 import type { LowCode } from '/@/types/schema.d';
 
 import { buildUUID } from '/@/utils/common';
-import { BasicComponents, BusinessComponents, LayoutComponents, AdvancedComponents } from '/@/schema/pc';
+import {
+  BasicComponents,
+  BusinessComponents,
+  LayoutComponents,
+  AdvancedComponents,
+  FormComponents,
+} from '/@/schema/pc';
+import { BasicColumnDto } from '/@/schema/common/schema';
+import { BasicColumn } from '/@/components/hex-table';
+import { log } from 'console';
 
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
@@ -84,6 +93,24 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
       default:
         break;
     }
+  } else if (newSchema.tag === 'FORM') {
+    if (newSchema.componentType === 'SubForm') {
+      // 操作栏
+      const indexElement = new BasicColumnDto({
+        title: '序号',
+        dataIndex: 'no',
+        align: 'center',
+        width: 80,
+      }) as BasicColumn;
+      const actionElement = new BasicColumnDto({
+        title: '操作栏',
+        fixed: 'right',
+        dataIndex: 'action',
+        align: 'center',
+      }) as BasicColumn;
+      newSchema.props?.columns.push(indexElement);
+      newSchema.props?.columns.push(actionElement);
+    }
   }
   return newSchema;
 }
@@ -124,6 +151,14 @@ export function buildElementSchemaByType(
     newSchema.id = `${newSchema.componentType}_${buildUUID(8)}`;
     if (newSchema.props) {
       newSchema.props.className = `${newSchema.componentType.toLowerCase()}_${buildUUID(8).toLowerCase()}`;
+
+      if (newSchema.props.hasOwnProperty('field')) {
+        newSchema.props.field = `Field_${buildUUID()}`;
+      }
+
+      if (newSchema.props.hasOwnProperty('model')) {
+        newSchema.props.model = `Model_${buildUUID()}`;
+      }
     }
     return newSchema;
   }
@@ -161,6 +196,13 @@ export function findElementSchemaByType(
     });
     if (idx !== -1) {
       schema = LayoutComponents[idx];
+    }
+  } else if (classification === 'FORM') {
+    const idx = FormComponents.findIndex((item) => {
+      return item.componentType === componentName;
+    });
+    if (idx !== -1) {
+      schema = FormComponents[idx];
     }
   } else if (classification === 'ADVANCED') {
     const idx = AdvancedComponents.findIndex((item) => {

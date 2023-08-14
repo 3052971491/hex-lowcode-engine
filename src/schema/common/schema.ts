@@ -1043,13 +1043,20 @@ export class SubForm extends Scheme<PcSchema.SubFormScheme> {
     this.docUrl = '';
     this.componentName = '子表单';
     this.componentType = ComponentType.SubForm;
-    this.formItemFlag = true;
+    this.formItemFlag = false;
     this.alwaysCommit = false;
+    this.children = [];
     this.props = {
       field: '',
-      label: this.componentName,
       defaultValue: [],
       behavior: 'normal',
+      title: this.componentName,
+      rowKey: 'id',
+      bordered: true,
+      columns: [],
+      actionColumn: null,
+      actionItem: [],
+      noPadding: false,
       className: '',
       __style__: '',
     };

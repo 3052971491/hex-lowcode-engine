@@ -288,6 +288,9 @@ export default {
         isAdvanced: '是否高级查询',
         tableComponentId: '表格组件',
       },
+      SubForm: {
+        children: '列配置',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',

@@ -581,18 +581,30 @@ export namespace PcSchema {
 
   export interface SubFormScheme extends LowCode.NodeSchema {
     props: SubFormSchemeProps;
+    children: LowCode.Schema[];
   }
 
   export interface SubFormSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;
-    /** 标签 */
-    label: I18n;
     /** 默认值 */
     defaultValue: I18n[];
     /** 状态 */
     behavior: LowCode.Behavior;
-
+    /** 表格标题 */
+    title: I18n;
+    /** 唯一行标识 */
+    rowKey: string;
+    /** 是否显示表格边框 */
+    bordered: boolean;
+    /** 列配置 */
+    columns: BasicColumn[];
+    actionItem: (ActionItem & {
+      events?: {
+        [key: string]: any;
+      };
+    })[];
+    noPadding: boolean;
     [key: string]: any;
   }
 
