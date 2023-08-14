@@ -1525,7 +1525,7 @@ export class BasicColumnDto {
         }
       }
     } else {
-      const field = '';
+      const field = `Field_${buildUUID()}`;
       this.title = field;
       this.dataIndex = field;
     }
