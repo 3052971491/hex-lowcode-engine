@@ -71,6 +71,7 @@ export default {
       TimeRangePicker: 'Time Range Picker',
       Rate: 'Rate',
       Upload: 'Upload',
+      SubForm: 'SubForm',
       Row: 'Row',
       Column: 'Column',
       Card: 'Card',

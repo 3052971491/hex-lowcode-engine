@@ -579,6 +579,23 @@ export namespace PcSchema {
     [key: string]: any;
   }
 
+  export interface SubFormScheme extends LowCode.NodeSchema {
+    props: SubFormSchemeProps;
+  }
+
+  export interface SubFormSchemeProps extends LowCode.NodeSchemaProps {
+    /** 数据模型字段, 即对应后端的表中的字段 */
+    field: string;
+    /** 标签 */
+    label: I18n;
+    /** 默认值 */
+    defaultValue: I18n[];
+    /** 状态 */
+    behavior: LowCode.Behavior;
+
+    [key: string]: any;
+  }
+
   export interface RowSchemeProps extends LowCode.NodeSchemaProps {
     /** flex 布局下的垂直对齐方式 */
     align: 'top' | 'middle' | 'bottom';

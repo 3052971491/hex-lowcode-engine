@@ -71,6 +71,7 @@ export default {
       TimeRangePicker: '时间区间',
       Rate: '评分',
       Upload: '上传',
+      SubForm: '子表单',
       Row: '栅格',
       Column: '栅格列',
       Card: '卡片',

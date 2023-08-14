@@ -27,6 +27,7 @@ export enum ComponentType {
   'TimeRangePicker' = 'TimeRangePicker',
   'Rate' = 'Rate',
   'Upload' = 'Upload',
+  'SubForm' = 'SubForm',
   'Row' = 'Row',
   'Column' = 'Column',
   'Card' = 'Card',
@@ -1034,6 +1035,33 @@ export class Upload extends Scheme<PcSchema.UploadScheme> {
   }
 }
 
+export class SubForm extends Scheme<PcSchema.SubFormScheme> {
+  props: PcSchema.SubFormSchemeProps;
+
+  constructor(_data?: any) {
+    super();
+    this.docUrl = '';
+    this.componentName = '子表单';
+    this.componentType = ComponentType.SubForm;
+    this.formItemFlag = true;
+    this.alwaysCommit = false;
+    this.props = {
+      field: '',
+      label: this.componentName,
+      defaultValue: [],
+      behavior: 'normal',
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+}
+
 export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
@@ -1738,6 +1766,7 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.TimeRangePicker, new TimeRangePicker() as any],
   [ComponentType.Rate, new Rate() as any],
   [ComponentType.Upload, new Upload() as any],
+  [ComponentType.SubForm, new SubForm() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
   [ComponentType.Card, new Card() as any],
@@ -1778,6 +1807,7 @@ export default {
   TimeRangePicker,
   Rate,
   Upload,
+  SubForm,
   Row,
   Column,
   Card,
