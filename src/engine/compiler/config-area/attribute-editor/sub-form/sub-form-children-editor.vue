@@ -34,7 +34,9 @@
         <a-dropdown>
           <template #overlay>
             <a-menu @click="handleMenuClick">
-              <a-menu-item key="Input">{{ t('el.component.Input') }}</a-menu-item>
+              <a-menu-item v-for="item in formComponentsOptions" :key="item.componentType">
+                {{ t(`el.component.${item.componentType}`) }}
+              </a-menu-item>
             </a-menu>
           </template>
           <a-button block type="primary">{{ t('el.addAnField') }}</a-button>
@@ -129,6 +131,7 @@ import { BasicColumn } from '/@/components/hex-table';
 import { BasicColumnDto } from '/@/schema/common/schema';
 import { buildElementSchemaByType } from '/@/utils/draggable-api';
 import { LowCode } from '/@/types/schema';
+import { FormComponents } from '/@/schema/pc';
 
 const { t } = useLocale();
 interface Props {
@@ -155,6 +158,10 @@ const modelValue = computed<LowCode.Schema[]>({
     if (!schema.value) return [];
     return schema.value[props.attribute] ?? [];
   },
+});
+
+const formComponentsOptions = computed(() => {
+  return FormComponents.filter((item) => item.componentType !== 'SubForm');
 });
 
 const handleMenuClick: MenuProps['onClick'] = (e) => {

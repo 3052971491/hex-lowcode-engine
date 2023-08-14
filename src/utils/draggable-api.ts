@@ -11,7 +11,6 @@ import {
 } from '/@/schema/pc';
 import { BasicColumnDto } from '/@/schema/common/schema';
 import { BasicColumn } from '/@/components/hex-table';
-import { log } from 'console';
 
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
