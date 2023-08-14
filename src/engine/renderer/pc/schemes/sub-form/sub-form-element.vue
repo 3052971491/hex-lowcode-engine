@@ -159,6 +159,7 @@ const findSchemaByField = computed(() => (filterValue: string) => {
 const onAddItemData = () => {
   modelValue.value.push({
     id: '123',
+    Field_jQiN1e2N: '123123',
   });
 };
 
