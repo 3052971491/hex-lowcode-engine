@@ -29,7 +29,7 @@
               :schema="findSchemaByField(column.dataIndex)"
               :parent-schema="state.schema"
               :parent-schema-list="state.schema.children"
-              :index-of-parent-list="index"
+              :index-of-parent-list="state.schema.children.findIndex((item) => item.props?.field === column.dataIndex)"
             />
           </template>
         </template>
