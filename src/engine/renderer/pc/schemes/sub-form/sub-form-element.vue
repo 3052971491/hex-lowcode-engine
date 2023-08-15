@@ -4,6 +4,7 @@
     :parent-schema="parentSchema"
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
+    :extra-props="props"
   >
     <HexTable @register="register">
       <template #bodyCell="{ column, record, index }">
@@ -30,6 +31,10 @@
               :parent-schema="state.schema"
               :parent-schema-list="state.schema.children"
               :index-of-parent-list="state.schema.children.findIndex((item) => item.props?.field === column.dataIndex)"
+              :sub-form="{
+                schema: state.schema,
+                rowIndex: index,
+              }"
             />
           </template>
         </template>
@@ -68,7 +73,7 @@ const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.SubFormScheme>(props, __instance__);
-const { modelValue } = useElementDataEngine<PcSchema.SubFormScheme>(props.schema, dataEngine);
+const { modelValue } = useElementDataEngine<PcSchema.SubFormScheme>(props, dataEngine);
 
 const prop = computed(
   () =>
@@ -134,21 +139,19 @@ const [register, methods] = useTable({
   bordered: unref(prop).bordered,
   columns: unref(realColumns),
   noPadding: unref(prop).noPadding,
+  pagination: false,
 });
 
 /** 操作列配置 */
 const tableAction = computed(() => (column: BasicColumn, record: any, index: number) => {
-  return prop.value.actionItem.map((item) => {
-    const { events, ...option } = item;
-    const result: ActionItem = { ...option };
-    // 动作
-    const opt: any = {};
-
-    return {
-      ...result,
-      ...opt,
-    };
-  });
+  return [
+    {
+      label: '删除',
+      color: 'error',
+      icon: 'DeleteOutlined',
+      onClick: () => onDeleteItemData(column, record, index),
+    },
+  ] as ActionItem[];
 });
 
 /** 根据字段名找出子表单-children中的Schema配置 */
@@ -157,10 +160,11 @@ const findSchemaByField = computed(() => (filterValue: string) => {
 });
 
 const onAddItemData = () => {
-  modelValue.value.push({
-    id: '123',
-    Field_jQiN1e2N: '123123',
-  });
+  modelValue.value.push({});
+};
+
+const onDeleteItemData = (column: BasicColumn, record: any, index: number) => {
+  modelValue.value.splice(index, 1);
 };
 
 onMounted(() => {

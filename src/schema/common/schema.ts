@@ -599,8 +599,8 @@ export class Select extends Scheme<PcSchema.SelectScheme> {
     this.props = {
       field: '',
       label: this.componentName,
-      placeholder: '请输入',
-      defaultValue: '',
+      placeholder: '请选择',
+      defaultValue: null,
       size: 'default',
       behavior: 'normal',
       tips: '',
@@ -657,7 +657,7 @@ export class MultiSelect extends Scheme<PcSchema.MultiSelectScheme> {
     this.props = {
       field: '',
       label: this.componentName,
-      placeholder: '请输入',
+      placeholder: '请选择',
       defaultValue: [],
       size: 'default',
       behavior: 'normal',
@@ -1043,7 +1043,7 @@ export class SubForm extends Scheme<PcSchema.SubFormScheme> {
     this.docUrl = '';
     this.componentName = '子表单';
     this.componentType = ComponentType.SubForm;
-    this.formItemFlag = false;
+    this.formItemFlag = true;
     this.alwaysCommit = false;
     this.children = [];
     this.props = {
@@ -1551,6 +1551,8 @@ export class BasicColumnDto {
   align: string = 'left';
 
   ellipsis: boolean = true;
+
+  resizable: boolean = true;
 
   constructor(_data?: any) {
     if (_data) {

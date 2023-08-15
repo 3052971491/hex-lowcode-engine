@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, computed, ref, toRaw, unref } from 'vue';
+import { Ref, computed, ref, unref } from 'vue';
 // eslint-disable-next-line import/no-cycle
 import { ActionItem, TableActionType } from '/@/components/hex-table';
 import { isBoolean, isFunction } from '/@/utils/is';

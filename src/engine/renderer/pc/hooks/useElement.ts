@@ -6,9 +6,17 @@ import { InstanceCoreFactory } from '/@/engine/renderer/central/useInstanceCore'
 import { ElementInstanceInjectionKey, HexCoreInjectionKey } from '/@/engine/renderer/render-inject-key';
 import { Fn } from '/@/types/value-type';
 import { useI18n } from './useI18n';
+import { PcSchema } from '/@/schema/common/interface';
 
 interface Props<T> {
   schema: T;
+  parentSchema: LowCode.NodeSchema;
+  parentSchemaList: LowCode.NodeSchema[];
+  indexOfParentList: number;
+  subForm?: {
+    schema: PcSchema.SubFormScheme;
+    rowIndex: number;
+  };
 }
 interface IElement<T extends LowCode.NodeSchema> {
   /** 组件副本 */

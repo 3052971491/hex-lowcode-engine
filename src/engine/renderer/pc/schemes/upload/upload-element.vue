@@ -4,6 +4,7 @@
     :parent-schema="parentSchema"
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
+    :extra-props="props"
   >
     <hex-upload ref="__instance__" v-model:value="modelValue" :class="[ectype.props.className]" @register="register" />
   </ElementWrapper>
@@ -28,16 +29,22 @@ interface Props {
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
+  subForm?: {
+    schema: PcSchema.SubFormScheme;
+    rowIndex: number;
+  };
 }
+const props = withDefaults(defineProps<Props>(), {
+  subForm: undefined,
+});
 
 const core = inject(HexCoreInjectionKey);
 
-const props = withDefaults(defineProps<Props>(), {});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.UploadScheme>(props, __instance__);
-const { modelValue } = useElementDataEngine<PcSchema.UploadScheme>(props.schema, dataEngine);
+const { modelValue } = useElementDataEngine<PcSchema.UploadScheme>(props, dataEngine);
 
 const prop = computed(
   () =>
