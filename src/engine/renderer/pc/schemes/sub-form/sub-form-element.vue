@@ -132,7 +132,6 @@ watch(props.schema.children, (val) => {
 const [register, methods] = useTable({
   title: (unref(prop).title || '') as string,
   rowKey: unref(prop).rowKey,
-  immediate: true,
   api: () => {
     return Promise.resolve(modelValue.value);
   },
@@ -140,6 +139,9 @@ const [register, methods] = useTable({
   columns: unref(realColumns),
   noPadding: unref(prop).noPadding,
   pagination: false,
+});
+watch(modelValue, (val) => {
+  methods.reload();
 });
 
 /** 操作列配置 */
