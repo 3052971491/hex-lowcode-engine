@@ -22,6 +22,8 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(props: Props<
   const { schema, subForm } = toRefs(props);
   /** 初始化默认值 */
   function initDefaultValue() {
+    // 当组件不存在【field】字段时跳过
+    if (!schema.value.props?.field) return;
     // 当源数据中有值时跳过初始化默认值过程
     if (!isUndefined(modelValue.value)) return;
     if (!schema.value.props.hasOwnProperty('defaultValue')) {
@@ -84,11 +86,9 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(props: Props<
     const value = cloneDeep(modelValue.value);
     return value;
   });
-
   // 初始化默认值, 立即执行
-  if (schema.value.props?.field) {
-    initDefaultValue();
-  }
+  initDefaultValue();
+
   return {
     modelValue,
     getReadonlyData,
