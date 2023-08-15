@@ -51,7 +51,7 @@ export class Text extends Scheme<PcSchema.TextSchema> {
   props: PcSchema.TextSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BASIC';
     this.componentName = '文本';
     this.componentType = ComponentType.Text;
@@ -75,7 +75,7 @@ export class Image extends Scheme<PcSchema.ImageSchema> {
   props: PcSchema.ImageSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BASIC';
     this.componentName = '图片';
     this.componentType = ComponentType.Image;
@@ -105,7 +105,7 @@ export class ButtonGroup extends Scheme<PcSchema.ButtonGroupSchema> {
   props: PcSchema.ButtonGroupSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BASIC';
     this.docUrl = 'https://www.antdv.com/components/button-cn';
     this.componentName = '按钮';
@@ -129,7 +129,7 @@ export class Button extends Scheme<PcSchema.ButtonSchema> {
   props: PcSchema.ButtonSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BASIC';
     this.docUrl = 'https://www.antdv.com/components/button-cn';
     this.componentName = '子按钮';
@@ -159,7 +159,7 @@ export class Divider extends Scheme<PcSchema.DividerSchema> {
   props: PcSchema.DividerSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/divider-cn';
     this.tag = 'BASIC';
     this.componentName = '分割线';
@@ -187,7 +187,7 @@ export class Alert extends Scheme<PcSchema.AlertSchema> {
   props: PcSchema.AlertSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BASIC';
     this.componentName = '警告提示';
     this.componentType = ComponentType.Alert;
@@ -214,7 +214,7 @@ export class Input extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '单行文本';
     this.componentType = ComponentType.Input;
@@ -284,7 +284,7 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
   props: PcSchema.InputSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/input-cn';
     this.componentName = '多行文本';
     this.componentType = ComponentType.Textarea;
@@ -354,7 +354,7 @@ export class InputNumber extends Scheme<PcSchema.InputNumberScheme> {
   props: PcSchema.InputNumberSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/input-number-cn';
     this.componentName = '数值输入';
     this.componentType = ComponentType.InputNumber;
@@ -428,7 +428,7 @@ export class Switch extends Scheme<PcSchema.SwitchScheme> {
   props: PcSchema.SwitchSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/switch-cn';
     this.componentName = '开关';
     this.componentType = ComponentType.Switch;
@@ -480,7 +480,7 @@ export class Radio extends Scheme<PcSchema.RadioScheme> {
   props: PcSchema.RadioSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/radio-cn';
     this.componentName = '单选框';
     this.componentType = ComponentType.Radio;
@@ -536,7 +536,7 @@ export class Checkbox extends Scheme<PcSchema.CheckboxScheme> {
   props: PcSchema.CheckboxSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/checkbox-cn';
     this.componentName = '多选框';
     this.componentType = ComponentType.Checkbox;
@@ -590,7 +590,7 @@ export class Select extends Scheme<PcSchema.SelectScheme> {
   props: PcSchema.SelectSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/select-cn';
     this.componentName = '下拉选择';
     this.componentType = ComponentType.Select;
@@ -648,7 +648,7 @@ export class MultiSelect extends Scheme<PcSchema.MultiSelectScheme> {
   props: PcSchema.MultiSelectSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/select-cn';
     this.componentName = '下拉多择';
     this.componentType = ComponentType.MultiSelect;
@@ -706,7 +706,7 @@ export class DatePicker extends Scheme<PcSchema.DatePickerScheme> {
   props: PcSchema.DatePickerSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/date-picker-cn';
     this.componentName = '日期';
     this.componentType = ComponentType.DatePicker;
@@ -764,7 +764,7 @@ export class RangePicker extends Scheme<PcSchema.RangePickerScheme> {
   props: PcSchema.RangePickerSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/date-picker-cn';
     this.componentName = '日期区间';
     this.componentType = ComponentType.RangePicker;
@@ -820,7 +820,7 @@ export class TimePicker extends Scheme<PcSchema.TimePickerScheme> {
   props: PcSchema.TimePickerSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
     this.componentName = '时间';
     this.componentType = ComponentType.TimePicker;
@@ -878,7 +878,7 @@ export class TimeRangePicker extends Scheme<PcSchema.TimeRangePickerScheme> {
   props: PcSchema.TimeRangePickerSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/time-picker-cn';
     this.componentName = '时间区间';
     this.componentType = ComponentType.TimeRangePicker;
@@ -936,7 +936,7 @@ export class Rate extends Scheme<PcSchema.RateScheme> {
   props: PcSchema.RateSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/switch-cn';
     this.componentName = '评分';
     this.componentType = ComponentType.Rate;
@@ -987,7 +987,7 @@ export class Upload extends Scheme<PcSchema.UploadScheme> {
   props: PcSchema.UploadSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = 'https://www.antdv.com/components/upload-cn';
     this.componentName = '上传';
     this.componentType = ComponentType.Upload;
@@ -1039,7 +1039,7 @@ export class SubForm extends Scheme<PcSchema.SubFormScheme> {
   props: PcSchema.SubFormSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.docUrl = '';
     this.componentName = '子表单';
     this.componentType = ComponentType.SubForm;
@@ -1073,7 +1073,7 @@ export class Row extends Scheme<PcSchema.RowScheme> {
   props: PcSchema.RowSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/grid-cn';
     this.componentName = '栅格';
@@ -1103,7 +1103,7 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
   props: PcSchema.ColumnSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/grid-cn';
     this.componentName = '栅格列';
@@ -1140,7 +1140,7 @@ export class Card extends Scheme<PcSchema.CardScheme> {
   props: PcSchema.CardSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/card-cn';
     this.componentName = '卡片';
@@ -1169,7 +1169,7 @@ export class Space extends Scheme<PcSchema.SpaceScheme> {
   props: PcSchema.SpaceSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/space-cn';
     this.componentName = '间距';
@@ -1197,7 +1197,7 @@ export class Collapse extends Scheme<PcSchema.CollapseScheme> {
   props: PcSchema.CollapseSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/collapse-cn';
     this.componentName = '折叠面板';
@@ -1229,7 +1229,7 @@ export class CollapsePanel extends Scheme<PcSchema.CollapsePanelScheme> {
   props: PcSchema.CollapsePanelSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/collapse-cn';
     this.componentName = '子折叠面板';
@@ -1259,7 +1259,7 @@ export class Tabs extends Scheme<PcSchema.TabsScheme> {
   props: PcSchema.TabsSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/tabs-cn';
     this.componentName = '标签页';
@@ -1293,7 +1293,7 @@ export class TabPane extends Scheme<PcSchema.TabPaneScheme> {
   props: PcSchema.TabPaneSchemeProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/tabs-cn';
     this.componentName = '子标签页';
@@ -1321,7 +1321,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
   props: PcSchema.FormSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'ADVANCED';
     this.docUrl = 'https://www.antdv.com/components/form-cn';
     this.componentName = '表单';
@@ -1381,7 +1381,7 @@ export class Vue extends Scheme<PcSchema.VueSchema> {
   props: PcSchema.VueSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'ADVANCED';
     this.docUrl = '';
     this.componentName = 'Vue';
@@ -1406,7 +1406,7 @@ export class Progress extends Scheme<PcSchema.ProgressSchema> {
   props: PcSchema.ProgressSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'ADVANCED';
     this.docUrl = '';
     this.componentName = 'Progress';
@@ -1435,7 +1435,7 @@ export class Table extends Scheme<PcSchema.TableSchema> {
   props: PcSchema.TableSchemaProps;
 
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'ADVANCED';
     this.docUrl = '';
     this.componentName = 'Table';
@@ -1591,7 +1591,7 @@ export class ActionItemDto {
 
 export class Filter extends Scheme<PcSchema.FilterSchema> {
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'ADVANCED';
     this.docUrl = '';
     this.componentName = '查询';
@@ -1661,7 +1661,7 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
   props: PcSchema.ModalSchemaProps;
 
   constructor(_data?: PcSchema.ModalSchema) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
     this.componentName = '模态框';
@@ -1690,7 +1690,7 @@ export class Modal extends Scheme<PcSchema.ModalSchema> {
 
 export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
     this.componentName = '模态框-内容区';
@@ -1708,7 +1708,7 @@ export class ModalContent extends Scheme<PcSchema.ModalContentSchema> {
 
 export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'LAYOUT';
     this.docUrl = 'https://www.antdv.com/components/modal-cn';
     this.componentName = '模态框-操作区';
@@ -1726,7 +1726,7 @@ export class ModalFooter extends Scheme<PcSchema.ModalFooterSchema> {
 
 export class QRcode extends Scheme<PcSchema.QRcodeSchema> {
   constructor(_data?: any) {
-    super();
+    super(_data);
     this.tag = 'BUSINESS';
     this.docUrl = 'https://www.antdv.com/components/qrcode-cn';
     this.componentName = '二维码';

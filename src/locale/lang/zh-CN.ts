@@ -98,7 +98,7 @@ export default {
       actionName: '请输入动作名称',
     },
     popconfirm: {
-      isDelete: '确认是否删除?',
+      isDelete: '确认删除数据吗？此操作将无法撤销。',
       isDeleteMultilingualCopywriting: '此操作不可恢复, 确认删除此条多国语言文案吗?',
     },
     label: {

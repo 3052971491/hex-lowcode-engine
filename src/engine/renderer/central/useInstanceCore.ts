@@ -5,7 +5,7 @@ export interface InstanceCoreFactory {
    * 新增组件实例
    * @param instance Schema的class实例
    */
-  setInstance(instance: any): void;
+  setInstance(instance: any, key?: string): void;
   /** 获取组件实例 */
   getInstance(id: string): any;
   /** 获取根实例 */
@@ -14,9 +14,13 @@ export interface InstanceCoreFactory {
 
 export function useInstanceCore(): InstanceCoreFactory {
   const instances = new Map([]);
-  function setInstance(instance: any) {
-    const { id } = instance;
-    instances.set(id, instance);
+  function setInstance(instance: any, key?: string) {
+    if (key) {
+      instances.set(key, instance);
+    } else {
+      const { id } = instance;
+      instances.set(id, instance);
+    }
   }
   function getInstance(id: string) {
     return instances.get(id);
