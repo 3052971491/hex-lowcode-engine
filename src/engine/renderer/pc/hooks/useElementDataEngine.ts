@@ -3,6 +3,7 @@ import { computed, toRefs, unref } from 'vue';
 import { IDataEngine } from '../../render-inject-key';
 import { LowCode } from '/@/types/schema';
 import { PcSchema } from '/@/schema/common/interface';
+import { isUndefined } from '/@/utils/is';
 
 interface Props<T> {
   schema: T;
@@ -21,6 +22,8 @@ export function useElementDataEngine<T extends LowCode.NodeSchema>(props: Props<
   const { schema, subForm } = toRefs(props);
   /** 初始化默认值 */
   function initDefaultValue() {
+    // 当源数据中有值时跳过初始化默认值过程
+    if (!isUndefined(modelValue.value)) return;
     if (!schema.value.props.hasOwnProperty('defaultValue')) {
       modelValue.value = undefined;
       return;
