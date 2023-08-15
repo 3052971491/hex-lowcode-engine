@@ -218,7 +218,7 @@ const onDeleteItemData = (column: BasicColumn, record: any, index: number) => {
  * @param row 某行
  * @param column 某列
  */
-function setComponentAttribute(property: string, value: any, row = -1, column = -1) {
+function setCellAttribute(property: string, value: any, row = -1, column = -1) {
   if (row === -1 && column === -1) {
     // 禁用整个表单
     modelValue.value.forEach((item: any, idx: number) => {
@@ -248,7 +248,7 @@ function setComponentAttribute(property: string, value: any, row = -1, column = 
  * @param row 某行
  * @param column 某列
  */
-function getComponentAttribute(property: string, row = -1, column = -1) {
+function getCellAttribute(property: string, row = -1, column = -1) {
   return core?.state.__this__?.$(ectype.value.id, childrenIds[column], row)?.get(property);
 }
 
@@ -262,8 +262,8 @@ onMounted(() => {
   obj.setValue = (data: any) => {
     modelValue.value = data;
   };
-  obj.getComponentAttribute = getComponentAttribute;
-  obj.setComponentAttribute = setComponentAttribute;
+  obj.getCellAttribute = getCellAttribute;
+  obj.setCellAttribute = setCellAttribute;
 });
 </script>
 
