@@ -59,7 +59,7 @@ import { useElementDataEngine } from '../../hooks/useElementDataEngine';
 import { useElement } from '../../hooks/useElement';
 import { ActionItem, BasicColumn, BasicTableProps, HexTable, TableAction } from '/@/components/hex-table';
 import useTable from '/@/components/hex-table/src/hooks/useTable';
-import { BasicColumnDto } from '/@/schema/common/schema';
+import { BasicColumnDto, SubForm } from '/@/schema/common/schema';
 import { useLocale } from '/@/hooks/use-loacle';
 
 const { t } = useLocale();
@@ -97,7 +97,7 @@ const prop = computed(
     }) as PcSchema.SubFormSchemeProps,
 );
 
-const childrenIds = ectype.value.children?.map((item) => item.id);
+const childrenIds = ectype.value.children?.map((item) => item.id) || [];
 
 // 监听children是否变化, 变化即更新表格列配置
 // 期望: 只存在编辑状态下
@@ -211,14 +211,59 @@ const onDeleteItemData = (column: BasicColumn, record: any, index: number) => {
   modelValue.value.splice(index, 1);
 };
 
+/**
+ * 设置子表单中子组件的属性
+ * @param property 属性名
+ * @param value 属性值
+ * @param row 某行
+ * @param column 某列
+ */
+function setProperty(property: string, value: any, row = -1, column = -1) {
+  if (row === -1 && column === -1) {
+    // 禁用整个表单
+    modelValue.value.forEach((item: any, idx: number) => {
+      childrenIds?.forEach((id) => {
+        core?.state.__this__?.$(ectype.value.id, id, idx)?.set(property, value);
+      });
+    });
+  } else if (column === -1) {
+    // 禁用表单某一行
+    childrenIds?.forEach((id) => {
+      core?.state.__this__?.$(ectype.value.id, id, row)?.set(property, value);
+    });
+  } else if (row === -1) {
+    // 禁用表单某一列
+    modelValue.value.forEach((item: any, idx: number) => {
+      core?.state.__this__?.$(ectype.value.id, childrenIds[column - 1], idx - 1)?.set(property, value);
+    });
+  } else {
+    // 禁用某行某列
+    core?.state.__this__?.$(ectype.value.id, childrenIds[column - 1], row - 1)?.set(property, value);
+  }
+}
+
+/**
+ * 获取子表单中子组件的属性
+ * @param property 属性名
+ * @param row 某行
+ * @param column 某列
+ */
+function getProperty(property: string, row = -1, column = -1) {
+  return core?.state.__this__?.$(ectype.value.id, childrenIds[column], row)?.get(property);
+}
+
 onMounted(() => {
   // 替换原型方法
-  unref(ectype).getValue = () => {
+  const obj = ectype.value as SubForm;
+  // 替换原型方法
+  obj.getValue = () => {
     return unref(modelValue);
   };
-  unref(ectype).setValue = (data: any) => {
+  obj.setValue = (data: any) => {
     modelValue.value = data;
   };
+  obj.getProperty = getProperty;
+  obj.setProperty = setProperty;
 });
 </script>
 

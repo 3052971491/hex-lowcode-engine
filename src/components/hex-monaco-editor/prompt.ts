@@ -160,7 +160,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `reload();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 刷新表格',
+      detail: '表格 Table: 刷新表格',
       range,
     },
     {
@@ -168,7 +168,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setProps(info);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 用于设置表格参数',
+      detail: '表格 Table: 用于设置表格参数',
       range,
     },
     {
@@ -176,7 +176,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setLoading(loading);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 设置表格 loading 状态',
+      detail: '表格 Table: 设置表格 loading 状态',
       range,
     },
     {
@@ -184,7 +184,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getColumns();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取表格列数据',
+      detail: '表格 Table: 获取表格列数据',
       range,
     },
     {
@@ -192,7 +192,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setColumns(columns);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 设置表格列数据',
+      detail: '表格 Table: 设置表格列数据',
       range,
     },
     {
@@ -200,7 +200,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setPagination(info);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 设置分页信息',
+      detail: '表格 Table: 设置分页信息',
       range,
     },
     {
@@ -208,7 +208,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `deleteSelectRowByKey(key);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 根据 key 删除取消选中行',
+      detail: '表格 Table: 根据 key 删除取消选中行',
       range,
     },
     {
@@ -216,7 +216,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getSelectRowKeys();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取选中行的 keys',
+      detail: '表格 Table: 获取选中行的 keys',
       range,
     },
     {
@@ -224,7 +224,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getSelectRows();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取选中行的 rows',
+      detail: '表格 Table: 获取选中行的 rows',
       range,
     },
     {
@@ -232,7 +232,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `clearSelectedRowKeys();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 清空选中行',
+      detail: '表格 Table: 清空选中行',
       range,
     },
     {
@@ -240,7 +240,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setSelectedRowKeys(keys);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 设置选中行',
+      detail: '表格 Table: 设置选中行',
       range,
     },
     {
@@ -248,7 +248,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getPaginationRef();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取当前分页信息',
+      detail: '表格 Table: 获取当前分页信息',
       range,
     },
     {
@@ -256,7 +256,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getRowSelection();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取勾选框信息',
+      detail: '表格 Table: 获取勾选框信息',
       range,
     },
     {
@@ -264,7 +264,7 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `setShowPagination(show);`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 设置当前是否显示分页',
+      detail: '表格 Table: 设置当前是否显示分页',
       range,
     },
     {
@@ -272,7 +272,23 @@ export function createDependencyProposals(range: any) {
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `getShowPagination();`,
       insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-      detail: 'Table: 获取当前是否显示分页',
+      detail: '表格 Table: 获取当前是否显示分页',
+      range,
+    },
+    {
+      label: 'getProperty()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `getProperty(property, row, col);`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '子表单 SubForm: 获取子表单中某行某列组件的属性',
+      range,
+    },
+    {
+      label: 'setProperty()',
+      kind: monaco.languages.CompletionItemKind.Function,
+      insertText: `setProperty(property, value, row, col);`,
+      insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      detail: '子表单 SubForm: 设置子表单中某行某列组件的属性',
       range,
     },
     ...jsonArr,
