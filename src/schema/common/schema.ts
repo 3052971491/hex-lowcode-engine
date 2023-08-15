@@ -1068,11 +1068,11 @@ export class SubForm extends Scheme<PcSchema.SubFormScheme> {
     }
   }
 
-  setProperty(property: string, value: any, row = -1, column = -1) {
+  setComponentAttribute(property: string, value: any, row = -1, column = -1) {
     throw new Error('警告: SubForm的【setProperty】方法暂未实现');
   }
 
-  getProperty(property: string, row = -1, column = -1) {
+  getComponentAttribute(property: string, row = -1, column = -1) {
     throw new Error('警告: SubForm的【getProperty】方法暂未实现');
   }
 }
