@@ -229,12 +229,12 @@ function setCellAttribute(property: string, value: any, row = -1, column = -1) {
   } else if (column === -1) {
     // 禁用表单某一行
     childrenIds?.forEach((id) => {
-      core?.state.__this__?.$(ectype.value.id, id, row)?.set(property, value);
+      core?.state.__this__?.$(ectype.value.id, id, row - 1)?.set(property, value);
     });
   } else if (row === -1) {
     // 禁用表单某一列
     modelValue.value.forEach((item: any, idx: number) => {
-      core?.state.__this__?.$(ectype.value.id, childrenIds[column - 1], idx - 1)?.set(property, value);
+      core?.state.__this__?.$(ectype.value.id, childrenIds[column - 1], idx)?.set(property, value);
     });
   } else {
     // 禁用某行某列
