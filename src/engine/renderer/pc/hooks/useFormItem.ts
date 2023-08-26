@@ -1,7 +1,8 @@
 import type { Rule } from 'ant-design-vue/es/form';
-import { nextTick } from 'vue';
+import { computed, nextTick, toRefs, unref } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
 import { copyElementSchema } from '/@/utils/draggable-api';
+import { PcSchema } from '/@/schema/common/interface';
 
 interface FormItem {
   /**
@@ -23,6 +24,10 @@ interface Props {
   parentSchema: LowCode.Schema;
   parentSchemaList: LowCode.Schema[];
   indexOfParentList: number;
+  subForm?: {
+    schema: PcSchema.SubFormScheme;
+    rowIndex: number;
+  };
 }
 
 /**
@@ -31,6 +36,9 @@ interface Props {
  * @returns
  */
 export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
+  /** 是否是子表单 */
+  const isSubForm = computed(() => !!unref(props?.subForm));
+
   function getRules() {
     if (!schema || !schema.props?.hasOwnProperty('rules')) return [];
     const { rules } = schema.props;
@@ -84,7 +92,12 @@ export function useFormItem(schema: LowCode.Schema, props?: Props): FormItem {
   }
 
   function getName() {
-    return !schema.alwaysCommit && schema.props?.behavior === 'hidden' ? undefined : schema.props?.field;
+    if (!schema.alwaysCommit && schema.props?.behavior === 'hidden') return undefined;
+
+    if (unref(isSubForm)) {
+      return [props?.subForm?.schema.props.field, props?.subForm?.rowIndex, schema.props?.field];
+    }
+    return schema.props?.field;
   }
 
   function onDelete() {

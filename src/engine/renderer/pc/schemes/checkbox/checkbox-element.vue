@@ -4,6 +4,7 @@
     :parent-schema="parentSchema"
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
+    :extra-props="props"
   >
     <a-checkbox-group ref="__instance__" v-model:value="modelValue" v-bind="prop" :class="[ectype.props.className]">
       <a-checkbox v-for="(item, index) in ectype.props.options" :key="index" :value="item.value">
@@ -28,13 +29,19 @@ interface Props {
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
+  subForm?: {
+    schema: PcSchema.SubFormScheme;
+    rowIndex: number;
+  };
 }
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+  subForm: undefined,
+});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.CheckboxScheme>(props, __instance__);
-const { modelValue } = useElementDataEngine<PcSchema.CheckboxScheme>(props.schema, dataEngine);
+const { modelValue } = useElementDataEngine<PcSchema.CheckboxScheme>(props, dataEngine);
 
 const prop = computed(() =>
   ectypeProps((obj) => {
