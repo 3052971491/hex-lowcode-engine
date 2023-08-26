@@ -1,5 +1,5 @@
 <template>
-  <div class="pc-render w-full h-full overflow-auto">
+  <div class="pc-render">
     <!-- 编辑模式 -->
     <template v-if="redactState">
       <template v-if="!core?.state.__isModalDesigner__">
@@ -99,4 +99,11 @@ const breadcrumbs = useComponentBreadcrumbs([]);
 provide(ComponentBreadcrumbs, breadcrumbs);
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.pc-render {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+}
+</style>

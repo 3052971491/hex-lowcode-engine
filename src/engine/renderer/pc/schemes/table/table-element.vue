@@ -25,7 +25,6 @@
           </template>
         </template>
       </template>
-      <!--  -->
     </HexTable>
   </ElementWrapper>
 </template>

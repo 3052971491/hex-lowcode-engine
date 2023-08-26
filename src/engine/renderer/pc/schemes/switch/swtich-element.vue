@@ -4,6 +4,7 @@
     :parent-schema="parentSchema"
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
+    :extra-props="props"
   >
     <a-switch
       ref="__instance__"
@@ -29,13 +30,19 @@ interface Props {
   parentSchema: LowCode.NodeSchema;
   parentSchemaList: LowCode.NodeSchema[];
   indexOfParentList: number;
+  subForm?: {
+    schema: PcSchema.SubFormScheme;
+    rowIndex: number;
+  };
 }
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+  subForm: undefined,
+});
 const dataEngine = inject(DataEngineInjectionKey);
 const __instance__ = ref<any>();
 
 const { ectype, ectypeProps } = useElement<PcSchema.SwitchScheme>(props, __instance__);
-const { modelValue } = useElementDataEngine<PcSchema.SwitchScheme>(props.schema, dataEngine);
+const { modelValue } = useElementDataEngine<PcSchema.SwitchScheme>(props, dataEngine);
 
 const prop = computed(() =>
   ectypeProps((obj) => {

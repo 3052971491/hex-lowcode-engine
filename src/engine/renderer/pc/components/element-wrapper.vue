@@ -21,11 +21,11 @@
       </ContainerEditWrapper>
     </template>
     <template v-else>
-      <ElementViewWrapper v-show="!isHidden" :schema="schema">
+      <ElementViewWrapper v-show="!isHidden" :schema="schema" :extra-props="props.extraProps">
         <template v-if="isDefault">
           <slot></slot>
         </template>
-        <template v-else-if="isReadonly"> {{ getReadonlyData }} </template>
+        <!-- <template v-else-if="isReadonly"> {{ getReadonlyData }} </template> -->
       </ElementViewWrapper>
     </template>
   </div>
@@ -46,15 +46,28 @@ import {
 } from '/@/engine/renderer/render-inject-key';
 import { useComponentBreadcrumbs } from '../hooks/useComponentBreadcrumbs';
 import { useElementDataEngine } from '../hooks/useElementDataEngine';
+import { PcSchema } from '/@/schema/common/interface';
 
 interface Props {
   schema: LowCode.Schema;
   parentSchema: LowCode.Schema;
   parentSchemaList: LowCode.Schema[];
   indexOfParentList: number;
+  extraProps?: {
+    schema: LowCode.Schema;
+    parentSchema: LowCode.Schema;
+    parentSchemaList: LowCode.Schema[];
+    indexOfParentList: number;
+    subForm?: {
+      schema: PcSchema.SubFormScheme;
+      rowIndex: number;
+    };
+  };
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+  extraProps: undefined,
+});
 
 const core = inject(HexCoreInjectionKey);
 const redactState = inject(RedactStateInjectionKey);
@@ -86,7 +99,7 @@ const { isDefault, isPreview, isReadonly, isHidden } = useElementWrapper(
   redactState,
 );
 
-const { getReadonlyData } = useElementDataEngine<LowCode.Schema>(props.schema, dataEngine);
+// const { getReadonlyData } = useElementDataEngine<LowCode.Schema>(props, dataEngine);
 
 onMounted(() => {
   if (!redactState && core?.state && props.schema.props?.className && props.schema.props?.__style__) {

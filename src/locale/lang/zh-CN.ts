@@ -71,6 +71,7 @@ export default {
       TimeRangePicker: '时间区间',
       Rate: '评分',
       Upload: '上传',
+      SubForm: '子表单',
       Row: '栅格',
       Column: '栅格列',
       Card: '卡片',
@@ -97,7 +98,7 @@ export default {
       actionName: '请输入动作名称',
     },
     popconfirm: {
-      isDelete: '确认是否删除?',
+      isDelete: '确认删除数据吗？此操作将无法撤销。',
       isDeleteMultilingualCopywriting: '此操作不可恢复, 确认删除此条多国语言文案吗?',
     },
     label: {
@@ -286,6 +287,9 @@ export default {
         span: '跨列数量',
         isAdvanced: '是否高级查询',
         tableComponentId: '表格组件',
+      },
+      SubForm: {
+        children: '列配置',
       },
     },
     tips: {

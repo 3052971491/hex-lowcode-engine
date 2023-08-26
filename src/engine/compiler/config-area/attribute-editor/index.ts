@@ -279,6 +279,18 @@ const UPLOAD_ATTRIBUTES: Array<AttributeItem> = [
   // { type: 'Upload', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
+const SUB_FORM_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'SubForm', name: 'title', label: '表格标题', editor: 'input-editor', i18n: true },
+  { type: 'SubForm', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Table', name: 'rowKey', label: '表格行 key', editor: 'input-editor' },
+  { type: 'SubForm', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'SubForm', name: 'children', label: '列配置', editor: 'children-editor', merge: true },
+  { type: 'SubForm', name: 'actionItem', label: '操作列配置', editor: 'action-item-editor', merge: true },
+  { type: 'Table', name: 'noPadding', label: '隐藏边距', editor: 'switch-editor' },
+  { type: 'SubForm', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'SubForm', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+];
+
 /** 栅格-行 */
 const ROW_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Row', name: 'rowGutter', label: '列间距', editor: 'input-number-editor' },
@@ -493,6 +505,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   TimeRangePicker: TIME_RANGE_PICKER_ATTRIBUTES,
   Rate: RATE_ATTRIBUTES,
   Upload: UPLOAD_ATTRIBUTES,
+  SubForm: SUB_FORM_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,

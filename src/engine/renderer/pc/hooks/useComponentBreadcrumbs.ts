@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import { LowCode } from '/@/types/schema';
 
 export interface IComponentBreadcrumbs {
@@ -11,7 +12,7 @@ export interface IComponentBreadcrumbs {
  * 组件面包屑
  */
 export function useComponentBreadcrumbs(data?: LowCode.Schema[]): IComponentBreadcrumbs {
-  let breadcrumbs = data ?? [];
+  let breadcrumbs = reactive(data ?? []);
   function setBreadcrumbs(val: LowCode.Schema) {
     if (val) {
       breadcrumbs.push(val);

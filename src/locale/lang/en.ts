@@ -71,6 +71,7 @@ export default {
       TimeRangePicker: 'Time Range Picker',
       Rate: 'Rate',
       Upload: 'Upload',
+      SubForm: 'SubForm',
       Row: 'Row',
       Column: 'Column',
       Card: 'Card',
@@ -286,6 +287,9 @@ export default {
         span: 'Number of columns across',
         isAdvanced: 'Advanced query',
         tableComponentId: 'Table component',
+      },
+      SubForm: {
+        children: 'Column config',
       },
     },
     tips: {

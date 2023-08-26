@@ -7,6 +7,7 @@ import { RuntimeDataSourceConfig } from '../types/data-source/data-source-runtim
 import { message } from 'ant-design-vue';
 import { MessageInstance } from 'ant-design-vue/lib/message';
 import { iteratorPromise, load } from './func';
+import { isUndefined } from './is';
 
 interface IUtilsContext {
   /** 组件实例集合 */
@@ -55,11 +56,16 @@ export class Context {
   /**
    * 获取组件实例
    * @param id 组件唯一标识
+   * @param extraId 可选, 用于子表单, 子表单中的组件
+   * @param rowIndex 可选, 用于子表单, 当前行
    * @returns
    */
-  $(id: string): Scheme<any> | undefined {
+  $(id: string, extraId?: string, rowIndex?: number): Scheme<any> | undefined {
     const { instances } = this.utils;
     if (!instances) return undefined;
+    if (!isUndefined(extraId) && !isUndefined(rowIndex)) {
+      return instances.getInstance(`${id}@${extraId}@${rowIndex}`);
+    }
     return instances.getInstance(id);
   }
 
