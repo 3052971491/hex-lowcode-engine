@@ -74,6 +74,7 @@ export default {
       SubForm: 'SubForm',
       Row: 'Row',
       Column: 'Column',
+      Grid: 'Grid',
       Card: 'Card',
       Space: 'Space',
       Collapse: 'Collapse',

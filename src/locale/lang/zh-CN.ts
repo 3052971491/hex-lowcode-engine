@@ -74,6 +74,7 @@ export default {
       SubForm: '子表单',
       Row: '栅格',
       Column: '栅格列',
+      Grid: '单元格',
       Card: '卡片',
       Space: '间距',
       Collapse: '折叠面板',

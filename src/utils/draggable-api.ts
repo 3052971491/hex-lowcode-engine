@@ -11,6 +11,7 @@ import {
 } from '/@/schema/pc';
 import { BasicColumnDto } from '/@/schema/common/schema';
 import { BasicColumn } from '/@/components/hex-table';
+import { useData } from '/@/components/hex-cell/useData';
 
 export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
   const newSchema = cloneDeep(element);
@@ -29,6 +30,7 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
 
   if (newSchema.tag === 'LAYOUT') {
     let obj = null;
+    const { build } = useData();
     switch (newSchema.componentType) {
       case 'Row':
         obj = buildElementSchemaByType('LAYOUT', 'Column');
@@ -75,6 +77,9 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
           obj.props.value = '2';
           newSchema.children?.push(obj);
         }
+        break;
+      case 'Grid':
+        newSchema.children = build(4, 5);
         break;
       default:
         break;
