@@ -27,14 +27,16 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['select']);
 
 const modelOption = computed<GridCol>(() => {
-  return props.options;
+  const result = props.options;
+  result.props = { ...result.props, selected: false };
+  return result;
 });
 
 const getBindValues = computed(() => {
   const { ...opt } = unref(modelOption).props;
   return {
     ...opt,
-    selected: props.disabled ? false : opt.selected,
+    selected: opt.selected,
   };
 });
 

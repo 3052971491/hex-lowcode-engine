@@ -1233,7 +1233,6 @@ export class GridCol extends Scheme<PcSchema.GridColScheme> {
       rowSpan: 1,
       rowIndex: -1,
       colIndex: -1,
-      selected: false,
       className: '',
       __style__: '',
     };

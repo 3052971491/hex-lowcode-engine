@@ -5,7 +5,12 @@
     :parent-schema-list="parentSchemaList"
     :index-of-parent-list="indexOfParentList"
   >
-    <hex-cell ref="__instance__" v-model:value="ectype" :disabled="!redactState" :class="[ectype.props.className]">
+    <hex-cell
+      ref="__instance__"
+      v-model:value="ectype"
+      :disabled="!redactState || selectedScheme?.id !== ectype.id"
+      :class="[ectype.props.className]"
+    >
       <template #cell="{ item: cell }">
         <template v-if="isPreview">
           <hex-draggable v-model:value="cell.children" @add="onAdd($event, cell as GridCol)" @update="onUpdate">

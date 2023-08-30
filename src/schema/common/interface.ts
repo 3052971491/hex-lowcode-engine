@@ -699,11 +699,7 @@ export namespace PcSchema {
     rowIndex: number;
     /** 某列 */
     colIndex: number;
-    /**
-     * 是否被选中
-     * @description 用于非禁用状态的选中合并拆分功能
-     */
-    selected: boolean;
+    [key: string]: any;
   }
 
   export interface CardSchemeProps extends LowCode.NodeSchemaProps {
