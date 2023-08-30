@@ -828,6 +828,8 @@ export namespace PcSchema {
     hideRequiredMark: boolean;
     /** label 标签的文本对齐方式 */
     labelAlign: 'left' | 'right';
+    /** 是否显示 label 后面的冒号 */
+    colon: boolean;
   }
 
   export interface VueSchema extends LowCode.NodeSchema {

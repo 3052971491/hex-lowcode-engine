@@ -292,6 +292,9 @@ export default {
       SubForm: {
         children: 'Column config',
       },
+      Form: {
+        colon: 'Colon',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',

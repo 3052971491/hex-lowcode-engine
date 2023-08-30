@@ -92,6 +92,7 @@ const prop = computed(() =>
     return {
       hideRequiredMark: obj.hideRequiredMark,
       labelAlign: obj.labelAlign,
+      colon: obj.colon,
     };
   }),
 );

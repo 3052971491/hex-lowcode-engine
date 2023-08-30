@@ -1461,6 +1461,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
       model: '',
       hideRequiredMark: false,
       labelAlign: 'left',
+      colon: true,
       className: '',
       __style__: '',
     };

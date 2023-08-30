@@ -292,6 +292,9 @@ export default {
       SubForm: {
         children: '列配置',
       },
+      Form: {
+        colon: '是否显示冒号',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',
