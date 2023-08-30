@@ -168,6 +168,8 @@ export function useFeatures(data: GridRow[], disabled: boolean) {
   function setSelected(cell: GridCol) {
     // 禁用模式不允许选中
     if (disabled) return;
+    // 当children有值时不允许被选中
+    if (cell.children && cell.children?.length > 0) return;
     cell.props.selected = !cell.props.selected;
     const idx = state.cells.findIndex((item) => item.id === cell.id);
     if (idx !== -1) {
