@@ -121,7 +121,7 @@ const RADIO_ATTRIBUTES: Array<AttributeItem> = [
 
 const CHECKBOX_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Checkbox', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
-  { type: 'Checkbox', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  // { type: 'Checkbox', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
   { type: 'Checkbox', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Checkbox', name: 'behavior', label: '状态', editor: 'behavior-editor' },
   { type: 'Checkbox', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
