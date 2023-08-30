@@ -8,7 +8,7 @@
     <hex-cell ref="__instance__" v-model:value="ectype" :disabled="!redactState" :class="[ectype.props.className]">
       <template #cell="{ item: cell }">
         <template v-if="isPreview">
-          <hex-draggable v-model:value="cell.children" @add="onAdd" @update="onUpdate">
+          <hex-draggable v-model:value="cell.children" @add="onAdd($event, cell as GridCol)" @update="onUpdate">
             <template #item="{ element, index }">
               <div class="item hex-draggable-handle">
                 <component
@@ -49,7 +49,7 @@ import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer
 import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import HexCell from '/@/components/hex-cell/hex-cell.vue';
-import { Grid } from '/@/schema/common/schema';
+import { Grid, GridCol } from '/@/schema/common/schema';
 
 const __instance__ = ref<any>();
 
@@ -71,9 +71,9 @@ const state = reactive({
 const selectedScheme = computed(() => {
   return core?.state.selectedData?.selectedScheme;
 });
-const onAdd = ({ newIndex }: { newIndex: number }) => {
-  if (props.schema?.children && props.schema?.children[newIndex]) {
-    core?.handleUpdateSelectData(props.schema.children[newIndex]);
+const onAdd = ({ newIndex }: { newIndex: number }, cell: GridCol) => {
+  if (cell?.children && cell?.children[newIndex]) {
+    core?.handleUpdateSelectData(cell.children[newIndex]);
     core?.handleUpdateHistoryData();
   }
 };
