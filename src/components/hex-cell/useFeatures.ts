@@ -1,7 +1,11 @@
 import { computed, reactive, unref } from 'vue';
-import { GridRow, GridCol } from '/@/schema/common/schema';
+import { GridRow, GridCol, Grid } from '/@/schema/common/schema';
 
-export function useFeatures(data: GridRow[], disabled: boolean) {
+interface Props {
+  value: Grid;
+  disabled?: boolean;
+}
+export function useFeatures(data: GridRow[], op: Props) {
   const state = reactive<{
     cells: GridCol[];
   }>({
@@ -92,7 +96,7 @@ export function useFeatures(data: GridRow[], disabled: boolean) {
    */
   function merge() {
     // 禁用模式不允许合并
-    if (disabled) return;
+    if (op.disabled) return;
     if (!unref(isAllowMerge)) return;
     if (!unref(hasOverColorRow)) return;
     if (!standardCell.value) return;
@@ -136,7 +140,7 @@ export function useFeatures(data: GridRow[], disabled: boolean) {
    */
   function split() {
     // 禁用模式不允许拆分
-    if (disabled) return;
+    if (op.disabled) return;
     state.cells.map((item) => {
       const { rowIndex, colIndex } = item.props;
       const targetCelProps = data[rowIndex].children?.[colIndex].props ?? null;
@@ -167,7 +171,7 @@ export function useFeatures(data: GridRow[], disabled: boolean) {
    */
   function setSelected(cell: GridCol) {
     // 禁用模式不允许选中
-    if (disabled) return;
+    if (op.disabled) return;
     // 当children有值时不允许被选中
     if (cell.children && cell.children?.length > 0) return;
     cell.props.selected = !cell.props.selected;

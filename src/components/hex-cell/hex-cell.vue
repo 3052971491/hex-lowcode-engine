@@ -26,7 +26,6 @@ import { computed } from 'vue';
 import Cell from './cell.vue';
 import { useFeatures } from './useFeatures';
 import { Grid, GridCol, GridRow } from '/@/schema/common/schema';
-import { PcSchema } from '/@/schema/common/interface';
 
 interface Props {
   value: Grid;
@@ -46,7 +45,7 @@ const modelValue = computed<Grid>({
   },
 });
 
-const { merge, setSelected, split } = useFeatures(modelValue.value.children as GridRow[], props.disabled);
+const { merge, setSelected, split } = useFeatures(modelValue.value.children as GridRow[], props);
 
 defineExpose({
   merge,

@@ -8,7 +8,7 @@
     <hex-cell
       ref="__instance__"
       v-model:value="ectype"
-      :disabled="!redactState || selectedScheme?.id !== ectype.id"
+      :disabled="!redactState || selectedScheme?.id !== props.schema.id"
       :class="[ectype.props.className]"
     >
       <template #cell="{ item: cell }">
