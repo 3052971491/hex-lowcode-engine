@@ -318,6 +318,11 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+/** 单元格 */
+const GRID_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Grid', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const CARD_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Card', name: 'title', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Card', name: 'size', label: '尺寸', editor: 'size-editor' },
@@ -509,6 +514,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   SubForm: SUB_FORM_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
+  Grid: GRID_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,
   Space: SPACE_ATTRIBUTES,
   Collapse: COLLAPSE_ATTRIBUTE,
