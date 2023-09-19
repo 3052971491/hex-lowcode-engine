@@ -43,7 +43,7 @@
     <!-- 是否a-form-item包裹 -->
     <template v-if="schema?.formItemFlag">
       <a-form-item :rules="getRules()">
-        <template #label> {{ label }} </template>
+        <template v-if="label" #label> {{ label }} </template>
         <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
         <!-- <template #help></template> -->
         <slot></slot>
