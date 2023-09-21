@@ -75,6 +75,8 @@ export default {
       Row: '栅格',
       Column: '栅格列',
       Grid: '单元格',
+      GridRow: '单元格-行',
+      GridCol: '单元格-列',
       Card: '卡片',
       Space: '间距',
       Collapse: '折叠面板',

@@ -75,6 +75,8 @@ export default {
       Row: 'Row',
       Column: 'Column',
       Grid: 'Grid',
+      GridRow: 'Grid Row',
+      GridCol: 'Grid Col',
       Card: 'Card',
       Space: 'Space',
       Collapse: 'Collapse',
