@@ -79,7 +79,7 @@ export function buildElementSchema(element: LowCode.Schema): LowCode.Schema {
         }
         break;
       case 'Grid':
-        newSchema.children = build(4, 5);
+        newSchema.children = build(1, 1);
         break;
       default:
         break;

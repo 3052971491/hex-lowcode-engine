@@ -9,7 +9,7 @@
                 v-if="!col.props?.merged"
                 :options="(col as GridCol)"
                 :disabled="props.disabled"
-                @select="setSelected"
+                @select="features.setSelected"
               >
                 <slot name="cell" :item="col" :index="colIndex"></slot>
               </Cell>
@@ -45,12 +45,9 @@ const modelValue = computed<Grid>({
   },
 });
 
-const { merge, setSelected, split } = useFeatures(modelValue.value.children as GridRow[], props);
+const features = useFeatures(modelValue.value.children as GridRow[], props);
 
-defineExpose({
-  merge,
-  split,
-});
+defineExpose(features);
 </script>
 
 <style lang="less" scoped>

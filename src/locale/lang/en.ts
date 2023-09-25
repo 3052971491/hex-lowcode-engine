@@ -297,6 +297,13 @@ export default {
       Form: {
         colon: 'Colon',
       },
+      Grid: {
+        operate: 'Operate',
+        add: 'Add',
+        delete: 'Delete',
+        merge: 'Merge',
+        split: 'Split',
+      },
     },
     tips: {
       normal: 'normal: The basic functions of the control can be operated',

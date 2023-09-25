@@ -320,6 +320,7 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
 
 /** 单元格 */
 const GRID_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Grid', name: 'operate', label: '操作', editor: 'operate-editor', merge: true },
   { type: 'Grid', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 

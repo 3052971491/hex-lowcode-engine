@@ -297,6 +297,13 @@ export default {
       Form: {
         colon: '是否显示冒号',
       },
+      Grid: {
+        operate: '操作',
+        add: '新增',
+        delete: '删除',
+        merge: '合并',
+        split: '拆分',
+      },
     },
     tips: {
       normal: 'normal: 控件的基本功能均可操作',

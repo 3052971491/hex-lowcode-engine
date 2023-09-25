@@ -46,11 +46,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, inject, reactive, ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, reactive, ref, watch } from 'vue';
+import { useEventBus } from '@vueuse/core';
 import HexDraggable from '/@/components/hex-draggable/hex-draggable.vue';
 import ElementWrapper from '../../components/element-wrapper.vue';
 import { LowCode } from '/@/types/schema.d';
 import { HexCoreInjectionKey, RedactStateInjectionKey } from '/@/engine/renderer/render-inject-key';
+import { gridInstanceKey, gridOperateKey } from '/@/engine/renderer/render-event-bus-key';
 import { PcSchema } from '/@/schema/common/interface';
 import { useElementWrapper } from '../../hooks/useElementWrapper';
 import HexCell from '/@/components/hex-cell/hex-cell.vue';
@@ -89,6 +91,41 @@ const onUpdate = () => {
 const { isPreview } = useElementWrapper(props.schema, selectedScheme.value, redactState);
 const ectype = computed(() => {
   return (!redactState ? new Grid(props.schema) : state.schema) as Grid;
+});
+
+/**
+ * 单元格操作事件
+ * @description 配合grid-operate-editor.vue完成对单元格的增加, 删除, 合并, 拆分
+ */
+const onGridOperateCallback = () => {
+  if (!redactState) return;
+  const bus = useEventBus(gridOperateKey);
+
+  bus.on((org) => {
+    if (org.id === ectype.value.id && __instance__.value) {
+      __instance__.value.run(org.name);
+    }
+  });
+};
+
+const emitGridOperateCallback = () => {
+  if (!redactState) return;
+  const bus2 = useEventBus(gridInstanceKey);
+  watch(
+    () => core?.state.selectedData?.selectedId,
+    (val) => {
+      if (val !== ectype.value.id) return;
+      // 此处加延迟是第一次选中初始化时, 属性编辑器未渲染而导致其接受失败
+      setTimeout(() => {
+        bus2.emit({ instance: __instance__.value });
+      }, 100);
+    },
+  );
+};
+
+onMounted(() => {
+  emitGridOperateCallback();
+  onGridOperateCallback();
 });
 </script>
 

@@ -5,6 +5,26 @@ interface Props {
   value: Grid;
   disabled?: boolean;
 }
+
+/** 操作类型 */
+export enum OperateType {
+  InsertLeft,
+  InsertRight,
+  InsertTop,
+  InsertBottom,
+  DeleteRow,
+  DeleteCol,
+  MergeRow,
+  MergeCol,
+  MergeLeft,
+  MergeRight,
+  MergeTop,
+  MergeBottom,
+  Merge,
+  SplitRow,
+  SplitCol,
+  Split,
+}
 export function useFeatures(data: GridRow[], op: Props) {
   const state = reactive<{
     cells: GridCol[];
@@ -12,6 +32,15 @@ export function useFeatures(data: GridRow[], op: Props) {
     /** 选中单元格 */
     cells: [],
   });
+
+  const conditions: any = {
+    [OperateType.Merge]: () => {
+      return {
+        disabled: true,
+        func: merge,
+      };
+    },
+  };
 
   /**
    * 标准单元格
@@ -183,9 +212,25 @@ export function useFeatures(data: GridRow[], op: Props) {
     }
   }
 
+  function run(name: OperateType) {
+    if (conditions.hasOwnProperty(name)) {
+      return conditions[name]().func();
+    }
+  }
+
+  function getOperateStatus(name: OperateType): boolean {
+    if (conditions.hasOwnProperty(name)) {
+      return conditions[name]().disabled;
+    }
+    return true;
+  }
+
   return {
+    state,
     merge,
     split,
     setSelected,
+    run,
+    getOperateStatus,
   };
 }
