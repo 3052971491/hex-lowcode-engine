@@ -1158,7 +1158,7 @@ export class Grid extends Scheme<PcSchema.GridScheme> {
     this.componentType = ComponentType.Grid;
     this.children = [];
     this.formItemFlag = false;
-    this.internal = true;
+    this.internal = false;
     this.props = {
       className: '',
       __style__: '',
