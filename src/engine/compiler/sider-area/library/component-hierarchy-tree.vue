@@ -1,5 +1,5 @@
 <template>
-  <div class="element-library">
+  <div class="element-library flex flex-col overflow-hidden">
     <a-skeleton active :loading="loading">
       <a-input-search
         v-model:value="filterText"
@@ -9,41 +9,44 @@
         enter-button
         @search="onSearch"
       />
-      <a-tree
-        v-model:selectedKeys="selectedKeys"
-        show-line
-        block-node
-        default-expand-all
-        :tree-data="treeData"
-        :field-names="{
-          key: 'id',
-        }"
-        @select="onSelect"
-      >
-        <template #title="item">
-          <div class="tree-node">
-            <div class="flex items-center">
-              <span>{{ t(`el.component.${item.componentType}`) }}</span>
-              <a-tooltip>
-                <template #title>{{ t('el.common.loop') }}</template>
-                <sync-outlined v-if="item.condition" class="mx-2" style="color: #67bbbb" />
-              </a-tooltip>
+      <div class="flex-1 overflow-y-auto overflow-x-hidden">
+        <a-tree
+          v-model:selectedKeys="selectedKeys"
+          show-line
+          block-node
+          default-expand-all
+          :tree-data="treeData"
+          :field-names="{
+            key: 'id',
+          }"
+          @select="onSelect"
+        >
+          <template #title="item">
+            <div class="tree-node">
+              <div class="flex items-center">
+                <span>{{ t(`el.component.${item.componentType}`) }}</span>
+                <a-tooltip>
+                  <template #title>{{ t('el.common.loop') }}</template>
+                  <sync-outlined v-if="item.condition" class="mx-2" style="color: #67bbbb" />
+                </a-tooltip>
+              </div>
+              <div v-if="item.props.hasOwnProperty('behavior')" class="eye">
+                <eye-outlined
+                  v-if="isSelected(item) && item.props.behavior !== 'hidden'"
+                  @click.stop="onChangeBehavior(false, item)"
+                />
+                <eye-invisible-outlined
+                  v-if="isSelected(item) && item.props.behavior === 'hidden'"
+                  @click.stop="onChangeBehavior(true, item)"
+                />
+              </div>
             </div>
-            <div v-if="item.props.hasOwnProperty('behavior')" class="eye">
-              <eye-outlined
-                v-if="isSelected(item) && item.props.behavior !== 'hidden'"
-                @click.stop="onChangeBehavior(false, item)"
-              />
-              <eye-invisible-outlined
-                v-if="isSelected(item) && item.props.behavior === 'hidden'"
-                @click.stop="onChangeBehavior(true, item)"
-              />
-            </div>
-          </div>
-        </template>
-      </a-tree>
-      <div v-if="treeData.length < 1" class="w-full p-3">
-        <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
+          </template>
+        </a-tree>
+
+        <div v-if="treeData.length < 1" class="w-full p-3">
+          <a-empty :image="Empty.PRESENTED_IMAGE_SIMPLE" :description="t('el.common.noData')"></a-empty>
+        </div>
       </div>
     </a-skeleton>
   </div>

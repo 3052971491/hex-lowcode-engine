@@ -3,7 +3,7 @@
     <!-- 遮罩层 -->
     <div class="mask" @click.stop="handleSelectCurrentComponentClick()"></div>
     <!-- 面包屑列表 -->
-    <div v-if="isSelect" class="instance-node-selector">
+    <div v-if="isSelect" class="instance-node-selector" :style="nodeSelectorStyle">
       <span
         v-for="(item, index) in breadcrumbsArr"
         :key="index"
@@ -15,7 +15,7 @@
     </div>
     <!-- 操作按钮组 -->
     <div v-if="isSelect" class="borders-actions">
-      <a-tooltip placement="bottom">
+      <a-tooltip v-if="isSelectParentBtn" placement="bottom">
         <template #title>
           <span>{{ t('el.control.selectParentNode') }}</span>
         </template>
@@ -43,7 +43,7 @@
     <!-- 是否a-form-item包裹 -->
     <template v-if="schema?.formItemFlag">
       <a-form-item :rules="getRules()">
-        <template #label> {{ label }} </template>
+        <template v-if="label" #label> {{ label }} </template>
         <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
         <!-- <template #help></template> -->
         <slot></slot>
@@ -125,6 +125,19 @@ const handleSelectParentElementClick = (event: Event) => {
     core?.handleUpdateSelectData(props.parentSchema);
   }
 };
+const isSelectParentBtn = computed(() => {
+  const exclude = ['GridCol'];
+  return !exclude.includes(props.parentSchema.componentType);
+});
+const nodeSelectorStyle = computed(() => {
+  let right = 26 * 3;
+  if (!isSelectParentBtn.value) {
+    right -= 26;
+  }
+  return {
+    right: `${right + 4}px`,
+  };
+});
 /**
  * 选中当前组件
  */
@@ -210,7 +223,6 @@ const handleCopyCurrentElementClick = (event: Event) => {
   .instance-node-selector {
     position: absolute;
     top: calc(100% + 2px);
-    right: 84px;
     z-index: 999;
     display: flex;
     align-items: flex-end;

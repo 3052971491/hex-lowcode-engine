@@ -1,7 +1,7 @@
 <template>
   <div class="element-wrapper-container">
     <a-form-item v-if="schema?.formItemFlag" :name="getName()" :rules="getRules()">
-      <template #label> {{ label }} </template>
+      <template v-if="label" #label> {{ label }} </template>
       <template v-if="schema.props?.tips" #extra>{{ schema.props?.tips }}</template>
       <!-- <template #help></template> -->
       <slot></slot>

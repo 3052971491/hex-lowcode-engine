@@ -47,6 +47,7 @@ import {
 import { useComponentBreadcrumbs } from '../hooks/useComponentBreadcrumbs';
 import { useElementDataEngine } from '../hooks/useElementDataEngine';
 import { PcSchema } from '/@/schema/common/interface';
+import { cloneDeep } from 'lodash-es';
 
 interface Props {
   schema: LowCode.Schema;
@@ -75,18 +76,20 @@ const breadcrumbs = inject(ComponentBreadcrumbs);
 const dataEngine = inject(DataEngineInjectionKey);
 
 // 开始一次新的面包屑, 由于赋值是引用类型, 所以不影响属性面板修改
-const arr = breadcrumbs?.getBreadcrumbs().slice();
+const arr = breadcrumbs?.getBreadcrumbs();
 const componentBreadcrumbs = useComponentBreadcrumbs(arr);
 componentBreadcrumbs.setBreadcrumbs(props.schema);
 provide(ComponentBreadcrumbs, componentBreadcrumbs);
 if (core?.state.selectedData) {
   // 此处watch是了更新面包屑, 缺陷是每个组件都会有一个watch, 消耗性能
-  // 此处待优化
-  watch(core?.state.selectedData, () => {
-    if (core?.state.selectedData?.selectedId === props.schema.id) {
-      core.handleUpdateBreadcrumbs(core?.state.selectedData?.selectedId ? componentBreadcrumbs.getBreadcrumbs() : []);
-    }
-  });
+  watch(
+    () => core.state.selectedData?.selectedId,
+    () => {
+      if (core?.state.selectedData?.selectedId === props.schema.id) {
+        core.handleUpdateBreadcrumbs(componentBreadcrumbs.getBreadcrumbs());
+      }
+    },
+  );
 }
 
 const selectedScheme = computed(() => {

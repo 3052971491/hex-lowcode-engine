@@ -49,7 +49,7 @@
         </a-dropdown>
       </div>
       <a-drawer
-        :title="`${columnEditInfo?.title}`"
+        :title="t('el.control.edit')"
         placement="right"
         :open="isColumnEditMode"
         width="360"

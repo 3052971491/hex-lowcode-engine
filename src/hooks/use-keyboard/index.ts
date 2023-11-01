@@ -119,7 +119,7 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
       if (breadcrumbs.length === 1) {
         core?.handleUpdateSelectData();
       } else {
-        const parent = breadcrumbs[1];
+        const parent = breadcrumbs[breadcrumbs.length - 2];
         core?.handleUpdateSelectData(parent);
       }
     });
@@ -150,7 +150,9 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
     whenever(logicAnd(keys.ArrowRight, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       const parentChildren =
-        breadcrumbs.length === 1 ? core.state.projectConfig?.componentsTree : breadcrumbs[1].children;
+        breadcrumbs.length === 1
+          ? core.state.projectConfig?.componentsTree
+          : breadcrumbs[breadcrumbs.length - 2].children;
       if (!parentChildren || parentChildren?.length < 1) return;
       const idx = parentChildren?.findIndex((item) => item.id === selectedId);
       if (idx !== -1) {
@@ -169,7 +171,9 @@ export const useKeyboard = (core: HexCoreFactory, i18n: any) => {
     whenever(logicAnd(keys.ArrowLeft, notUsingInput), () => {
       const { selectedId, breadcrumbs } = core.state.selectedData!;
       const parentChildren =
-        breadcrumbs.length === 1 ? core.state.projectConfig?.componentsTree : breadcrumbs[1].children;
+        breadcrumbs.length === 1
+          ? core.state.projectConfig?.componentsTree
+          : breadcrumbs[breadcrumbs.length - 2].children;
       if (!parentChildren || parentChildren?.length < 1) return;
       const idx = parentChildren?.findIndex((item) => item.id === selectedId);
       if (idx !== -1) {
