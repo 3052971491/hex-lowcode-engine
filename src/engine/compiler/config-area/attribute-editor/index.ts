@@ -121,7 +121,7 @@ const RADIO_ATTRIBUTES: Array<AttributeItem> = [
 
 const CHECKBOX_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Checkbox', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
-  { type: 'Checkbox', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  // { type: 'Checkbox', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
   { type: 'Checkbox', name: 'size', label: '尺寸', editor: 'size-editor' },
   { type: 'Checkbox', name: 'behavior', label: '状态', editor: 'behavior-editor' },
   { type: 'Checkbox', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
@@ -318,6 +318,12 @@ const COLUMN_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Column', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
+/** 单元格 */
+const GRID_ATTRIBUTE: Array<AttributeItem> = [
+  { type: 'Grid', name: 'operate', label: '操作', editor: 'operate-editor', merge: true },
+  { type: 'Grid', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+];
+
 const CARD_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Card', name: 'title', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Card', name: 'size', label: '尺寸', editor: 'size-editor' },
@@ -418,6 +424,7 @@ const TAB_PANE_ATTRIBUTE: Array<AttributeItem> = [
 const FROM_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Form', name: 'hideRequiredMark', label: '隐藏必选标记', editor: 'switch-editor' },
   { type: 'Form', name: 'labelAlign', label: '标签对齐方式', editor: 'label-align-editor', merge: true },
+  { type: 'Form', name: 'colon', label: '是否显示冒号', editor: 'switch-editor' },
   { type: 'Form', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
@@ -508,6 +515,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   SubForm: SUB_FORM_ATTRIBUTES,
   Row: ROW_ATTRIBUTE,
   Column: COLUMN_ATTRIBUTE,
+  Grid: GRID_ATTRIBUTE,
   Card: CARD_ATTRIBUTES,
   Space: SPACE_ATTRIBUTES,
   Collapse: COLLAPSE_ATTRIBUTE,

@@ -30,6 +30,9 @@ export enum ComponentType {
   'SubForm' = 'SubForm',
   'Row' = 'Row',
   'Column' = 'Column',
+  'Grid' = 'Grid',
+  'GridRow' = 'GridRow',
+  'GridCol' = 'GridCol',
   'Card' = 'Card',
   'Space' = 'Space',
   'Collapse' = 'Collapse',
@@ -1144,6 +1147,124 @@ export class Column extends Scheme<PcSchema.ColumnScheme> {
   }
 }
 
+export class Grid extends Scheme<PcSchema.GridScheme> {
+  props: PcSchema.GridSchemeProps;
+
+  constructor(_data?: any) {
+    super(_data);
+    this.tag = 'LAYOUT';
+    this.docUrl = '';
+    this.componentName = '单元格';
+    this.componentType = ComponentType.Grid;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = false;
+    this.props = {
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) {
+          if (property === 'children') {
+            (<any>this).children = (<any>_data).children.map((item: any) => {
+              return new GridRow(item);
+            });
+          } else {
+            (<any>this)[property] = (<any>_data)[property];
+          }
+        }
+      }
+    }
+  }
+}
+
+export class GridRow extends Scheme<PcSchema.GridRowScheme> {
+  props: PcSchema.GridRowSchemeProps;
+
+  constructor(_data?: any) {
+    super(_data);
+    this.tag = 'LAYOUT';
+    this.docUrl = '';
+    this.componentName = '单元格-行';
+    this.componentType = ComponentType.GridRow;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = false;
+    this.props = {
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) {
+          if (property === 'children') {
+            (<any>this)[property] = (<any>_data).children.map((item: any) => {
+              return new GridCol(item);
+            });
+          } else {
+            (<any>this)[property] = (<any>_data)[property];
+          }
+        }
+      }
+    }
+  }
+}
+
+export class GridCol extends Scheme<PcSchema.GridColScheme> {
+  props: PcSchema.GridColSchemeProps;
+
+  constructor(_data?: any) {
+    super(_data);
+    this.tag = 'LAYOUT';
+    this.docUrl = '';
+    this.componentName = '单元格-列';
+    this.componentType = ComponentType.GridCol;
+    this.children = [];
+    this.formItemFlag = false;
+    this.internal = false;
+    this.props = {
+      merged: false,
+      width: null,
+      height: null,
+      colSpan: 1,
+      rowSpan: 1,
+      rowIndex: -1,
+      colIndex: -1,
+      className: '',
+      __style__: '',
+    };
+
+    if (_data) {
+      for (const property in _data) {
+        if (_data.hasOwnProperty(property)) (<any>this)[property] = (<any>_data)[property];
+      }
+    }
+  }
+
+  /** 当前单元格行起始点 */
+  rowStart() {
+    return this.props.rowIndex + 1;
+  }
+
+  /** 当前单元格行结束点 */
+  rowEnd() {
+    return this.props.rowIndex + 2;
+  }
+
+  /** 当前单元格列起始点 */
+  colStart() {
+    return this.props.colIndex + 1;
+  }
+
+  /** 当前单元格列结束点 */
+  colEnd() {
+    return this.props.colIndex + 2;
+  }
+}
+
 export class Card extends Scheme<PcSchema.CardScheme> {
   props: PcSchema.CardSchemeProps;
 
@@ -1339,6 +1460,7 @@ export class Form extends Scheme<PcSchema.FormSchema> {
       model: '',
       hideRequiredMark: false,
       labelAlign: 'left',
+      colon: true,
       className: '',
       __style__: '',
     };
@@ -1786,6 +1908,9 @@ export const SchemaMap: Map<ComponentType, any> = new Map([
   [ComponentType.SubForm, new SubForm() as any],
   [ComponentType.Row, new Row() as any],
   [ComponentType.Column, new Column() as any],
+  [ComponentType.Grid, new Grid() as any],
+  [ComponentType.GridRow, new GridRow() as any],
+  [ComponentType.GridCol, new GridCol() as any],
   [ComponentType.Card, new Card() as any],
   [ComponentType.Space, new Space() as any],
   [ComponentType.Collapse, new Collapse() as any],
@@ -1827,6 +1952,9 @@ export default {
   SubForm,
   Row,
   Column,
+  Grid,
+  GridRow,
+  GridCol,
   Card,
   Space,
   Collapse,

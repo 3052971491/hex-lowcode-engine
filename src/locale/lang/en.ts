@@ -74,6 +74,9 @@ export default {
       SubForm: 'SubForm',
       Row: 'Row',
       Column: 'Column',
+      Grid: 'Grid',
+      GridRow: 'Grid Row',
+      GridCol: 'Grid Col',
       Card: 'Card',
       Space: 'Space',
       Collapse: 'Collapse',
@@ -290,6 +293,16 @@ export default {
       },
       SubForm: {
         children: 'Column config',
+      },
+      Form: {
+        colon: 'Colon',
+      },
+      Grid: {
+        operate: 'Operate',
+        add: 'Add',
+        delete: 'Delete',
+        merge: 'Merge',
+        split: 'Split',
       },
     },
     tips: {

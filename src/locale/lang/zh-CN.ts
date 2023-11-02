@@ -74,6 +74,9 @@ export default {
       SubForm: '子表单',
       Row: '栅格',
       Column: '栅格列',
+      Grid: '单元格',
+      GridRow: '单元格-行',
+      GridCol: '单元格-列',
       Card: '卡片',
       Space: '间距',
       Collapse: '折叠面板',
@@ -290,6 +293,16 @@ export default {
       },
       SubForm: {
         children: '列配置',
+      },
+      Form: {
+        colon: '是否显示冒号',
+      },
+      Grid: {
+        operate: '操作',
+        add: '新增',
+        delete: '删除',
+        merge: '合并',
+        split: '拆分',
       },
     },
     tips: {

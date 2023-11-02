@@ -662,6 +662,46 @@ export namespace PcSchema {
     props: ColumnSchemeProps;
   }
 
+  export interface GridScheme extends LowCode.NodeSchema {
+    children: GridRowScheme[];
+    props: GridSchemeProps;
+  }
+
+  export interface GridSchemeProps extends LowCode.NodeSchemaProps {}
+
+  export interface GridRowScheme extends LowCode.NodeSchema {
+    children: GridColScheme[];
+    props: GridRowSchemeProps;
+  }
+
+  export interface GridRowSchemeProps extends LowCode.NodeSchemaProps {}
+
+  export interface GridColScheme extends LowCode.NodeSchema {
+    children: LowCode.Schema[];
+    props: GridColSchemeProps;
+  }
+
+  export interface GridColSchemeProps extends LowCode.NodeSchemaProps {
+    /**
+     * 是否合并单元格
+     * @description 当为true时则隐藏
+     */
+    merged: boolean;
+    /** 单元格宽度 单位px 或者 % */
+    width: string | null;
+    /** 单元格高度 单位px 或者 % */
+    height: string | null;
+    /** 规定单元格可横跨的列数 */
+    colSpan: number;
+    /** 设置单元格可纵跨的行数 */
+    rowSpan: number;
+    /** 某行 */
+    rowIndex: number;
+    /** 某列 */
+    colIndex: number;
+    [key: string]: any;
+  }
+
   export interface CardSchemeProps extends LowCode.NodeSchemaProps {
     /** 卡片标题 */
     title: I18n;
@@ -784,6 +824,8 @@ export namespace PcSchema {
     hideRequiredMark: boolean;
     /** label 标签的文本对齐方式 */
     labelAlign: 'left' | 'right';
+    /** 是否显示 label 后面的冒号 */
+    colon: boolean;
   }
 
   export interface VueSchema extends LowCode.NodeSchema {

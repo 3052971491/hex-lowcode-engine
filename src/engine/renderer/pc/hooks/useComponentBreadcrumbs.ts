@@ -1,5 +1,6 @@
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import { LowCode } from '/@/types/schema';
+import { cloneDeep } from 'lodash-es';
 
 export interface IComponentBreadcrumbs {
   breadcrumbs: LowCode.Schema[];
@@ -12,21 +13,21 @@ export interface IComponentBreadcrumbs {
  * 组件面包屑
  */
 export function useComponentBreadcrumbs(data?: LowCode.Schema[]): IComponentBreadcrumbs {
-  let breadcrumbs = reactive(data ?? []);
+  const breadcrumbs = ref(data ?? []);
   function setBreadcrumbs(val: LowCode.Schema) {
     if (val) {
-      breadcrumbs.push(val);
+      breadcrumbs.value.push(val);
     }
   }
   function getBreadcrumbs() {
-    return breadcrumbs;
+    return cloneDeep(breadcrumbs.value);
   }
 
   function resetBreadcrumbs(data: LowCode.Schema[]) {
-    breadcrumbs = data;
+    breadcrumbs.value = data;
   }
   return {
-    breadcrumbs,
+    breadcrumbs: breadcrumbs.value,
     setBreadcrumbs,
     getBreadcrumbs,
     resetBreadcrumbs,

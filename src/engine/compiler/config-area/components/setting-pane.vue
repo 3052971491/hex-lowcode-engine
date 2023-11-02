@@ -30,13 +30,11 @@ import { useLocale } from '/@/hooks/use-loacle';
 const { t } = useLocale();
 const core = inject(HexCoreInjectionKey);
 const breadcrumbs = computed(() => {
-  return (
-    core?.state.selectedData?.breadcrumbs
-      .filter((item, index) => {
-        return index < 3;
-      })
-      .reverse() ?? []
-  );
+  if (!core?.state.selectedData || core?.state.selectedData?.breadcrumbs.length < 1) return [];
+  const number = core.state.selectedData.breadcrumbs.length;
+  return core.state.selectedData.breadcrumbs.filter((item, index) => {
+    return number - index <= 3;
+  });
 });
 
 const handleSelectComponent = (schema: LowCode.Schema) => {
