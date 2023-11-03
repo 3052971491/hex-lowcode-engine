@@ -63,9 +63,10 @@
       @close="onCloseDrawer"
     >
       <template #extra>
+        <a-button style="margin-right: 8px" @click="handlePrintClick">打印</a-button>
         <a-button style="margin-right: 8px" @click="onCloseDrawer">{{ t('el.control.close') }}</a-button>
       </template>
-      <render v-model:value="element" />
+      <render ref="renderRef" v-model:value="element" />
     </a-drawer>
   </div>
 </template>
@@ -110,6 +111,8 @@ const visible = ref(false);
 const drawerVisible = ref(false);
 const element = ref();
 
+const renderRef = ref();
+
 function handlePreviewClick() {
   modalType.value = ComponentTypeEnum.RENDER_PREVIEW;
   modalTitle.value = t('el.nav.preview');
@@ -148,6 +151,10 @@ function handleKeyboardClick() {
   modalType.value = ComponentTypeEnum.KEYBOARD;
   modalTitle.value = t('el.nav.keyboard');
   visible.value = true;
+}
+
+function handlePrintClick() {
+  renderRef.value.print();
 }
 </script>
 

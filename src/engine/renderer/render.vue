@@ -4,22 +4,22 @@
       <a-watermark v-bind="watermarkModel">
         <!-- PC 渲染器 -->
         <template v-if="device === 'PC'">
-          <pc-render v-model:value="modelValue" :redact-state="redactState" />
+          <pc-render :id="printGuid" v-model:value="modelValue" :redact-state="redactState" />
         </template>
         <!-- Mobile 渲染器 -->
         <template v-else>
-          <mobile-render />
+          <mobile-render :id="printGuid" />
         </template>
       </a-watermark>
     </template>
     <template v-else>
       <!-- PC 渲染器 -->
       <template v-if="device === 'PC'">
-        <pc-render v-model:value="modelValue" :redact-state="redactState" />
+        <pc-render :id="printGuid" v-model:value="modelValue" :redact-state="redactState" />
       </template>
       <!-- Mobile 渲染器 -->
       <template v-else>
-        <mobile-render />
+        <mobile-render :id="printGuid" />
       </template>
     </template>
   </a-spin>
@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { computed, defineComponent, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import type { LowCode } from '/@/types/schema.d';
+import { message } from 'ant-design-vue';
 import PcRender from './pc/pc-render.vue';
 import MobileRender from './mobile/mobile-render.vue';
 import { useHexCore, HexCoreFactory } from './central/useHexCore';
@@ -47,6 +48,8 @@ import { localeContextKey } from '/@/hooks/use-loacle';
 import zhCn from '/@/locale/lang/zh-CN';
 import en from '/@/locale/lang/en';
 import { useWatermark } from '/@/hooks/use-watermark';
+import { guid } from '/@/utils/common';
+import { domToPdf } from '/@/utils/export-pdf';
 
 interface Props {
   value?: LowCode.ProjectSchema;
@@ -177,6 +180,19 @@ function runtimeDataSource(remotes: RuntimeDataSourceConfig[]) {
 }
 
 const { watermarkModel } = useWatermark(core, props.redactState);
+const printGuid = `PRINT-${guid()}`;
+function print() {
+  const el = document.querySelector(`#${printGuid}`) as HTMLElement;
+  if (!el) {
+    message.error(`未找到DOM元素: #${printGuid}`);
+    return;
+  }
+  domToPdf(el);
+}
+
+defineExpose({
+  print,
+});
 </script>
 
 <script lang="ts">
