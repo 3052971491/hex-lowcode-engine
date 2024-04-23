@@ -40,7 +40,6 @@ const ALERT_ATTRIBUTE: Array<AttributeItem> = [
   { type: 'Alert', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
 ];
 
-/** 单行文本, 多行文本属性配置 */
 const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
   { type: 'Input', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
@@ -60,6 +59,25 @@ const INPUT_ATTRIBUTES: Array<AttributeItem> = [
   { type: 'Input', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
   { type: 'Input', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
   { type: 'Input', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
+];
+
+const TEXTAREA_ATTRIBUTES: Array<AttributeItem> = [
+  { type: 'Textarea', name: 'label', label: '标题', editor: 'input-editor', i18n: true },
+  { type: 'Textarea', name: 'defaultValue', label: '默认值', editor: 'input-editor' },
+  { type: 'Textarea', name: 'placeholder', label: '占位提示', editor: 'input-editor', i18n: true },
+  { type: 'Textarea', name: 'size', label: '尺寸', editor: 'size-editor' },
+  { type: 'Textarea', name: 'behavior', label: '状态', editor: 'behavior-editor' },
+  { type: 'Textarea', name: 'tips', label: '描述信息', editor: 'tips-editor', i18n: true },
+  { type: 'Textarea', name: 'allowClear', label: '清除按钮', editor: 'switch-editor' },
+  { type: 'Textarea', name: 'bordered', label: '边框', editor: 'switch-editor' },
+  { type: 'Textarea', name: 'showCount', label: '计数器', editor: 'switch-editor' },
+  { type: 'Textarea', name: 'maxlength', label: '字数上限', editor: 'input-number-editor' },
+  { type: 'Textarea', name: 'trim', label: '自动去除头尾空字符', editor: 'switch-editor' },
+  { type: 'Textarea', name: 'autofocus', label: '自动聚焦', editor: 'switch-editor' },
+  { type: 'Textarea', name: 'rules', label: '校验', editor: 'rules-editor' },
+  { type: 'Textarea', name: 'id', label: '唯一标识', editor: 'id-editor', advanced: true },
+  { type: 'Textarea', name: 'alwaysCommit', label: '数据提交', editor: 'always-commit-editor', advanced: true },
+  { type: 'Textarea', name: 'events', label: '动作设置', editor: 'events-editor', advanced: true },
 ];
 
 const INPUT_NUMBER_ATTRIBUTES: Array<AttributeItem> = [
@@ -499,7 +517,7 @@ const obj: { [key: string]: Array<AttributeItem> } = {
   Divider: DIVIDER_ATTRIBUTE,
   Alert: ALERT_ATTRIBUTE,
   Input: INPUT_ATTRIBUTES,
-  Textarea: INPUT_ATTRIBUTES,
+  Textarea: TEXTAREA_ATTRIBUTES,
   InputNumber: INPUT_NUMBER_ATTRIBUTES,
   Switch: SWITCH_ATTRIBUTES,
   Radio: RADIO_ATTRIBUTES,

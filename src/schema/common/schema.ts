@@ -283,8 +283,8 @@ export class Input extends Scheme<PcSchema.InputScheme> {
   }
 }
 
-export class Textarea extends Scheme<PcSchema.InputScheme> {
-  props: PcSchema.InputSchemeProps;
+export class Textarea extends Scheme<PcSchema.TextareaSchema> {
+  props: Omit<PcSchema.InputSchemeProps, 'addonBefore' | 'addonAfter'>;
 
   constructor(_data?: any) {
     super(_data);
@@ -303,8 +303,6 @@ export class Textarea extends Scheme<PcSchema.InputScheme> {
       tips: '',
       rules: [],
       allowClear: true,
-      addonBefore: '',
-      addonAfter: '',
       bordered: true,
       showCount: false,
       maxlength: 255,

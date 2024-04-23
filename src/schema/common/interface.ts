@@ -148,6 +148,10 @@ export namespace PcSchema {
     props: InputSchemeProps;
   }
 
+  export interface TextareaSchema extends LowCode.NodeSchema {
+    props: Omit<PcSchema.InputSchemeProps, 'addonBefore' | 'addonAfter'>;
+  }
+
   export interface InputNumberSchemeProps extends LowCode.NodeSchemaProps {
     /** 数据模型字段, 即对应后端的表中的字段 */
     field: string;
