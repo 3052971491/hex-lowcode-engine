@@ -635,7 +635,7 @@
 
 "@types/less@^3.0.3":
   version "3.0.3"
-  resolved "hhttps://registry.npmmirror.com/@types/less/-/less-3.0.3.tgz"
+  resolved "https://registry.npmmirror.com/@types/less/-/less-3.0.3.tgz"
   integrity sha512-1YXyYH83h6We1djyoUEqTlVyQtCfJAFXELSKW2ZRtjHD4hQ82CC4lvrv5D0l0FLcKBaiPbXyi3MpMsI9ZRgKsw==
 
 "@types/lodash-es@^4.17.6":
