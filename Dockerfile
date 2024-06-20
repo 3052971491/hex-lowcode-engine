@@ -1,5 +1,5 @@
 # ================== STEP 1: Build ==================
-FROM yuanjunjie/node:16.13.1 as builder
+FROM node:22.3.0 as builder
 
 # 将源码复制到 /app 目录中
 WORKDIR /app

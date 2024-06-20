@@ -81,7 +81,7 @@ export function useFeatures(data: GridRow[], op: Props) {
    * @description 如果有则不允许合并
    */
   const hasOverColorRow = computed(() => {
-    const { colStart, colEnd, rowStart, rowEnd } = state.cells.reduce(
+    const { colStart, colEnd, rowStart, rowEnd } = (state.cells as any[]).reduce(
       (acc, current) => ({
         colStart: Math.min(acc.colStart, current.colStart()),
         colEnd: Math.max(acc.colEnd, current.colEnd()),
@@ -130,13 +130,13 @@ export function useFeatures(data: GridRow[], op: Props) {
     if (!unref(hasOverColorRow)) return;
     if (!standardCell.value) return;
     const { props } = standardCell.value;
-    const colSpan = state.cells
+    const colSpan = (state.cells as any[])
       .filter((item) => item.props.rowIndex === props.rowIndex)
       .reduce((result, current) => {
         result += current.props.colSpan;
         return result;
       }, 0);
-    const rowSpan = state.cells
+    const rowSpan = (state.cells as any[])
       .filter((item) => item.props.colIndex === props.colIndex)
       .reduce((result, current) => {
         result += current.props.rowSpan;
@@ -170,7 +170,7 @@ export function useFeatures(data: GridRow[], op: Props) {
   function split() {
     // 禁用模式不允许拆分
     if (op.disabled) return;
-    state.cells.map((item) => {
+    (state.cells as any[]).map((item) => {
       const { rowIndex, colIndex } = item.props;
       const targetCelProps = data[rowIndex].children?.[colIndex].props ?? null;
       if (!targetCelProps) return;
