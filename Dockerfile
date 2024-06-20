@@ -6,7 +6,10 @@ WORKDIR /app
 COPY . .
 
 # 还原 node_modules
-RUN npm config get registry
+# 设置淘宝镜像源
+RUN npm config set registry https://registry.npm.taobao.org
+RUN yarn config set registry https://registry.npm.taobao.org
+
 RUN yarn install
 RUN ls -l
 RUN echo "package restore is success"
